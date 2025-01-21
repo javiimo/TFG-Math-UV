@@ -1,0 +1,29 @@
+\ProvidesPackage{thesisutilities}[2025/01/21 Custom Abstract Environment]
+
+\RequirePackage{xcolor}
+
+% Default options
+\definecolor{defaultabstractrulecolor}{rgb}{0,0,0} % Define a default color
+\newcommand{\abstractrulecolor}{defaultabstractrulecolor}
+\newcommand{\abstracttitlesize}{\large}
+
+% Allow overriding options
+\DeclareOption{rulecolor}{\def\abstractrulecolor{#1}}
+\DeclareOption{titlesize}{\def\abstracttitlesize{\csname #1\endcsname}}
+\ProcessOptions\relax
+
+% Define custom abstract environment
+\newenvironment{abstract}{%
+    \vspace*{2em}
+    \begin{center}
+        {\abstracttitlesize\bfseries\abstractname}
+    \end{center}
+    \vspace{1em}
+    \noindent\textcolor{\abstractrulecolor}{\rule{\textwidth}{0.5pt}}
+    \par
+    \noindent
+}{%
+    \par\vspace{1em}
+    \noindent\textcolor{\abstractrulecolor}{\rule{\textwidth}{0.5pt}}
+}
+\newcommand{\abstractname}{Abstract}
