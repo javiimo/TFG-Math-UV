@@ -1,4 +1,7 @@
-\ProvidesPackage{thesisutilities}[2025/01/21 Custom Abstract Environment]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{thesisutilities}[2025/01/21 Custom Abstract Environments]
 
 \RequirePackage{xcolor}
 
@@ -27,3 +30,13 @@
     \noindent\textcolor{\abstractrulecolor}{\rule{\textwidth}{0.5pt}}
 }
 \newcommand{\abstractname}{Abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Theorem-like envs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem*{remark}{Remark}
