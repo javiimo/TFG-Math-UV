@@ -1,10 +1,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Abstract
+%% Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ProvidesPackage{thesisutilities}[2025/01/21 Custom Abstract Environments]
 
 \RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{here}
+\RequirePackage{lipsum}
+\RequirePackage[a4paper, margin=1in]{geometry}
+\RequirePackage{amsthm}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{tcolorbox}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Default options
 \definecolor{defaultabstractrulecolor}{rgb}{0,0,0} % Define a default color
 \newcommand{\abstractrulecolor}{defaultabstractrulecolor}
@@ -35,14 +46,37 @@
 %% Theorem-like envs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtheorem{definition}{Definition}[section]
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem*{remark}{Remark}
+% 1. Plain style: For theorem-like statements
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]% Numbered by chapter
+\newtheorem{lemma}[theorem]{Lemma}% Share numbering with Theorem
+\newtheorem{corollary}[theorem]{Corollary}% Share numbering with Theorem
+\newtheorem{proposition}[theorem]{Proposition}% Share numbering with Theorem
+
+% 2. Definition style: For definitions
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}% Share numbering with Theorem
+\newtheorem*{definition*}{Definition}% Unnumbered definition
+\newtheorem{example}{Example}[section]
+
+% 3. Remark style: For remarks or informal notes
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+
+%4. Notation Environment:
+\newcounter{tcb@cnt@notation}
+\newtcolorbox{notation}[2][]{colframe=blue!10!white, colback=blue!2!white, coltitle=blue!30!black, title=#2,#1}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Signal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\signal}[1]{{\color{red}#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Math
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\let\oldforall\forall
+\renewcommand{\forall}{\, \, \, \oldforall}
