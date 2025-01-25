@@ -4,18 +4,78 @@
 
 \subsection{Union, Intersection and Complement of Fuzzy Sets}
 \begin{definition}[Triangular Norm]
-    
+    A mapping $T:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
+    \begin{enumerate}[(i)]\setlength{\itemindent}{2em}
+      \item \textbf{Symmetricity:} $T(x,y) = T(y,x) \quad \oldforall x,y \in [0,1]$
+      \item \textbf{Associativity:} $T(x,T(y,z)) = T(T(x,y),z) \quad \oldforall x,y,z \in [0,1]$
+      \item \textbf{Monotonicity:} $T(x,y) \leq T(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
+      \item \textbf{One Identity:} $T(x,1) = T(1,x) = x \quad \oldforall x \in [0,1]$
+    \end{enumerate}
+    is called a triangular norm or t-norm.
 \end{definition}
 
 \begin{definition}[Triangular Conorm]
+  A mapping $S:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
+  \begin{enumerate}[(i)]\setlength{\itemindent}{2em}
+    \item \textbf{Symmetricity:} $S(x,y) = S(y,x) \quad \oldforall x,y \in [0,1]$
+    \item \textbf{Associativity:} $S(x,T(y,z)) = S(S(x,y),z) \quad \oldforall x,y,z \in [0,1]$
+    \item \textbf{Monotonicity:} $S(x,y) \leq S(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
+    \item \textbf{Zero Identity:} $S(x,0) = S(0,x) = x \quad \oldforall x \in [0,1]$
+  \end{enumerate}
+  is called a triangular conorm or t-conorm.
     
 \end{definition}
-
 
 \begin{definition}[Complement]
-    
+    The complement of a fuzzy set $A$ is another fuzzy set with membership function given by $^\lnot A(x) \coleq 1 - A(x)$
 \end{definition}
 \signal{Menciona lo de que no se cumplen las leyes de De Morgan en general.}
+
+\begin{definition}[t-norm based union]
+  
+\end{definition}
+
+\begin{definition}[t-conorm based intersection]
+  
+\end{definition}
+
+\begin{proposition}[Relationship between t-norm and t-conorm]
+  Given a t-norm $T$, the t-conorm $S(a,b)\coleq 1 - T(1-a, 1-b)$, then the union and intersection defined by that pair satisfy the De Morgan's Laws.
+\end{proposition}
+\begin{remark}
+  It is easy to see that the previous relation is equivalent to $T(a,b) = 1-S(1-a, 1-b)$ which can be obtained simply by substituting $a'=1-a$ and $b'=1-b$, i.e., working with the complementary fuzzy sets.
+\end{remark}
+
+\begin{proof}
+  Let $x\in X$, $A$, $B$ be fuzzy sets over $X$ with $a \coleq A(x)$ and $b \coleq B(x)$\\
+
+  $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\
+  $$\lnot S(a,b) = T(\lnot a, \lnot b)$$
+  $$1 - S(a,b) = T(1-a, 1-b)$$
+  $$S(a,b) = 1 - T(1-a, 1-b)$$
+  $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\
+  $$\lnot T(a,b) = S(\lnot a, \lnot b)$$
+  $$1 - T(a,b) = S(1-a, 1-b)$$
+  $$T(a,b) = 1 - S(1-a, 1-b)$$
+
+\end{proof}
+
+\begin{definition}[Archimedean t-norm]
+  
+\end{definition}
+\begin{proposition}[Characterization of archimedean t-norms]
+  
+\end{proposition}
+
+\signal{
+\begin{definition}[Nilpotent t-norm]
+  
+\end{definition}}
+
+\begin{definition}[Weaker t-norm]
+  Partial order relation
+\end{definition}
+\signal{The weaker the t-norm, the stronger the associated s-norm?}
 
 \subsection{Fuzzy Relations}
 \begin{definition*}[Classical n-ary relation]
