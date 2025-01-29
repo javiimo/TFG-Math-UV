@@ -3,6 +3,7 @@
   \end{notation}
 
 \subsection{Union, Intersection and Complement of Fuzzy Sets}
+\signal{say why we assign those properties to the union and intersection to generalize the ones from classical sets}
 \begin{definition}[Triangular Norm]
     A mapping $T:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
     \begin{enumerate}[(i)]\setlength{\itemindent}{2em}
@@ -11,7 +12,7 @@
       \item \textbf{Monotonicity:} $T(x,y) \leq T(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
       \item \textbf{One Identity:} $T(x,1) = T(1,x) = x \quad \oldforall x \in [0,1]$
     \end{enumerate}
-    is called a triangular norm or t-norm.
+    is called a triangular norm or t-norm. Defines the \textbf{intersection} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cup B) (x) = T(A(x),B(x)) \forall x \in X$ 
 \end{definition}
 
 \begin{definition}[Triangular Conorm]
@@ -22,22 +23,23 @@
     \item \textbf{Monotonicity:} $S(x,y) \leq S(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
     \item \textbf{Zero Identity:} $S(x,0) = S(0,x) = x \quad \oldforall x \in [0,1]$
   \end{enumerate}
-  is called a triangular conorm or t-conorm.
+  is called a triangular conorm or t-conorm. Defines the \textbf{union} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cap  B) (x) = S(A(x),B(x)) \forall x \in X$ 
     
 \end{definition}
 
 \begin{definition}[Complement]
     The complement of a fuzzy set $A$ is another fuzzy set with membership function given by $^\lnot A(x) \coleq 1 - A(x)$
 \end{definition}
-\signal{Menciona lo de que no se cumplen las leyes de De Morgan en general.}
 
-\begin{definition}[t-norm based union]
-  
-\end{definition}
+Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\lnot A(x)= 1 - A(x) \notin \{0,1\}$.\\
 
-\begin{definition}[t-conorm based intersection]
-  
-\end{definition}
+This implies as well that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
+
+However, there is a particular t-norm and t-conorm (named after Lukasiewicz) that does satisfy both laws. This will have implications for the derived logic that will be explained in section \ref{sec:fuzzy_logic}. \signal{is it the only one?}
+
+\hspace{10em}$T_L(x,y)=\max\{x+y-1,0\},\, S_L(x,y)=\min\{1,x+y\}$\\
+
+Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of t-norm and t-conorm they are not satisfied but by imposing it, we get that the t-norm induces a t-conorm and viceversa.
 
 \begin{proposition}[Relationship between t-norm and t-conorm]
   Given a t-norm $T$, the t-conorm $S(a,b)\coleq 1 - T(1-a, 1-b)$, then the union and intersection defined by that pair satisfy the De Morgan's Laws.
@@ -60,12 +62,25 @@
 
 \end{proof}
 
-\begin{definition}[Archimedean t-norm]
+% \signal{
+% \begin{definition}[Archimedean t-norm]
+%   A continuous t-norm that satisfies $T(x,x)<x \forall x\in ]0,1[$ is called an archimedean t-norm.
+% \end{definition}
+
+% \begin{proposition}[Characterization of archimedean t-norms]
+%   For all archimedean t-norms there exists a continuous decreasing function $f:[0,1] \longrightarrow [0,\infty[$ with $f(1)=0$ such that: 
+%   \[ 
+%   T(x,y)= f^{-1}(min{f(x)+f(y), f(0)})\textnormal{ where }f^{-1}
+%   \begin{cases}
+%     f^{-1}(y) \text{ if } y\in [0,f(0) ]\\
+%     0 \text{ otherwise}
+%   \end{cases}
   
-\end{definition}
-\begin{proposition}[Characterization of archimedean t-norms]
-  
-\end{proposition}
+%   \textnormal{is a pseudo-inverse}.
+%   \]
+%   where $f^{-1}$ is a pseudo-inverse.
+% \end{proposition}
+% }
 
 \signal{
 \begin{definition}[Nilpotent t-norm]
@@ -73,21 +88,42 @@
 \end{definition}}
 
 \begin{definition}[Weaker t-norm]
-  Partial order relation
+  Given $T_1, T_2$ t-norms, then $T_1$ is weaker than $T_2$ $(T_1 \leq T_2)$ if $T_1(x,y)\leq T_2(x,y)\forall x,y\in [0,1]$.\\
+  In that case, it is equivalent to say $T_2$ is stronger than $T_1$ $(T_2 \geq T_1)$
+
 \end{definition}
-\signal{The weaker the t-norm, the stronger the associated s-norm?}
+\begin{remark}
+  This defines a partial order relation in the set of t-norms.
+\end{remark}
+\signal{The weaker the t-norm, the stronger the associated s-norm? (not proved in Fuller)}
+
+\signal{
+There are many results like all t-norms are between the weak and the min, all t-conorms are between max and strong, or that min is the only t-norm that satisfies $T(a,a)=a$ (igual es por esto ultimo q se usa tanto. Qué implicaciones tiene que lukasiewicz no cumpla eso?)}
+
+\begin{example}
+  \signal{Some examples of t-norms and t-conorms.}
+\end{example}
 
 \subsection{Fuzzy Relations}
+
+Relations are defined using the cartesian product. Since we are interested in generalizing that notion to fuzzy sets, let us go first one step before and define what a projection is and build up on that notion the cartesian product of fuzzy sets and the concept of fuzzy relations.
+
 \begin{definition*}[Classical n-ary relation]
-    
+    Let $X_1, \dots , X_n$ be classical sets. Then the subsets of the cartesian product $X_1\times \dots \times X_n$ are n-ary relations. \\
+    If $X_1=\dots = X_n = X$ then we call it n-ar relation in $X$.
 \end{definition*}
 
-\begin{definition}[Fuzzy Binary Relation]
-    
+\begin{definition}[Fuzzy Relation]
+  Let $X,Y \neq \emptyset$ \signal{be classical sets}. A fuzzy (binary) relation $R$ is a fuzzy set on $X \times Y$.
 \end{definition}
 
 
 \begin{definition*}[Classical Projection]
+  Given a classical relation $R$ on $X \times Y$, we define the classical projection:
+  \begin{itemize}
+    \item on $X$ as $\Pi_X(R)=\{x \in X \mid \exists y \in Y such that (x,y) \in R\}$
+    \item on $Y$ as $\Pi_Y(R)=\{y \in Y \mid \exists x \in X such that (x,y) \in R\}$
+  \end{itemize}
 
 \end{definition*}
 
