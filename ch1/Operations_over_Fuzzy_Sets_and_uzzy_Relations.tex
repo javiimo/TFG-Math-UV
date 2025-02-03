@@ -105,13 +105,12 @@ There are many results like all t-norms are between the weak and the min, all t-
 \end{example}
 
 \subsection{Fuzzy Relations}
-
 \signal{Igual esto motivar la definición de relación con un ejemplo a estas alturas es pasarse?}
 
 In the previous sections we have been working with a single domain denoted by $X$. Intuitively, it might be useful to think about the domain as the possible values of property independently of the object that has those properties. For example, we could say that for the property lenght the domain is $\R^+\coleq
 \{x\in\R \min x \geq 0\}$ and a person might have a height defined in that domain (modeled as a subset), although not all possible lengths values will be part of the support of a person's height since it is save to assume impossible to be 10 meters tall. If we were to look at the arm length, then we would have another subset of the lenghts. Treating each subset independently, doesn't allow to distinguish between the people of the same height with different arm lenght or viceversa. Therefore it is needed to distinguish each unique combination of attributes. Notice that in this example, height and arm length have the same domain but for example hair color would have a different domain.\\
 
-Mathematically, this is done taking the subsets of the cartesian product of the domains, so that each element is a unique possible combination of attributes, an ordered n-tuple over that domain. Again, the "fuzzy" part will be referred to how we generalize the membership values to the continuum.\\
+Mathematically, this is done taking the subsets of the cartesian product of the domains, so that each element is a unique possible combination of attributes, an ordered n-tuple over that domain. For simplicity, let us consider just the cartesian product of 2 sets. \signal{(The general case can be obtained inductively)}. Again, the "fuzzy" part will be referred to how we generalize the membership values to the continuum.\\
 
 To justify the definition of the membership function of a cartesian product of two fuzzy sets, let us first recall that in classical sets, we can retrieve the orginal subsets individually by taking the projection of the cartesian product. Given $R$ a relation on $X\times Y$ the projections are:
 
@@ -133,6 +132,31 @@ Then, with the boolean membership, can be defined as:
     0 & \textnormal{otherwise}
   \end{cases}
 \]
+
+It is clear that in the case of having 2 possible values for the membership function, the above expresions are identical. The use of $\sup$ in the definition of the projection can be intuitively interpreted as the \textit{shadow} of the membership function of the cartesian product, as figure \ref{fig:class_cart_prod} illustrates. It is also desirable because then the following property holds for any classical cartesian product:\\
+$$ 
+\Pi_X(A\times B)=A \quad \textnormal{ and } \quad \Pi_Y(A\times B)=B \forall A\in X, \forall B \in Y
+$$
+
+Generalizing the definition of projection with the supremum to fuzzy sets, we have a way to retrieve the membership function of each fuzzy set given the membership function fuzzy cartesian product (figure \ref{fig:fuzzy_cart_prod}). So we now want a consistent definition of cartesian product that respects the previous property.\\
+
+For a given point in $A\times B$ we have 2 values of membership: $A(x)$ and $B(y)$ \signal{Justify that in the classical part we took the intersection. }
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ch1/figures/class_cart_prod.png}
+    \caption{The blue volume represents the membership function of the cartesian product of two classical sets $X=[a,b]$ and $Y=[c,d]$ in $\R$. In the plane $y=0$ we have the projection that corresponds to the membership function of $X$ and analogously, the projection of $Y$ in the plane $x=0$.}
+    \label{fig:class_cart_prod}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ch1/figures/fuzzy_cart_prod.png}
+    \caption{The blue volume represents the membership function of the cartesian product of two fuzzy sets $X$ and $Y$. In the plane $y=0$, we have the projection that corresponds to the membership function of $X$, and analogously, the projection of $Y$ in the plane $x=0$. The partial memberships illustrate how the fuzzy relations can vary across the domains.}
+    \label{fig:fuzzy_cart_prod}
+\end{figure}
+
 
 
 \begin{definition*}[Classical n-ary relation]

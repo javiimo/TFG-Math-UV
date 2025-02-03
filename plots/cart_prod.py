@@ -30,7 +30,7 @@ vertices = np.array([
 ])
 
 # Create polygons and add to plot
-poly3d = Poly3DCollection(vertices, alpha=0.6)
+poly3d = Poly3DCollection(vertices, alpha=0.5, edgecolor='black')
 poly3d.set_facecolor('blue')
 ax.add_collection3d(poly3d)
 
@@ -55,23 +55,16 @@ ax.set_ylabel('')
 ax.set_zlabel('')
 
 # Add custom axis labels at the ends
-ax.text(5.5, 0, 0, 'X', fontsize=20)
+ax.text(5.7, 0, 0, 'X', fontsize=20)
 ax.text(0, 8.5, 0, 'Y', fontsize=20)
 ax.text(0, 0, 1.1, '$\mu_{X\\times Y}(x,y)$', fontsize=20)
 
-# Remove default axis lines and grid
+# Remove default axis lines
 ax.xaxis.line.set_visible(False)
 ax.yaxis.line.set_visible(False)
 ax.zaxis.line.set_visible(False)
-#ax.grid(False)
 
-# Remove background panes
-# ax.xaxis.pane.fill = False
-# ax.yaxis.pane.fill = False
-# ax.zaxis.pane.fill = False
-# ax.xaxis.pane.set_edgecolor('none')
-# ax.yaxis.pane.set_edgecolor('none')
-# ax.zaxis.pane.set_edgecolor('none')
+
 
 # Set ticks
 ax.set_xticks([2,3]) 
