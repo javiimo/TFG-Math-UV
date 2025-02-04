@@ -1,7 +1,7 @@
 \signal{Decir cómo a partir de ese concepto de partial membership llegamos a esto y cómo es una generalización de boolean membership de classical sets.}
 
 \begin{definition}[Fuzzy Set]
-    Let $X\neq\emptyset$ a set. Then we define a \textbf{fuzzy set A in X} as:
+    Let $X\neq\emptyset$ a set. Then we define a \textbf{fuzzy set A in X}, i.e., $A \in \fuzzy{X}$ as:
     \[A=\{(x,\mu_A(x))\mid x\in X\}\]
     Where $\mu_A:X\longrightarrow [0,1]$ is the \textbf{membership function} and $X$ is the \textbf{domain} of the fuzzy set.
 \end{definition}
@@ -11,7 +11,7 @@
 \end{remark}
 
 \begin{definition}[Support]
-    The set of non zero membership value elements is called the support:
+    Let $A \in \fuzzy{X}$. The set of non zero membership value elements is called the support:
     \[\textnormal{Supp}(A)=\{x\in X \mid A(x)>0\}\]
 \end{definition}
 
@@ -21,7 +21,7 @@
 \end{definition}
 }
 \begin{definition}[$\alpha$-cut]
-    Let $\alpha \in [0,1]$, the $\alpha$-cut (also called $\alpha$-cut) of a fuzzy set \( A \) is:
+    Let $\alpha \in [0,1]$, the $\alpha$-cut (also called $\alpha$-cut) of a fuzzy set \( A \in \fuzzy{X}\) is:
     \[
     [A]^\alpha =
     \begin{cases}
@@ -40,7 +40,7 @@
 
 
 \begin{definition}[Fuzzy Subset]
-    Given the fuzzy sets $A$ and $B$ in $X$ we say $A$ is a fuzzy subset of $B$ if and only if $A(x)
+    Given the fuzzy sets $A, B \in \fuzzy{X}$ we say $A$ is a fuzzy subset of $B$ (and write $A \subseteq B$) if and only if $A(x)
     \leq B(x) \forall x \in X$.
 
     Analogously, $A$ and $B$ are equal if and only if $A(x)=B(x) \forall x \in X$, i.e., each of them is a subset of the other.
