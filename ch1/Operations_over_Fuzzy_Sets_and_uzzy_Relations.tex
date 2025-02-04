@@ -186,13 +186,56 @@ Applying the definition of projection with the supremum to fuzzy sets, we have a
 \begin{notation}[label={not:compositionFS}]{Notation}
     Although Fuzzy Relations are Fuzzy Sets as well, we will often use the name distinction to denote whether the domain is a cartesian product or not.
   \end{notation}
-\begin{definition}[Composition of 2 Fuzzy Relations]
-    Let $R\in \fuzzy{X\times Y}$, $G \in \fuzzy{X\times Y}$ be 2 fuzzy relations with one of the sets of the domain in common. Then the composition is another fuzzy relation $R\circ G\in \fuzzy{X\times Z}$ (the non common sets of the domain) and the membership function is given by the projection of the cartesian product:
+
+% The definition of projection allows us to define a composition of fuzzy relations with a common domain. Intuitively, a composition is the projection into the uncommon domain of the intersection of each fuzzy relation.
+
+% \begin{definition}[Composition of 2 Fuzzy Relations]
+%     Let $R\in \fuzzy{X\times Y}$, $G \in \fuzzy{X\times Y}$ be 2 fuzzy relations with one of the sets of the domain in common. Then the composition is another fuzzy relation $R\circ G\in \fuzzy{X\times Z}$ (the non common sets of the domain) and the membership function is given by the projection of the cartesian product:
+%     \[
+%     (R \circ G) (x,z) = \Pi_{X\times Z}[T(R(x,y), G(y,z))] = \sup_{y\in Y}\{T(R(x,y), G(y,z))\}
+%     \]
+% \end{definition}
+
+The concept of projection allows us to combine fuzzy relations sharing a common domain. Intuitively, composing two fuzzy relations involves intersecting their membership values (using a t-norm) and then projecting the result onto the domain where the relations do not overlap.
+
+\begin{definition}[Composition of Two Fuzzy Relations]
+    Let \( R \in \fuzzy{X \times Y} \) and \( G \in \fuzzy{Y \times Z} \) be fuzzy relations sharing the set \(Y\). Their composition \( R \circ G \) is the fuzzy relation in \(\fuzzy{X \times Z}\) defined by
     \[
-    \mu
+    (R \circ G)(x,z) = \Pi_{X\times Z}\Bigl[\, T\bigl(R(x,y), G(y,z)\bigr) \Bigr] = \sup_{y\in Y}\, T\bigl(R(x,y), G(y,z)\bigr),
     \]
+    where \(T\) is a t-norm acting as the fuzzy intersection.
 \end{definition}
 
+% This means that given three properties $X$, $Y$ and $Z$ and two fuzzy relation R from X to Y and another fuzzy relation from Y to Z, we have a way to induce a relation $R\circ G$ between X and Z.
+
+% (add a diagram here)
+
+Given three sets \(X\), \(Y\), and \(Z\), suppose we have a fuzzy relation \(R\) from \(X\) to \(Y\) and another fuzzy relation \(G\) from \(Y\) to \(Z\). Using the composition operation, we can derive a new fuzzy relation \(R \circ G\) that directly connects \(X\) to \(Z\).
+
+\noindent
+\begin{minipage}{0.7\textwidth}
+In this diagram, the arrows represent fuzzy relations, with \(R\) mapping elements from \(X\) to \(Y\), \(G\) mapping from \(Y\) to \(Z\), and \(R \circ G\) representing the induced fuzzy relation between \(X\) and \(Z\) through composition.\\
+\end{minipage}%
+\begin{minipage}{0.3\textwidth}
+  \begin{center}
+    \begin{tikzcd}
+      X \arrow[r, "R", leftrightarrow] & Y \arrow[r, "G", leftrightarrow] & Z \arrow[bend right=30, from=1-1, "R \circ G"', leftrightarrow]
+      \end{tikzcd}
+  \end{center}
+
+\end{minipage}
+
+
+We can define a the composition of a fuzzy set with a fuzzy relation in a completely analogous way. 
+
 \begin{definition}[Composition of a Fuzzy Set and a Fuzzy Relation]
-    
+    Let \( A \in \fuzzy{X} \) be a fuzzy set on \(X\) and \( R \in \fuzzy{X \times Y} \) be a fuzzy relation between \(X\) and \(Y\). The composition \( A \circ R \in \fuzzy{Y} \) is defined by
+    \[
+    (A \circ R)(y) = \Pi_{Y}\Bigl[\, T\bigl( A(x), R(x,y) \bigr) \Bigr] = \sup_{x \in X}\, T\bigl( A(x), R(x,y) \bigr),
+    \]
+    where \(T\) is a t-norm.
 \end{definition}
+
+
+
+\subsection{Extension Principles}
