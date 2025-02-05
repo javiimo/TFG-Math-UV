@@ -181,6 +181,7 @@ Applying the definition of projection with the supremum to fuzzy sets, we have a
     \label{fig:fuzzy_cart_prod}
 \end{figure}
 
+\signal{Falta ver que efectivamente lo que hemos dichos se cumple para esa defición de producto cartesiano y quizás definiríá la proyección como un bloque de definición. }
 
 \subsubsection*{Composition of Fuzzy Sets}
 \begin{notation}[label={not:compositionFS}]{Notation}
@@ -239,3 +240,16 @@ We can define a the composition of a fuzzy set with a fuzzy relation in a comple
 
 
 \subsection{Extension Principles}
+
+Following a similar idea as in the definition of the composition of fuzzy sets, we can derive a way to generalize crisp functions \signal{(Hasta ahora lo he llamado classical en vez de crisp, tengo que explicarlo y elegir una notación uniforme)} to fuzzy sets.\\
+
+Let's consider the crisp function $f:\,X \longrightarrow Y$ where $X$ and $Y$ are classical sets. And let's consider as well the fuzzy sets $A \in \fuzzy{X}$ and $B \in \fuzzy{Y}$. Then $f$ induces the classical relation $R=\{(x,y)\in X\times Y \mid f(x)=y\}$. And we can also make this relation fuzzy by taking the membership function of $A$:
+$$ \mu_R (x,y) = \mu_A (x) \forall (x,y)\in R$$
+Then the membership function of $B$ is the projection of this fuzzy relation:
+$$\mu_B (y) = \Pi_Y (R) = \sup\{R(x,y)\mid x\in X\} = \sup\{\mu_A (x)\mid x\in X, \, f(x)= y\} = \sup_{x\in f^{-1}(y)}\{\mu_A(x)\}$$
+
+This is called the (Zadeh's) extension principle: 
+
+\begin{definition}[Zade]
+  
+\end{definition}
