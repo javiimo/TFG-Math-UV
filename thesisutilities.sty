@@ -51,14 +51,14 @@
 
 % 1. Plain style: For theorem-like statements
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]% Numbered by chapter
+\newtheorem{theorem}{Theorem}[section]% Numbered by section
 \newtheorem{lemma}[theorem]{Lemma}% Share numbering with Theorem
 \newtheorem{corollary}[theorem]{Corollary}% Share numbering with Theorem
 \newtheorem{proposition}[theorem]{Proposition}% Share numbering with Theorem
 
 % 2. Definition style: For definitions
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}% Share numbering with Theorem
+\newtheorem{definition}{Definition}[section]
 \newtheorem*{definition*}{Definition}% Unnumbered definition
 \newtheorem{example}{Example}[section]
 
