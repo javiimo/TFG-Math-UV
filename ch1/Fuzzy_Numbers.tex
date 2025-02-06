@@ -1,3 +1,6 @@
+%See Nguyen paper page 7-8 of the pdf and 375-376 of the book.
+According to Nguyen: "Interval analysis deals with closed bounded intervals (complex convex sets of $\R$) as an extension of numbers. Fuzzy numbers can be regarded as an extension of closed bounded intervals, ..." \signal{Esto de poner extractos de texto literal así bonito y referenciarlo estaría bien.}
+
 \begin{definition}[Convexity]
     
 \end{definition}
@@ -10,10 +13,15 @@
     
 \end{definition}
 
-\subsection{Fuzzy Arithmetic}
+
 
 
 \subsection{Nguyen's Theorems}
+\signal{We use continuous functions because that way, we get the image of an interval is an interval as well. So then we get another fuzzy number because it maintains the convexity property?}
+
+That is because the image under $f:\R \longrightarrow \R$ continuous of a compact is compact and of a connected set is a connected set. Therefore continuous functions move intervals to intervals.
+
+\signal{This is for fuzzy numbers with the definition we gave them!}
 %https://sci-hub.se/10.1016/0165-0114(91)90139-H
 \begin{theorem}[First Nguyen Theorem]
     Let $f:\, X \longrightarrow X$ a continuous function and $A$ \signal{any} fuzzy number. Then,
@@ -29,3 +37,23 @@
 \end{theorem}
 
 \signal{Sup- t-norm convolution para la generalización lo menciono?? Y eso de la convolución es útil para algo más?}
+
+\begin{theorem}[Second Nguyen Theorem]
+    Let $f:\, X \times \signal{X}\longrightarrow X$ a continuous function and $A,B$ \signal{any} fuzzy numbers. Then,
+    \[
+    [f(A,B)]^{\alpha} = f([A]^{\alpha},[B]^{\alpha})=\{f(x_1,x_2)\mid x_1\in [A]^\alpha, \, x_2\in [B]^\alpha\}
+    \signal{=[A]^\alpha [B]^\alpha}
+    \]
+    where $[\cdot]^\alpha$ denotes the $\alpha$-cut of a fuzzy set.
+\end{theorem}
+
+
+\signal{generalization of Nguyen Theorems by Fuller in sectino 1.9 of Fuller 2.}
+
+
+
+\subsection{Fuzzy Arithmetic}
+
+
+\signal{
+\subsection{Metrics for fuzzy numbers}}
