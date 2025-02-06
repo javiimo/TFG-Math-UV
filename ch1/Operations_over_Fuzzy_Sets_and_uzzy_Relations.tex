@@ -51,14 +51,11 @@ Another important property that classical union and intersection satisfy is De M
 \begin{proof}
   Let $x\in X$, $A$, $B$ be fuzzy sets over $X$ with $a \coleq A(x)$ and $b \coleq B(x)$\\
 
-  $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\
-  $$\lnot S(a,b) = T(\lnot a, \lnot b)$$
-  $$1 - S(a,b) = T(1-a, 1-b)$$
-  $$S(a,b) = 1 - T(1-a, 1-b)$$
-  $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\
-  $$\lnot T(a,b) = S(\lnot a, \lnot b)$$
-  $$1 - T(a,b) = S(1-a, 1-b)$$
-  $$T(a,b) = 1 - S(1-a, 1-b)$$
+  $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\[0.5em]
+  $\lnot S(a,b) = T(\lnot a, \lnot b) \implies 1 - S(a,b) = T(1-a, 1-b) \implies S(a,b) = 1 - T(1-a, 1-b)$\\
+
+  $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\[0.5em]
+  $\lnot T(a,b) = S(\lnot a, \lnot b) \implies 1 - T(a,b) = S(1-a, 1-b) \implies T(a,b) = 1 - S(1-a, 1-b)$
 
 \end{proof}
 
@@ -155,7 +152,7 @@ Then, with the boolean membership, it can be expressed as well as:
   \end{cases}
 \]
 
-It is clear that in the case of having 2 possible values for the membership function, the above expresions are identical. The use of $\sup$ in the definition of the projection can be intuitively interpreted as the \textit{shadow} of the membership function of the cartesian product, as figure \ref{fig:class_cart_prod} illustrates. It is also desirable because then the following property holds for any classical cartesian product:\\
+It is clear that in the case of having 2 possible values for the membership function, the above expresions are identical. The use of $\sup$ in the definition of the projection can be intuitively interpreted as the \textit{shadow} of the membership function of the cartesian product, as figure \ref{fig:class_cart_prod} illustrates. It is also desirable because then the following property holds for any classical \signal{(and fuzzy?)} cartesian product:\\
 $$ 
 \Pi_X(A\times B)=A \quad \textnormal{ and } \quad \Pi_Y(A\times B)=B \forall A\in X, \forall B \in Y
 $$
@@ -166,6 +163,19 @@ $$
   \caption{The blue volume represents the membership function of the cartesian product of two classical sets $X=[a,b]$ and $Y=[c,d]$ in $\R$. In the plane $y=0$ we have the projection that corresponds to the membership function of $X$ and analogously, the projection of $Y$ in the plane $x=0$.}
   \label{fig:class_cart_prod}
 \end{figure}
+
+Therefore, we define:
+
+\begin{definition}[Projection of a fuzzy relation]
+  The projection from fuzzy relations on $X\times Y$ onto the fuzzy sets on $X$ is the function:
+  \[
+    \begin{aligned}
+      \Pi_X: \fuzzy{X\times Y} &\longrightarrow \fuzzy{X} \\
+      R &\longmapsto \Pi_X(R)
+    \end{aligned}
+  \]
+  where $\Pi_X(R)(x) = \sup_{y\in Y}\{R(x,y)\}\forall x \in X$
+\end{definition}
 
 Applying the definition of projection with the supremum to fuzzy sets, we have a way to retrieve the membership function of each fuzzy set given the membership function of a fuzzy cartesian product (figure \ref{fig:fuzzy_cart_prod}). \\
 
@@ -181,7 +191,7 @@ Applying the definition of projection with the supremum to fuzzy sets, we have a
     \label{fig:fuzzy_cart_prod}
 \end{figure}
 
-\signal{Falta ver que efectivamente lo que hemos dichos se cumple para esa defición de producto cartesiano y quizás definiríá la proyección como un bloque de definición. }
+\signal{Falta ver que que la proyección nos devuelve el fuzzy set original en los fuzzy cart prod.}
 
 \subsubsection*{Composition of Fuzzy Sets}
 \begin{notation}[label={not:compositionFS}]{Notation}
@@ -243,13 +253,43 @@ We can define a the composition of a fuzzy set with a fuzzy relation in a comple
 
 Following a similar idea as in the definition of the composition of fuzzy sets, we can derive a way to generalize crisp functions \signal{(Hasta ahora lo he llamado classical en vez de crisp, tengo que explicarlo y elegir una notación uniforme)} to fuzzy sets.\\
 
-Let's consider the crisp function $f:\,X \longrightarrow Y$ where $X$ and $Y$ are classical sets. And let's consider as well the fuzzy sets $A \in \fuzzy{X}$ and $B \in \fuzzy{Y}$. Then $f$ induces the classical relation $R=\{(x,y)\in X\times Y \mid f(x)=y\}$. And we can also make this relation fuzzy by taking the membership function of $A$:
+Let's consider the crisp function $f:\,X \longrightarrow Y$ where $X$ and $Y$ are classical sets. And consider as well the fuzzy sets $A \in \fuzzy{X}$. Then $f$ induces the classical relation $R=\{(x,y)\in X\times Y \mid f(x)=y\}$. And we can also make this relation fuzzy by copying the membership function of $A$:
 $$ \mu_R (x,y) = \mu_A (x) \forall (x,y)\in R$$
-Then the membership function of $B$ is the projection of this fuzzy relation:
+Now we can define $B\in\fuzzy{Y}$, the fuzzy image of $A$ under $f$, as the projection of this fuzzy relation:
 $$\mu_B (y) = \Pi_Y (R) = \sup\{R(x,y)\mid x\in X\} = \sup\{\mu_A (x)\mid x\in X, \, f(x)= y\} = \sup_{x\in f^{-1}(y)}\{\mu_A(x)\}$$
 
-This is called the (Zadeh's) extension principle: 
+This is called the (Zadeh's) extension principle and is the basis for building arithmetic for fuzzy numbers (see section \ref{sec:fuzzy_numbers}) and generalizing any crisp function to fuzzy sets: 
 
-\begin{definition}[Zade]
-  
+\begin{definition}[Zadeh's extension principle]
+  Let $f: X \longrightarrow Y$ be a crisp function and $A\in \fuzzy{X}$ a fuzzy set on $X$. Then we can define $f(A)\in \fuzzy{Y}$ as:
+  \[
+  \mu_{f(A)}(y)\equiv f(A)(y) = 
+  \begin{cases}
+    \sup_{x\in f^{-1}(y)}A(x) & \textnormal{if } f^{-1}(y)\neq \emptyset\\
+    0 & \textnormal{otherwise}
+  \end{cases}
+  \quad\quad\quad \textnormal{where } f^{-1}(y)=\{x\in X \mid f(x)=y\}
+  \]
+\end{definition}
+
+
+\begin{remark}
+  If $f$ is \textbf{injective} then for any $y \in \textnormal{Im}(f)$ there exists a unique $x \in X$ such that $f(x)=y$, and therefore $f^{-1}(y)=\{x\}$. Then the first case can be rewritten as, $f(A)(y) = A(f^{-1}(y))$ if $y \in \textnormal{Im}(f)$.
+\end{remark}
+
+It is important to highlight as well that this definition is straight forward generalization of set-valued functions where $f(A)= \{f(x)\mid x\in A\}$. In terms of boolean membership function:
+$$\chi _{f(A)}(y)=\sup_{x\in f^{-1}(y)}\chi_A(x)$$
+
+The definition above can be easily generalized to vector functions using the intersection of membership values (like with the cartesian product \signal{Is it a cartesian product that we are taking here?}):
+
+\begin{definition}[Zadeh's extension principle for vector functions]
+  Let $f: X_1 \times \cdots \times X_n \longrightarrow Y$ be a crisp function and $A_1 \in \fuzzy{X_1}, \ldots, A_n \in \fuzzy{X_n}$ be fuzzy sets. Then we can define $f(A_1,\ldots,A_n)\in \fuzzy{Y}$ as:
+  \[
+  \mu_{f(A_1,\ldots,A_n)}(y)\equiv f(A_1,\ldots,A_n)(y) = 
+  \begin{cases}
+    \sup_{(x_1,\ldots,x_n)\in f^{-1}(y)} T(A_1(x_1),\ldots,A_n(x_n)) & \textnormal{if } f^{-1}(y)\neq \emptyset\\
+    0 & \textnormal{otherwise}
+  \end{cases}
+  \]
+  where $f^{-1}(y)=\{(x_1,\ldots,x_n)\in X_1\times\cdots\times X_n \mid f(x_1,\ldots,x_n)=y\}$ and $T$ is a t-norm.
 \end{definition}
