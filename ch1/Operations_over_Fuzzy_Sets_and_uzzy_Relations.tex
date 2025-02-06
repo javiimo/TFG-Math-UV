@@ -249,7 +249,7 @@ We can define a the composition of a fuzzy set with a fuzzy relation in a comple
 
 
 
-\subsection{Extension Principles}
+\subsection{Extension Principle}
 
 Following a similar idea as in the definition of the composition of fuzzy sets, we can derive a way to generalize crisp functions \signal{(Hasta ahora lo he llamado classical en vez de crisp, tengo que explicarlo y elegir una notación uniforme)} to fuzzy sets.\\
 
@@ -280,9 +280,9 @@ This is called the (Zadeh's) extension principle and is the basis for building a
 It is important to highlight as well that this definition is straight forward generalization of set-valued functions where $f(A)= \{f(x)\mid x\in A\}$. In terms of boolean membership function:
 $$\chi _{f(A)}(y)=\sup_{x\in f^{-1}(y)}\chi_A(x)$$
 
-The definition above can be easily generalized to vector functions using the intersection of membership values (like with the cartesian product \signal{Is it a cartesian product that we are taking here?}):
+The definition above can be generalized to vector functions using the definition of fuzzy cartesian product, which requires us to take the intersection:
 
-\begin{definition}[Zadeh's extension principle for vector functions]
+\begin{definition}[Sup-T extension principle]
   Let $f: X_1 \times \cdots \times X_n \longrightarrow Y$ be a crisp function and $A_1 \in \fuzzy{X_1}, \ldots, A_n \in \fuzzy{X_n}$ be fuzzy sets. Then we can define $f(A_1,\ldots,A_n)\in \fuzzy{Y}$ as:
   \[
   \mu_{f(A_1,\ldots,A_n)}(y)\equiv f(A_1,\ldots,A_n)(y) = 
@@ -293,3 +293,9 @@ The definition above can be easily generalized to vector functions using the int
   \]
   where $f^{-1}(y)=\{(x_1,\ldots,x_n)\in X_1\times\cdots\times X_n \mid f(x_1,\ldots,x_n)=y\}$ and $T$ is a t-norm.
 \end{definition}
+
+Which is again a generalization of vector set-valued functions where: $$f(A_1,\ldots,A_n)= \{f(x_1,\ldots,x_n)\mid x_i\in A_i\}$$
+In terms of boolean membership function:
+$$\chi _{f(A_1,\ldots,A_n)}(y)=\sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}T(\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)) = \sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}min\{\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)\}$$
+
+Where we have used that every t-norm operates the same on boolean memberships. \signal{Debería haber puesto esto como un remark cuando presento la intersección y la unión.}
