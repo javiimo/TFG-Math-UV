@@ -1,20 +1,70 @@
 %See Nguyen paper page 7-8 of the pdf and 375-376 of the book.
 According to Nguyen: "Interval analysis deals with closed bounded intervals (complex convex sets of $\R$) as an extension of numbers. Fuzzy numbers can be regarded as an extension of closed bounded intervals, ..." \signal{Esto de poner extractos de texto literal así bonito y referenciarlo estaría bien.}
 
-\begin{definition}[Convexity]
+
+\begin{definition}[Normal Fuzzy Set]
+    A fuzzy set $A\in \fuzzy{X}$ is called \textbf{normal} if there exists $x\in X$ such that $A(x)=1$. Otherwise it is called \textbf{subnormal}.
+\end{definition}
+
+\begin{definition}[$\alpha$-cut]
+    Let $\alpha \in [0,1]$, an $\alpha$-cut (also called $\alpha$-level) of a fuzzy set \( A \in \fuzzy{X}\) is:
+    \[
+    [A]^\alpha =
+    \begin{cases}
+    \{x \in X \mid A(x)\geq \alpha\} & \text{if } \alpha > 0, \\
+    \textnormal{cl}(\textnormal{Supp}(A)) & \text{if } \alpha = 0.
+    \end{cases}
+    \]
+    where \textit{cl} denotes the closure.
+\end{definition}
+
+\begin{definition}[Convexity] A fuzzy set $A\in \fuzzy{\R}$ is convex if and only if every $\alpha$-cut is convex in $\R$.
     
 \end{definition}
 
 \begin{definition}[Fuzzy Number]
+    A fuzzy number is a fuzzy set in the real line, i.e., $A\in \fuzzy{\R}$ such that:\vspace{-0.9em}
+    \begin{romanenum}
+        \item Normal\vspace{-0.5em}
+        \item Convex\vspace{-0.5em}
+        \item $\mu_A$ is continuous.\vspace{-0.5em}
+        \item $\textnormal{Supp}(A)\subseteq\R$ is bounded
+    \end{romanenum}
     
 \end{definition}
 
-\begin{definition}[Quasi Fuzzy Number]
+\begin{remark}
+    Notice that convexity and continuity implies that the $\alpha$-cuts are intervals in the real line, which is an important property of fuzzy numbers. This applies as well to the support, which is the $0$-cut.
+\end{remark}
+
+\begin{note}
+The condition of bounded support can be relaxed to define \textit{quasi-fuzzy numbers} \signal{(Which properties still hold and which are lost?)}:
+$$\textnormal{(iv}_{\textnormal{bis}}\textnormal{) } \lim{t}{\infty}A(t) = 0 \quad \land \quad \lim{t}{-\infty}A(t) = 0$$
+\end{note}
+
+%The following proposition will give us a way to justify that any membership function of fuzzy number can be divided into 3 contiguous intervals where it is monotone increasing, constant equal 1 and monotone decreasing. This means, it can be expressed as a LR-fuzzy number.
+
+\signal{The following proposition establishes that the membership function of any fuzzy number can be partitioned into three contiguous intervals: one where it monotonically increases, one where it equals 1, and one where it monotonically decreases. This characterization shows that every fuzzy number can be represented as an LR-fuzzy number.}
+
+\begin{proposition}[Membership function of fuzzy numbers]
+    Let $A\in \fuzzy{\R}$ be a fuzzy number, then it satisfies:
+    \begin{romanenum}
+        \item $\mu_A(t)=0$ outside an interval (let's say $[c,d]$)
+        \item $\exists a,b \in \R \mid c\leq a < b \leq d$ where $\begin{cases}
+            
+        \end{cases}$
+    \end{romanenum}
+\end{proposition}
+
+
+\begin{example}Here are some examples of fuzzy numbers:
+    \begin{itemize}
+        \item Triangular
+        \item Trapezoidal
+        \item LR-fuzzy number
+    \end{itemize}
     
-\end{definition}
-
-
-
+\end{example}
 
 \subsection{Nguyen's Theorems}
 \signal{We use continuous functions because that way, we get the image of an interval is an interval as well. So then we get another fuzzy number because it maintains the convexity property?}

@@ -91,6 +91,20 @@
 \let\oldsup\sup
 \renewcommand{\sup}{\mathop{\oldsup}\limits}
 
+\renewcommand{\lim}[2]{\mathop{\mathrm{lim}}\limits_{#1 \to #2}}
+
 
 \newcommand{\coleq}{\mathrel{\mathop:}=}
 \newcommand{\eqcol}{=\mathrel{\mathop:}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Useful Envs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Roman numeral enumeration with 2em indent
+\newenvironment{romanenum}{
+  \begin{enumerate}[(i)]\setlength{\itemindent}{2em}
+}{
+  \end{enumerate}
+}
