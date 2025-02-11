@@ -102,7 +102,7 @@ There are many results like all t-norms are between the weak and the min, all t-
   \signal{Some examples of t-norms and t-conorms.}
 \end{example}
 
-\signal{$(\fuzzy{X},\cup , \cap , \lnot)$ is a complete, completely distributive, lattice with an involution. This extends the boolean algebra.}
+
 
 \subsection{Fuzzy Relations}
 \signal{Igual esto motivar la definición de relación con un ejemplo a estas alturas es pasarse?}
@@ -116,6 +116,10 @@ Mathematically, this is done with \textbf{relations} which are subsets of the ca
 \begin{definition}[Fuzzy Relation]
   Let $X\neq \emptyset \neq Y$ be classical sets. Then a fuzzy relation $R$ is a fuzzy set on $X\times Y$, i.e., $R\in \fuzzy{X\times Y}$. $R(x,y)$ will denote the degree of membership of $(x,y) \in R$
 \end{definition}
+
+\begin{notation}[label={not:compositionFS}]{Notation}
+  Although Fuzzy Relations are Fuzzy Sets as well, we will often use the name distinction to denote whether the domain is a cartesian product or not.
+\end{notation}
 
 \begin{remark}
   To formally extend the Cartesian product from two sets to \( n \) sets using induction, it is important to observe that it satisfies associativity up to a natural isomorphism, i.e., 
@@ -197,9 +201,6 @@ Applying the definition of projection with the supremum to fuzzy sets, we have a
 \signal{Falta ver que que la proyección nos devuelve el fuzzy set original en los fuzzy cart prod.}
 
 \subsubsection*{Composition of Fuzzy Sets}
-\begin{notation}[label={not:compositionFS}]{Notation}
-    Although Fuzzy Relations are Fuzzy Sets as well, we will often use the name distinction to denote whether the domain is a cartesian product or not.
-  \end{notation}
 
 % The definition of projection allows us to define a composition of fuzzy relations with a common domain. Intuitively, a composition is the projection into the uncommon domain of the intersection of each fuzzy relation.
 
@@ -301,4 +302,6 @@ Which is again a generalization of vector set-valued functions where: $$f(A_1,\l
 In terms of boolean membership function:
 $$\chi _{f(A_1,\ldots,A_n)}(y)=\sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}T(\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)) = \sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}min\{\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)\}$$
 
-Where we have used that every t-norm operates the same on boolean memberships. \signal{Debería haber puesto esto como un remark cuando presento la intersección y la unión.}
+Where we have used that every t-norm operates the same on boolean memberships. \signal{Debería haber puesto esto como un remark cuando presento la intersección y la unión.}\\
+
+\signal{Hay otros principios de extensión como el de Ramik con extensiones canónicas y order preserving operators, etc. No sé hasta qué punto eso podrá serme útil.}

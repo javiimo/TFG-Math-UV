@@ -3,8 +3,9 @@ According to Nguyen \signal{ (referenciar el paper de los teoremas de Nguyen)}:
 
 \say{Interval analysis deals with closed bounded intervals (complex convex sets of $\R$) as an extension of numbers. Fuzzy numbers can be regarded as 
 an extension of closed bounded intervals, [...]} 
+\\
 
-
+\signal{Explain that we want to define fuzzy numbers to work with fuzzy attributes later on}
 
 
 \begin{definition}[Normal Fuzzy Set]
@@ -25,7 +26,7 @@ an extension of closed bounded intervals, [...]}
 
 \begin{remark}
     From the definition of $\alpha$-cut, the \textbf{nested property} states that for
-    $\alpha_1, \alpha_2 \in ]0,1]$ if $\alpha_1\leq \alpha_2$ then $[A]^{\alpha_2}\subseteq [A]^{\alpha_1}$
+    $\alpha_1, \alpha_2 \in [0,1]$ if $\alpha_1\leq \alpha_2$ then $[A]^{\alpha_2}\subseteq [A]^{\alpha_1}$
 \end{remark}
 
 \begin{definition}[Convexity] A fuzzy set $A\in \fuzzy{\R}$ is convex if and only if every $\alpha$-cut is convex in $\R$.
@@ -49,7 +50,7 @@ an extension of closed bounded intervals, [...]}
 
 \begin{proof}
 %1
-The fact that $[A]^\alpha$ is an interval follows from the definition of convex subset in $\R$, which can only be an interval (or a single point).\\
+The fact that $[A]^\alpha$ is an interval follows from the definition of convex subset in $\R$ with the usual topology, which can only be an interval (or a single point).\\
 %2
 Now we prove that $[A]^\alpha$ is closed. For $\alpha \in (0,1]$, since $\mu_A$ is continuous and $[\alpha, 1]$ is closed in $\R$, the set
 \[
@@ -61,8 +62,8 @@ is closed in $\R$. %For $\alpha = 0$, $[A]^0 = \textnormal{cl}(\textnormal{Supp}
 \begin{notation}{Notation}
     We will denote the $\alpha$-cuts of a fuzzy number $A$ as 
     \[[A]^\alpha=[a_1(\alpha),a_2(\alpha)]\textnormal{ where }\begin{cases}
-        a_1(\alpha)&=min[A]^\alpha\\
-        a_2(\alpha)&=max[A]^\alpha\\
+        a_1(\alpha)=min[A]^\alpha&\\
+        a_2(\alpha)=max[A]^\alpha&\\
     \end{cases}\]
 \end{notation}
 
@@ -71,11 +72,11 @@ The condition of bounded support can be relaxed to define \textit{quasi-fuzzy nu
 $$\textnormal{(iv}_{\textnormal{bis}}\textnormal{) } \lim{t}{\infty}A(t) = 0 \quad \land \quad \lim{t}{-\infty}A(t) = 0$$
 \end{note}
 
-The following proposition establishes that the membership function of any fuzzy number can be partitioned into three contiguous intervals: one where it monotonically increases, one where it equals 1, and one where it monotonically decreases. This characterization shows that every fuzzy number can be represented as an LR-fuzzy number.
+The following proposition establishes that the membership function of any fuzzy number can be partitioned into three contiguous intervals: one where it monotonically increases, one where it equals 1, and one where it monotonically decreases. This characterization shows that every fuzzy number can be represented as an LR-fuzzy number (see example \ref{ex:fuzzy_num} for the definition).
 
 \signal{Esta proposición no me acuerdo de dónde la saqué.}
 
-\signal{No sé si debería meterme en rollos de semicontinuidad inferior y superior de los extremos de los niveles.}
+\signal{No sé si debería meterme en rollos de semicontinuidad inferior y superior de los extremos de los niveles. Con esta definición de fuzzy number, creo que me lo puedo ahorrar.}
 
 \begin{proposition}[Membership function of fuzzy numbers]
     Let $A\in \fuzzy{\R}$ be a fuzzy number, then it satisfies:
@@ -100,7 +101,8 @@ The following proposition establishes that the membership function of any fuzzy 
 
 
 % Write me a python function to represent the following fuzzy numbers in theree plots in the same figure. I want the letters to be the same as the ones in the definition and I want them all to be in the positive quadrant. Also write the 1 of the membership in the y axis saying that axis is the membership function of A \mu_A. The area of the fuzzy number must be gray and plot also thin lines for the reference values.
-\begin{example}Here are some examples of fuzzy numbers:
+\begin{example}\label{ex:fuzzy_num}
+    Here are some examples of fuzzy numbers:
     \begin{itemize}
         \item \textbf{Triangular Fuzzy Number:} Defined by a triplet $A\equiv(a, \alpha, \beta)$ where $a$ is the peak and $\alpha$ and $\beta$ the right and left widths respectively. The membership function $\mu_A(x)$ is given by:
         \[
@@ -137,13 +139,20 @@ The following proposition establishes that the membership function of any fuzzy 
     \end{itemize}
 \end{example}
     
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ch1/figures/fuzzy_numbers.png}
+    \caption{Plots of Triangular, Trapezoidal, and LR Fuzzy Numbers}
+    \label{fig:fuzzy_numbers}
+\end{figure}
+
+
 
 \subsection{Nguyen's Theorems}
 \signal{We use continuous functions because that way, we get the image of an interval is an interval as well. So then we get another fuzzy number because it maintains the convexity property?}
 
-That is because the image under $f:\R \longrightarrow \R$ continuous of a compact is compact and of a connected set is a connected set. Therefore continuous functions move intervals to intervals.
+That is because the image under $f:\R \longrightarrow \R$ continuous of a compact is compact and of a connected set is a connected set. Therefore continuous functions move closed intervals to closed intervals.
 
-\signal{This is for fuzzy numbers with the definition we gave them!}
 %https://sci-hub.se/10.1016/0165-0114(91)90139-H
 \begin{theorem}[First Nguyen Theorem]
     Let $f:\, \R \longrightarrow \R$ a continuous function and $A\in \R$ any fuzzy number \signal{(creo que vale para LR fuzzy num)}. Then,
@@ -170,7 +179,7 @@ That is because the image under $f:\R \longrightarrow \R$ continuous of a compac
 \end{theorem}
 
 
-\signal{generalization of Nguyen Theorems by Fuller in sectino 1.9 of Fuller 2.}
+\signal{generalization of Nguyen Theorems by Fuller in section 1.9 of Fuller 2.}
 
 
 
