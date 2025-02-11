@@ -20,7 +20,8 @@ Once the Pareto frontier has been identified
 \footnote{In general, Multiobjective Optimization problems are not tractable, often involve many dimensions, and cannot be solved analytically like the simple example plotted in \ref{fig:pareto_frontier}. Common solution approaches include metaheuristic algorithms such as Goal Programming and Evolutionary Algorithms.}
 (see figure \ref{fig:pareto_frontier}), it cannot be directly presented as a solution to the customer since it represents an infinite set of building designs. Therefore, the team selects 5 representative options to present to the customer. \\
 
-This leads to a new decision problem: how should the customer choose among these 5 options? The decision requires evaluating both objective criteria (like number of rooms and floor area) and subjective criteria (like aesthetic appeal and practical layout). A decision maker must determine which criteria to consider, their relative importance, and how to assess subjective attributes. This type of selection problem is what we call a MCDM problem. The options (in this case, building designs) will be assumed to be given.
+This leads to a new decision problem: how should the customer choose among these 5 options? The decision requires evaluating both objective criteria (like the ones already considered but also others such as number of rooms and floor area) and subjective criteria (like aesthetic appeal and practical layout). A decision maker must determine which criteria to consider, their relative importance, and how to assess subjective attributes. This type of selection problem is what we call a MCDM problem. The options (in this case, building designs) will be assumed to be given\footnote{
+In this example, we are studying an a posteriori approach, where a set of solutions is generated first and then presented to the decision maker. This is one of three main classifications of MCDM methods, along with a priori methods (where preferences are specified before generating alternatives) and interactive methods (which involve iterative preference elicitation and solution refinement)}.
 
 \begin{figure}[ht]
     \centering
@@ -28,7 +29,6 @@ This leads to a new decision problem: how should the customer choose among these
     \caption{Pareto Frontier, feasible region and proposed designs for Sustainable Building Design}
     \label{fig:pareto_frontier}
 \end{figure}
-
 
 \section{Crisp MCDM Methods}
 \input{ch2/crisp_mcdm}

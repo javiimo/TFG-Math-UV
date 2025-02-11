@@ -20,6 +20,51 @@
     leftsub = `,% 
     rightsub = ' %
 ]{dirtytalk}
+\RequirePackage[linesnumbered,ruled,vlined]{algorithm2e}
+% Algorithm Environment Usage:
+%
+% Basic structure:
+% \begin{algorithm}[H]
+%     \caption{Algorithm Name}
+%     \KwIn{Input parameters description}
+%     \KwOut{Output description}
+%     
+%     % Algorithm steps here
+%     % Use indentation for nested blocks
+% \end{algorithm}
+%
+% Common commands:
+% \For{condition}{body}     % For loops
+% \While{condition}{body}   % While loops
+% \If{condition}{body}      % If statements
+% \ElseIf{condition}{body}  % Else if
+% \Else{body}              % Else
+% \tcp{comment}            % Comments
+% \Return statement        % Return value
+%
+% Example:
+% \begin{algorithm}[H]
+%     \caption{Binary Search}
+%     \KwIn{Sorted array A, target value x}
+%     \KwOut{Index of x in A, or -1 if not found}
+%     left $\gets$ 0\;
+%     right $\gets$ length(A) - 1\;
+%     \While{left $\leq$ right}{
+%         mid $\gets$ $\lfloor$(left + right)$/2\rfloor$\;
+%         \If{A[mid] = x}{
+%             \Return mid\;
+%         }
+%         \ElseIf{A[mid] < x}{
+%             left $\gets$ mid + 1\;
+%         }
+%         \Else{
+%             right $\gets$ mid - 1\;
+%         }
+%     }
+%     \Return -1\;
+% \end{algorithm}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Abstract

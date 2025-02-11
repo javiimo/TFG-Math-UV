@@ -7,8 +7,236 @@ Outranking methods (e.g., ELECTRE, PROMETHEE)
 Sorting/Assignment Methods
 Some methods are designed not to rank alternatives but to assign them into predefined categories (for instance, ELECTRE TRI or other multiple criteria sorting techniques).
 
-Reference point methods (e.g., methods where the DM sets aspiration levels: TOPSIS and VIKOR)
+Reference point methods or distance based (e.g., methods where the DM sets aspiration levels: TOPSIS and VIKOR)
 
 Pairwise comparison methods (e.g., AHP, ANP)
 
 Interactive methods (where the decision maker iteratively refines preferences)}
+
+\subsection{Utility function methods}
+
+\subsection{Outranking methods}
+% ===========================
+% ELECTRE I
+% ===========================
+\begin{algorithm}[H]
+    \caption{ELECTRE I Method}
+    \KwIn{Decision matrix $X=[x_{ij}]$ for $m$ alternatives and $n$ criteria, criteria weights $w_j$, concordance threshold $c^*$, discordance threshold $d^*$, and ranges $R_j$ for each criterion}
+    \KwOut{Outranking relation among alternatives and selection of the best alternatives}
+    \For{each pair of alternatives $(a,b)$}{
+        \textbf{Compute Concordance Index:}\;
+        \[
+            C(a,b) = \sum_{j \in J(a,b)} w_j, \quad \text{where } J(a,b)=\{\, j \mid x_{aj} \ge x_{bj} \,\}
+        \]\;
+        \textbf{Compute Discordance Index:}\;
+        \[
+            D(a,b) = \begin{cases}
+            \max\limits_{j \in J'(a,b)} \left( \dfrac{x_{bj}-x_{aj}}{R_j} \right), & \text{if } J'(a,b)\neq\emptyset,\\[1ex]
+            0, & \text{otherwise},
+            \end{cases}
+        \]
+        where \( J'(a,b)=\{\, j \mid x_{aj} < x_{bj} \,\}\)\;
+    }
+    \For{each pair $(a,b)$}{
+        \If{\( C(a,b) \ge c^* \) \textbf{and} \( D(a,b) \le d^* \)}{
+                Conclude that alternative \( a \) outranks \( b \) (add an edge \( a \rightarrow b \) in the outranking graph)\;
+        }
+    }
+    Determine the kernel (set of non-dominated alternatives) or derive a ranking from the outranking graph\;
+    \Return The outranking relation and selection (or ranking) of the best alternatives\;
+    \end{algorithm}
+    
+% ===========================
+% PROMETHEE II
+% ===========================
+\begin{algorithm}[H]
+\caption{PROMETHEE II Method}
+\KwIn{Decision matrix $X=[x_{ij}]$ with $m$ alternatives and $n$ criteria, criteria weights $w_j$, and parameters defining the preference functions}
+\KwOut{Complete ranking of alternatives based on net outranking flows}
+\For{each pair of alternatives $(a,b)$}{
+    \For{each criterion $j=1,\dots,n$}{
+            Compute the performance difference: 
+            \[
+            d_{j}(a,b) = x_{aj} - x_{bj}
+            \]
+            Evaluate the preference degree \( P_j(a,b) \) using the chosen preference function\;
+    }
+    Compute the aggregated preference index:
+    \[
+        \Pi(a,b) = \sum_{j=1}^{n} w_j \cdot P_j(a,b)
+    \]\;
+}
+\For{each alternative \( a \)}{
+    Compute the positive outranking flow:
+    \[
+        \phi^+(a) = \frac{1}{m-1} \sum_{b \neq a} \Pi(a,b)
+    \]\;
+    Compute the negative outranking flow:
+    \[
+        \phi^-(a) = \frac{1}{m-1} \sum_{b \neq a} \Pi(b,a)
+    \]\;
+    Compute the net flow:
+    \[
+        \phi(a) = \phi^+(a) - \phi^-(a)
+    \]\;
+}
+\Return Ranking of alternatives in descending order of \(\phi(a)\)\;
+\end{algorithm}
+
+
+\subsection{Reference point and distance-based methods}
+
+\begin{algorithm}[H]
+    \caption{TOPSIS Method for Multi-Criteria Decision Making}
+    \KwIn{Decision matrix $X = [x_{ij}]$ with $m$ alternatives and $n$ criteria, weights $w_j$ for each criterion}
+    \KwOut{Ranking of alternatives based on relative closeness to the ideal solution}
+    
+    % Step 1: Normalize the decision matrix
+    \For{$j\leftarrow 1$ \KwTo $n$}{
+        Compute normalization factor: $d_j = \sqrt{\sum_{i=1}^{m} x_{ij}^2}$\;
+        \For{$i\leftarrow 1$ \KwTo $m$}{
+            $r_{ij} \gets \dfrac{x_{ij}}{d_j}$\;
+        }
+    }
+    
+    % Step 2: Calculate the weighted normalized decision matrix
+    \For{$i\leftarrow 1$ \KwTo $m$}{
+        \For{$j\leftarrow 1$ \KwTo $n$}{
+            $v_{ij} \gets w_j \times r_{ij}$\;
+        }
+    }
+    
+    % Step 3: Determine the ideal and anti-ideal solutions
+    \For{$j\leftarrow 1$ \KwTo $n$}{
+        $v_j^+ \gets \max\{v_{1j}, v_{2j}, \dots, v_{mj}\}$ \quad (if $j$ is beneficial)\;
+        $v_j^- \gets \min\{v_{1j}, v_{2j}, \dots, v_{mj}\}$ \quad (if $j$ is beneficial)\;
+        \tcp{For cost criteria, swap the definitions of $v_j^+$ and $v_j^-$}
+    }
+    
+    % Step 4: Calculate separation measures for each alternative
+    \For{$i\leftarrow 1$ \KwTo $m$}{
+        $S_i^+ \gets \sqrt{\sum_{j=1}^{n} (v_{ij} - v_j^+)^2}$\;
+        $S_i^- \gets \sqrt{\sum_{j=1}^{n} (v_{ij} - v_j^-)^2}$\;
+    }
+    
+    % Step 5: Calculate the relative closeness to the ideal solution
+    \For{$i\leftarrow 1$ \KwTo $m$}{
+        $C_i \gets \dfrac{S_i^-}{S_i^+ + S_i^-}$\;
+    }
+    
+    % Step 6: Rank the alternatives based on $C_i$
+    \Return The alternatives ranked in descending order of $C_i$\;
+    \end{algorithm}
+
+
+% ====================================
+% 2. VIKOR Method
+% ====================================
+\begin{algorithm}[H]
+    \caption{VIKOR Method}
+    \KwIn{Decision matrix \(X = [x_{ij}]\) for \(m\) alternatives and \(n\) criteria, weights \(w_j\) for each criterion, and parameter \(v \in [0,1]\)}
+    \KwOut{Ranking of alternatives based on a compromise solution}
+    \textbf{Step 1: Determine the Best and Worst Values}\;
+    \quad \For{each criterion \(j = 1,\dots,n\)}{
+        Compute the best value: 
+        \[
+          f_j^* = \max_{i}\{x_{ij}\} \quad \text{(if maximization; use \(\min\) for minimization)}
+        \]\;
+        Compute the worst value:
+        \[
+          f_j^- = \min_{i}\{x_{ij}\} \quad \text{(if maximization; use \(\max\) for minimization)}
+        \]\;
+    }
+    \textbf{Step 2: Compute the \(S\) and \(R\) Values}\;
+    \quad \For{each alternative \(i = 1,\dots,m\)}{
+        Compute the aggregated measure:
+        \[
+           S_i = \sum_{j=1}^{n} w_j \cdot \frac{f_j^* - x_{ij}}{f_j^* - f_j^-}
+        \]\;
+        Compute the individual regret measure:
+        \[
+           R_i = \max_{j=1,\dots,n} \left[ w_j \cdot \frac{f_j^* - x_{ij}}{f_j^* - f_j^-} \right]
+        \]\;
+    }
+    \textbf{Step 3: Compute the \(Q\) Value for Each Alternative}\;
+    \quad Let 
+    \[
+    S^* = \min_{i} S_i,\quad S^- = \max_{i} S_i,\quad R^* = \min_{i} R_i,\quad R^- = \max_{i} R_i
+    \]\;
+    \quad \For{each alternative \(i = 1,\dots,m\)}{
+        Compute:
+        \[
+           Q_i = v \cdot \frac{S_i - S^*}{S^- - S^*} + (1-v) \cdot \frac{R_i - R^*}{R^- - R^*}
+        \]\;
+    }
+    \textbf{Step 4: Ranking and the Compromise Solution}\;
+    \quad Rank alternatives in ascending order of \(Q_i\)\;
+    \quad \tcp{Optionally, check for acceptable advantage and stability conditions among the top alternatives}
+    \Return Ranking of alternatives based on \(Q_i\)\;
+    \end{algorithm}
+
+
+
+\subsection{Pairwise comparison methods}
+
+
+% ===========================
+% ANP (Analytic Network Process)
+% ===========================
+\begin{algorithm}[H]
+    \caption{Analytic Network Process (ANP)}
+    \KwIn{A set of clusters (criteria, alternatives, etc.), pairwise comparison matrices, and information on interdependencies}
+    \KwOut{Ranking of alternatives based on final priority weights}
+    \textbf{Step 1: Network Construction}\;
+    \quad Define clusters and identify the interdependencies among them\;
+    \textbf{Step 2: Pairwise Comparisons}\;
+    \quad \For{each cluster and for each interdependency between clusters}{
+        Perform pairwise comparisons to construct local comparison matrices\;
+        Compute local priority vectors (e.g., using the eigenvector method)\;
+    }
+    \textbf{Step 3: Supermatrix Formation}\;
+    \quad Assemble all local priority vectors into the initial (unweighted) supermatrix $W$\;
+    \textbf{Step 4: Weighting the Supermatrix}\;
+    \quad Adjust $W$ by cluster weights (or inter-cluster influences) to obtain the weighted supermatrix $W'$\;
+    \textbf{Step 5: Limit Supermatrix Calculation}\;
+    \quad Raise $W'$ to a sufficiently large power until convergence, i.e., 
+    \[
+    W'^{(k)} \rightarrow W^* \quad \text{as } k \to \infty
+    \]
+    \textbf{Step 6: Derive Final Priorities}\;
+    \quad Extract the final weights for the alternatives from $W^*$\;
+    \Return Ranking of alternatives based on the final weights\;
+    \end{algorithm}
+
+
+% ====================================
+% 1. Analytic Hierarchy Process (AHP)
+% ====================================
+\begin{algorithm}[H]
+    \caption{Analytic Hierarchy Process (AHP)}
+    \KwIn{A set of criteria and alternatives, pairwise comparison matrices for criteria and for alternatives under each criterion}
+    \KwOut{Final ranking of alternatives based on global priorities}
+    \textbf{Step 1: Hierarchy Construction}\;
+    \quad Define the goal, criteria, and alternatives\;
+    \textbf{Step 2: Pairwise Comparison of Criteria}\;
+    \quad Construct the pairwise comparison matrix for the criteria\;
+    \quad Compute the eigenvector of this matrix to obtain criteria weights \(w_j\)\;
+    \quad \tcp{Optionally check the consistency ratio for reliability}
+    \textbf{Step 3: Pairwise Comparison of Alternatives}\;
+    \quad \For{each criterion \(j = 1,\dots,n\)}{
+        Construct the pairwise comparison matrix for the alternatives with respect to criterion \(j\)\;
+        
+        Compute the eigenvector for this matrix to obtain local priorities \(p_{ij}\) for each alternative \(i\) under criterion \(j\)\;
+        
+        \tcp{Optionally check the consistency ratio for each matrix}
+    }
+    \textbf{Step 4: Global Priority Synthesis}\;
+    \quad For each alternative \(i\), compute the global priority:
+    \[
+    P_i = \sum_{j=1}^{n} w_j \cdot p_{ij}
+    \]
+    \Return Ranking of alternatives based on the global priorities \(P_i\)\;
+    \end{algorithm}
+
+
+
