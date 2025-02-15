@@ -9,13 +9,146 @@ Some methods are designed not to rank alternatives but to assign them into prede
 
 Reference point methods or distance based (e.g., methods where the DM sets aspiration levels: TOPSIS and VIKOR)
 
-Pairwise comparison methods (e.g., AHP, ANP)
+Pairwise comparison methods (e.g., AHP, ANP, BWM)
 
 Interactive methods (where the decision maker iteratively refines preferences)
 }
 %Tb he leido en "lectura diagonal pag 15" sobre la clasificación en Value measurement, goal aspirations y outranking methods
 
+%https://www.dma-journal.org/index.php/dema/article/view/7/5
+\say{MCDM  methods  provide  a  systematic  and  structured framework  for  decision-making.  They  enable  decision-makers  to  break  down  complex problems  into  a  set  of  criteria,  evaluate  alternatives  against  these  criteria,  and  make informed choices based on well-defined decision rules.}\footnote{\href{https://www.dma-journal.org/index.php/dema/article/view/7/5}{https://www.dma-journal.org/index.php/dema/article/view/7/5}}
+\\
+
+
+
+% A Handbook on Multi-Attribute Decision-Making Methods, First Edition.
+% Omid Bozorg-Haddad, Babak Zolghadr-Asli, and Hugo A. Loáiciga.
+% © 2021 John Wiley & Sons, Inc. Published 2021 by John Wiley & Sons, Inc.
+
+Therefore, the problem formulation usually starts by defining a decision matrix:
+
+\begin{definition}[Decision-Matrix] 
+    Let $\A =\{a_i\mid 1\leq i \leq n\} $ be the set of $n\in \N$ alternatives and $\C =\{c_j\mid 1\leq j \leq m\}$ the set of $m \in \N$ criteria. We may represent the value of the alternative $a_i$ with regard to a criterion $c_j$ as the element $d_{ij}$ of a decision-matrix $D$ as follows:
+    \[D=
+\setlength{\arraycolsep}{5pt} % adjust spacing if desired
+\begin{array}{c@{\,}l}
+  % Left block: matrix with column labels underneath
+  \begin{array}{c}
+    \begin{pmatrix}
+      d_{11} & d_{12} & \cdots & d_{1m} \\
+      d_{21} & d_{22} & \cdots & d_{2m} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      d_{n1} & d_{n2} & \cdots & d_{nm}
+    \end{pmatrix} \\[2mm] % vertical space between matrix and column labels
+    \begin{array}{llll}
+      \scriptstyle c_1 \hspace{1mm}& \hspace{1mm}\scriptstyle c_2 \hspace{1mm} & \hspace{1mm}\cdots  &   \hspace{1mm}\scriptstyle c_m
+    \end{array}
+  \end{array}
+  % Right block: row labels aligned with matrix rows
+  \hspace{-2.5mm}
+  \begin{array}{l}
+    \scriptstyle a_1 \\%[-2.5mm]
+    \scriptstyle a_2 \\%[-2.5mm]
+    \scriptstyle \vdots \\%[-2.5mm]
+    \scriptstyle a_n\\
+    \\
+  \end{array}
+\end{array}
+\]
+Where each row represents an alternative's values across all criteria, while each column shows how all alternatives perform on a single criterion.
+    
+\end{definition}
+
+
+\signal{Aquí quiero decir cómo los clasificamos y por qué. Me gustaría una clasificación que recoja la idea general de los métodos. Cojo la clasificación de Belton and Stewart (2002)? value measurement, goal
+aspirations or reference level, and outranking methods}
+
+There is no standard classification of all the MCDM methods and there are as well mixed methods that involve ideas from a variety of them. But in order to get an approximate picture of the field, we are going to follow the classification from Belton and Stewart (2002) and see the most common methods (figure \ref{fig:MCDM_classification}):
+
+\begin{itemize}
+    \item \textbf{Value Measurement Methods:} assign each alternative a numerical value by aggregating its performance on various criteria into a single overall score, allowing for direct comparison of alternatives. They assume that all criteria can be quantified on a common scale.
+    \begin{itemize}
+        \item \textbf{AHP (Analytic Hierarchy Process):} Decomposes the decision problem into a hierarchical structure and uses pairwise comparisons to derive weights and scores, which are then aggregated to compute an overall value.
+        \item \textbf{ANP (Analytic Network Process):} Extends AHP by accounting for interdependencies among criteria and alternatives, yet still relies on aggregating performance scores into a global value.
+        \item \textbf{MAUT (Multiattribute Utility Theory):} Constructs a utility function that maps the performance of each alternative on different criteria to an overall utility value, capturing the decision maker's preferences.
+    \end{itemize}
+    
+    \item \textbf{Goal Aspirations or Reference Level Methods:} evaluate alternatives based on their distance from pre-established ideal or reference levels. Instead of simply aggregating scores, they measure how closely each alternative meets or deviates from desired targets without requiring explicit trade-offs or weight assignments.
+    \begin{itemize}
+        \item \textbf{TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution):} Ranks alternatives by computing their distances to both an ideal (aspiration) and an anti-ideal solution, favoring those closest to the ideal.
+        \item \textbf{VIKOR (VlseKriterijumska Optimizacija I Kompromisno Resenje):}         Identifies a compromise solution by balancing the closeness of each alternative to an ideal reference point with the need to minimize regret, considering both group utility and individual dissatisfaction.
+        \item \textbf{BWM (Best Worst Method):} Determines criteria weights through comparisons between the best and worst criteria against all others, thereby setting performance reference points for the evaluation.
+    \end{itemize}
+    
+    \item \textbf{Outranking Methods:} compare alternatives pairwise to determine preference, indifference, or incomparability, leading to a ranked selection based on relative performance.
+    \begin{itemize}
+        \item \textbf{ELECTRE Family (Elimination and Choice Expressing Reality):}
+        Uses concordance (measuring the degree of agreement) and discordance (measuring the opposition) indices in pairwise comparisons to establish if one alternative outranks another.
+        \item \textbf{PROMETHEE Family (Preference Ranking Organization Method for Enrichment Evaluations):} Applies preference functions to compare alternatives pairwise, producing outranking flows that help to rank the alternatives.
+    \end{itemize}
+\end{itemize} 
+
+
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=2cm,
+        every node/.style={draw, rectangle, rounded corners, align=center, fill=blue!10, minimum width=2.5cm, minimum height=1cm},
+        scale=1, transform shape
+    ]
+        % Root node
+        \node (mcdm) {MCDM Methods};
+    
+        % First level: Categories arranged to the right of the root with increased vertical spacing
+        \node (value) [right=3cm of mcdm, yshift=3.8cm] {Value Measurement\\Methods};
+        \node (goal)  [right=3cm of mcdm] {Goal Aspirations/\\Reference Level Methods};
+        \node (outrank) [right=3cm of mcdm, yshift=-3.2cm] {Outranking Methods};
+    
+        % Arrows from root to first-level categories
+        \draw[->, thick] (mcdm) -- (value);
+        \draw[->, thick] (mcdm) -- (goal);
+        \draw[->, thick] (mcdm) -- (outrank);
+    
+        % Second level: Children of "Value Measurement Methods"
+        \node (anp)  [right=2.7cm of value, yshift=1.2cm] {ANP};
+        \node (ahp)  [right=2.7cm of value, yshift=0cm] {AHP};
+        \node (maut) [right=2.7cm of value, yshift=-1.2cm] {MAUT};
+    
+        \draw[->, thick] (value) -- (anp);
+        \draw[->, thick] (value) -- (ahp);
+        \draw[->, thick] (value) -- (maut);
+    
+        % Second level: Children of "Goal Aspirations/Reference Level Methods"
+        \node (topsis) [right=1.8cm of goal, yshift=1.2cm] {TOPSIS};
+        \node (vikor)  [right=1.8cm of goal] {VIKOR};
+        \node (bwm)    [right=1.8cm of goal, yshift=-1.2cm] {BWM};
+    
+        \draw[->, thick] (goal) -- (topsis);
+        \draw[->, thick] (goal) -- (vikor);
+        \draw[->, thick] (goal) -- (bwm);
+    
+        % Second level: Children of "Outranking Methods"
+        \node (electre)   [right=2.5cm of outrank, yshift=0.6cm] {ELECTRE};
+        \node (promethee) [right=2.5cm of outrank, yshift=-0.6cm] {PROMETHEE};
+    
+        \draw[->, thick] (outrank) -- (electre);
+        \draw[->, thick] (outrank) -- (promethee);
+    \end{tikzpicture}
+    \caption{Classification of MCDM Methods following Beltan and Stewart (2002).}
+    \label{fig:MCDM_classification}
+    \end{figure}
+    
+    
+    
+
+
 \subsection{Utility function methods}
+
+\signal{
+MAUT: ordinal utility functions and cardinal utility functions (Von Neumann-Morgenstern utility theorem)}
 
 \subsection{Outranking methods}
 % ===========================
