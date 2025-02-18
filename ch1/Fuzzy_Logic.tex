@@ -4,34 +4,37 @@ R-implications
 t-norm implications
 \signal{$(\fuzzy{X},\cup , \cap , \lnot)$ is a complete, completely distributive, lattice with an involution. This extends the boolean algebra.}
 
+\signal{Fuzzy description logics explained %https://www.umbertostraccia.it/cs/download/papers/KES09/KES09.pdf
 
+The Lukasiewicz t-conorm is closely related to the basic binary operation of multi-valued
+algebras. Additionally, t-norms and t-conorms form examples of aggregation operators. They
+play a significant role in the axiomatic definition of the concept of triangular norm-based measure
+and, in particular, of the concept of probability of fuzzy events; the Frank family of t-norms and
+t-conorms plays a particular role [6]. 
 
-% \signal{
-%     Lukasiewicz logic algebraic structure and formal implications thanks to the residual property.\\
+%https://cake.fiu.edu/Publications/Ngan+al-18-LC.Logic_Connectives_of_Complex_Fuzzy_Sets_ROMJIST_downloaded.pdf 
 
-%     Gödel Logic uses 
-% a
-% ⊗
-% b
-% =
-% min
+It should be mentioned that t-norms overlap with copulas [3, 24]: commutative associative
+copulas are t-norms; t-norms which satisfy the 1-Lipschitz condition are copulas. Some families
+of t-norms are known as families of copulas under different names
 
-% (
-% a
-% ,
-% b
-% )
-% a⊗b=min(a,b), which tends to produce conservative scores dominated by the weakest criterion. While useful for risk-averse scenarios, it fails to differentiate alternatives when all criteria are partially satisfied.
+A new t-norm was introduced and applied in Active Learning Method (ALM) by Kiaei et
+al. [20]. The original operators of ALM were presented, along with the Ink Drop Spread and
+the Center of Gravity operators, and two basic morphological operators. The obtained results
+show that new operators have overcome several of the disadvantages of the original operators.
+The new operators were applied well in ALM. In that paper, aggregations of fuzzy relations
+using aggregation functions have been considered. This has been performed by determining
+certain conditions expressed in computational formulas and deploying t-norms and t-conorms
+properties. Recently, T-operators have been used to combine criteria in MCDM.}
 
-% Product Logic employs 
-% a
-% ⊗
-% b
-% =
-% a
-% ⋅
-% b
-% a⊗b=a⋅b, amplifying the impact of low-scoring criteria. This can lead to premature elimination of alternatives with one poor attribute.
+\signal{
+    Lukasiewicz logic algebraic structure and formal implications thanks to the residual property.\\
 
-% Łukasiewicz Logic's additive t-norm balances compensation between criteria, allowing alternatives to offset weaknesses in one dimension with strengths in others—a critical feature for complex trade-off analysis
-% }
+    Gödel Logic uses 
+    $a \otimes b = \min(a, b)$, which tends to produce conservative scores dominated by the weakest criterion. While useful for risk-averse scenarios, it fails to differentiate alternatives when all criteria are partially satisfied.
+
+    Product Logic employs 
+    $a \otimes b = a \cdot b$, amplifying the impact of low-scoring criteria. This can lead to premature elimination of alternatives with one poor attribute.
+
+    Łukasiewicz Logic's additive t-norm balances compensation between criteria, allowing alternatives to offset weaknesses in one dimension with strengths in others—a critical feature for complex trade-off analysis.
+}
