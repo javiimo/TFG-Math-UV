@@ -3,44 +3,51 @@
 \signal{What are the different kinds of uncertainty, why not simply use probability for modeling uncertainty, the sorites paradox, what are rough sets (very briefly like in a couple of paragraphs to outline) and what is the structure of this book.
 
 I don't want to state any definitions and things, that is inside the main work and other chapters where those are properly stated.
+
+
 }
 
 Before stating a proper formalization of the fuzzy framework, it is crucial to first clarify what it represents and why there is a need for such a theory when there already exists Probability and Statistics, which are broadly applied and much more developed.\\
 
-The main objective of these frameworks is to represent and manage uncertainty inherent in complex systems. This involves encoding data and expressing information through appropriate mathematical structures and developing measures that enable effective synthesis and combination of uncertain information.
+The main objective of these frameworks is to represent and manage uncertainty inherent in complex systems. This involves encoding data and expressing information through appropriate mathematical structures and developing measures that enable effective synthesis and combination of uncertain information.\\
 
-\section{Uncertainty Quantification}
+A fundamental motivation for modeling uncertainty is to enable better decision making across diverse domains. In engineering, uncertainty quantification helps assess structural reliability and optimize designs. In finance, it aids risk management and portfolio optimization. In medicine, it supports diagnosis and treatment planning under incomplete information. In environmental science, it helps model climate patterns and ecological systems. By developing mathematical frameworks to represent and reason about uncertainty, we can make more informed choices and balance competing objectives in complex scenarios.\\
+
+\section{Uncertainty: Definition and Types}
 
 There is no consensus about a unique definition of uncertainty and a single classification of its types. 
 
-As mentioned above, uncertainty is present in complex systems. According to \cite{UncertaintySciences}: 
+As mentioned above, uncertainty is present in complex systems. According to \cite{UncertaintySciences} they are abstractions that aid understanding a group of interacting, interrelated, or interdependent elements that together form a complex whole, which can be a physical structure, process, or procedure with some attributes of interest. All parts of a system are related to the same overall process, procedure, or structure. Formally:
 
 \begin{definition}[System]
-    A system is a group of interacting, interrelated, or interdependent elements that together form a complex whole, which can be a physical structure, process, or procedure with some attributes of interest. All parts of
-    a system are related to the same overall process, procedure, or structure.\\
-
     An object is called a system if it can be expressed as a pair: a set of things ($T$) and a set of relations ($R$).
 
     \[S = (T,R)\]
 \end{definition}
 
 \begin{remark}
-    By \emph{set of things}, we mean that \(T\) may be any collection of elements, from a simple set (finite or infinite) to more complex structures such as sets of sets or power sets. Likewise, the \emph{set of relations} (\(R\)) is understood broadly, covering any subset of a suitable Cartesian product, whether binary, ternary, or \(n\)-ary. It provides the structural foundation. Hence, even though \((T, R)\) appears simple, its components can be very varied and rich.
+    By \emph{set of things}, we mean that \(T\) may be any collection of elements, from a simple set (finite or infinite) to more complex structures such as sets of sets or power sets. Likewise, the \emph{set of relations} (\(R\)) is understood broadly, it encapsulates interactions, constraints, and dependencies between these elements; providing a structural foundation. Hence, even though \((T, R)\) appears simple, its components can be very varied and rich.
 \end{remark}
 
 This definition is too general to have any practical utility. However, it gives us a flexible "skeleton" to build upon.\\
 
-Now we are in shape to tackle what we refer to with \textit{uncertainty in a system}. The most broadly used classification of uncertainty is this binary one:
+Now we are in shape to tackle what we refer to with \textit{uncertainty in a system}. \say{The term uncertainty can be viewed as a component of ignorance.}\cite{UncertaintySciences}. The most broadly used classification of uncertainty is this binary one:\\
+
 \begin{itemize}
     \item \textbf{Aleatoric:} due to the inherent randomnes of some nondeterministic events. This kind of uncertainty is \textbf{irreducible} since it is intrinsic to the nature of the event. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
-    \item Epistemic Uncertainty: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Realistic examples include: 
+    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Realistic examples include: 
     \begin{itemize} 
         \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
-        \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature, we would need to group them together. 
-        This represents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness}.
+        \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature above that level, we would need to group them together. This situation presents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness} (which is a type of epistemic uncertainty).
     \end{itemize} 
 \end{itemize}
 
-First, it is crucial to understand that uncertainty is not merely a lack of data, but rather an inherent characteristic of systems where measurements, models, or knowledge are imperfect \cite{UncertaintySciences}. A fundamental motivation for modeling uncertainty is to quantify it in order to improve decision making.\\
+However this classification does not come without some notable deficiencies, to name a few:
 
-There many different possible sources for uncertainty: 
+\begin{itemize}
+    \item \textbf{Incomplete Coverage:} Some forms of uncertainty do not neatly fit into these two categories. For example: vagueness, which is not aleatoric but neither reducible with more data. Even with coarseness that is presented as reducible (in the example above you could buy a thermometer), it is not clear that is always the case.
+    \item \textbf{Fail to capture higher-order uncertainties:} does not account for meta-uncertainties (uncertainty about the uncertainty itself) or a broader hierarchical nature of ignorance.
+    \item \textbf{Interdependence Oversight:} Uncertainty types are presented as independent but in many cases they can influence each other.
+\end{itemize}
+
+Having a classification of uncertainty types may be useful to build a proper representation tailored to a specific kind of ignorance.
