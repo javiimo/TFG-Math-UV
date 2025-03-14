@@ -1,0 +1,46 @@
+\setcounter{chapter}{-1}
+\chapter{Introduction: Fuzzy Logic as a Framework for Uncertainty in Decision Making}
+\signal{What are the different kinds of uncertainty, why not simply use probability for modeling uncertainty, the sorites paradox, what are rough sets (very briefly like in a couple of paragraphs to outline) and what is the structure of this book.
+
+I don't want to state any definitions and things, that is inside the main work and other chapters where those are properly stated.
+}
+
+Before stating a proper formalization of the fuzzy framework, it is crucial to first clarify what it represents and why there is a need for such a theory when there already exists Probability and Statistics, which are broadly applied and much more developed.\\
+
+The main objective of these frameworks is to represent and manage uncertainty inherent in complex systems. This involves encoding data and expressing information through appropriate mathematical structures and developing measures that enable effective synthesis and combination of uncertain information.
+
+\section{Uncertainty Quantification}
+
+There is no consensus about a unique definition of uncertainty and a single classification of its types. 
+
+As mentioned above, uncertainty is present in complex systems. According to \cite{UncertaintySciences}: 
+
+\begin{definition}[System]
+    A system is a group of interacting, interrelated, or interdependent elements that together form a complex whole, which can be a physical structure, process, or procedure with some attributes of interest. All parts of
+    a system are related to the same overall process, procedure, or structure.\\
+
+    An object is called a system if it can be expressed as a pair: a set of things ($T$) and a set of relations ($R$).
+
+    \[S = (T,R)\]
+\end{definition}
+
+\begin{remark}
+    By \emph{set of things}, we mean that \(T\) may be any collection of elements, from a simple set (finite or infinite) to more complex structures such as sets of sets or power sets. Likewise, the \emph{set of relations} (\(R\)) is understood broadly, covering any subset of a suitable Cartesian product, whether binary, ternary, or \(n\)-ary. It provides the structural foundation. Hence, even though \((T, R)\) appears simple, its components can be very varied and rich.
+\end{remark}
+
+This definition is too general to have any practical utility. However, it gives us a flexible "skeleton" to build upon.\\
+
+Now we are in shape to tackle what we refer to with \textit{uncertainty in a system}. The most broadly used classification of uncertainty is this binary one:
+\begin{itemize}
+    \item \textbf{Aleatoric:} due to the inherent randomnes of some nondeterministic events. This kind of uncertainty is \textbf{irreducible} since it is intrinsic to the nature of the event. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
+    \item Epistemic Uncertainty: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Realistic examples include: 
+    \begin{itemize} 
+        \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
+        \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature, we would need to group them together. 
+        This represents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness}.
+    \end{itemize} 
+\end{itemize}
+
+First, it is crucial to understand that uncertainty is not merely a lack of data, but rather an inherent characteristic of systems where measurements, models, or knowledge are imperfect \cite{UncertaintySciences}. A fundamental motivation for modeling uncertainty is to quantify it in order to improve decision making.\\
+
+There many different possible sources for uncertainty: 
