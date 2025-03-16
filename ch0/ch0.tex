@@ -17,10 +17,12 @@ A fundamental motivation for modeling uncertainty is to enable better decision m
 
 There is no consensus about a unique definition of uncertainty and a single classification of its types. 
 
-As mentioned above, uncertainty is present in complex systems. According to \cite{UncertaintySciences} they are abstractions that aid understanding a group of interacting, interrelated, or interdependent elements that together form a complex whole, which can be a physical structure, process, or procedure with some attributes of interest. All parts of a system are related to the same overall process, procedure, or structure. Formally:
+As mentioned above, uncertainty is present in complex systems. According to \cite{UncertaintySciences}, \textbf{systems are abstractions that aid understanding} a group of interacting, interrelated, or interdependent elements that together form a complex whole, which can be a physical structure, process, or procedure with some attributes of interest. All parts of a system are related to the same overall process, procedure, or structure. \\
+
+Notice that usually these abstractions are not unique in the sense that there are different ways to model the same system. Formally it is:
 
 \begin{definition}[System]
-    An object is called a system if it can be expressed as a pair: a set of things ($T$) and a set of relations ($R$).
+    An object is called a system if it can be expressed as a pair of a set of things ($T$) and a set of relations ($R$).
 
     \[S = (T,R)\]
 \end{definition}
@@ -29,12 +31,44 @@ As mentioned above, uncertainty is present in complex systems. According to \cit
     By \emph{set of things}, we mean that \(T\) may be any collection of elements, from a simple set (finite or infinite) to more complex structures such as sets of sets or power sets. Likewise, the \emph{set of relations} (\(R\)) is understood broadly, it encapsulates interactions, constraints, and dependencies between these elements; providing a structural foundation. Hence, even though \((T, R)\) appears simple, its components can be very varied and rich.
 \end{remark}
 
-This definition is too general to have any practical utility. However, it gives us a flexible "skeleton" to build upon.\\
+This definition is too general to have any practical utility. However, it gives us a flexible "skeleton" to build upon and tackle what we refer to with \textit{uncertainty in a system}. Finding a proper definition for uncertainty is a very subtle and challenging task due to the breadth of the concept, but following the ideas from \cite{UncertaintySciences} and \cite{RumsfeldMatrix} we will start by classifying knowledge into 4 categories using Rumsfeld's Matrix\footnote{While \cite{RumsfeldMatrix} classifies this matrix as representing only Epistemic Uncertainty, we take a broader view since aleatoric uncertainty, with its quantifiable regularities through probability distributions, can be considered a "known unknown".}:
 
-Now we are in shape to tackle what we refer to with \textit{uncertainty in a system}. \say{The term uncertainty can be viewed as a component of ignorance.}\cite{UncertaintySciences}. The most broadly used classification of uncertainty is this binary one:\\
+\begin{table}[h!]
+    \centering
+    \label{tab:rumsfeld}
+    \begin{tabular}{@{}c@{~}c|c|c|}
+        \multicolumn{2}{c}{} & \multicolumn{2}{c}{\large \textbf{Our Perceived Knowledge}} \\[0.3em]
+        \multicolumn{2}{c}{} & \multicolumn{1}{c}{Known} & \multicolumn{1}{c}{Unknown} \\
+        \cline{3-4}
+        \multirow{2}{*}{\rotatebox{90}{\parbox{2cm}{\centering \large \textbf{Real State of} \\ \textbf{Knowledge}}}} 
+        & Known & Things we know we know & Things we know we don't know \\
+        \cline{3-4}
+        & Unknown & Things we know we don't know & Things we do not know we don't know \\
+        \cline{3-4}
+    \end{tabular}
+    \vspace{1cm}
+    \caption{Rumsfeld's Matrix}
+\end{table}
+
+This matrix illustrates the relationship between knowledge and ignorance\footnote{For a more rigorous treatment of ignorance and higher-order ignorance using non-formal modal logic see \cite{firstorderignorance}.}, where ignorance can be understood as the absence or incompleteness of knowledge. In particular, we would consider \textbf{ignorance} to be represented in the \textit{Unknown} column and \textbf{knowledge}, the \textit{Known} column. From this perspective, we can identify four distinct categories:
+\begin{itemize}
+    \item \textbf{Known Knowns}: things we are aware of and understand well.
+    \item \textbf{Unknown Knowns}: these are the aspects that we actually know but are not conciously aware of. They might include tacit knowledge or assumptions that go unrecognized.
+    \item \textbf{Known Unknowns}: gaps in our knowledge that we recognize.
+    \item \textbf{Unknown Unknowns}: things we are completely unaware of.
+\end{itemize}
+
+In the context of uncertainty quantification, we focus primarily on the \textbf{known unknowns} because those are the aspects of ignorance that we can identify and attempt to model. Therefore, we can finally state what we will consider as uncertainty in this work:\\
+
+
+\begin{definition}[Uncertainty in a system]
+    \say{The term uncertainty can be viewed as \textbf{a component of ignorance}.[...] Uncertainty and information as a pair, and ignorance and knowledge as another pair,[...], as the former component of each pair describes a deficiency in the respective latter component, while the latter component of a pair can be viewed as the respective capacity available to reduce the respective former component.}\cite{UncertaintySciences}
+\end{definition}
+
+It is useful to classify different types of uncertainty to better understand what our mathematical models represent. However, it is vital to keep in mind that these types are not independent of each other. Rather than strict boundaries where every known unknown fits, it is better to think of them as \textit{dimensions} of uncertainty. The most broadly used classification of uncertainty is this binary one:\\
 
 \begin{itemize}
-    \item \textbf{Aleatoric:} due to the inherent randomness of some nondeterministic events. This kind of uncertainty is \textbf{irreducible} since it is intrinsic to the nature of the event. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
+    \item \textbf{Aleatoric:} inherent randomness or natural variability, which is \textbf{irreducible}. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
     \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Realistic examples include: 
     \begin{itemize} 
         \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
@@ -45,7 +79,7 @@ Now we are in shape to tackle what we refer to with \textit{uncertainty in a sys
 However this classification does not come without some notable deficiencies, to name a few:
 
 \begin{itemize}
-    \item \textbf{Incomplete Coverage:} Some forms of uncertainty do not neatly fit into these two categories. For example: vagueness, which is not aleatoric but neither reducible with more data. Even with coarseness that is presented as reducible (in the example above you could buy a thermometer), it is not clear that is always the case.
+    \item \textbf{Incomplete Coverage:} Some forms of uncertainty do not neatly fit into these two categories. For example: vagueness, which is not aleatoric but neither reducible with more data.
     \item \textbf{Fail to capture higher-order uncertainties:} does not account for meta-uncertainties (uncertainty about the uncertainty itself) or a broader hierarchical nature of ignorance.
     \item \textbf{Interdependence Oversight:} Uncertainty types are presented as independent but in many cases they can influence each other.
 \end{itemize}
