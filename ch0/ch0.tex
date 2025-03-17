@@ -51,12 +51,56 @@ This definition is too general to have any practical utility. However, it gives 
 \end{table}
 
 This matrix illustrates the relationship between knowledge and ignorance\footnote{For a more rigorous treatment of ignorance and higher-order ignorance using non-formal modal logic see \cite{firstorderignorance}.}, where ignorance can be understood as the absence or incompleteness of knowledge. In particular, we would consider \textbf{ignorance} to be represented in the \textit{Unknown} column and \textbf{knowledge}, in the \textit{Known} column. From this perspective, we can identify four distinct categories:
-\begin{itemize}
-    \item \textbf{Known Knowns}: things we are aware of and understand well.
-    \item \textbf{Unknown Knowns}: these are the aspects that we actually know but are not conciously aware of. They might include tacit knowledge or assumptions that go unrecognized.
-    \item \textbf{Known Unknowns}: gaps in our knowledge that we recognize.
-    \item \textbf{Unknown Unknowns}: things we are completely unaware of.
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{Known Knowns}: things we are aware of and understand well.
+%     \item \textbf{Unknown Knowns}: these are the aspects that we actually know but are not conciously aware of. They might include tacit knowledge or assumptions that go unrecognized.
+%     \item \textbf{Known Unknowns}: gaps in our knowledge that we recognize.
+%     \item \textbf{Unknown Unknowns}: things we are completely unaware of.
+% \end{itemize}
+ 
+\begin{tikzpicture}[remember picture, every node/.style={anchor=west}]
+    % First group: Knowledge
+    \node (knowledge) at (0,0) {%
+      \begin{minipage}{0.8\textwidth}
+        \begin{itemize}[leftmargin=1cm]
+          \item \textbf{Known Knowns}: things we are aware of and understand well.
+          \item \textbf{Unknown Knowns}: these are the aspects that we actually know but are not consciously aware of.
+        \end{itemize}
+      \end{minipage}%
+    };
+    
+    % Second group: Ignorance
+    % Increase vertical gap below "knowledge" to avoid overlap
+    \node (ignorance) [below=0.5cm of knowledge] {%
+      \begin{minipage}{0.8\textwidth}
+        \begin{itemize}[leftmargin=1cm]
+          \item \textbf{Known Unknowns}: gaps in our knowledge that we recognize.
+          \item \textbf{Unknown Unknowns}: things we are completely unaware of.
+        \end{itemize}
+      \end{minipage}%
+    };
+    
+    % Draw curly brace for Knowledge
+    % Shift it further left (xshift=-1.2cm) and move label out (xshift=-0.6cm)
+    \draw[
+      decorate,
+      decoration={brace, amplitude=10pt, mirror}
+    ] 
+      ([xshift=0.6cm]knowledge.north west) 
+      -- 
+      ([xshift=0.6cm]knowledge.south west)
+      node[midway, left, xshift=-0.6cm,yshift=1cm, rotate=90] {\large Knowledge};
+    
+    % Draw curly brace for Ignorance
+    \draw[
+      decorate,
+      decoration={brace, amplitude=10pt, mirror}
+    ] 
+      ([xshift=0.6cm]ignorance.north west) 
+      -- 
+      ([xshift=0.6cm]ignorance.south west)
+      node[midway, left, xshift=-0.6cm,yshift=1cm, rotate=90] {\large Ignorance};
+  \end{tikzpicture}
 
 In the context of uncertainty quantification, we focus primarily on the \textbf{known unknowns} because those are the aspects of ignorance that we can identify and attempt to model. Therefore, we can finally state what we will consider as uncertainty in this work:\\
 
@@ -65,26 +109,73 @@ In the context of uncertainty quantification, we focus primarily on the \textbf{
     \say{The term uncertainty can be viewed as \textbf{a component of ignorance}.[...] Uncertainty and information as a pair, and ignorance and knowledge as another pair,[...], as the former component of each pair describes a deficiency in the respective latter component, while the latter component of a pair can be viewed as the respective capacity available to reduce the respective former component.}\cite{UncertaintySciences}
 \end{definition}
 
-It is useful to classify different types of uncertainty to better understand what our mathematical models represent. However, it is vital to keep in mind that these types are not independent of each other. Rather than strict boundaries where every known unknown fits, it is better to think of them as \textit{dimensions} of uncertainty. The most broadly used classification of uncertainty is this binary one:\\
+It is useful to classify different types of uncertainty to better understand what our mathematical models represent. However, it is vital to keep in mind that these types are not independent of each other. Rather than strict boundaries where every known unknown fits, it is better to think of them as dimensions of uncertainty. The most broadly used classification of uncertainty is this binary one:\\
 
 \begin{itemize}
     \item \textbf{Aleatoric:} inherent randomness or natural variability, which is \textbf{irreducible}. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
-    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Realistic examples include: 
+    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Some examples include: 
     \begin{itemize} 
         \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
         \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature above that level, we would need to group them together. This situation presents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness} (which is a type of epistemic uncertainty).
     \end{itemize} 
 \end{itemize}
 
-However this classification does not come without some notable deficiencies, to name a few:
+Nevertheless, this binary classification has several important limitations:
 
 \begin{itemize}
     \item \textbf{Incomplete Coverage:} Some forms of uncertainty do not neatly fit into these two categories. For example: vagueness, which is not aleatoric but neither reducible with more data.
     \item \textbf{Fail to capture higher-order uncertainties:} does not account for meta-uncertainties (uncertainty about the uncertainty itself) or a broader hierarchical nature of ignorance.
-    \item \textbf{Interdependence Oversight:} Uncertainty types are presented as independent but in many cases they can influence each other.
+    \item \textbf{Interdependence Oversight:} The influence between each other is not taken into account.
 \end{itemize}
 
-Having a classification of uncertainty types may be useful to build a proper representation tailored to a specific kind of ignorance.
+A classification of uncertainty types allow us to build a proper representation tailored to a specific kind of ignorance. Given these limitations of the binary classification, we will adopt a more nuanced framework based on \cite{UncertaintySciences}. While their full classification system is more extensive than needed for our purposes, we will present a simplified version that better captures the complexity of uncertainty while remaining practical for our analysis. It is important to note that while specific frameworks are associated with each type of uncertainty (even the same framework with multiple uncertainty types), alternative modeling approaches exist and can be effectively used.
+
+
+\begin{itemize}
+    \item \textbf{Nonspecificity:} Uncertainty resulting from insufficient specificity or detail, information is insufficient to precisely specify which outcome or event applies.
+    \begin{itemize}
+        \item \textit{Example:} Knowing only that the solution to an equation lies within a set \(\{1, 2, 3\}\), but without further precision.
+        \item \textit{Frameworks:} Modeled primarily by crisp set theory and possibility theory, where uncertainty arises from ambiguous specification of possibilities.
+    \end{itemize}
+
+    \item \textbf{Vagueness:} Arises from imprecise, unclear, or fuzzy boundaries in concepts, meaning that elements can partially belong to a category. 
+    \begin{itemize}
+        \item \textit{Example:} Categorizing a temperature as "hot"; the boundary between hot and not-hot is not clearly defined; it is not crisp.
+        \item \textit{Frameworks:} Modeled using fuzzy set theory, assigning partial membership values between 0 and 1 to indicate degrees of compatibility between elements and sets.
+    \end{itemize}
+
+    \item \textbf{Coarseness (Granularity):} Uncertainty due to limited resolution in the available data or knowledge, making it difficult to distinguish precisely between similar elements.
+    \begin{itemize}
+        \item \textit{Example:} A digital thermometer that only displays whole numbers - temperatures of 20.3°C and 20.7°C would both be displayed as 20°C, making them indistinguishable at this level of granularity.
+        \item \textit{Frameworks:} Modeled using rough set theory, i.e. equivalence classes to define lower and upper approximations of a set to manage indistinguishability caused by granularity.
+    \end{itemize}
+
+    \item \textbf{Randomness (Aleatoric Uncertainty):} Intrinsic uncertainty in stochastic processes, inherently irreducible, even with complete knowledge of the system.
+    \begin{itemize}
+        \item \textit{Example:} Predicting the outcome of a fair dice roll.
+        \item \textit{Frameworks:} Modeled by probability theory through probability distributions, which represent expected frequencies in repeated experiments but unable to deterministically predict individual outcomes.
+    \end{itemize}
+
+    \item \textbf{Epistemic Uncertainty:} Uncertainty arising from incomplete knowledge or insufficient data, potentially reducible by obtaining more information.
+    \begin{itemize}
+        \item \textit{Example:} Uncertainty regarding a biased coin's true probability of landing heads, which reduces after observing more tosses.
+        \item \textit{Frameworks:} Often modeled by Bayesian inference (through updating prior distributions with data), possibility theory, belief functions and interval methods.
+    \end{itemize}
+
+    \item \textbf{Sampling Uncertainty:} Uncertainty emerging from inferring properties of a population based solely on a limited sample from it.
+    \begin{itemize}
+        \item \textit{Example:} Estimating the average height of a country's population from measurements of a random subset.
+        \item \textit{Frameworks:} Modeled by inferential statistics, confidence intervals, hypothesis testing, and conformal prediction methods, explicitly quantifying the variability and uncertainty in such inferences.
+    \end{itemize}
+\end{itemize}
+
+A final consideration worth discussing is the distinction between subjectivity and objectivity in uncertainty representation. While this distinction plays a central role in frameworks like Bayesian statistics and fuzzy set theory (particularly when assigning membership values), the boundary between subjective and objective uncertainty is often unclear. For our purposes, we will treat both types as formally equivalent regardless of their origin.\\
+
+Consider this illustrative example with fuzzy sets highlighting the ambiguity:
+Suppose we want to determine the membership degree of a person who is 180cm tall to the set of "tall people". One approach would be to assign a value based on personal perception, a subjective assessment influenced by our own height, the heights of people we know, and even potentially varying over time as our perception changes. Alternatively, we could use the population height percentile as the membership degree, which seems more objective. However, this choice still involves subjective decisions: for instance, why use the percentile directly rather than its square root?\\
+
+Therefore, throughout this work, we will treat subjective and objective uncertainties as formally equivalent, with the only potential distinction arising from how decision makers may choose to weight their relative importance in specific contexts.
+
 
 \signal{Pongo mi propia clasificacion:
 aleatoric (probabilidad), epistemic (falta de datos únicamente) eso tiene que ver con cómo de bueno es el modelo, pero no tenemos un framework específico creo. Luego van vagueness (fuzzy) y coarseness (rough).
@@ -101,8 +192,8 @@ with uncertain states
 Hablo también de que hay muchísimos modelos, de que cuantificar incertidumbre es ponerle vayas al campo y de cómo es relevante encontrar un equilibrio entre modelizar todos los detalles y que sea práctico y se pueda trabajar con algo que no es absurdamente complejo.
 
 Finalmente presento los capítulos (el de possibility distributions, lo saco del primer capítulo mejor)}
-\section{Vagueness}
+\section{Vagueness and Sorites Paradox}
 
-\section{Uncertainty model}
+\section{Mathematical Uncertainty Theories}
 
 \section{Structure of this work}
