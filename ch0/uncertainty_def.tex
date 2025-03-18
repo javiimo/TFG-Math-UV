@@ -100,11 +100,12 @@ It is useful to classify different types of uncertainty to better understand wha
 
 \begin{itemize}
     \item \textbf{Aleatoric:} inherent randomness or natural variability, which is \textbf{irreducible}. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
-    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Some examples include: 
-    \begin{itemize} 
-        \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
-        \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature above that level, we would need to group them together. This situation presents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness} (which is a type of epistemic uncertainty).
-    \end{itemize} 
+    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. 
+    %Some examples include: 
+    % \begin{itemize} 
+    %     \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
+    %     \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature above that level, we would need to group them together. This situation presents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness} (which is a type of epistemic uncertainty).
+    % \end{itemize} 
 \end{itemize}
 
 Nevertheless, this binary classification has several important limitations:
@@ -115,7 +116,8 @@ Nevertheless, this binary classification has several important limitations:
     \item \textbf{Interdependence Oversight:} The influence between each other is not taken into account.
 \end{itemize}
 
-A classification of uncertainty types allow us to build a proper representation tailored to a specific kind of ignorance. Given these limitations of the binary classification, we will adopt a more nuanced framework based on \cite{UncertaintySciences}. While their full classification system is more extensive than needed for our purposes, we will present a simplified version that better captures the complexity of uncertainty while remaining practical for our analysis. It is important to note that while specific frameworks are associated with each type of uncertainty (even the same framework with multiple uncertainty types), alternative modeling approaches exist and can be effectively used.
+% A classification of uncertainty types allow us to build a proper representation tailored to a specific kind of ignorance. 
+Given these limitations of the binary classification, we will adopt a more nuanced framework based on \cite{UncertaintySciences}. While their full classification system is more extensive than needed for our purposes, we will present a simplified version that better captures the complexity of uncertainty while remaining practical for our analysis. It is important to note that while specific frameworks are associated with each type of uncertainty (even the same framework with multiple uncertainty types), alternative modeling approaches exist and can be effectively used.
 
 
 \begin{itemize}
@@ -150,9 +152,9 @@ A classification of uncertainty types allow us to build a proper representation 
         \item \textit{Frameworks:} Often modeled via Bayesian inference (updating priors with data), possibility theory, belief functions, and interval methods. The focus is on refining or correcting a model (e.g., identifying correct distributions, dependencies, causal structures).
     \end{itemize}
 
-    \item \textbf{Sampling Uncertainty:} Uncertainty emerging from inferring properties of a population based solely on a limited sample from it.
+    \item \textbf{Sampling Uncertainty:} Uncertainty emerging from inferring properties of a population based solely on a limited sample from it. This uncertainty decreases as the sample size approaches the population size.
     \begin{itemize}
-        \item \textit{Example:} Estimating the average height of a country's population from measurements of a random subset.
+        \item \textit{Example:} Estimating the average height of a country's population from measurements of a random subset. 
         \item \textit{Frameworks:} Modeled by inferential statistics, confidence intervals, hypothesis testing, and conformal prediction methods, explicitly quantifying the variability and uncertainty in such inferences.
     \end{itemize}
 \end{itemize}
