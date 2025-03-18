@@ -3,10 +3,17 @@
 As mentioned in \cite{uncertaintymeasuresbigpicture} and further detailed in chapters 2 and 3 of \cite{UncertaintySciences}, a theory of uncertainty typically consists of two elements:
 
 \begin{romanenum}
-    \item A mathematical representation that encodes uncertain states of the world and information about them.
+    \item A mathematical representation that encodes data about uncertain states of the world.
     \item Mathematical operators and measures that enable reasoning about and combining uncertain information.
 \end{romanenum}
-\signal{No sé si compro eso de que rough sets tienen elementos precisos. Bueno sí, lo que pasa que tienes elementos precisos en clases de equivalencia. Tengo que revisar el ejemplo ese de granularity.}\\
+
+As shown in Figure \ref{fig:Generalized_sets}, data is encoded via different generalizations of sets, according to what is considered precise or not (elements and sets). These set models are examples of theories that tackle a specific representation, but are not the only possible models.\\
+
+When choosing a proper model for a concrete problem, one should 
+take into account that the more expressive and general a framework 
+is, the more complicated it becomes due to all the nuances it 
+attempts to capture. Therefore, if precise information is 
+available, it should not be treated as imprecise. For this reason, precise information should be modeled as precise rather than imprecise when available. This trade-off will be explored further in our discussion of possibilities versus probabilities, where possibilities offer greater expressiveness but lower predictive power.
 
 
 \begin{figure}[ht]
@@ -129,20 +136,20 @@ As mentioned in \cite{uncertaintymeasuresbigpicture} and further detailed in cha
         
         % --------------------- Edges ---------------------
         % Column 1 -> Column 2:
-        \draw[->] (B1) -- (C1);
-        \draw[->] (B1) -- (C2);
-        \draw[->] (B2) -- (C3);
-        \draw[->] (B2) -- (C4);
+        \draw[->] (B1) to[bend right=10] (C1);
+        \draw[->] (B1) to[bend left=10] (C2);
+        \draw[->] (B2) to[bend right=10] (C3);
+        \draw[->] (B2) to[bend left=10] (C4);
         
         % Column 2 -> Column 3:
-        \draw[->] (C1) -- (D1);
-        \draw[->] (C1) -- (D2);
-        \draw[->] (C2) -- (D3);
-        \draw[->] (C2) -- (D4);
-        \draw[->] (C3) -- (D5);
-        \draw[->] (C3) -- (D6);
-        \draw[->] (C4) -- (D7);
-        \draw[->] (C4) -- (D8);
+        \draw[->] (C1) to[bend right=10] (D1);
+        \draw[->] (C1) to[bend left=10] (D2);
+        \draw[->] (C2) to[bend right=10] (D3);
+        \draw[->] (C2) to[bend left=10] (D4);
+        \draw[->] (C3) to[bend right=10] (D5);
+        \draw[->] (C3) to[bend left=10] (D6);
+        \draw[->] (C4) to[bend right=10] (D7);
+        \draw[->] (C4) to[bend left=10] (D8);
         
         % Column 3 -> Column 4:
         \draw[->] (D1) -- (E1);
@@ -155,8 +162,39 @@ As mentioned in \cite{uncertaintymeasuresbigpicture} and further detailed in cha
         \draw[->] (D8) -- (E8);
         
     \end{tikzpicture}
-    \caption{Generalizations of crisp sets with different set models, showing increasing levels of expressivity for encoding data uncertainty.}
+    \caption{Generalizations of crisp sets with different set models, showing increasing levels of expressivity for encoding data uncertainty. Adapted from Figure 2.1 in \cite{UncertaintySciences}.}
     \label{fig:Generalized_sets}
+\end{figure}
+
+
+
+Regarding operators and measures (most based on the previous set models), there exist many different frameworks, with varying levels of development and adoption. In Figure \ref{fig:uncertainty_taxonomy}, Cuzzolin \cite{uncertaintymeasuresbigpicture} maps out the major uncertainty theories and notes that \say{The \say{quality} of the various proposals differs radically}. As an example, he points out that Liu's Uncertainty Theory lacks rigorous mathematical foundations and convincing justification. \\
+
+Another interesting observation stated in the paper is that generality isn't the only factor that matters, as the most general frameworks haven't experienced the growth and adoption one might expect. This is likely because overly general frameworks can become intractable and unnecessarily complex without providing clear practical benefits:
+
+\hspace{1cm}\say{Imprecise probability is remarkable for its generality, asspecial cases of coherent lower previsions include probabilities, de Finetti previsions, Choquet capacities, possibility and belief measures, random sets but also probability boxes, (lower and upper envelopes of) credal sets, and robust Bayesian models. Nevertheless, IP has so far failed to achieved the expected impact in both mathematical statistics and application fields. This may lead to the reflection that generality, after all, is not the real thing.}\cite{uncertaintymeasuresbigpicture}\\
+
+The majority of these frameworks emerged to address key limitations of probability theory. Some of these limitations include:
+\begin{romanenum}
+      \item \textbf{Second-Order Uncertainty:} Probability theory handles risk well but fails to capture uncertainties about the probability model itself.
+      \item \textbf{Ignorance Representation:} There is no probability distribution that assigns equal probability to every single event (not even the uniform distribution). There the state of absolute ignorance is not possible.
+      \item \textbf{Imprecision in Data:} The additive nature of probability struggles with fuzzy, ambiguous, or set-valued data.
+      %\item \textbf{Scarce Data Limitations:} It relies on large datasets, making it less effective when data is incomplete or limited.
+      \item \textbf{Additivity Constraint:} The strict additivity axiom prevents modeling non-additive phenomena common in real-world uncertainty.
+      %\item \textbf{Update and Combination Challenges:} Bayesian inference requires well-justified priors and often struggles to combine uncertain evidence.
+      %\item \textbf{Alternative Reasoning Incompatibility:} It does not integrate smoothly with frameworks like fuzzy logic or belief functions.
+      %\item \textbf{Decision-Making Mismatch:} Observed human behavior under uncertainty (e.g., Ellsberg's paradox) often contradicts classical probabilistic predictions.
+      \item \textbf{Rigidity in Assumptions:} The need for well-defined sample spaces and distributions is frequently unrealistic in complex, real-world scenarios.
+    \end{romanenum}
+    
+
+
+
+
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{ch0/figures/Uncertainties Diagram.png}
+    \caption{A classification of uncertainty theories showing their relationships and hierarchies. The theories are grouped based on their rationale and class of objects they attempt to mathematically model. Arrows indicate generalization relationships, pointing from more specific to more general frameworks. Extracted from \cite{uncertaintymeasuresbigpicture}.}
+    \label{fig:uncertainty_taxonomy}
 \end{figure}
 
 
@@ -201,89 +239,3 @@ As mentioned in \cite{uncertaintymeasuresbigpicture} and further detailed in cha
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{tikzpicture}[scale=0.75, every node/.style={scale=0.75}]
-
-    % Colors
-    \definecolor{bluearea}{RGB}{200,225,245}
-    \definecolor{greenarea}{RGB}{195,225,200}
-    \definecolor{yellowarea}{RGB}{255,253,225}
-    \definecolor{redarea}{RGB}{245,215,220}
-    \definecolor{purplearea}{RGB}{235,215,250}
-    \definecolor{darkredarea}{RGB}{225,175,175}
-    
-    % Ellipses
-    \draw[fill=bluearea,opacity=.4] (4,4.5) ellipse (6cm and 4cm);
-    \draw[fill=greenarea,opacity=.4] (-0.5,2) ellipse (4cm and 3cm);
-    \draw[fill=yellowarea,opacity=.4] (-5,4) ellipse (3cm and 2cm);
-    \draw[fill=redarea,opacity=.4] (3,0) ellipse (4cm and 3cm);
-    \draw[fill=purplearea,opacity=.4] (8,3.5) ellipse (3cm and 2cm);
-    \draw[fill=darkredarea,opacity=.4] (4.5,-1) ellipse (1.5cm and 1cm);
-    
-    % Nodes (Texts)
-    % Robust Probability
-    \node at (4,8.5) {\textbf{ROBUST PROBABILITY}};
-    \node at (2.5,7) {Probability intervals};
-    \node at (5.5,6.5) {Lower/upper probabilities};
-    \node at (4,5.5) {Feasible probability intervals};
-    \node at (7,5) {Credal sets};
-    \node at (9.5,4.5) {P-boxes};
-    \node at (4.5,3.8) {Probability};
-    
-    % Generalised Sets
-    \node at (-7,6) {\textbf{GENERALISED SETS}};
-    \node at (-5,5) {Rough sets};
-    \node at (-5.5,4) {Granular};
-    \node at (-5,3.5) {Possibility};
-    \node at (-6,3) {Zadeh's GTU};
-    
-    % Capacities
-    \node at (-3,-1) {CAPACITIES};
-    \node at (-2,2) {Belief functions};
-    \node at (-0.5,0.5) {Random sets};
-    \node at (-3,-2) {Liu's UT};
-    \node at (1.5,3) {2-monotone capacities};
-    
-    % Behavioural Probability
-    \node at (10.5,6) {\textbf{BEHAVIOURAL PROBABILITY}};
-    \node at (8.5,4) {De Finetti's previsions};
-    \node at (9.5,2.5) {Vovk-Shafer};
-    
-    % Measures on Functions
-    \node at (10,-2.5) {\textbf{MEASURES ON FUNCTIONS}};
-    \node at (6,1) {Probability on fuzzy sets};
-    \node at (4.5,-1) {Dirichlet};
-    \node at (6.5,-2) {Meta-probability};
-    \node at (2.5,-2.5) {Belief functions on fuzzy sets};
-    \node at (4.5, -3.5) {MV-algebras};
-    
-    \node at (11,-1) {\textbf{HIGHER-ORDER PROBABILITIES}};
-    
-    % Generalised measures on events
-    \node at (-1,-4.5) {\textbf{GENERALISED MEASURES ON EVENTS}};
-    
-    % Arrows
-    \draw[->,thick] (-4,3) -- (-2.5,2.3);
-    \draw[->,thick] (-4.5,3.7) -- (-2.5,2.5);
-    \draw[->,thick] (-5,4.2) -- (-2.5,3);
-    \draw[->,thick] (-0.5,2.5) -- (2.5,4);
-    \draw[->,thick] (-0.5,2.5) -- (2.5,0.5);
-    \draw[->,thick] (-0.5,1.5) -- (2,-2);
-    \draw[->,thick] (1.5,3) -- (3.5,3.8);
-    \draw[->,thick] (5.5,4) -- (6.5,4.5);
-    \draw[->,thick] (6,1) -- (7.5,2.5);
-    \draw[->,thick,red] (7,4.8) -- (8.3,4);
-    
-    \end{tikzpicture}
