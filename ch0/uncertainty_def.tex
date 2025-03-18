@@ -133,7 +133,7 @@ A classification of uncertainty types allow us to build a proper representation 
 
     \item \textbf{Coarseness (Granularity):} Uncertainty due to limited resolution in the available data or knowledge, making it difficult to distinguish precisely between similar elements.
     \begin{itemize}
-        \item \textit{Example:} A digital thermometer that only displays whole numbers - temperatures of 20.3°C and 20.7°C would both be displayed as 20°C, making them indistinguishable at this level of granularity.
+        \item \textit{Example:} A doctor has patient records with temperatures and cough symptoms, but can only match new patients' temperatures with cough symptoms at a coarse level (e.g. 37.3°C and 37.4°C are treated as identical since the records don't include every possible temperature value), limiting the precision of symptom prediction.
         \item \textit{Frameworks:} Modeled using rough set theory, i.e. equivalence classes to define lower and upper approximations of a set to manage indistinguishability caused by granularity.
     \end{itemize}
 
