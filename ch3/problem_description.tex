@@ -1,0 +1,76 @@
+The problem that will be tackled in this chapter is the ROADEF/EURO Challenge 2020: Maintenance Planning Problem \cite{roadef2020}, which was jointly organized by the French Operational Research and Decision Support Society (ROADEF) and the European Operational Research Society (EURO) in collaboration with RTE (Réseau de Transport d'Électricité).
+
+\section{ Original Problem Description}
+The maintenance planning problem aims to schedule the starting times of a set of interventions (i.e., maintenance tasks) over a time horizon (typically one year, discretized into days or weeks). The goal is to minimize risk-related costs represented as a single objective function \ref{eq:objective}, while satisfying resource and exclusion constraints. 
+This is formalized in table \ref{tab:variables} and as an integer programming optimization problem (following the description from \cite{ConsueloRoadef}):\\
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|p{13cm}|}
+    \hline
+    \textbf{Symbol} & \textbf{Description} \\ \hline
+    $T$ & Total number of time periods in the planning horizon. \\ \hline
+    $t$ & Time period index, with $t \in \{1,\ldots,T\}$. \\ \hline
+    $\tau$ & Starting time period for interventions, with $\tau \in \{1,\ldots,T\}$. \\ \hline
+    $I$ & Set of interventions. \\ \hline
+    $x_{i,\tau}$ & Binary variable: 1 if intervention $i\in I$ starts at period $\tau$, 0 otherwise. \\ \hline
+    $d_{i,\tau}$ & Duration of intervention $i$ if started at period $\tau$. \\ \hline
+    $C$ & Set of resources (teams). \\ \hline
+    $l_{c,t},\, u_{c,t}$ & Lower and upper bounds on the availability of resource $c\in C$ at period $t$. \\ \hline
+    $r_{c,t}(i,\tau)$ & Consumption of resource $c$ in period $t$ by intervention $i$, if started at $\tau$. \\ \hline
+    $\mathcal{E}$ & Set of exclusion triplets $(i_1,i_2,t)$ (interventions $i_1,i_2$ cannot overlap at $t$). \\ \hline
+    $S_t$ & Set of scenarios for period $t$. \\ \hline
+    $\mathrm{risk}_{s,t}^{(i,\tau)}$ & Risk cost in scenario $s\in S_t$ for intervention $i$ (if started at $\tau$) during period $t$. \\ \hline
+    $\alpha$ & Weight in the objective, with $\alpha\in[0,1]$. \\ \hline
+  \end{tabular}
+  \caption{Main Variables and Parameters}
+  \label{tab:variables}
+\end{table}
+
+\vspace{1em}
+
+
+\noindent\textbf{Objective:}
+\begin{equation}
+\min \; \alpha\,\mathrm{obj}_1 + (1-\alpha)\,\mathrm{obj}_2(\beta) \qquad \text{ with }\alpha \in [0,1]
+\label{eq:objective}
+\end{equation}
+where
+\[
+\begin{aligned}
+&\mathrm{obj}_1 = \frac{1}{T}\sum_{t=1}^{T} \mathrm{risk}_t,\quad \mathrm{obj}_2(\beta) = \frac{1}{T}\sum_{t=1}^{T} \max\Big\{0,\;Q_t^\beta-\mathrm{risk}_t\Big\},\\[1ex]
+&\quad\text{with: }\quad\mathrm{risk}_t = \frac{1}{|S_t|}\sum_{s\in S_t}\sum_{\substack{i\in I\\ \tau \le t < \tau+d_{i,\tau}}} \mathrm{risk}_{s,t}^{(i,\tau)}\,x_{i,\tau},\quad Q_t^\beta=\beta\text{-quantile of } \Big\{\mathrm{risk}_{s,t} : s\in S_t\Big\}.
+\end{aligned}
+\]
+\noindent Here, $\mathrm{obj}_1$ is the mean cumulative planning risk and $\mathrm{obj}_2(\beta)$ quantifies the extremely high-risk scenarios and periods we want to avoid.
+
+\vspace{1em}
+\noindent\textbf{Subject to:}
+
+\noindent Each intervention is scheduled exactly once:
+\[
+\sum_{\tau=1}^{T-d_{i,\tau}+1} x_{i,\tau} = 1,\quad \forall\, i\in I
+\]
+
+\noindent Intervention finishes within the horizon:
+\[
+t + d_{i,\tau} \le T+1,\quad \forall\, i\in I \text{ and } t \text{ with } x_{i,\tau}=1
+\]
+
+\noindent Resource capacity limits:
+\[
+l_{c,t} \le \sum_{i\in I}\sum_{\tau \le t < \tau+d_{i,\tau}} r_{c,t}(i,\tau)\,x_{i,\tau} \le u_{c,t},\quad \forall\, c\in C,\; \forall\, t
+\]
+
+\noindent Exclusion constraints:
+\[
+\sum_{\tau:\, t\in [\tau,\,\tau+d_{i_1,\tau}-1]} x_{i_1,\tau} + \sum_{\tau:\, t\in [\tau,\,\tau+d_{i_2,\tau}-1]} x_{i_2,\tau} \le 1,\quad \forall\,(i_1,i_2,t)\in \mathcal{E}
+\]
+
+\noindent Binary variables:
+\[
+x_{i,\tau} \in \{0,1\},\quad \forall\, i\in I,\; \tau=1,\ldots,T-d_{i,\tau}+1
+\]
+
+

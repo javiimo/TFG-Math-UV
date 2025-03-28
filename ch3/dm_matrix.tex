@@ -1,5 +1,112 @@
 \signal{Explain the attributes and how to compute them. 
-}
+}\\
+The presented optimization problem employs binary decision variables and a single aggregated objective function with crisp parameter values to provide a clear, tractable, and straightforward formulation. Such a representation is very practical due to its computational efficiency, interpretability, and ease of implementation using standard optimization solvers. However, this framework neglects the uncertainty, imprecision, and conflicting nature of  real-world criteria, such as varied stakeholder preferences, uncertain resource availability, or imprecise risk estimations. \\
+
+However, this imprecise knowledge and information that the challenge providers have access to such as the physical location of each intervention or an interval for the possible risk values, is not public. To formulate our fuzzy MCDM problem, we will make minimal assumptions to extract meaningful information from the available data. These assumptions will help us reconstruct plausible attributes while maintaining the integrity of the original problem structure.\\
+
+\signal{Another important aspect of a Multi-criteria decision making problem is having alternatives we want to choose from. In this case, since some of the algorithms that ranked among the top }
+
+\subsection{Retriving the physical location of the interventions}
+One of the assumptions that will be made is that there is a component of the risk that comes from the location of an intervention. This is intuitive since interventions in densely populated areas or near critical infrastructure likely carry higher risks than those in remote locations. However, location is not the only factor, the risk also depends on other variables like the type of maintenance work. \\
+
+Therefore, we will attempt to infer the approximate location of the interventions stating the following:
+\begin{notation}{Assumption 1:}
+    Two interventions \(i\) and \(j\) are close if, for all time periods, their overall mean risks (averaged accross all possible start times and scenarios)
+    \[
+    \overline{r}_t^{(i)} = \frac{1}{\left|\mathcal{T}_i\right|}\sum_{\mathcal{T}_i}\mu_t^{(i,\tau)}, 
+    \qquad \text{where }\mu_t^{(i,\tau)} \coleq \frac{1}{|S|}\sum_{s\in S} \mathrm{risk}_{s,t}^{(i,\tau)}, \quad
+    \mathcal{T}_i\coleq \{\tau\in \N:\,1\leq \tau \leq T-d_{i,\tau}\}
+    \]
+    vary in the same direction, i.e.,
+    \[
+    \operatorname{sgn}\Big(\overline{r}_{t+1}^{(i)}-\overline{r}_t^{(i)}\Big)=\operatorname{sgn}\Big(\overline{r}_{t+1}^{(j)}-\overline{r}_t^{(j)}\Big)\quad\forall t\in\{1,\dots , T\}
+    \]
+    \end{notation}
+
+
+In practice, this crisp equivalence relation will rarely hold for all time periods $t$. However, we can use it to define a similarity measure between interventions by counting how often their risk variations align. Specifically, for each pair of interventions $(i,j)$, we compute a similarity score by adding 1 when their risk variations match in sign and subtracting 1 when they differ. Then it is normalized to the interval $[-1,1]$. This yields a symmetric similarity matrix that captures the degree of correlation between intervention risks over time.
+    
+Notice that not all correlation values provide information about the closeness between interventions. Only positively correlated interventions can be considered "close" to some extent. However, we cannot determine how far apart negatively correlated interventions should be. Therefore, these negative correlations will be set to \texttt{NaN} and treated as missing values.\\
+
+We still need to do one further assuumption regarding how close and how far 2 points are. \signal{Does higher correlation imply closer interventions? And the influence of distance is disipated as the distance increases until it is not relevant. And then explain how am I handling this by considering only orders since specific magnitudes we cannot really tell.}
+
+\subsubsection*{Non-metric Weighted MDS with SMACOF:}
+\paragraph{Problem Formulation .} Let us assume we have $n$ objects, and an $n\times n$ matrix of observed dissimilarities 
+\[
+\Delta = \bigl[\delta_{ij}\bigr],
+\]
+where $\delta_{ij} \ge 0$ and each pair of objects $(i,j)$ is assigned a weight $w_{ij}\ge 0$. The goal of \emph{non-metric} weighted MDS is to find an embedding of these objects as points $\mathbf{x}_1,\dots,\mathbf{x}_n$ in $\mathbb{R}^p$ (collectively denoted by $X \in \mathbb{R}^{n\times p}$), such that the pairwise distances $d_{ij}(X) = \|\mathbf{x}_i - \mathbf{x}_j\|$ (usually Euclidean) respect the \emph{rank ordering} of $\delta_{ij}$.
+
+Formally, non-metric MDS replaces $\delta_{ij}$ with a \emph{monotonic transformation} $f(\cdot)$, yielding
+\[
+\hat{\delta}_{ij} = f(\delta_{ij}),
+\]
+subject to the isotonic constraint:
+\[
+\delta_{ij} < \delta_{kl} 
+\quad \Longrightarrow \quad 
+f(\delta_{ij}) \;\le\; f(\delta_{kl}).
+\]
+We then define the \emph{weighted STRESS} function:
+\[
+\mathrm{STRESS}(X,\hat{\Delta}) 
+\;=\;
+\sum_{i<j} w_{ij}\,\bigl(\hat{\delta}_{ij} \;-\; d_{ij}(X)\bigr)^2,
+\]
+where $\hat{\Delta}$ denotes the matrix $\bigl[\hat{\delta}_{ij}\bigr]$.  
+The goal is to minimize this STRESS with respect to both $X$ and the (monotonic) mapping $f$.
+
+\subsection{Solution via SMACOF}
+Although Kruskal's classic algorithm alternates direct gradient-based updates of $X$ with isotonic regression for $f$, here we use the \textbf{SMACOF} (\emph{Scaling by MAjorizing a COmplicated Function}) framework, which employs \emph{iterative majorization} to ensure monotone convergence of the STRESS function.
+
+\paragraph{Step 1: Initialize.}
+\begin{itemize}
+  \item Sort the (non-missing) dissimilarities $\{\delta_{ij}\}$ and fix an initial configuration $X^{(0)}$ (e.g.\ random or via classical MDS).
+\end{itemize}
+
+\paragraph{Step 2: Optimal Scaling (Isotonic Regression).}
+\begin{itemize}
+  \item Given the current distances $d_{ij}\bigl(X^{(t)}\bigr)$, find the \emph{monotonic transformation} $f$ that minimizes
+  \[
+    \sum_{i<j} w_{ij}\,\Bigl(f(\delta_{ij}) \;-\; d_{ij}(X^{(t)})\Bigr)^2
+  \]
+  subject to $f$ being non-decreasing in $\delta_{ij}$.  
+  \item This is usually done by sorting $\{\delta_{ij}\}$ in ascending order and applying \emph{weighted isotonic regression} (the Pool Adjacent Violators Algorithm), producing $\hat{\delta}_{ij} = f(\delta_{ij})$.
+\end{itemize}
+
+\paragraph{Step 3: Iterative Majorization Update.}
+\begin{itemize}
+  \item With $\hat{\delta}_{ij}$ now fixed, define the \emph{majorizing function} for STRESS.  One can show the STRESS is majorized by a simpler quadratic function $Q\bigl(X, X^{(t)}\bigr)$ such that
+  \[
+    \mathrm{STRESS}(X,\hat{\Delta})
+    \;\le\;
+    Q\bigl(X, X^{(t)}\bigr),
+    \quad
+    \text{with equality if } X = X^{(t)}.
+  \]
+  \item Minimizing $Q$ w.r.t.\ $X$ often yields a closed-form “Guttman transform” update:
+  \[
+    X^{(t+1)} \;=\; \mathbf{G}\bigl(X^{(t)}, \hat{\Delta}\bigr).
+  \]
+  \item Because $Q$ majorizes the STRESS, we get a \emph{monotone decrease} in STRESS at each iteration:
+  \[
+    \mathrm{STRESS}\bigl(X^{(t+1)}, \hat{\Delta}\bigr) \;\le\;
+    \mathrm{STRESS}\bigl(X^{(t)}, \hat{\Delta}\bigr).
+  \]
+\end{itemize}
+
+\paragraph{Step 4: Convergence Check.}
+\begin{itemize}
+  \item Recompute STRESS; if it decreases below a tolerance or remains unchanged, stop. Otherwise, return to Step 2 with the updated $X^{(t+1)}$.
+\end{itemize}
+
+\noindent
+In summary, \textbf{non-metric weighted MDS} via \textbf{SMACOF} alternates:
+\begin{enumerate}
+  \item \emph{Optimal scaling} (weighted isotonic regression) to enforce rank preservation,
+  \item \emph{Iterative majorization} to update $X$ in a stable, monotone-convergent manner.
+\end{enumerate}
+This approach generalizes Kruskal’s original method (which used a direct optimization for $X$) and is often more numerically robust and efficient.
 
 \subsection{Crisp Attributes}
 Highest Concurrency
