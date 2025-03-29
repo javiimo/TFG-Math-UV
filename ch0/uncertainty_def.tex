@@ -89,7 +89,7 @@ This matrix illustrates the relationship between knowledge and ignorance\footnot
       node[midway, left, xshift=-0.6cm,yshift=1cm, rotate=90] {\large Ignorance};
   \end{tikzpicture}
 
-In the context of uncertainty quantification, we focus primarily on the \textbf{known unknowns} because those are the aspects of ignorance that we can identify and attempt to model. Therefore, we can finally state what we will consider as uncertainty in this work:\\
+In the context of uncertainty quantification, we focus primarily on the \textbf{known unknowns} because those are the aspects of ignorance that can be identified and attempted to model. With this idea in mind, we can finally state what we will consider as uncertainty in this work:\\
 
 
 \begin{definition}[Uncertainty in a system]
@@ -117,14 +117,14 @@ Nevertheless, this binary classification has several important limitations:
 \end{itemize}
 
 % A classification of uncertainty types allow us to build a proper representation tailored to a specific kind of ignorance. 
-Given these limitations of the binary classification, we will adopt a more nuanced framework based on \cite{UncertaintySciences}. While their full classification system is more extensive than needed for our purposes, we will present a simplified version that better captures the complexity of uncertainty while remaining practical for our analysis. It is important to note that while specific frameworks are associated with each type of uncertainty (even the same framework with multiple uncertainty types), alternative modeling approaches exist and can be effectively used.
+Given these limitations of the binary classification, we will adopt a more nuanced framework based on \cite{UncertaintySciences}. While their full classification system is more extensive than needed for our purposes, here it is presented a simplified version that better captures the complexity of uncertainty while remaining practical for our analysis. Another important remark is that while specific frameworks are associated with each type of uncertainty (even the same framework with multiple uncertainty types), alternative modeling approaches exist and can be effectively used.
 
 
 \begin{itemize}
-    \item \textbf{Nonspecificity:} Uncertainty resulting from insufficient specificity or detail, information is insufficient to precisely specify which outcome or event applies.
+    \item \textbf{Nonspecificity:} Uncertainty resulting from insufficient specificity or detail, information is insufficient to precisely specify which outcome or event applies. 
     \begin{itemize}
         \item \textit{Example:} Knowing only that the solution to an equation lies within a set \(\{1, 2, 3\}\), but without further precision.
-        \item \textit{Frameworks:} Modeled primarily by crisp set theory and possibility theory, where uncertainty arises from ambiguous specification of possibilities.
+        \item \textit{Frameworks:} Modeled primarily by crisp set theory and possibility theory, where uncertainty arises from ambiguous specification of possibilities. For example, this is what is modeled when assigning a domain for a random experiment.
     \end{itemize}
 
     \item \textbf{Vagueness:} Arises from imprecise, unclear, or fuzzy boundaries in concepts, meaning that elements can partially belong to a category. 
@@ -164,5 +164,3 @@ This distinction plays an important role in frameworks like Bayesian statistics 
 
 The boundary between what may be considered objective versus subjective in fuzzy sets is often unclear. Consider this illustrative example that highlights this ambiguity:
 Suppose we want to determine the membership degree of a person who is 180cm tall to the set of "tall people". One approach would be to assign a value based on personal perception, a subjective assessment influenced by our own height, the heights of people we know, and even potentially varying over time as our perception changes. Alternatively, we could use the population height percentile as the membership degree, which seems more objective. However, this choice still involves subjective decisions: for instance, why use the percentile directly rather than its square root?\\
-
-Therefore, throughout this work, we will treat subjective and objective uncertainties as formally equivalent, with the only potential distinction arising from how decision makers may choose to weight their relative importance in specific contexts.
