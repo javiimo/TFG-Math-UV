@@ -42,7 +42,7 @@ There is not enough information to assign a specific distance value between 2 cl
 \end{remark}
 
 
-\subsubsection*{Non-metric Weighted MDS with SMACOF:}
+\subsubsection*{Non-metric Weighted MDS with SMACOF \cite{smacof}:}
 \paragraph{Problem Formulation .} Let us assume we have $n$ objects, and an $n\times n$ matrix of observed dissimilarities 
 \[
 \Delta = \bigl[\delta_{ij}\bigr],
@@ -65,13 +65,13 @@ We then define the \emph{weighted STRESS} function:
 \begin{equation}
 \mathrm{STRESS}(X,\hat{\Delta}) 
 \;=\;
-\sum_{i<j} w_{ij}\,\bigl(\hat{\delta}_{ij} \;-\; d_{ij}(X)\bigr)^2,
+\frac{\sum_{i<j} w_{ij}\,\bigl(\hat{\delta}_{ij} \;-\; d_{ij}(X)\bigr)^2}{\sum_{i<j} w_{ij}\,d_{ij}(X)^2},
 \label{eq:stress}
 \end{equation}
 where $\hat{\Delta}$ denotes the matrix $\bigl[\hat{\delta}_{ij}\bigr]$.  
 The goal is to minimize this STRESS with respect to both $X$ and the (monotonic) mapping $f$. Missing values are simply not taken into account in the sum (which is equivalent to setting their weight to 0).
 
-\paragraph{Solution via SMACOF \cite{smacof}}\label{sec:smacof-solution}
+\paragraph{Solution via SMACOF}\label{sec:smacof-solution}
 \emph{Scaling by MAjorizing a COmplicated Function} is an iterative algorithm that provides a stable, monotone-convergent framework for MDS. Unlike Kruskal's classic method, which uses gradient-based updates to move the configuration $X$, SMACOF replaces the gradient step with a \emph{majorization step} that guarantees non-increasing STRESS accross iterations. This is typically more numerically stable and better at handling large amounts of missing data.
 
 The algorithm alternates between two main steps:
@@ -185,4 +185,9 @@ For details about the global linear convergence to a stationary point conditions
     \Return $\{\hat{d}_{ij}\}$\;
 \end{algorithm}
 
-\signal{Add an image of the resulting map}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{ch3/figures/points.png}
+    \caption{Visualization of the resulting MDS map showing the relative positions of the interventions from \texttt{X12} in a two-dimensional space based on their dissimilarities derived from assumption 1.}
+    \label{fig:mds_map}
+\end{figure}
