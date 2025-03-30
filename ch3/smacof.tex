@@ -94,7 +94,7 @@ The algorithm alternates between two main steps:
       \[
         \min_{f\,:\, \text{non-decreasing}} \sum_{i<j} w_{ij}\,\Bigl(f(\delta_{ij}) - d_{ij}\bigl(X^{(t)}\bigr)\Bigr)^2.
       \]
-      In practice, weighted isotonic regression (e.g., via the Up-and-Down-Blocks Algorithm \ref{algo:Up-and-Down-Blocks}) is applied to obtain $\hat{\delta}_{ij}=f(\delta_{ij})$, ensuring that the transformed dissimilarities preserve the original rank order.
+      In practice, weighted isotonic regression (e.g., via the Up-and-Down-Blocks Algorithm\footnote{Up-and-Down-Blocks is a specific implementation strategy for PAVA (Pool-Adjacent-Violators Algorithm) that can be optimized for efficiency and linear time complexity. There are other possible implementations of PAVA that could be used.\cite{PAVA}} \ref{algo:Up-and-Down-Blocks}) is applied to obtain $\hat{\delta}_{ij}=f(\delta_{ij})$, ensuring that the transformed dissimilarities preserve the original rank order.
       
       \item \textbf{Majorization Update (Guttman Transform):} \\
       With the disparities $\hat{\Delta}=\{\hat{\delta}_{ij}\}$ fixed, 
@@ -102,19 +102,23 @@ The algorithm alternates between two main steps:
       \[
         \mathrm{STRESS}(X,\hat{\Delta}) \le Q\bigl(X, X^{(t)}\bigr), \quad \text{with equality when } X = X^{(t)}.
       \]
-      Minimizing $Q$ leads to a closed-form update via the Guttman transform:
+      Minimizing $Q\bigl(X, X^{(t)}\bigr)$ leads to a closed-form update via the Guttman transform:
       \[
         X^{(t+1)} = V^{+}B\bigl(X^{(t)}\bigr)X^{(t)},
       \]
-      where the matrix $B\bigl(X^{(t)}\bigr)$ is defined element-wise by
-      \[
-        B_{ij}\bigl(X^{(t)}\bigr)=
-          \begin{cases}
-            -\dfrac{w_{ij}\,\hat{\delta}_{ij}}{d_{ij}\bigl(X^{(t)}\bigr)} & \text{if } i\neq j, \\[1mm]
-            -\displaystyle\sum_{k\neq i} B_{ik}\bigl(X^{(t)}\bigr) & \text{if } i = j,
-          \end{cases}
-      \]
-      and $V$ is a constant matrix determined by the weights (its Moore-Penrose inverse is denoted $V^{+}$). By construction, the update satisfies
+      \hspace{1em}where the constant matrix \(V\) is defined by
+          \[
+            V = \frac{1}{2}\sum_{i=1}^n \sum_{j=1}^n w_{ij}\,A_{ij}, \qquad \text{where }A_{ij} = (e_i - e_j)(e_i - e_j)^T,
+          \]
+          \hspace{1em}with \(e_i\) denoting the \(i\)th standard basis vector. Note that \(A_{ij} = A_{ji}\), and \(A_{ii} = 0\). The factor \(\frac{1}{2}\) accounts for double counting of symmetric terms. \(V\) is positive semidefinite and singular. Its Moore-Penrose inverse is denoted by \(V^{+}\).\\
+
+        \hspace{1em}And the matrix \(B\bigl(X^{(t)}\bigr)\) is defined element-wise by
+          \[
+            B\bigl(X^{(t)}\bigr) = \frac{1}{2} \sum_i \sum_j w_{ij} \, \hat{\delta}_{ij} \, s_{ij}\bigl(X^{(t)}\bigr) \, A_{ij}, \quad \text{where } s_{ij}\bigl(X^{(t)}\bigr) = \begin{cases} \dfrac{1}{d_{ij}\bigl(X^{(t)}\bigr)} & \text{if } d_{ij}\bigl(X^{(t)}\bigr) \neq 0, \\ 0 & \text{otherwise} \end{cases}
+          \]
+          \hspace{1em}where \(d_{ij}\bigl(X^{(t)}\bigr)\) is the Euclidean distance between points \(i\) and \(j\) in the current configuration.
+
+      By construction, the update satisfies
       \[
         \mathrm{STRESS}\bigl(X^{(t+1)},\hat{\Delta}\bigr) \le \mathrm{STRESS}\bigl(X^{(t)},\hat{\Delta}\bigr),
       \]
