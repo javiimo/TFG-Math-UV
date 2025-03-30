@@ -3,7 +3,7 @@ One of the assumptions that will be made is that there is a component of the ris
 
 Therefore, we will attempt to infer the approximate location of the interventions stating the following:
 \begin{notation}{Assumption 1:}
-    Two interventions \(i\) and \(j\) are close, for all time periods, their overall mean risks (averaged accross all possible start times and scenarios)
+    Two interventions \(i\) and \(j\) are close if their overall mean risks (averaged accross all possible start times and scenarios)
     \[
     \overline{r}_t^{(i)} = \frac{1}{\left|\mathcal{T}_i\right|}\sum_{\mathcal{T}_i}\mu_t^{(i,\tau)}, 
     \qquad \text{where }\mu_t^{(i,\tau)} \coleq \frac{1}{|S|}\sum_{s\in S} \mathrm{risk}_{s,t}^{(i,\tau)}, \quad
@@ -11,13 +11,13 @@ Therefore, we will attempt to infer the approximate location of the intervention
     \]
     vary in the same direction, i.e.,
     \[
-    \operatorname{sgn}\Big(\overline{r}_{t+1}^{(i)}-\overline{r}_t^{(i)}\Big)=\operatorname{sgn}\Big(\overline{r}_{t+1}^{(j)}-\overline{r}_t^{(j)}\Big)\quad\forall t\in\{1,\dots , T\}
+    \operatorname{sgn}\Big(\overline{r}_{t+1}^{(i)}-\overline{r}_t^{(i)}\Big)=\operatorname{sgn}\Big(\overline{r}_{t+1}^{(j)}-\overline{r}_t^{(j)}\Big),\quad t\in\{1,\dots , T-1\}
     \]
     This affirms that the risk variation of an intervention over time is strongly correlated with its location.
     \end{notation}
 
 
-In practice, this crisp equivalence relation will rarely hold for all time periods $t$. However, we can use it to define a similarity measure between interventions by counting how often their risk variations align. Specifically, for each pair of interventions $(i,j)$, we compute a similarity score by adding 1 when their risk variations match in sign and subtracting 1 when they differ. Then it is normalized to the interval $[-1,1]$. This yields a symmetric similarity matrix that captures the degree of correlation between intervention risks over time.
+In practice, this condition will rarely hold for all time periods $t$. However, we can use it to define a similarity measure between interventions by counting how often their risk variations align. Specifically, for each pair of interventions $(i,j)$, we compute a similarity score by adding 1 when their risk variations match in sign and subtracting 1 when they differ. Then it is normalized to the interval $[-1,1]$. This yields a symmetric similarity matrix that captures the degree of correlation between intervention risks over time.
 
 \begin{remark}
     By definition, an intervention has a correlation of 1 with itself.
@@ -94,7 +94,7 @@ The algorithm alternates between two main steps:
       \[
         \min_{f\,:\, \text{non-decreasing}} \sum_{i<j} w_{ij}\,\Bigl(f(\delta_{ij}) - d_{ij}\bigl(X^{(t)}\bigr)\Bigr)^2.
       \]
-      In practice, weighted isotonic regression (e.g., via the Up-and-Down-Blocks Algorithm\footnote{Up-and-Down-Blocks is a specific implementation strategy for PAVA (Pool-Adjacent-Violators Algorithm) that can be optimized for efficiency and linear time complexity. There are other possible implementations of PAVA that could be used.\cite{PAVA}} \ref{algo:Up-and-Down-Blocks}) is applied to obtain $\hat{\delta}_{ij}=f(\delta_{ij})$, ensuring that the transformed dissimilarities preserve the original rank order.
+      In practice, weighted isotonic regression (e.g., via the Up-and-Down-Blocks Algorithm\footnote{Up-and-Down-Blocks is a specific implementation strategy for PAVA (Pool-Adjacent-Violators Algorithm) that can be optimized for efficiency and linear time complexity. There are other possible implementations of PAVA that could be used.\cite{PAVA}}, see algorithm \ref{algo:Up-and-Down-Blocks}) is applied to obtain $\hat{\delta}_{ij}=f(\delta_{ij})$, ensuring that the transformed dissimilarities preserve the original rank order.
       
       \item \textbf{Majorization Update (Guttman Transform):} \\
       With the disparities $\hat{\Delta}=\{\hat{\delta}_{ij}\}$ fixed, 

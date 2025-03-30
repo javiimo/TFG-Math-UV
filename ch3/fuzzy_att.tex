@@ -1,0 +1,67 @@
+% Closeness Concurrency
+% Environmental Impact Concurrency
+% Risk Concurrency %Maybe fuzzy clustering in theese into 5? Quiero hacer un fuzzy clustering y combinarlo esto con la concurrencia crisp y propagar el fuzzy clustering a fuzzy concurrency
+% Size Concurrency %Maybe fuzzy clustering in theese into 5?
+% % But then fuzzy clusters become crisp when adding the concurrency, right?
+% \\
+\signal{Aquí el tema está en que la concurrencia es crisp y el resto (cercanía, riesgo medioambiental, riesgo, tamaño) son fuzzy y con ambos me gustaría sacar un atributo fuzzy.}
+\paragraph{Closeness Concurrency:} This attribute quantifies the degree to which interventions that are spatially "close" occur simultaneously. At each timestep \(t\), let \(\mathcal{I}(t)\) be the set of interventions active. For every unique pair \(\{i,j\}\) in \(\mathcal{I}(t)\), we assign a value based on the distance \(d(i,j)\) between interventions:
+\[
+\delta(i,j) \coleq 
+\begin{cases}
+1, & \text{if } d(i,j)=\text{"close"} \\
+0.5, & \text{if } d(i,j)=\text{"mid"} \\
+0, & \text{if } d(i,j)=\text{"far"}
+\end{cases}
+\]
+This, the concurrency score at a timestep \(c(t)\) can be used to compute the overall \(\text{closeness\_concurrency}\) score, which is the sum of these contributions:
+\[
+    \text{closeness\_concurrency} \coleq \sum_{t=1}^{T} c(t), \qquad \text{where }
+c(t) \coleq \sum_{\{i,j\}\subset \mathcal{I}(t)} \delta(i,j)
+\]
+\signal{Hasta ahora cerca es si dos puntos se encuentran en la misma provincia, medio es si están en provincias contiguas y lejos si ninguna de las dos anteriores. El tema es también que el ajuste de la nube de puntos con SMACOF, con un error relativo de 0.2 se considera malo y mi error es relativo es de 0.4 (lo cual se sale de la escala de referencias que he encontrado, pero yo lo llamaría pésimo). Por tanto, creo que sería más interesante considerar los puntos como fuzzy points en lugar de crisp.}
+
+
+\paragraph{Environmental Impact Concurrency:} This score quantifies the level of simultaneous interventions with high and mid environmental impact over the planning horizon. At each timestep \(t\), let \(\mathcal{I}(t)\) denote the set of active interventions. Define  
+\[
+h(t) \coleq \left|\{ i \in \mathcal{I}(t) : i \text{ is high impact}\}\right|-1,\qquad
+m(t) \coleq \left|\{ i \in \mathcal{I}(t) : i \text{ is mid impact}\}\right|-1.
+\]
+We subtract 1 because if there is only one active risky intervention, there should be no penalization (i.e. the score should not increment). Then, the per-timestep contribution $e(t)$ is used to compute the overall environmental impact concurrency score:
+\[
+    \text{env\_impact\_concurrency} \coleq \sum_{t=1}^{T} e(t), \qquad \text{where }e(t) \coleq \left(\max\{h(t),0\}\right)^2 + \max\{m(t),0\}
+\]
+
+This scoring mechanism imposes a quadratic penalty when multiple large interventions overlap and a linear penalty for mid-sized interventions.
+\signal{Hasta ahora estaba asumiendo una orientación de los puntos concreta con respecto al mapa de Francia y viendo si coincidía con algún parque natural o estaba a menos de 8 kilómetros. El problema es que podría girar la nube de puntos sobre sí misma sin modificar las distancias relativas y el procedimiento seguiría siendo válido. Por tanto tengo dos opciones: asumir una rotación completamente arbitraria y sin ninguna justificación razonable más a allá de comodidad o considerar simetría de rotación entorno al centro de masas y calcular la posibilidad de intersección con un parque natural.}
+
+
+\paragraph{Size Concurrency:} This attribute quantifies the degree of overlap among interventions with significant workload sizes. 
+
+First, we compute the \textbf{mean intervention size}: For each intervention \(i\), we consider all possible start times \(\tau\). For each start time \(\tau\), the total workload is used to compute the mean intervention size for intervention \(i\):
+
+\[
+    \text{mean\_size}_i \coleq \frac{1}{|\mathcal{T}_i|} \sum_{\tau\in \mathcal{T}_i} \text{size}_{i,\tau},
+    \qquad \text{with }\,
+    \text{size}_{i,\tau} \coleq \left(\sum_{c \in C} \sum_{t=1}^{T} r_{c,t}(i,\tau)\right) \times d_{i,\tau}, \,\, \mathcal{T}_i = \{ \tau \mid \text{size}_{i,\tau} > 0 \}
+\]
+
+where \(C\) is the set of resources, \(r_{c,t}(i,\tau)\) is the consumption of resource \(c\) at time \(t\) when intervention \(i\) starts at \(\tau\), and \(d_{i,\tau}\) is the duration. Only start times with non-zero \(\text{size}_{i,\tau}\) are considered. 
+
+
+Then, interventions are clustered into \texttt{'small'}, \texttt{'mid'}, and \texttt{'big'} groups using K-means on their mean intervention sizes. At each timestep \(t\), let \(\mathcal{I}(t)\) denote the set of active interventions. Define
+\[
+b(t) \coleq \left|\{ i \in \mathcal{I}(t) : i \text{ is big}\}\right|-1,\qquad
+m(t) \coleq \left|\{ i \in \mathcal{I}(t) : i \text{ is mid}\}\right|-1.
+\]
+We subtract 1 because if there is only one active intervention of a given size, there should be no penalization. Then, the per-timestep contribution $s(t)$ is used to compute the overall size concurrency score:
+\[
+    \text{size\_concurrency} \coleq \sum_{t=1}^{T} s(t), \qquad \text{where }s(t) \coleq \left(\max\{b(t),0\}\right)^2 + \max\{m(t),0\}
+\]
+This scoring mechanism imposes a quadratic penalty when multiple large interventions overlap and a linear penalty for mid-sized interventions.
+
+\signal{Aquí imagino que lo que haré es un fuzzy clustering}
+
+\paragraph{Risk Concurrency:} Analogous to size concurrency, risk concurrency quantifies the degree of overlap among interventions with elevated risk levels. In this case, each intervention \(i\in I\) has a risk value which is the average of its nonzero risk values $r_t^{(i)}$ (see Assumption 1) across all start times. Then, interventions are clustered via K-means into three groups: \texttt{'low'}, \texttt{'mid'}, and \texttt{'high'} risk. The score is completely identical to the one from size concurrency.
+
+\signal{Aquí imagino que lo que haré es un fuzzy clustering}
