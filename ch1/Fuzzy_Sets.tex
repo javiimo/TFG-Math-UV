@@ -1,4 +1,14 @@
-\signal{Decir cómo a partir de ese concepto de partial membership llegamos a esto y cómo es una generalización de boolean membership de classical sets. Di también que con classical y crisp nos referimos a boolean sets y con fuzzy a los otros. Di que usas la xi para la boolean membership y mu para la fuzzy en general}
+Fuzzy sets were introduced by Zadeh in 1965, following the idea of generalizing sets that was presented in section \ref{sec:sorites}:
+
+\say{More often than not, the classes of objects encountered in the real physical world do not have precisely defined criteria of membership. [...]Clearly, the "class of all real numbers which are much greater than 1," or "the class of beautiful women," or "the class of tall men," do not constitute classes or sets in the usual mathematical sense of these terms. [...]Yet, the fact remains that such imprecisely defined "classes" play an important role in human thinking, particularly in the domains of pattern recognition, communication of information, and abstraction.}\cite{Zadeh1965}\\
+
+The idea he proposed for representing those classes is using a continuum of grades of membership. While classical (also called crisp or boolean) sets use a boolean membership function $\chi_A:X\rightarrow\{0,1\}$ that assigns either 0 or 1 to each element, fuzzy sets generalize this by using a membership function $\mu_A:X\rightarrow[0,1]$ that can assign any value between 0 and 1. 
+
+\begin{remark}
+    The membership degree represents how compatible an object is with a set. This creates a total ordering of objects based on their degree of compatibility with the set.
+\end{remark}
+
+Therefore, fuzzy sets can be seen as an extension of crisp sets, since every crisp set can be modeled as a fuzzy set but not the other way around. The formal definition is as follows:
 
 \begin{definition}[Fuzzy Set]
     Let $X\neq\emptyset$ a set. Then we define a \textbf{fuzzy set A in X}, i.e., $A \in \fuzzy{X}$ as:
@@ -12,13 +22,16 @@
 
 \begin{notation}{Notation}
     We may use \( A(x) \equiv \mu_A(x) \) interchangeably.
+
+    In general, $\chi$ will denote boolean membership functions and $\mu$, fuzzy membership functions.
 \end{notation}
 
+
+
 \begin{definition}[Support]
-    Let $A \in \fuzzy{X}$. The set of non zero membership value elements is called the support:
+    Let $A \in \fuzzy{X}$. The crisp set of non zero membership value elements is called the support:
     \[\textnormal{Supp}(A)=\{x\in X \mid A(x)>0\}\]
 \end{definition}
-
 
 \begin{definition}[Fuzzy Subset]
     Given the fuzzy sets $A, B \in \fuzzy{X}$ we say $A$ is a fuzzy subset of $B$ (and write $A \subseteq B$) if and only if $A(x)
