@@ -3,21 +3,33 @@
   \end{notation}
 
 \subsection{Union, Intersection and Complement of Fuzzy Sets}
-The notion of union and intersection in fuzzy sets were first introduced by Zadeh \cite{Zadeh1965} via $\max\{A(x),B(x)\}$ and $\min\{A(x),B(x)\}$ operations respectively. Since then it can be intuitively interpreted as: the union is the smallest fuzzy set that contains both and intersection is the biggest fuzzy set contained by both.
+The notion of union and intersection in fuzzy sets were first introduced by Zadeh \cite{Zadeh1965} via $\max\{A(x),B(x)\}$ and $\min\{A(x),B(x)\}$ operations respectively. Since then it can be intuitively interpreted as: the union is the \textit{smallest} (lowest membership value at every element) fuzzy set that contains both and intersection is the \textit{biggest} (highest membership value at every element) fuzzy set contained by both.\\
 
-However, this notion can be generalized by two classes of operators: triangular norms (intersection) and triangular conorms (union). Where the later is completely analogous to the later. These concepts were first introduced by Karl Menger in 1942 \cite{OriginTNorms}, where in the context of generalizing the distance between points as probability distributions (probability of the distance being lower or equal than a value), he wanted to define an operation $T:\,[0,1]\times [0,1]\to [0.1]$ such that the triangular inequality would hold:
+However, this notion can be generalized by two classes of operators: triangular norms (intersection) and triangular conorms (union). 
+
+Triangular norms were first introduced by Karl Menger in 1942 \cite{OriginTNorms}, where in the context of generalizing the notion of distance between points as probability distributions (probability of the distance being lower or equal than a value), he wanted to define an operation $T:\,[0,1]\times [0,1]\to [0.1]$ such that the triangular inequality would hold. Let $x,y,z$ be three points in a metric space and $d(\cdot,\cdot)$, then:
 \[
-  d(x, z) \leq d(x, y) + d(y, z)\quad \Rightarrow \quad F_{xz}(t + s) >= T(F_{xy}(t), F_{yz}(s))\,\forall t,s\geq 0
+  d(x, z) \leq d(x, y) + d(y, z)\quad \longrightarrow \quad F_{xz}(t + s) \geq T(F_{xy}(t), F_{yz}(s))\,\forall t,s\geq 0
 \]
+This inequality means that the probability of $d(x,z)$ being less than $t+s$ must be at least the t-norm of the probabilities that $d(x,y)<t$ and $d(y,z)<s$. Notice that the change in the inequality from $\geq$ to $\leq$, this is to be consistent with the definition of distribution, since a bigger probability indicates it is more likely that the distance is smaller.\\
+
+Since it was dealing with distances, the following properties were required for an operator to be a t-norm:
+
+\begin{itemize}
+  \item \textbf{Symmetry:} The order of combining probabilities shouldn't matter, just as intersection of sets is commutative. For distances between points $x$, $y$, and $z$, combining probabilities for distances $(x,y)$ and $(y,z)$ should be order-independent.
+  
+  \item \textbf{Associativity:} When combining multiple probabilities (e.g., for paths through points $x,y,z,w$), the grouping shouldn't affect the result. This mirrors how nested intersections $(A \cap B) \cap C = A \cap (B \cap C)$ are equal.
+  
+  \item \textbf{Monotonicity:} If probability $F_{xy}(t)$ increases, the lower bound for $F_{xz}(t+s)$ given by $T(F_{xy}(t), F_{yz}(s))$ shouldn't decrease. This parallels how adding elements in crisp sets (or increasing the membership of elements in fuzzy sets) cannot reduce the intersection set.
+  
+  \item \textbf{One Identity:} If $F_{yz}(s) = 1$ (certainty that $d(y,z) < s$), then the probability $F_{xz}(t+s)$ is exactly $F_{xy}(t)$. Similarly, intersecting with the universal set preserves the original set.
+\end{itemize}
 
 
-\signal{por las propiedades de lo que debería ser y para lo de la triangular norm}
+% \say{The name \textit{triangular norm} refers to the fact that in the framework of probabilistic metric spaces, t-norms and t-conorms are used to generalize triangle inequality of ordinary metric spaces.}\cite{NGAN2018}\\
 
-\say{The name \textit{triangular norm} refers to the fact that in the framework of probabilistic metric spaces, t-norms and t-conorms are used to generalize triangle inequality of ordinary metric spaces.}\cite{NGAN2018}\\
+Therefore the concept of intersection (conjunction) of fuzzy sets is represented in the general case with a triangular norm (also called t-norm).
 
-
-
-\signal{say why we assign those properties to the union and intersection to generalize the ones from classical sets}
 \begin{definition}[Triangular Norm]
     A mapping $T:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
     \begin{romanenum}
@@ -26,8 +38,13 @@ However, this notion can be generalized by two classes of operators: triangular 
       \item \textbf{Monotonicity:} $T(x,y) \leq T(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
       \item \textbf{One Identity:} $T(x,1) = T(1,x) = x \quad \oldforall x \in [0,1]$
     \end{romanenum}
-    is called a triangular norm or t-norm. Defines the \textbf{intersection} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cup B) (x) = T(A(x),B(x)) \forall x \in X$ 
+    is called a triangular norm or t-norm. Defines the \textbf{intersection} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cap B) (x) = T(A(x),B(x)) \forall x \in X$ 
 \end{definition}
+
+Its dual operator can be also obtained following a similar reasoning as before but rather than considering the probability distribution of finding both points closer than the distance given, considering the probability distribution ($G_{uv}(t) = 1 - F_{uv}(t)$) of finding them further apart than a given distance. In this case, both inequalities are $\leq$ since bigger probabilities mean that it is more likely that distances are bigger as well.
+\[d(x, z) \leq d(x, y) + d(y, z)\quad \longrightarrow \quad G_{xz}(t + s) \leq S(G_{xy}(t), G_{yz}(s))\]
+
+The reasoning regarding the properties is completely analogous to the previous one, with the only difference that $F_{uv}(t) = 1 \Leftrightarrow  G_{uv}(t) = 0$ and in this case it is a zero identity.
 
 \signal{Normalmente se pide que sean left continuous (it is sufficient in either argument \cite{Esteva2001MonoidalTB}), which expresses the assumption that a microscopic decrease of the truth degree of a conjunct should not macroscopically decrease the truth degree of conjunction.}
 
@@ -35,16 +52,18 @@ However, this notion can be generalized by two classes of operators: triangular 
   A mapping $S:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
   \begin{enumerate}[(i)]\setlength{\itemindent}{2em}
     \item \textbf{Symmetricity:} $S(x,y) = S(y,x) \quad \oldforall x,y \in [0,1]$
-    \item \textbf{Associativity:} $S(x,T(y,z)) = S(S(x,y),z) \quad \oldforall x,y,z \in [0,1]$
+    \item \textbf{Associativity:} $S(x,S(y,z)) = S(S(x,y),z) \quad \oldforall x,y,z \in [0,1]$
     \item \textbf{Monotonicity:} $S(x,y) \leq S(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
     \item \textbf{Zero Identity:} $S(x,0) = S(0,x) = x \quad \oldforall x \in [0,1]$
   \end{enumerate}
-  is called a triangular conorm or t-conorm. Defines the \textbf{union} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cap  B) (x) = S(A(x),B(x)) \forall x \in X$ 
+  is called a triangular conorm or t-conorm. Defines the \textbf{union} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cup  B) (x) = S(A(x),B(x)) \forall x \in X$ 
     
 \end{definition}
 
+Complement was defined by Zadeh \cite{Zadeh1965}as\footnote{This is not the only definition that satisfies the axioms of a complement and is compatible with the classical limit, but it is the most simple one and will be used in this text. Other alternatives and its axioms may be found at \cite{Sladoje2007}}:
+
 \begin{definition}[Complement]
-    The complement of a fuzzy set $A\in \fuzzy{X}$ is another fuzzy set with membership function given by $^\lnot A(x) \coleq 1 - A(x) \forall x\in X$
+  The complement of a fuzzy set $A\in \fuzzy{X}$ is another fuzzy set with membership function given by $^\lnot A(x) \coleq 1 - A(x) \forall x\in X$
 \end{definition}
 
 Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\lnot A(x)= 1 - A(x) \notin \{0,1\}$.\\
@@ -55,7 +74,12 @@ However, there is a particular t-norm and t-conorm (named after Lukasiewicz) tha
 
 \hspace{10em}$T_L(x,y)=\max\{x+y-1,0\},\, S_L(x,y)=\min\{1,x+y\}$\\
 
-Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of t-norm and t-conorm they are not satisfied but by imposing it, we get that the t-norm induces a t-conorm and viceversa.
+Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of t-norm and t-conorm they are not satisfied but by imposing it, we get that the t-norm induces a t-conorm and viceversa. Reconsidering the probabilistic metrics $F,G$ from before, it can be seen that the triangular inequality is:
+
+\[F_{xz}(t + s) \geq T(F_{xy}(t), F_{yz}(s)) for all x, y, z and all t, s \geq 0\]
+
+\[1 - G_{xz}(t + s) \geq T(1 - G_{xy}(t), 1 - G_{yz}(s))\]
+Comparing this one with the previous one, we get the relation from the following proposition. Both must be equivalent because both come from the triangular inequality.
 
 \begin{proposition}[Relationship between t-norm and t-conorm]
   Given a t-norm $T$, the t-conorm $S(a,b)\coleq 1 - T(1-a, 1-b)$, then the union and intersection defined by that pair satisfy the De Morgan's Laws.

@@ -5,7 +5,7 @@ Fuzzy sets were introduced by Zadeh in 1965, following the idea of generalizing 
 The idea he proposed for representing those classes is using a continuum of grades of membership. While classical (also called crisp or boolean) sets use a boolean membership function $\chi_A:X\rightarrow\{0,1\}$ that assigns either 0 or 1 to each element, fuzzy sets generalize this by using a membership function $\mu_A:X\rightarrow[0,1]$ that can assign any value between 0 and 1. 
 
 \begin{remark}
-    The membership degree represents how compatible an object is with a set. This creates a total ordering of objects based on their degree of compatibility with the set.
+    The membership degree represents how compatible an object is with a set. This creates a \signal{total ordering (or partial since 2 objects with the same membership are not equal but cannot be ordered?)} of objects based on their degree of compatibility with the set.
 \end{remark}
 
 Therefore, fuzzy sets can be seen as an extension of crisp sets, since every crisp set can be modeled as a fuzzy set but not the other way around. The formal definition is as follows:
