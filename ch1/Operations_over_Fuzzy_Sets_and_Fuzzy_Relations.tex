@@ -106,6 +106,8 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 
 \signal{
   Lo de archimedean sirve para el teorema 1.8.1 de \cite{FULLER2}. Y tb con la law of large numbers con LR-fuzzy numbers.
+
+  \signal{Añadir lo de strict archimedean y divisores de zero y eso.}
 \begin{definition}[Archimedean t-norm]
   A continuous t-norm that satisfies $T(x,x)<x \forall x\in ]0,1[$ is called an archimedean t-norm.
 \end{definition}
@@ -145,6 +147,49 @@ There are many results like all t-norms are between the weak and the min, all t-
 
 \begin{example}
   \signal{Some examples of t-norms and t-conorms.}
+  \begin{itemize}
+    \item \textbf{Minimum/Maximum:} 
+    The largest t-norm (minimum) and smallest t-conorm (maximum). They are the standard interpretations of conjunction and disjunction in fuzzy logic and are idempotent ($T(x,x)=x, S(x,x)=x$).\\
+    $T(x, y) = \min(x, y) \quad S(x, y) = \max(x, y)$
+
+    \item \textbf{Łukasiewicz:}
+    Represents a bounded arithmetic sum/difference logic. Corresponds to the logic introduced by Łukasiewicz. It is Archimedean but not strict (has zero divisors). Boundary condition for t-norms satisfying $T(x,y)+S(x,y) = x+y$. \\
+    $T(x, y) = \max(0, x + y - 1) \quad S(x, y) = \min(1, x + y)$
+
+    \item \textbf{Product:}
+    The standard algebraic product t-norm and the probabilistic sum t-conorm. Represents the intersection of independent events in probability theory. It is a strict Archimedean t-norm. \\
+    $T(x, y) = x \cdot y \quad S(x, y) = x + y - x \cdot y$
+
+    \item \textbf{Weak/Strong:}
+    The smallest t-norm ($T_D$) and the largest t-conorm ($S_D$). They represent the most extreme intersection and union possible. Discontinuous except at boundary points (0,0), (1,1), etc. \\
+    $T(x, y) = \begin{cases} \min(x,y) & \text{if } \max(x,y)=1 \\ 0 & \text{otherwise} \end{cases} \quad S(x, y) = \begin{cases} \max(x,y) & \text{if } \min(x,y)=0 \\ 1 & \text{otherwise} \end{cases}$
+    % Simpler equivalent definitions:
+    % T(x, y) = y if x=1, x if y=1, 0 otherwise
+    % S(x, y) = y if x=0, x if y=0, 1 otherwise
+
+    \item \textbf{Hamacher Family ($\gamma \ge 0$):}
+    A parametric family of t-norms and t-conorms. Includes the Product t-norm as a special case when $\gamma = 1$. It is strictly Archimedean for $\gamma > 0$. \\
+    $T_\gamma(x, y) = \frac{xy}{\gamma + (1-\gamma)(x+y-xy)} \quad S_\gamma(x, y) = \frac{x+y-xy-(1-\gamma)xy}{1-(1-\gamma)xy}$
+    % Note: For gamma=0 this is related to Lukasiewicz via generator, for gamma -> infinity to Drastic.
+
+    \item \textbf{Dubois and Prade Family ($\alpha \in [0, 1]$):}
+    A parametric family that includes the Minimum t-norm ($\alpha=0$) and the Product t-norm ($\alpha=1$). Provides flexibility between these two important t-norms. \\
+    $T_\alpha(x, y) = \frac{xy}{\max(x, y, \alpha)} \quad S_\alpha(x, y) = 1 - \frac{(1-x)(1-y)}{\max(1-x, 1-y, \alpha)}$ 
+    % Note: The S-conorm is expressed directly via duality relation S(x,y) = 1 - T(1-x, 1-y).
+
+    \item \textbf{Yager Family ($p > 0$):}
+    A parametric family characterized by the parameter $p$. It approaches the Drastic t-norm as $p \to 0^+$ and the Minimum t-norm as $p \to \infty$. The Łukasiewicz t-norm is obtained for $p=1$. \\
+    $T_p(x, y) = \max(0, 1 - ((1-x)^p + (1-y)^p)^{1/p}) \quad S_p(x, y) = \min(1, (x^p + y^p)^{1/p})$
+
+    \item \textbf{Frank Family ($p > 0, p \neq 1$):}
+    The only family of t-norms (besides min-max) that are Archimedean and satisfy the functional equation $T(x, y) + S(x, y) = x + y$. It includes Łukasiewicz ($p \to 0^+$), Product ($p \to 1$), and Minimum/Maximum ($p \to \infty$) as limiting cases. \\
+    $T_p(x, y) = \log_p \left( 1 + \frac{(p^x - 1)(p^y - 1)}{p - 1} \right) \quad S_p(x, y) = 1 - \log_p \left( 1 + \frac{(p^{1-x} - 1)(p^{1-y} - 1)}{p - 1} \right)$
+
+    \item \textbf{Schweizer-Sklar Family ($p \in [-\infty, \infty]$):}
+    A very general parametric family encompassing several others. Includes Drastic ($p \to -\infty$), Łukasiewicz ($p=1$ in a different parameterization, not this T form), Product ($p=0$ in a related form), and Minimum ($p \to \infty$). The Yager family is generated differently but related. \\
+    $T_p(x, y) = (\max(0, x^p + y^p - 1))^{1/p} \quad S_p(x, y) = 1 - (\max(0, (1-x)^p + (1-y)^p - 1))^{1/p}$ 
+    % Note: S-conorm shown is the dual S_p(x,y) = 1 - T_p(1-x, 1-y). The commonly cited S_p(x,y) = (min(1, x^p + y^p))^{1/p} is NOT dual to this T_p w.r.t standard negation.
+  \end{itemize}
 \end{example}
 
 
