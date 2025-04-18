@@ -85,7 +85,7 @@ Another important property that classical union and intersection satisfy is De M
 Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a relationship between t-norms and t-conorms, which is formalized in the following proposition:
 
 \begin{proposition}[Relationship between t-norm and t-conorm]
-  Given a t-norm $T$, the t-conorm $S(a,b)\coleq 1 - T(1-a, 1-b)$, then the union and intersection defined by that pair satisfy the De Morgan's Laws.
+  Given a t-norm $T$, the t-conorm is $S(a,b)\coleq 1 - T(1-a, 1-b)$ if and only if the union and intersection defined by that pair satisfy the De Morgan's Laws.
 \end{proposition}
 \begin{remark}
   It is easy to see that the previous relation is equivalent to $T(a,b) = 1-S(1-a, 1-b)$ which can be obtained simply by substituting $a'=1-a$ and $b'=1-b$, i.e., working with the complementary fuzzy sets.
@@ -94,11 +94,13 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 \begin{proof}
   Let $x\in X$, $A$, $B$ be fuzzy sets over $X$ with $a \coleq A(x)$ and $b \coleq B(x)$\\
 
-  $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\[0.5em]
-  $\lnot S(a,b) = T(\lnot a, \lnot b) \implies 1 - S(a,b) = T(1-a, 1-b) \implies S(a,b) = 1 - T(1-a, 1-b)$\\
+  $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\
+  [0.5em]
+  $\lnot S(a,b) = T(\lnot a, \lnot b) \iff 1 - S(a,b) = T(1-a, 1-b) \iff S(a,b) = 1 - T(1-a, 1-b)$\\
 
-  $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\[0.5em]
-  $\lnot T(a,b) = S(\lnot a, \lnot b) \implies 1 - T(a,b) = S(1-a, 1-b) \implies T(a,b) = 1 - S(1-a, 1-b)$
+  $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\
+  [0.5em]
+  $\lnot T(a,b) = S(\lnot a, \lnot b) \iff 1 - T(a,b) = S(1-a, 1-b) \iff T(a,b) = 1 - S(1-a, 1-b)$
 
 \end{proof}
 
@@ -289,6 +291,27 @@ Applying the definition of projection with the supremum to fuzzy sets, we have a
 \end{figure}
 
 \signal{Falta ver que que la proyección nos devuelve el fuzzy set original en los fuzzy cart prod.}
+
+\signal{\paragraph{Retrieving Original Sets from Cartesian Product}
+Let $A \in \fuzzy{X}$ and $B \in \fuzzy{Y}$ be two fuzzy sets. Their fuzzy Cartesian product $R = A \times B \in \fuzzy{X \times Y}$ is typically defined using a t-norm $T$:
+\[ R(x,y) = T(A(x), B(y)) \quad \forall x \in X, y \in Y \]
+We now verify if the projection operation retrieves the original fuzzy sets from this product, addressing the question raised earlier about whether $\Pi_X(A \times B) = A$ and $\Pi_Y(A \times B) = B$ holds in the fuzzy case.
+
+Consider the projection onto $X$:
+\[ \Pi_X(A \times B)(x) = \sup_{y \in Y} R(x,y) = \sup_{y \in Y} T(A(x), B(y)) \]
+From the t-norm property $T(a,b) \le a$, we know $T(A(x), B(y)) \le A(x)$ for all $y \in Y$. Consequently, the supremum over $y$ must also satisfy this inequality:
+\[ \sup_{y \in Y} T(A(x), B(y)) \le A(x) \]
+
+For the equality $\Pi_X(A \times B)(x) = A(x)$ to hold, we need the supremum to reach $A(x)$. This occurs under specific conditions. Using the boundary condition axiom for t-norms, $T(a, 1) = a$, if the fuzzy set $B$ is \textbf{normalized} (i.e., its height $h_B = \sup_{y \in Y} B(y) = 1$), and assuming the t-norm $T$ is upper semi-continuous in the second argument (which holds for all common t-norms like min, product, Łukasiewicz), then:
+\[ \sup_{y \in Y} T(A(x), B(y)) = T(A(x), \sup_{y \in Y} B(y)) = T(A(x), 1) = A(x) \]
+Therefore, $\Pi_X(A \times B) = A$ holds if the fuzzy set $B$ is normalized.
+
+An analogous argument applies to the projection onto $Y$:
+\[ \Pi_Y(A \times B)(y) = \sup_{x \in X} R(x,y) = \sup_{x \in X} T(A(x), B(y)) \]
+Using $T(a,b) \le b$ and the boundary condition $T(1, b) = b$, we find that $\Pi_Y(A \times B) = B$ holds if the fuzzy set $A$ is normalized ($h_A = \sup_{x \in X} A(x) = 1$) and $T$ is upper semi-continuous in the first argument.
+
+In summary, the desirable property that projections of a fuzzy Cartesian product (defined via a t-norm $T$) retrieve the original fuzzy sets holds true provided that the set being projected \textit{away} is normalized. This requirement parallels the condition in classical set theory where the property holds if the corresponding sets are non-empty.}
+
 
 \subsubsection*{Composition of Fuzzy Sets}
 
