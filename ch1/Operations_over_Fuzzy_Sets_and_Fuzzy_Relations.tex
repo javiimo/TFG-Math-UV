@@ -72,7 +72,7 @@ Complement was defined by Zadeh \cite{Zadeh1965} as\footnote{This is not the onl
 
 Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\lnot A(x)= 1 - A(x) \notin \{0,1\}$.\\
 
-This implies as well that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
+One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
 
 However, there is a particular t-norm and t-conorm (named after Lukasiewicz) that does satisfy both laws. This will have implications for the derived logic that will be explained in section \ref{sec:fuzzy_logic}. \signal{is it the only one?}
 
@@ -107,45 +107,9 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 \signal{Creo que además de esto de las leyes de de Morgan, también nos da que el modus ponen funciona si se cumple la propiedad esa. Además no sé si se llama residual property.}
 
 \signal{
-  Lo de archimedean sirve para el teorema 1.8.1 de \cite{FULLER2}. Y tb con la law of large numbers con LR-fuzzy numbers.
+  Lo de archimedean sirve para el teorema 1.8.1 de \cite{FULLER2}. Y tb con la law of large numbers con LR-fuzzy numbers.}
 
-  \signal{Añadir lo de strict archimedean y divisores de zero y eso.}
-\begin{definition}[Archimedean t-norm]
-  A continuous t-norm that satisfies $T(x,x)<x \forall x\in ]0,1[$ is called an archimedean t-norm.
-\end{definition}
 
-\begin{proposition}[Characterization of archimedean t-norms]
-  For all archimedean t-norms there exists a continuous decreasing function $f:[0,1] \longrightarrow [0,\infty[$ with $f(1)=0$ such that: 
-  \[ 
-  T(x,y)= f^{-1}(\min\{f(x)+f(y), f(0)\}) \text{ where } f^{-1} =
-  \begin{cases}
-    f^{-1}(y) & \text{if } y\in [0,f(0) ]\\
-    0 & \text{otherwise}
-  \end{cases}
-  \text{ is a pseudo-inverse}.
-  \]
-\end{proposition}
-}
-
-\signal{
-\begin{definition}[Nilpotent t-norm]
-  
-\end{definition}}
-
-\begin{definition}[Weaker t-norm]
-  Given $T_1, T_2$ t-norms, then $T_1$ is weaker than $T_2$ $(T_1 \leq T_2)$ if $T_1(x,y)\leq T_2(x,y)\forall x,y\in [0,1]$.\\
-  In that case, it is equivalent to say $T_2$ is stronger than $T_1$ $(T_2 \geq T_1)$
-
-\end{definition}
-\begin{remark}
-  This defines a partial order relation in the set of t-norms.
-\end{remark}
-\signal{The weaker the t-norm, the stronger the associated s-norm. Lo pongo como un remark igual.}
-
-\signal{
-There are many results like all t-norms are between the weak and the min, all t-conorms are between max and strong, or that min is the only t-norm that satisfies $T(a,a)=a$ (igual es por esto ultimo q se usa tanto. Qué implicaciones tiene que lukasiewicz no cumpla eso?)}
-
-\signal{Tambien lo de que la T-norm e distributiva con max/sup sirve para justificar la definicion del producto cartesiano, así que esa propiedad la tendré que meter por aquí igual.}
 
 \begin{example}
   \signal{Some examples of t-norms and t-conorms.}
@@ -162,8 +126,8 @@ There are many results like all t-norms are between the weak and the min, all t-
     The standard algebraic product t-norm and the probabilistic sum t-conorm. Represents the intersection of independent events in probability theory. It is a strict Archimedean t-norm. \\
     $T(x, y) = x \cdot y \quad S(x, y) = x + y - x \cdot y$
 
-    \item \textbf{Weak/Strong:}
-    The smallest t-norm ($T_D$) and the largest t-conorm ($S_D$). They represent the most extreme intersection and union possible. Discontinuous except at boundary points (0,0), (1,1), etc. \\
+    \item \textbf{Drastic:}
+    The smallest t-norm ($T_D$) and the largest t-conorm ($S_D$). They represent the most extreme intersection and union possible. \signal{Discontinuous except at boundary points (0,0), (1,1), etc.} \\
     $T(x, y) = \begin{cases} \min(x,y) & \text{if } \max(x,y)=1 \\ 0 & \text{otherwise} \end{cases} \quad S(x, y) = \begin{cases} \max(x,y) & \text{if } \min(x,y)=0 \\ 1 & \text{otherwise} \end{cases}$
     % Simpler equivalent definitions:
     % T(x, y) = y if x=1, x if y=1, 0 otherwise
@@ -193,6 +157,183 @@ There are many results like all t-norms are between the weak and the min, all t-
     % Note: S-conorm shown is the dual S_p(x,y) = 1 - T_p(1-x, 1-y). The commonly cited S_p(x,y) = (min(1, x^p + y^p))^{1/p} is NOT dual to this T_p w.r.t standard negation.
   \end{itemize}
 \end{example}
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection*{Classification of T-norms}
+
+\signal{Añadir lo de strict archimedean y divisores de zero y eso.}
+\begin{definition}[Archimedean t-norm]
+  A continuous t-norm that satisfies $T(x,x)<x \forall x\in ]0,1[$ is called an archimedean t-norm.
+\end{definition}
+
+\begin{proposition}[Characterization of archimedean t-norms]
+  For all archimedean t-norms there exists a continuous decreasing function $f:[0,1] \longrightarrow [0,\infty[$ with $f(1)=0$ such that: 
+  \[ 
+  T(x,y)= f^{-1}(\min\{f(x)+f(y), f(0)\}) \text{ where } f^{-1} =
+  \begin{cases}
+    f^{-1}(y) & \text{if } y\in [0,f(0) ]\\
+    0 & \text{otherwise}
+  \end{cases}
+  \text{ is a pseudo-inverse}.
+  \]
+\end{proposition}
+
+
+\signal{
+\begin{definition}[Nilpotent t-norm]
+  
+\end{definition}}
+
+\begin{definition}[Weaker t-norm]
+  Given $T_1, T_2$ t-norms, then $T_1$ is weaker than $T_2$ $(T_1 \leq T_2)$ if $T_1(x,y)\leq T_2(x,y)\forall x,y\in [0,1]$.\\
+  In that case, it is equivalent to say $T_2$ is stronger than $T_1$ $(T_2 \geq T_1)$
+
+\end{definition}
+\begin{remark}
+  This defines a partial order relation in the set of t-norms.
+\end{remark}
+\signal{The weaker the t-norm, the stronger the associated s-norm. Lo pongo como un remark igual.}
+
+\signal{
+There are many results like all t-norms are between the weak and the min, all t-conorms are between max and strong, or that min is the only t-norm that satisfies $T(a,a)=a$ (igual es por esto ultimo q se usa tanto. Qué implicaciones tiene que lukasiewicz no cumpla eso?)}
+
+\signal{Tambien lo de que la T-norm e distributiva con max/sup sirve para justificar la definicion del producto cartesiano, así que esa propiedad la tendré que meter por aquí igual.}
+
+
+
+% \subsubsection*{Classification of T-norms}
+
+% The set of all t-norms can be partially ordered, and understanding their properties allows for a useful classification, particularly for continuous t-norms.
+
+% \begin{definition}[Weaker/Stronger t-norm {\citep[Definition 1.4, p.~21]{Klement2000}}]
+%   Given two t-norms $T_1$ and $T_2$, $T_1$ is said to be \emph{weaker} than $T_2$ (denoted $T_1 \leq T_2$) if $T_1(x,y) \leq T_2(x,y)$ for all $x,y \in [0,1]$.
+%   Equivalently, $T_2$ is said to be \emph{stronger} than $T_1$.
+% \end{definition}
+
+% \begin{remark}
+%   The relation $\leq$ defines a partial order on the set of all t-norms.
+%   It's a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ is the drastic product and $T_M$ is the minimum t-norm (\citep[Remark 1.5(i), p.~21]{Klement2000}).
+% \end{remark}
+
+% \begin{remark}
+%   Duality with t-conorms: If $T_1 \leq T_2$ are t-norms, and $S_1, S_2$ are their respective dual t-conorms (obtained via a strong negation $N$, typically $N(x)=1-x$), then $S_1 \geq S_2$. Thus, a weaker t-norm corresponds to a stronger dual t-conorm.
+% \end{remark}
+
+% To classify t-norms further, several algebraic properties are essential:
+
+% \begin{definition}[Algebraic Properties of T-norms {\citep[Definition 2.1, p.~22 \& Definition 2.9, p.~27]{Klement2000}}]
+% Let $T$ be a t-norm.
+% \begin{enumerate}
+%     \item An element $a \in [0,1]$ is an \emph{idempotent element} of $T$ if $T(a,a)=a$. The elements $0$ and $1$ are always trivial idempotent elements.
+%     \item An element $a \in ]0,1[$ is a \emph{nilpotent element} of $T$ if there exists $n \in \mathbb{N}$ such that $a_T^{(n)} = 0$, where $a_T^{(n)}$ denotes the $n$-th power of $a$ with respect to $T$.
+%     \item An element $a \in ]0,1[$ is a \emph{zero divisor} of $T$ if there exists $b \in ]0,1[$ such that $T(a,b)=0$.
+%     \item $T$ is \emph{Archimedean} if for each $(x,y) \in ]0,1[^2$ there is an $n \in \mathbb{N}$ with $x_T^{(n)} < y$. Equivalently, a t-norm $T$ is Archimedean if and only if it has only trivial idempotent elements (0 and 1) and satisfies a further condition related to limits, or more simply for continuous t-norms, if $T(x,x) < x$ for all $x \in ]0,1[$ (\citep[Theorem 2.12, p.~28 \& for continuous context, implied by Theorem 5.1, p.~122]{Klement2000}).
+% \end{enumerate}
+% \end{definition}
+
+% \begin{proposition}[{\citep[Proposition 1.9(i), p.~24]{Klement2000}}]
+%   The minimum t-norm $T_M(x,y) = \min(x,y)$ is the only t-norm $T$ satisfying $T(x,x)=x$ for all $x \in [0,1]$.
+% \end{proposition}
+
+% \paragraph{Continuous T-norms}
+% Continuous t-norms admit a very structured classification.
+
+% \begin{theorem}[Generator Theorem for Continuous Archimedean T-norms {\citep[Theorem 5.1, p.~122]{Klement2000}}]
+%   A function $T: [0,1]^2 \to [0,1]$ is a continuous Archimedean t-norm if and only if it has a \emph{continuous additive generator}. That is, there exists a continuous, strictly decreasing function $t: [0,1] \to [0,\infty]$ with $t(1)=0$, such that for all $(x,y) \in [0,1]^2$:
+%   \[
+%   T(x,y) = t^{(-1)}(t(x) + t(y))
+%   \]
+%   where $t^{(-1)}: [0,\infty] \to [0,1]$ is the pseudo-inverse of $t$, defined as
+%   \[
+%   t^{(-1)}(z) =
+%   \begin{cases}
+%     t^{-1}(z) & \text{if } z \in [0, t(0)] \\
+%     0 & \text{if } z \in ]t(0), \infty]
+%   \end{cases}
+%   \]
+%   (If $t(0)=\infty$, then $t^{(-1)} = t^{-1}$). The generator $t$ is unique up to a positive multiplicative constant.
+% \end{theorem}
+
+% Continuous Archimedean t-norms are further divided into two main classes:
+
+% \begin{definition}[Strict and Nilpotent T-norms {\citep[Definition 2.13, p.~42]{Klement2000}}]
+%   \begin{enumerate}
+%       \item A t-norm $T$ is called \emph{strict} if it is continuous and strictly monotone (i.e., $T(x,y) < T(x,z)$ whenever $x>0$ and $y<z$).
+%       \item A t-norm $T$ is called \emph{nilpotent} if it is continuous and if each $a \in ]0,1[$ is a nilpotent element of $T$.
+%   \end{enumerate}
+% \end{definition}
+
+% \begin{corollary}[{\citep[Corollary 3.30, p.~88]{Klement2000}}]
+%   Let $T$ be a continuous Archimedean t-norm with a continuous additive generator $t$.
+%   \begin{enumerate}
+%       \item $T$ is strict if and only if $t(0) = \infty$.
+%       \item $T$ is nilpotent if and only if $t(0) < \infty$.
+%   \end{enumerate}
+% \end{corollary}
+
+% \begin{proposition}[Isomorphism of Continuous Archimedean T-norms {\citep[Corollary 5.7, p.~125; Proposition 5.9, p.~126; Proposition 5.10, p.~127]{Klement2000}}]
+%   \begin{enumerate}
+%       \item Every strict t-norm is isomorphic to the product t-norm $T_P(x,y) = xy$.
+%       \item Every nilpotent t-norm is isomorphic to the Łukasiewicz t-norm $T_L(x,y) = \max(0, x+y-1)$.
+%   \end{enumerate}
+%   This means that any continuous Archimedean t-norm is isomorphic to either $T_P$ or $T_L$.
+% \end{proposition}
+
+% \paragraph{Ordinal Sum Representation}
+% Not all continuous t-norms are Archimedean. Those that are not (i.e., possess non-trivial idempotents) can be constructed from Archimedean t-norms using the concept of an ordinal sum.
+
+% \begin{definition}[Ordinal Sum of T-norms {\citep[Definition 3.44, p.~97]{Klement2000}}]
+% Let $(T_\alpha)_{\alpha \in A}$ be a family of t-norms and $(]a_\alpha, e_\alpha[)_{\alpha \in A}$ be a family of non-empty, pairwise disjoint open subintervals of $[0,1]$. The t-norm $T$ defined by
+% \[
+% T(x,y) =
+% \begin{cases}
+%   a_\alpha + (e_\alpha - a_\alpha) \cdot T_\alpha \left( \frac{x-a_\alpha}{e_\alpha - a_\alpha}, \frac{y-a_\alpha}{e_\alpha - a_\alpha} \right) & \text{if } (x,y) \in [a_\alpha, e_\alpha]^2 \text{ for some } \alpha \in A \\
+%   \min(x,y) & \text{otherwise}
+% \end{cases}
+% \]
+% is called the \emph{ordinal sum} of the summands $(a_\alpha, e_\alpha, T_\alpha)$, $\alpha \in A$.
+% We denote this as $T = ((a_\alpha, e_\alpha, T_\alpha))_{\alpha \in A}$.
+% \end{definition}
+
+% \begin{theorem}[Representation of Continuous T-norms {\citep[Theorem 5.11, p.~140]{Klement2000}}]
+%   A function $T: [0,1]^2 \to [0,1]$ is a continuous t-norm if and only if $T$ is uniquely representable as an ordinal sum of continuous Archimedean t-norms.
+% \end{theorem}
+
+% \begin{remark}
+%   A t-norm is \emph{ordinally irreducible} if it only has a trivial ordinal sum representation (i.e., $T = ((0,1,T))$). For continuous t-norms, being ordinally irreducible is equivalent to being Archimedean (\citep[Proposition 3.53, p.~99 & surrounding discussion]{Klement2000}).
+% \end{remark}
+
+% In summary, continuous t-norms are either Archimedean (and thus isomorphic to $T_P$ or $T_L$) or they are ordinal sums of such Archimedean t-norms (and $T_M$ as a limiting case).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
