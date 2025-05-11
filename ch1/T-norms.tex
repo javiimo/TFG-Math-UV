@@ -1,0 +1,194 @@
+The notions of union and intersection in fuzzy sets were first introduced by Zadeh \cite{Zadeh1965} using the operations $\max\{A(x),B(x)\}$ and $\min\{A(x),B(x)\}$ respectively. These can be intuitively interpreted as follows: the union is the \textit{smallest} fuzzy set (having lowest membership values) that contains both sets, while the intersection is the \textit{biggest} fuzzy set (having highest membership values) that is contained by both sets.\\
+However, these operations can be generalized by two broader classes of operators: triangular norms (for intersection) and triangular conorms (for union).
+Triangular norms were first introduced by Karl Menger in 1942 \cite{OriginTNorms} in the context of probabilistic metric spaces. When generalizing distances between points to probability distributions (representing the probability that the distance is less than or equal to a given value), Menger defined an operation $T:\,[0,1]\times [0,1]\to [0,1]$ to preserve the triangular inequality. For points $x,y,z$ in a metric space with distance function $d(\cdot,\cdot)$, this operation satisfies:
+\begin{equation}\label{eq:Ftriangle_inequality_user}
+d(x, z) \leq d(x, y) + d(y, z) \quad \longrightarrow \quad F_{xz}(t + s) \geq T(F_{xy}(t), F_{yz}(s)) \quad \forall t,s \geq 0
+\end{equation}
+This inequality means that the probability of $d(x,z)$ being less than $t+s$ must be at least the t-norm of the probabilities that $d(x,y)<t$ and $d(y,z)<s$. Note the change from $\leq$ to $\geq$ in the inequality. This is consistent with \textit{larger} probabilities indicating \textit{smaller} distances are more likely.\\
+Since this originated in the context of distances, the following properties were required for an operator to be a t-norm\footnote{Associativity and one identity were not originally proposed by Menger but were later added by Sklar and Schweizer \cite{Sklar1983} in their refinement of triangular norms}:
+\begin{itemize}
+  \item \textbf{Symmetry:} The order of combining probabilities shouldn't matter, just as intersection of sets is commutative. That is, combining probabilities for distances $(x,y)$ and $(y,z)$ should give the same result regardless of order.
+  
+  \item \textbf{Associativity:} When combining multiple probabilities (e.g., for paths through points $x,y,z,w$), the grouping shouldn't affect the result. This extends the triangular norm to be consistent with polygonal inequalities, similar to how nested intersections satisfy $(A \cap B) \cap C = A \cap (B \cap C)$.
+  
+  \item \textbf{Monotonicity:} If the probability $F_{xy}(t)$ increases, then the lower bound for $F_{xz}(t+s)$ given by $T(F_{xy}(t), F_{yz}(s))$ should not decrease. This is analogous to how adding elements in crisp sets (or increasing membership degrees in fuzzy sets) cannot reduce the intersection set.
+  
+  \item \textbf{One Identity:} If $F_{yz}(s) = 1$ (meaning $d(y,z) < s$ with certainty), then $F_{xz}(t+s)$ depends only on $F_{xy}(t)$. This is analogous to how intersecting with the universal set preserves the original set.
+\end{itemize}
+Therefore, the concept of intersection (conjunction) of fuzzy sets is generally represented by a triangular norm (also called a t-norm).
+\begin{definition}[Triangular Norm {\cite[Def.~1.1, p.~19]{Klement2000}}]
+    A mapping $T:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
+    \begin{romanenum}
+      \item \textbf{Symmetricity (T1):} $T(x,y) = T(y,x) \quad \oldforall x,y \in [0,1]$
+      \item \textbf{Associativity (T2):} $T(x,T(y,z)) = T(T(x,y),z) \quad \oldforall x,y,z \in [0,1]$
+      \item \textbf{Monotonicity (T3):} $T(x,y) \leq T(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
+      \item \textbf{One Identity (T4):} $T(x,1) = T(1,x) = x \quad \oldforall x \in [0,1]$
+    \end{romanenum}
+    is called a triangular norm or t-norm. Defines the \textbf{intersection} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cap B) (x) = T(A(x),B(x)) \forall x \in X$.
+\end{definition}
+Its dual operator can also be obtained by a similar reasoning as before, but instead of considering the probability distribution of finding both points closer than a given distance, it considers the probability distribution ($G_{uv}(t) = 1 - F_{uv}(t)$) of finding them further apart than that distance. In this case, both inequalities are $\leq$ since larger probabilities indicate that greater distances are more likely.
+\begin{equation}\label{eq:Gtriangle_inequality_user}
+d(x, z) \leq d(x, y) + d(y, z) \quad \longrightarrow \quad G_{xz}(t + s) \leq S(G_{xy}(t), G_{yz}(s))
+\end{equation}
+The reasoning regarding the properties is entirely analogous to the previous case, with the only difference being that $F_{uv}(t) = 1 \Leftrightarrow  G_{uv}(t) = 0$, and here the identity element is zero (union with the empty set).
+\begin{definition}[Triangular Conorm {\cite[Def.~1.13, p.~26]{Klement2000}}]
+  A mapping $S:[0,1]\times [0,1] \longrightarrow [0,1]$ that satisfies:
+  \begin{enumerate}[(i)]\setlength{\itemindent}{2em}
+    \item \textbf{Symmetricity (T1):} $S(x,y) = S(y,x) \quad \oldforall x,y \in [0,1]$
+    \item \textbf{Associativity (T2):} $S(x,S(y,z)) = S(S(x,y),z) \quad \oldforall x,y,z \in [0,1]$
+    \item \textbf{Monotonicity (T3):} $S(x,y) \leq S(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
+    \item \textbf{Zero Identity (S4):} $S(x,0) = S(0,x) = x \quad \oldforall x \in [0,1]$
+  \end{enumerate}
+  is called a triangular conorm or t-conorm. Defines the \textbf{union} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cup  B) (x) = S(A(x),B(x)) \forall x \in X$.
+\end{definition}
+Complement was defined by Zadeh \cite{Zadeh1965} as\footnote{This is not the only definition that satisfies the axioms of a complement and is compatible with the classical limit, but it is the simplest one and will be used in this text. Other alternatives and their axioms can be found in \cite{Sladoje2007}. In \cite{Klement2000}, this is called the standard negation $N_s$.}:
+\begin{definition}[Complement]
+  The complement of a fuzzy set $A\in \fuzzy{X}$ is another fuzzy set with membership function given by $^\lnot A(x) \coleq 1 - A(x) \forall x\in X$.
+\end{definition}
+Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\lnot A(x)= 1 - A(x) \notin \{0,1\}$.\\
+One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
+However, there is a particular t-norm and t-conorm (named after Łukasiewicz) that does satisfy both laws. This will have implications for the derived logic that will be explained in section \ref{sec:fuzzy_logic}. \signal{Klement2000 does not explicitly state $T_L$ is the *only* one satisfying both excluded middle ($S(x, 1-x)=1$) and non-contradiction ($T(x,1-x)=0$). It mentions (p. 233) that for the De Morgan triple $(T_L, S_L, N_s)$, a many-valued analogue of the law of excluded middle holds, but this is more nuanced.}
+\hspace{10em}$T_L(x,y)=\max\{x+y-1,0\},\, S_L(x,y)=\min\{1,x+y\}$\\
+Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of t-norm and t-conorm, these laws are not automatically satisfied. However, there are specific pairs that do fulfill them. To illustrate the relationship between t-norms and t-conorms that satisfy De Morgan's Laws, we can use our probabilistic metric space analogy. Reconsidering the probabilistic metrics $F,G$ introduced earlier and substituting $F = 1 - G$ into equation \ref{eq:Ftriangle_inequality_user}, we obtain:
+\[ G_{xz}(t + s) \leq 1 - T(1 - G_{xy}(t), 1 - G_{yz}(s))\]
+Comparing this with equation \ref{eq:Gtriangle_inequality_user}, we can derive a relationship between t-norms and t-conorms, which is formalized in the following proposition:
+\begin{proposition}[Relationship between t-norm and t-conorm {\cite[Prop.~1.15, Eq.~(1.9), p.~26]{Klement2000}}]
+  Given a t-norm $T$ and the standard negation $N_s(x)=1-x$, the t-conorm $S(x,y)\coleq N_s(T(N_s(x), N_s(y))) = 1 - T(1-x, 1-y)$ is called the \emph{dual t-conorm} of $T$. This pair $(T,S)$ satisfies De Morgan's Laws with respect to $N_s$.
+\end{proposition}
+\begin{remark}
+  It is easy to see that the previous relation is equivalent to $T(x,y) = 1-S(1-x, 1-y)$ which can be obtained simply by substituting $a'=1-x$ and $b'=1-x$, i.e., working with the complementary fuzzy sets. This means $T$ is also the dual t-norm of $S$.
+\end{remark}
+  
+\subsection{Basic Properties and Examples of T-norms}
+The set of all t-norms can be partially ordered, which helps in their classification.
+\begin{definition}[Weaker/Stronger t-norm {\cite[Def.~1.4, p.~21]{Klement2000}}]
+  Given two t-norms $T_1$ and $T_2$, $T_1$ is said to be \emph{weaker} than $T_2$ (denoted $T_1 \leq T_2$) if $T_1(x,y) \leq T_2(x,y)$ for all $x,y \in [0,1]$.
+  Equivalently, $T_2$ is said to be \emph{stronger} than $T_1$.
+\end{definition}
+\begin{remark}
+  The relation $\leq$ defines a partial order on the set of all t-norms. It's a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ is the drastic product and $T_M$ is the minimum t-norm (\cite[Rem.~1.5(i), p.~21]{Klement2000}).
+\end{remark}
+To classify t-norms further, several algebraic properties are essential:
+\begin{definition}[Algebraic Properties of T-norms]
+Let $T$ be a t-norm.
+\begin{enumerate}
+    \item An element $a \in [0,1]$ is an \emph{idempotent element} of $T$ if $T(a,a)=a$. The elements $0$ and $1$ are always trivial idempotent elements (\cite[Def.~2.1(i), p.~36]{Klement2000}).
+    \item An element $a \in ]0,1[$ is a \emph{nilpotent element} of $T$ if there exists $n \in \mathbb{N}$ such that $a_T^{(n)} = 0$, where $a_T^{(n)} = T(a, a_T^{(n-1)})$ with $a_T^{(1)}=a$ (\cite[Def.~2.1(ii), p.~36; Rem~1.10(i), p.~24]{Klement2000}).
+    \item An element $a \in ]0,1[$ is a \emph{zero divisor} of $T$ if there exists $b \in ]0,1[$ such that $T(a,b)=0$ (\cite[Def.~2.1(iii), p.~36]{Klement2000}).
+    \item $T$ is \emph{Archimedean} if for each $(x,y) \in ]0,1[^2$ there is an $n \in \mathbb{N}$ with $x_T^{(n)} < y$ (\cite[Def.~2.9(iv), p.~40]{Klement2000}). Equivalently, a continuous t-norm $T$ is Archimedean if and only if $T(x,x) < x$ for all $x \in ]0,1[$ (\cite[Thm.~2.12, p.~42 and the implication from continuity]{Klement2000}). \signal{The book's Thm 2.12 states for a general t-norm T, T is Archimedean iff T satisfies the limit property (LP) iff T has only trivial idempotents AND whenever $\lim_{x\uparrow x_0} T(x,x) = x_0$ for $x_0 \in ]0,1[$, there exists $y_0 \in ]x_0, 1[$ such that $T(y_0, y_0) = x_0$. For continuous t-norms, having only trivial idempotents means $T(x,x)<x$ for $x \in ]0,1[$, which then implies Archimedean property directly.}
+\end{enumerate}
+\end{definition}
+
+\begin{example}[Basic T-norms {\cite[Ex.~1.2, p.~19]{Klement2000}}]
+  \begin{itemize}
+    \item \textbf{Minimum ($T_M$):} $T_M(x, y) = \min(x, y)$.
+    This is the strongest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). Every element $x \in [0,1]$ is an idempotent element ($T_M(x,x)=x$). It is not Archimedean (unless interpreted on a trivial interval, as it has non-trivial idempotents). It has no zero divisors and no nilpotent elements other than 0.
+    \item \textbf{Product ($T_P$):} $T_P(x, y) = x \cdot y$.
+    This t-norm is strict Archimedean (\cite[Ex.~2.14(i)]{Klement2000}). It has only $0$ and $1$ as idempotent elements, no nilpotent elements (other than $0$), and no zero divisors (\cite[Ex.~2.2(i)]{Klement2000}).
+    \item \textbf{Łukasiewicz ($T_L$):} $T_L(x, y) = \max(0, x + y - 1)$.
+    This t-norm is nilpotent Archimedean (\cite[Ex.~2.14(i)]{Klement2000}). It has only $0$ and $1$ as idempotent elements. Every $a \in ]0,1[$ is a nilpotent element and also a zero divisor (\cite[Ex.~2.2(i)]{Klement2000}).
+    \item \textbf{Drastic Product ($T_D$):} $T_D(x, y) = \begin{cases} \min(x,y) & \text{if } \max(x,y)=1 \\ 0 & \text{otherwise} \end{cases}$.
+    This is the weakest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). It is Archimedean since $T_D(x,x)=0 < x$ for $x \in ]0,1[$. It has only $0$ and $1$ as idempotent elements. Every $a \in ]0,1[$ is a zero divisor, and also nilpotent (since $a_D^{(2)} = T_D(a, T_D(a,a)) = T_D(a,0) = 0$ for $a<1$). It is not continuous.
+  \end{itemize}
+\end{example}
+
+\subsection{Classification of Continuous T-norms}
+\signal{Add an appendix with upper, lower, left, right continuity.}
+
+Continuous t-norms form a particularly well-structured class, admitting elegant representation theorems. Their study often revolves around whether they are Archimedean.
+
+\subsubsection{Continuous Archimedean T-norms and Generators}
+The structure of continuous Archimedean t-norms is intimately linked to certain functions called generators.
+\begin{definition}[Additive Generator and Pseudo-inverse]
+  An \emph{additive generator} of a t-norm $T$ is a strictly decreasing function $t: [0,1] \to [0,\infty]$ which is right-continuous in $0$ and satisfies $t(1)=0$, such that $T(x,y) = t^{(-1)}(t(x) + t(y))$ for all $(x,y) \in [0,1]^2$, provided $t(x)+t(y) \in \mathrm{Ran}(t) \cup [t(0),\infty]$ (\cite[Def.~3.25, p.~70]{Klement2000}).
+  The function $t^{(-1)}: [0,\infty] \to [0,1]$ is the \emph{pseudo-inverse} of $t$, defined as $t^{(-1)}(y) = \sup \{ x \in [0,1] \mid t(x) > y \}$ (adapted from \cite[Def.~3.2, p.~68 and Cor.~3.3]{Klement2000} for strictly decreasing $t$). \signal{`Ran(t)` denotes the range of $t$, i.e., the set of all values $t(x)$ for $x \in [0,1]$ \cite[p. xvii]{Klement2000}.}
+\end{definition}
+
+\begin{theorem}[Representation of Continuous Archimedean T-norms {\cite[Thm.~5.1, p.~122]{Klement2000}}]
+  A t-norm $T$ is a continuous Archimedean t-norm if and only if it possesses a continuous additive generator $t: [0,1] \to [0,\infty]$. This generator is unique up to a positive multiplicative constant.
+\end{theorem}
+Continuous Archimedean t-norms are further categorized based on the behavior of their generator at $0$:
+\begin{itemize}
+    \item $T$ is \textbf{strict} if its continuous additive generator $t$ satisfies $t(0)=\infty$. This means $T(x,y)>0$ whenever $x,y > 0$. Strict t-norms are strictly monotone on $]0,1]^2$. (\cite[Cor.~3.30(i), p.~88; Def.~2.13(i), p.~42]{Klement2000}).
+    \item $T$ is \textbf{nilpotent} if its continuous additive generator $t$ satisfies $t(0)<\infty$. This implies that for any $x,y \in ]0,1[$, there exists $n$ such that $T(x, \dots, x)$ ($n$ times) is $0$. Every $a \in ]0,1[$ is a nilpotent element. (\cite[Cor.~3.30(ii), p.~88; Def.~2.13(ii), p.~42]{Klement2000}).
+\end{itemize}
+
+\subsubsection{Isomorphism of Continuous Archimedean T-norms}
+The concept of isomorphism reveals a deep structural similarity among t-norms within these classes.
+\begin{definition}[Isomorphic T-norms {\cite[Def.~2.27, p.~51; Prop.~2.28(iv), p.~52]{Klement2000}}]
+  Two t-norms $T_1$ and $T_2$ are \emph{isomorphic} if there exists a strictly increasing bijection $\varphi: [0,1] \to [0,1]$ (an automorphism of the unit interval) such that $T_2(x,y) = \varphi^{-1}(T_1(\varphi(x), \varphi(y)))$ for all $x,y \in [0,1]$.
+\end{definition}
+Isomorphic t-norms share the same algebraic structure, merely operating on rescaled inputs and outputs via $\varphi$. A fundamental result is:
+\begin{proposition}[{\cite[Cor.~5.7, p.~125, referring to Prop.~5.9 and Prop.~5.10]{Klement2000}}]
+  \begin{enumerate}
+      \item Every strict t-norm is isomorphic to the Product t-norm $T_P$.
+      \item Every nilpotent t-norm is isomorphic to the Łukasiewicz t-norm $T_L$.
+  \end{enumerate}
+\end{proposition}
+This implies that, up to isomorphism, there are only two distinct types of continuous Archimedean t-norms: the product type and the Łukasiewicz type.
+
+\subsubsection{General Continuous T-norms and Ordinal Sums}
+Continuous t-norms that are not Archimedean must have non-trivial idempotent elements. These are constructed using ordinal sums.
+\begin{definition}[Ordinal Sum of T-norms {\cite[Def.~3.44, p.~97]{Klement2000}}]
+Let $(T_\alpha)_{\alpha \in A}$ be a family of t-norms and $(]a_\alpha, e_\alpha[)_{\alpha \in A}$ be a family of non-empty, pairwise disjoint open subintervals of $[0,1]$. The t-norm $T$ defined by
+\[
+T(x,y) =
+\begin{cases}
+  a_\alpha + (e_\alpha - a_\alpha) \cdot T_\alpha \left( \frac{x-a_\alpha}{e_\alpha - a_\alpha}, \frac{y-a_\alpha}{e_\alpha - a_\alpha} \right) & \text{if } (x,y) \in [a_\alpha, e_\alpha]^2 \text{ for some } \alpha \in A \\
+  \min(x,y) & \text{otherwise}
+\end{cases}
+\]
+is called the \emph{ordinal sum} of the summands $(a_\alpha, e_\alpha, T_\alpha)$, $\alpha \in A$.
+\end{definition}
+Intuitively, an ordinal sum "glues" copies of the t-norms $T_\alpha$ (scaled to fit the intervals $[a_\alpha, e_\alpha]$) onto the diagonal of the unit square. Outside these "active" regions, the t-norm behaves like the minimum $T_M$. The endpoints $a_\alpha, e_\alpha$ become idempotent elements of $T$.
+
+\begin{theorem}[Representation of Continuous T-norms {\cite[Thm.~5.11, p.~140]{Klement2000}}]
+  A function $T: [0,1]^2 \to [0,1]$ is a continuous t-norm if and only if $T$ is uniquely representable as an ordinal sum of continuous Archimedean t-norms.
+\end{theorem}
+\begin{remark}
+  A continuous t-norm is \emph{ordinally irreducible} if its only ordinal sum representation is $T = ((0,1,T))$. For continuous t-norms, being ordinally irreducible is equivalent to being Archimedean (\cite[Prop.~3.53, p.~99 and context]{Klement2000}). Thus, the "building blocks" in the ordinal sum representation are precisely the continuous Archimedean t-norms (isomorphic to $T_P$ or $T_L$). If the family of subintervals is empty, the ordinal sum is defined as $T_M$.
+\end{remark}
+
+\subsection{Further Examples: Parametric Families of T-norms}
+Beyond the four basic t-norms, several parametric families offer a spectrum of behaviors and are widely used. Their construction often relies on generators.
+\begin{definition}[Multiplicative Generator {\cite[Def.~3.36, p.~91]{Klement2000}}]
+  A \emph{multiplicative generator} $\theta: [0,1] \to [0,1]$ of a t-norm $T$ is a strictly increasing function, right-continuous in $0$, with $\theta(1)=1$, such that $T(x,y) = \theta^{(-1)}(\theta(x) \cdot \theta(y))$, assuming $\theta(x)\cdot\theta(y)$ is in a suitable range. \signal{This is a simplified statement; the book's definition includes range conditions.}
+\end{definition}
+\begin{remark}[Duality of Generators {\cite[Rem.~3.34, p.~90]{Klement2000}}]
+  If $t(x)$ is an additive generator, then $\theta(x) = e^{-c \cdot t(x)}$ (for some $c>0$) is a multiplicative generator, and if $\theta(x)$ is a multiplicative generator, then $t(x) = -c \cdot \log(\theta(x))$ is an additive generator.
+\end{remark}
+
+\begin{example}[Parametric Families of T-norms (selected from {\cite[Chapter 4]{Klement2000}})]
+  \begin{itemize}
+    \item \textbf{Schweizer-Sklar T-norms ($T_\lambda^{SS}$), $\lambda \in [-\infty, \infty]$:}
+    $T_\lambda^{SS}(x,y) = (\max(0, x^\lambda + y^\lambda - 1))^{1/\lambda}$.
+    Includes $T_M (\lambda=-\infty)$, $T_P (\lambda \to 0)$, $T_L (\lambda=1)$, $T_D (\lambda=\infty)$. Additive generator $t_\lambda^{SS}(x) = \frac{1-x^\lambda}{\lambda}$ for $\lambda \neq 0$.
+    \item \textbf{Frank T-norms ($T_\lambda^F$), $\lambda \in [0, \infty]$:}
+    $T_\lambda^F(x,y) = \log_\lambda \left(1 + \frac{(\lambda^x-1)(\lambda^y-1)}{\lambda-1}\right)$ for $\lambda \in ]0,\infty[, \lambda \neq 1$.
+    Includes $T_M (\lambda=0)$, $T_P (\lambda=1)$, $T_L (\lambda=\infty)$. All $T_\lambda^F$ for $\lambda \in ]0,\infty]$ are continuous Archimedean. Additive generator $t_\lambda^F(x) = -\log \frac{\lambda^x-1}{\lambda-1}$.
+    \item \textbf{Yager T-norms ($T_p^Y$), $p \in [0, \infty]$:} \signal{The book uses $\lambda$ for Yager, but $p$ is more common in literature to avoid clash with Frank's parameter.}
+    $T_p^Y(x,y) = \max(0, 1 - ((1-x)^p + (1-y)^p)^{1/p})$ for $p \in ]0,\infty[$.
+    Includes $T_D (p \to 0)$, $T_L (p=1)$, $T_M (p=\infty)$. All $T_p^Y$ for $p \in ]0,\infty[$ are continuous nilpotent Archimedean. Additive generator $t_p^Y(x) = (1-x)^p$.
+  \end{itemize}
+  \signal{Many other families exist, like Hamacher, Dombi, Aczél-Alsina, Sugeno-Weber, Mayor-Torrens. Refer to \cite[Table 4.1, p.~119]{Klement2000} and Appendix A therein for a comprehensive list and properties.}
+\end{example}
+
+\subsection{Non-Continuous T-norms and Left-Continuity}
+While continuous t-norms are well-classified, not all t-norms are continuous.
+The \textbf{drastic product $T_D$} is a key example of a non-continuous t-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable when the other is fixed (\cite[Rem.~1.21(i), Prop.~1.22]{Klement2000}). However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).
+
+The \textbf{nilpotent minimum $T^{nM}$} (\cite[Rem.~1.21(i), p.~16]{Klement2000}) is defined as:
+  \[
+  T^{nM}(x,y) =
+  \begin{cases}
+    0 & \text{if } x+y \leq 1 \\
+    \min(x,y) & \text{otherwise.}
+  \end{cases}
+  \]
+This t-norm is lower semicontinuous, which for monotone functions implies it is left-continuous in each variable (\cite[Prop.~1.22, p.~17]{Klement2000}). It is not continuous (specifically, not right-continuous at points on the line $x+y=1$ when approached from $x+y>1$).
+
+The \textbf{Krause t-norm $T^K$} (\cite[App.~B.1, Thm.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is stated to be "neither left- nor right-continuous, but has a continuous diagonal section." This highlights that t-norms can exhibit quite irregular continuity behavior.
+
+\begin{remark}[Importance of Left-Continuity]
+For non-continuous t-norms, the property of \emph{left-continuity} (in each variable) is often a desirable, or even required, condition in certain applications, particularly in fuzzy logic. For instance, in residuum-based logics, if a t-norm $T$ is left-continuous, its corresponding residuated implication $I(x,y) = \sup\{z \in [0,1] \mid T(x,z) \le y\}$ exhibits well-behaved properties. Specifically, a commutative, integral lattice-ordered monoid based on $T$ is residuated if and only if $T$ is left-continuous (\cite[Prop.~2.47, p.~63]{Klement2000}). This ensures that the implication adequately captures deductive reasoning. While the intuitive notion that "a microscopic decrease of the truth degree of a conjunct should not macroscopically decrease the truth degree of the conjunction" points towards continuity, left-continuity is a weaker but often sufficient condition for preserving logical coherence in such frameworks.
+\end{remark}
