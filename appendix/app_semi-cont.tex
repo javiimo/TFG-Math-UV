@@ -1,0 +1,113 @@
+\chapter{Continuity and Semi-continuity in T-norms}\label{app:semi-continuity}
+
+
+T-norms are real-valued functions of two variables defined over the compact domain $[0,1]^2$ with values in $[0,1]$, and they satisfy the monotonicity property (that is, $T(x,y) \le T(x',y')$ if $x \le x'$ and $y \le y'$). These properties greatly simplify the study of their continuity. This appendix presents key results from analysis concerning the continuity and semi-continuity of t-norms\footnote{These results also apply to t-conorms, as they do not depend on one or zero identity properties.}.
+
+\begin{notation}{Equivalence of Norms on $\R^n$}
+    On a finite-dimensional vector space (like $\mathbb{R}^n$), all norms are equivalent. This is, given any two norms $\|\cdot\|_a$ and $\|\cdot\|_b$ on $\mathbb{R}^n$ satisfy
+
+ $$
+ \exists c, C > 0 \text{ such that } \forall x \in \mathbb{R}^n, \quad c\|x\|_a \leq \|x\|_b \leq C\|x\|_a.
+ $$
+ Since we are working on $\R^2$, the statements are equal for any given norm and we will denote it by \say{$\|\cdot\|$}.
+\end{notation}
+
+\begin{definition}[Continuity]
+A t-norm $T$ is \emph{continuous at a point} $(x_0, y_0) \in [0,1]^2$ if:
+\[
+\forall \epsilon > 0, \exists \delta > 0 : \forall (x,y) \in [0,1]^2, \|(x,y) - (x_0,y_0)\| < \delta \implies |T(x,y) - T(x_0,y_0)| < \epsilon
+\]
+\end{definition}
+
+Intuitively, this means that the value $T(x,y)$ can be made arbitrarily close to $T(x_0,y_0)$ by choosing $(x,y)$ sufficiently close to $(x_0,y_0)$. A t-norm $T$ is \emph{continuous} if it is continuous at every point in its domain $[0,1]^2$.
+
+\begin{definition}[Uniform Continuity]
+A t-norm $T$ is \emph{uniformly continuous} if:
+\[
+\forall \epsilon > 0, \exists \delta > 0 : \forall (x,y),(x',y') \in [0,1]^2, \|(x,y) - (x',y')\| < \delta \implies |T(x,y) - T(x',y')| < \epsilon
+\]
+\end{definition}
+The key difference from pointwise continuity is that $\delta$ depends only on $\epsilon$, not on the specific location in the domain.
+\begin{remark}
+    Since the domain $[0,1]^2$ of a t-norm is a compact set, a t-norm $T$ is continuous if and only if it is uniformly continuous \cite[p.~30]{Klement2000}.
+\end{remark}
+
+Due to monotonicity, a t-norm's continuity over its 2D domain can be verified by checking continuity along its one-dimensional sections:
+\begin{proposition}[Continuity via Components for Monotone Functions {\cite[Prop.~1.19]{Klement2000}}]
+A t-norm $T$ (or any non-decreasing function on $[0,1]^2$) is continuous if and only if it is continuous in each variable separately. That is, for all fixed $x_0, y_0 \in [0,1]$, the functions $T(x_0, \cdot)$ and $T(\cdot, y_0)$ are continuous.
+\end{proposition}
+
+\begin{remark}
+Because of the commutativity, for a t-norm
+its continuity is equivalent to its continuity in the first component.\cite[p.~16]{Klement2000}
+\end{remark}
+
+Many theoretical contexts such as fuzzy logic require only less restrictive properties than continuity, such as left-continuity or upper semi-continuity. The following sections present these definitions and derive their relationships using the properties of t-norms.
+
+
+\begin{definition}[Semi-continuity for T-norms {\cite[Def.~1.20]{Klement2000}}]
+    A t-norm $T$ is:
+    \begin{itemize}
+        \item \emph{Lower semi-continuous (LSC) at $(x_0,y_0)$} if:
+        \[
+        \forall \epsilon > 0, \exists \delta > 0 :\, T(x,y) > T(x_0,y_0) - \epsilon \quad \forall (x,y) \in \left(]x_0 - \delta, x_0] \times ]y_0 - \delta, y_0]\right) \cap [0,1]^2
+        \]
+        \item \emph{Upper semi-continuous (USC) at $(x_0,y_0)$} if:
+        \[
+        \forall \epsilon > 0, \exists \delta > 0 :\, T(x,y) < T(x_0,y_0) + \epsilon \quad \forall (x,y) \in \left([x_0, x_0 + \delta[ \times [y_0, y_0 + \delta[\right) \cap [0,1]^2
+        \]
+    \end{itemize}
+    A t-norm is LSC (USC) if it is LSC (USC) at every point in $[0,1]^2$.
+    \end{definition}
+    \begin{notation}{Topological semi-continuity}
+        The definition above is only valid in metric spaces such as $\R^2$. The topological definitions are: $$T(x_0, y_0) \le \liminf_{(x,y) \to (x_0,y_0)} T(x,y) \text{ for LSC}$$   $$\text{and } T(x_0, y_0) \ge \limsup_{(x,y) \to (x_0,y_0)} T(x,y)\text{ for USC}$$
+    \end{notation}
+  
+    Intuitively, lower semi-continuity means that the function's value does not have an isolated peak relative to its surroundings. More precisely, values $T(x,y)$ approaching from the \emph{bottom-left quadrant} are not significantly lower than $T(x_0,y_0)$. If there's a discontinuity, $T(x_0,
+    y_0)$ is at the \emph{bottom} of an upward jump. Conversely, upper 
+    semi-continuity means $T(x_0,y_0)$ is at the \emph{top} of a downward 
+    jump.
+
+\begin{definition}[One-Sided Continuity]
+A t-norm $T$ is:
+\begin{itemize}
+    \item \emph{Left-continuous in its first component at $(x_0,y_0)$} if:
+    \[
+    \forall \epsilon > 0, \exists \delta > 0 : \, |T(x,y_0) - T(x_0,y_0)| < \epsilon \quad \forall x \in ]x_0-\delta, x_0]
+    \]
+    \item \emph{Right-continuous in its first component at $(x_0,y_0)$} if:
+    \[
+    \forall \epsilon > 0, \exists \delta > 0 :\, |T(x,y_0) - T(x_0,y_0)| < \epsilon \quad \forall x \in [x_0, x_0+\delta[, |T(x,y_0) - T(x_0,y_0)| < \epsilon
+    \]
+\end{itemize}
+For the second component the definition is completely analogous.
+$T$ is \emph{left-continuous} (or \emph{right-continuous}) if it is left-continuous (or right-continuous) in both components.
+\end{definition}
+
+\begin{remark}
+    Let $T$ be a t-norm:
+      \begin{align*}
+        T \text{ continuous } &\Leftrightarrow T \text{ lower semi-continuous and upper semi-continuous} \\
+        T \text{ continuous } &\Leftrightarrow T \text{ left-continuous and right-continuous}
+      \end{align*}
+\end{remark}
+
+
+For general functions, semi-continuity and one-sided continuity are unrelated concepts, as semi-continuity is related to the function's range while one-sided continuity deals with domain limits. However, for monotone functions like t-norms, these properties are equivalent. This is particularly useful because one-sided continuity is often easier to establish or analyze from the construction of a t-norm.\\
+\begin{proposition}[{\cite[Prop.~1.22]{Klement2000}}]
+For a t-norm $T$:
+\begin{itemize}
+    \item $T$ is lower semi-continuous if and only if $T$ is left-continuous.
+    \item $T$ is upper semi-continuous if and only if $T$ is right-continuous.
+\end{itemize}
+\end{proposition}
+
+For Archimedean t-norms (those for which $T(x,x) < x$ for all $x \in ]0,1[$), an even stronger relationship between one-sided continuity and full continuity exists. This class of t-norms is fundamental in many applications.
+\begin{proposition}[{\cite[Prop.~2.16]{Klement2000}}]
+  For an Archimedean t-norm $T$, the following are equivalent:
+  \begin{enumerate}
+      \item[(i)] $T$ is left-continuous.
+      \item[(ii)] $T$ is continuous.
+  \end{enumerate}
+\end{proposition}
+This result significantly simplifies the verification of continuity for Archimedean t-norms. If such a t-norm is known to be left-continuous (e.g., due to properties of its additive or multiplicative generator, which are often easier to analyze for one-sided continuity), it is automatically fully continuous. This is a non-trivial property that does not hold for general monotone functions.
