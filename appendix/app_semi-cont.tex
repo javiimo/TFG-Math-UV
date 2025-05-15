@@ -135,9 +135,102 @@ The t-norm $T$ is then constructed from its additive generator $t$ using the for
 \end{equation}
 where $t^{(-1)}: [0, t(0)] \to [0,1]$ is the pseudo-inverse of $t$, defined as $t^{(-1)}(u) = \sup \{z \in [0,1] \mid t(z) \ge u \}$ (or, due to strict decrease and continuity, often simply the standard inverse on the range of $t$). The inclusion of $\min(t(0), \dots)$ in Equation~\eqref{eq:additive_generator_t_norm} ensures that the argument of $t^{(-1)}$ remains within its domain $[0, t(0)]$.
 
+\begin{notation}{Multiplicative Generators}
+    Parallel to additive generators, continuous Archimedean t-norms can also be represented using multiplicative generators. The key differences are:
+    \begin{itemize}
+        \item A multiplicative generator $\theta$ is strictly \emph{increasing} (rather than decreasing)
+        \item $\theta(1)=1$ (rather than $t(1)=0$)
+        \item For strict t-norms, $\theta(0)=0$ (rather than $t(0)=\infty$)
+        \item For nilpotent t-norms, $\theta(0) \in ]0,1[$ (rather than $t(0)$ finite)
+    \end{itemize}
+    The relationship between both types of generators is given by $\theta(x) = e^{-t(x)}$ and $t(x) = -\log(\theta(x))$.
+    \end{notation}
+
 The value $t(0)$ is particularly significant as it determines the nature of the continuous Archimedean t-norm:
 \begin{itemize}
     \item If $t(0) = \infty$, then $\min(t(0), t(x) + t(y)) = t(x) + t(y)$, and the resulting t-norm $T$ is \textbf{strict} (e.g., for $t(x) = -\log(x)$, $T(x,y) = xy$, the product t-norm).
     \item If $t(0)$ is finite (i.e., $t(0) < \infty$), the resulting t-norm $T$ is \textbf{nilpotent} (e.g., for $t(x) = 1-x$, $T(x,y) = \max(0, x+y-1)$, the Łukasiewicz t-norm).
 \end{itemize}
 This representation via additive generators, as detailed in \cite[Sec.~3.2, Def.~3.25]{Klement2000}, not only simplifies the study of continuous Archimedean t-norms but also provides a constructive mechanism, highlighting the deep connection between their algebraic properties and the analytical properties of their associated generator functions.
+
+
+\subsection{Representation of Continuous Archimedean T-norms}
+A fundamental result, often attributed to Ling (1965) based on earlier work for topological semigroups by Mostert and Shields (1957), states that every continuous Archimedean t-norm possesses an additive generator \cite[Thm.~5.1]{Klement2000}. Specifically:
+\textit{A function $T:^2 \to$ is a continuous Archimedean t-norm if and only if there exists a continuous, strictly decreasing function $t: \to [0, \infty]$ with $t(1)=0$, such that $T(x,y) = t^{(-1)}(\min(t(0), t(x)+t(y)))$. This generator $t$ is unique up to a positive multiplicative constant.}
+
+This theorem is crucial because it guarantees that the entire class of continuous Archimedean t-norms can be characterized and constructed using these generator functions. Consequently, through the equivalence, they can also be represented by multiplicative generators.
+
+\subsection{Constructing Families of T-norms from Generators}
+Generators provide a powerful method for constructing parametric families of t-norms. The general approach involves:
+\begin{enumerate}
+    \item Starting with a known (prototypical) generator function. For example:
+    \begin{itemize}
+        \item $t_L(x) = 1-x$, the additive generator for the Łukasiewicz t-norm ($T_L$).
+        \item $t_P(x) = -\log x$, the additive generator for the Product t-norm ($T_P$).
+    \end{itemize}
+    \item Introducing one or more parameters (often denoted by $\lambda, p, \dots$) into the structure of this generator function to create a parameterized generator $t_\lambda(x)$.
+    \item Applying the construction formula (Equation~\eqref{eq:additive_generator_t_norm} or \eqref{eq:multiplicative_generator_t_norm}) with $t_\lambda(x)$ (or its corresponding $\theta_\lambda(x)$) to obtain a parametric family of t-norms $T_\lambda(x,y)$.
+\end{enumerate}
+The properties of the resulting t-norm family (e.g., whether its members are strict or nilpotent, their continuity with respect to the parameter) depend on how the parameter affects $t_\lambda(0)$ and the overall shape of $t_\lambda$. Many well-known t-norm families are derived in this manner.
+
+\subsection{Examples of T-norm Families}
+Below are some prominent families of continuous Archimedean t-norms, along with their definitions and key generator properties. These are based on the comprehensive Appendix A in \cite{Klement2000}.
+
+\textbf{1. Schweizer-Sklar T-norms} ($T_\lambda^{SS}$) for $\lambda \in [-\infty, \infty]$ \cite[A.6]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^{SS}(x,y) = \begin{cases} T_M(x,y) & \text{if } \lambda = -\infty \\ T_P(x,y) & \text{if } \lambda = 0 \\ T_D(x,y) & \text{if } \lambda = \infty \\ (\max(x^\lambda + y^\lambda - 1, 0))^{1/\lambda} & \text{if } \lambda \in ]-\infty, 0[ \cup ]0, \infty[ \end{cases}$
+    \item Additive generator (for $\lambda \in ]-\infty, 0[ \cup ]0, \infty[$): $t_\lambda^{SS}(x) = \frac{1-x^\lambda}{\lambda}$ (if $\lambda=0$, $t_0^{SS}(x) = -\log x$).
+    \item $t_\lambda^{SS}(0) = \infty$ for $\lambda \in ]-\infty, 0]$, hence $T_\lambda^{SS}$ is strict.
+    \item $t_\lambda^{SS}(0) = \frac{1}{\lambda} < \infty$ for $\lambda \in ]0, \infty[$, hence $T_\lambda^{SS}$ is nilpotent. ($T_\infty^{SS} = T_D$ is not Archimedean).
+\end{itemize}
+
+\textbf{2. Hamacher T-norms} ($T_\lambda^H$) for $\lambda \in [0, \infty]$ \cite[A.4]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^H(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = \infty \text{ and } (x,y) \neq (0,0) \\ 0 & \text{if } \lambda = \infty \text{ and } x=y=0 \\ \frac{xy}{\lambda + (1-\lambda)(x+y-xy)} & \text{if } \lambda \in [0, \infty[ \end{cases}$
+    (Note: $T_0^H = T_P$)
+    \item Additive generator (for $\lambda \in [0, \infty[$): $t_\lambda^H(x) = \log\left(\frac{\lambda + (1-\lambda)x}{x}\right)$ (if $\lambda=0$, $t_0^H(x)=\frac{1-x}{x}$).
+    \item $t_\lambda^H(0) = \infty$ for all $\lambda \in [0, \infty[$, hence $T_\lambda^H$ is strict.
+\end{itemize}
+
+\textbf{3. Frank T-norms} ($T_\lambda^F$) for $\lambda \in [0, \infty]$ \cite[A.3]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^F(x,y) = \begin{cases} T_M(x,y) & \text{if } \lambda = 0 \\ T_P(x,y) & \text{if } \lambda = 1 \\ T_L(x,y) & \text{if } \lambda = \infty \\ \log_\lambda \left(1 + \frac{(\lambda^x-1)(\lambda^y-1)}{\lambda-1}\right) & \text{if } \lambda \in ]0, 1[ \cup ]1, \infty[ \end{cases}$
+    \item Additive generator (for $\lambda \in ]0, 1[ \cup ]1, \infty[$): $t_\lambda^F(x) = \log_\lambda \left(\frac{\lambda^x-1}{\lambda-1}\right)$. (For $\lambda=1$, $t_1^F(x) = -\log x$; for $\lambda=\infty$, $t_\infty^F(x) = 1-x$).
+    \item $t_\lambda^F(0) = \infty$ for $\lambda \in [0, \infty[$, hence $T_\lambda^F$ is strict.
+    \item $t_\infty^F(0) = 1 < \infty$, hence $T_\infty^F = T_L$ is nilpotent.
+\end{itemize}
+
+\textbf{4. Yager T-norms} ($T_\lambda^Y$) for $\lambda \in [0, \infty]$ \cite[A.8]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^Y(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = 0 \\ T_M(x,y) & \text{if } \lambda = \infty \\ \max\left(1 - ((1-x)^\lambda + (1-y)^\lambda)^{1/\lambda}, 0\right) & \text{if } \lambda \in ]0, \infty[ \end{cases}$
+    (Note: $T_1^Y = T_L$)
+    \item Additive generator (for $\lambda \in ]0, \infty[$): $t_\lambda^Y(x) = (1-x)^\lambda$.
+    \item $t_\lambda^Y(0) = 1 < \infty$ for all $\lambda \in ]0, \infty[$, hence $T_\lambda^Y$ is nilpotent.
+\end{itemize}
+
+\textbf{5. Dombi T-norms} ($T_\lambda^D$) for $\lambda \in [0, \infty]$ \cite[A.2]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^D(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = 0 \\ T_M(x,y) & \text{if } \lambda = \infty \\ \frac{1}{1 + \left(\left(\frac{1}{x}-1\right)^\lambda + \left(\frac{1}{y}-1\right)^\lambda\right)^{1/\lambda}} & \text{if } \lambda \in ]0, \infty[ \text{ (for } x,y > 0) \end{cases}$
+    ($T(x,0)=T(0,x)=0$ for $x \in$). (Note: $T_1^D = T_H$ with parameter $\gamma=1$, the Hamacher product)
+    \item Additive generator (for $\lambda \in ]0, \infty[$): $t_\lambda^D(x) = \left(\frac{1-x}{x}\right)^\lambda$.
+    \item $t_\lambda^D(0) = \infty$ for all $\lambda \in ]0, \infty[$, hence $T_\lambda^D$ is strict.
+\end{itemize}
+
+\textbf{6. Sugeno-Weber T-norms} ($T_\lambda^{SW}$) for $\lambda \in [-1, \infty]$ \cite[A.7]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^{SW}(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = -1 \\ T_P(x,y) & \text{if } \lambda = \infty \\ \max\left(\frac{x+y-1+\lambda xy}{1+\lambda}, 0\right) & \text{if } \lambda \in ]-1, \infty[ \end{cases}$
+    (Note: $T_0^{SW} = T_L$)
+    \item Additive generator (for $\lambda \in ]-1, \infty[$): $t_\lambda^{SW}(x) = 1 - \frac{\log(1+\lambda x)}{\log(1+\lambda)}$. (For $\lambda=0$, $t_0^{SW}(x)=1-x$; for $\lambda \to \infty$, $t_\infty^{SW}(x)=-\log x$).
+    \item $t_\lambda^{SW}(0) = 1 < \infty$ for $\lambda \in ]-1, \infty[$, hence $T_\lambda^{SW}$ is nilpotent.
+    \item $t_\infty^{SW}(0) = \infty$, hence $T_\infty^{SW} = T_P$ is strict.
+\end{itemize}
+
+\textbf{7. Aczél-Alsina T-norms} ($T_\lambda^{AA}$) for $\lambda \in [0, \infty]$ \cite[A.1]{Klement2000}
+\begin{itemize}
+    \item $T_\lambda^{AA}(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = 0 \\ T_M(x,y) & \text{if } \lambda = \infty \\ e^{-\left((-\log x)^\lambda + (-\log y)^\lambda\right)^{1/\lambda}} & \text{if } \lambda \in ]0, \infty[ \end{cases}$
+    (Note: $T_1^{AA} = T_P$)
+    \item Additive generator (for $\lambda \in ]0, \infty[$): $t_\lambda^{AA}(x) = (-\log x)^\lambda$.
+    \item $t_\lambda^{AA}(0) = \infty$ for all $\lambda \in ]0, \infty[$, hence $T_\lambda^{AA}$ is strict.
+\end{itemize}
+
+This overview demonstrates the utility of generators in unifying the understanding and construction of various t-norm families, clearly delineating their fundamental characteristics through the properties of these generating functions. clearly delineating their fundamental characteristics through the properties of these generating functions.
