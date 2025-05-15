@@ -152,19 +152,22 @@ There are many results like all t-norms are between the weak and the min, all t-
 \noindent\rule{\textwidth}{2pt}
 
 
-\subsection{Basic Properties and Examples of T-norms}
-The set of all t-norms can be partially ordered, which helps in their classification.
+\subsection{Classification of T-norms}
+The first and most straight forward way to classify them is by defining the following partial order on the set of all t-norms. 
 \begin{definition}[Weaker/Stronger t-norm {\cite[Def.~1.4]{Klement2000}}]
   Given two t-norms $T_1$ and $T_2$, $T_1$ is said to be \emph{weaker} than $T_2$ (denoted $T_1 \leq T_2$) if $T_1(x,y) \leq T_2(x,y) \forall x,y \in [0,1]$.
   Equivalently, $T_2$ is said to be \emph{stronger} than $T_1$.
 \end{definition}
-\begin{remark}
-  The relation $\leq$ defines a partial order on the set of all t-norms. It's a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ is the drastic product and $T_M$ is the minimum t-norm (\cite[Rem.~1.5]{Klement2000}).
-\end{remark}
+
+The interpretation is that a weaker t-norm can be seen as a stricter and more pessimistic intersection (conjunction in the fuzzy logic derived).
+
+It's a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ is the drastic product and $T_M$ is the minimum t-norm  (\cite[Rem.~1.5]{Klement2000}).
+
+Another important aspect is that it is not a total order: there are pairs of t-norms where none of them is weaker than the other. 
+
+
+
 In order to classify t-norms further, the following algebraic properties will be needed \cite[Def.~2.1]{Klement2000}:
-\begin{definition}[Idempotent Element]
-Let $T$ be a t-norm. An element $a \in [0,1]$ is an \emph{idempotent element} of $T$ if $T(a,a)=a$. The elements $0$ and $1$ are always trivial idempotent elements.
-\end{definition}
 
 \begin{definition}[Nilpotent Element]
 Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{nilpotent element} of $T$ if there exists $n \in \mathbb{N}$ such that $a_T^{(n)} = 0$, where $a_T^{(n)} = T(a, a_T^{(n-1)})$ with $a_T^{(1)}=a$.
@@ -174,28 +177,37 @@ Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{nilpotent element} of $
 Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{zero divisor} of $T$ if there exists $b \in ]0,1[$ such that $T(a,b)=0$.
 \end{definition}
 
-\begin{definition}[Archimedean T-norm]
-A t-norm $T$ is \emph{Archimedean} if for each $(x,y) \in ]0,1[^2$ there is an $n \in \mathbb{N}$ with $x_T^{(n)} < y$ (\cite[Def.~2.9]{Klement2000}). 
+\begin{definition}[Idempotent Element]
+  Let $T$ be a t-norm. An element $a \in [0,1]$ is an \emph{idempotent element} of $T$ if $T(a,a)=a$. The elements $0$ and $1$ are always trivial idempotent elements.
+  \end{definition}
+  
 
-Equivalently, a continuous t-norm $T$ is Archimedean if and only if $T(x,x) < x \forall x \in ]0,1[$ (\cite[Thm.~2.12]{Klement2000}). 
+\begin{definition}[Archimedean T-norm]
+A t-norm $T$ is \emph{Archimedean} if for each $(x,y) \in ]0,1[^2$ there is an $n \in \mathbb{N}$ with $x_T^{(n)} < y$. \cite[Def.~2.9]{Klement2000}  
+
+In particular, a \textit{continuous} t-norm $T$ is Archimedean if and only if $T(x,x) < x \forall x \in ]0,1[$, i.e. it doesn't have non-trivial idempotent elements. \cite[Thm.~2.12]{Klement2000}
 \end{definition}
 
-\begin{example}[Basic T-norms {\cite[Ex.~1.2]{Klement2000}}]
-  
+\begin{example}[Basic T-norms {\cite[Ex.~1.2]{Klement2000}}]\label{ex:basic_tnorms}
+\signal{  The following t-norms are the most relevant ones due to their particular properties.} They can be ordered: $T_D\leq T_L\leq T_P\leq T_M$.
   \begin{itemize}
-    \item \textbf{Minimum ($T_M$):} $T_M(x, y) = \min(x, y)$.
-    This is the strongest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). Every element $x \in [0,1]$ is an idempotent element ($T_M(x,x)=x$). It is not Archimedean (unless interpreted on a trivial interval, as it has non-trivial idempotents). It has no zero divisors and no nilpotent elements other than 0.
-    \item \textbf{Product ($T_P$):} $T_P(x, y) = x \cdot y$.
+    \item \textbf{Minimum ($T_M$):} 
+        This is the strongest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). Every element is idempotent (indeed it is the only t-norm satisfying that \cite), therefore it is not Archimedean. It has no zero divisors and no nilpotent elements other than 0.
+
+    \[T_M(x, y) = \min(x, y) \quad S_M(x, y) = \max(x, y)
+\]
+    \item \textbf{Product ($T_P$):} 
     This t-norm is strict Archimedean (\cite[Ex.~2.14(i)]{Klement2000}). It has only $0$ and $1$ as idempotent elements, no nilpotent elements (other than $0$), and no zero divisors (\cite[Ex.~2.2(i)]{Klement2000}).
-    \item \textbf{Łukasiewicz ($T_L$):} $T_L(x, y) = \max(0, x + y - 1)$.
+    \[T_P(x, y) = x \cdot y \quad S_P(x, y) = x + y - x \cdot y\]
+    \item \textbf{Łukasiewicz ($T_L$):} 
     This t-norm is nilpotent Archimedean (\cite[Ex.~2.14(i)]{Klement2000}). It has only $0$ and $1$ as idempotent elements. Every $a \in ]0,1[$ is a nilpotent element and also a zero divisor (\cite[Ex.~2.2(i)]{Klement2000}).
-    \item \textbf{Drastic Product ($T_D$):} $T_D(x, y) = \begin{cases} \min(x,y) & \text{if } \max(x,y)=1 \\ 0 & \text{otherwise} \end{cases}$.
-    This is the weakest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). It is Archimedean since $T_D(x,x)=0 < x$ for $x \in ]0,1[$. It has only $0$ and $1$ as idempotent elements. Every $a \in ]0,1[$ is a zero divisor, and also nilpotent (since $a_D^{(2)} = T_D(a, T_D(a,a)) = T_D(a,0) = 0$ for $a<1$). It is not continuous.
+    \[T_L(x, y) = \max(0, x + y - 1) \quad S_L(x, y) = \min(1, x + y)\]
+    \item \textbf{Drastic Product ($T_D$):} This is the weakest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). It is Archimedean since $T_D(x,x)=0 < x$ for $x \in ]0,1[$. It has only $0$ and $1$ as idempotent elements. Every $a \in ]0,1[$ is a zero divisor, and also nilpotent (since $a_D^{(2)} = T_D(a, T_D(a,a)) = T_D(a,0) = 0$ for $a<1$). It is not continuous.
+    \[T_D(x, y) = \begin{cases} \min(x,y) & \text{if } \max(x,y)=1 \\ 0 & \text{otherwise} \end{cases} \quad S_D(x, y) = \begin{cases} \max(x,y) & \text{if } \min(x,y)=0 \\ 1 & \text{otherwise} \end{cases}\]
   \end{itemize}
 \end{example}
 
 \subsection{Classification of Continuous T-norms}
-\signal{Add an appendix with upper, lower, left, right continuity.}
 
 Continuous t-norms form a particularly well-structured class, admitting elegant representation theorems. Their study often revolves around whether they are Archimedean.
 
