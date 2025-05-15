@@ -1,6 +1,7 @@
-\chapter{Continuity and Semi-continuity in T-norms}\label{app:semi-continuity}
+\chapter{Results from Analysis for T-norms}
 
-
+\section{Continuity of T-norms}
+\label{app:cont_tnorms}
 T-norms are real-valued functions of two variables defined over the compact domain $[0,1]^2$ with values in $[0,1]$, and they satisfy the monotonicity property (that is, $T(x,y) \le T(x',y')$ if $x \le x'$ and $y \le y'$). These properties greatly simplify the study of their continuity. This appendix presents key results from analysis concerning the continuity and semi-continuity of t-norms\footnote{These results also apply to t-conorms, as they do not depend on one or zero identity properties.}.
 
 \begin{notation}{Equivalence of Norms on $\R^n$}
@@ -41,6 +42,9 @@ A t-norm $T$ (or any non-decreasing function on $[0,1]^2$) is continuous if and 
 Because of the commutativity, for a t-norm
 its continuity is equivalent to its continuity in the first component.\cite[p.~16]{Klement2000}
 \end{remark}
+
+\section{Semi-continuity of T-norms}
+\label{app:semicont-tnorms}
 
 Many theoretical contexts such as fuzzy logic require only less restrictive properties than continuity, such as left-continuity or upper semi-continuity. The following sections present these definitions and derive their relationships using the properties of t-norms.
 
@@ -111,3 +115,29 @@ For Archimedean t-norms (those for which $T(x,x) < x$ for all $x \in ]0,1[$), an
   \end{enumerate}
 \end{proposition}
 This result significantly simplifies the verification of continuity for Archimedean t-norms. If such a t-norm is known to be left-continuous (e.g., due to properties of its additive or multiplicative generator, which are often easier to analyze for one-sided continuity), it is automatically fully continuous. This is a non-trivial property that does not hold for general monotone functions.
+
+\section{Generators}
+\label{app:generators_tnorms}
+Families of t-norms can be elegantly characterized and constructed through the concept of generators. 
+These representations emerged from studying functional equations, particularly the associativity equation
+ $T(x, T(y,z)) = T(T(x,y),z)$. The study of this equation began with N. H. Abel's work in the 19th century. J. Aczél later advanced the theory through his research on functional equations. Important insights also came from P. S. Mostert, A. L. Shields, and C. H. Ling's work on topological semigroups \cite[Sec.~5.1]{Klement2000}. Though the theory behind functional equations and topological semigroups is beyond the scope of this work, these fields were essential in developing the theory of t-norm generators.\\
+
+The core idea of a generator is to transform the t-norm operation on $[0,1]$ into a simpler arithmetic operation on a different domain, via a strictly monotonic function. For continuous Archimedean t-norms, the additive generator provides such a framework.
+
+An \textbf{additive generator} of a t-norm $T$ is a strictly decreasing function $t: [0,1] \to [0, \infty]$ such that:
+\begin{enumerate}
+    \item $t(1) = 0$.
+    \item $t$ is right-continuous at $0$, i.e., $t(0) = \lim_{x \to 0^+} t(x)$.
+\end{enumerate}
+The t-norm $T$ is then constructed from its additive generator $t$ using the formula:
+\begin{equation} \label{eq:additive_generator_t_norm}
+    T(x,y) = t^{(-1)}( \min(t(0), t(x) + t(y)) )
+\end{equation}
+where $t^{(-1)}: [0, t(0)] \to [0,1]$ is the pseudo-inverse of $t$, defined as $t^{(-1)}(u) = \sup \{z \in [0,1] \mid t(z) \ge u \}$ (or, due to strict decrease and continuity, often simply the standard inverse on the range of $t$). The inclusion of $\min(t(0), \dots)$ in Equation~\eqref{eq:additive_generator_t_norm} ensures that the argument of $t^{(-1)}$ remains within its domain $[0, t(0)]$.
+
+The value $t(0)$ is particularly significant as it determines the nature of the continuous Archimedean t-norm:
+\begin{itemize}
+    \item If $t(0) = \infty$, then $\min(t(0), t(x) + t(y)) = t(x) + t(y)$, and the resulting t-norm $T$ is \textbf{strict} (e.g., for $t(x) = -\log(x)$, $T(x,y) = xy$, the product t-norm).
+    \item If $t(0)$ is finite (i.e., $t(0) < \infty$), the resulting t-norm $T$ is \textbf{nilpotent} (e.g., for $t(x) = 1-x$, $T(x,y) = \max(0, x+y-1)$, the Łukasiewicz t-norm).
+\end{itemize}
+This representation via additive generators, as detailed in \cite[Sec.~3.2, Def.~3.25]{Klement2000}, not only simplifies the study of continuous Archimedean t-norms but also provides a constructive mechanism, highlighting the deep connection between their algebraic properties and the analytical properties of their associated generator functions.
