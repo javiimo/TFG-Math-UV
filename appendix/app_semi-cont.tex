@@ -116,67 +116,66 @@ For Archimedean t-norms (those for which $T(x,x) < x$ for all $x \in ]0,1[$), an
 \end{proposition}
 This result significantly simplifies the verification of continuity for Archimedean t-norms. If such a t-norm is known to be left-continuous (e.g., due to properties of its additive or multiplicative generator, which are often easier to analyze for one-sided continuity), it is automatically fully continuous. This is a non-trivial property that does not hold for general monotone functions.
 
-\section{Generators}
+\section{Generators and continuous Archimedean T-norms}
 \label{app:generators_tnorms}
-Families of t-norms can be elegantly characterized and constructed through the concept of generators. 
+Continuous archimedean t-norms can be elegantly characterized and constructed through the concept of generators. 
 These representations emerged from studying functional equations, particularly the associativity equation
  $T(x, T(y,z)) = T(T(x,y),z)$. The study of this equation began with N. H. Abel's work in the 19th century. J. Aczél later advanced the theory through his research on functional equations. Important insights also came from P. S. Mostert, A. L. Shields, and C. H. Ling's work on topological semigroups \cite[Sec.~5.1]{Klement2000}. Though the theory behind functional equations and topological semigroups is beyond the scope of this work, these fields were essential in developing the theory of t-norm generators.\\
 
 The core idea of a generator is to transform the t-norm operation on $[0,1]$ into a simpler arithmetic operation on a different domain, via a strictly monotonic function. For continuous Archimedean t-norms, the additive generator provides such a framework.
 
-An \textbf{additive generator} of a t-norm $T$ is a strictly decreasing function $t: [0,1] \to [0, \infty]$ such that:
+An \textbf{additive generator} \cite[Def.~3.25]{Klement2000} of a t-norm $T$ is a strictly decreasing function $t: [0,1] \to [0, \infty]$ such that:
 \begin{enumerate}
     \item $t(1) = 0$.
-    \item $t$ is right-continuous at $0$, i.e., $t(0) = \lim_{x \to 0^+} t(x)$.
+    \item $t$ is right-continuous at $0$.
 \end{enumerate}
 The t-norm $T$ is then constructed from its additive generator $t$ using the formula:
 \begin{equation} \label{eq:additive_generator_t_norm}
     T(x,y) = t^{(-1)}( \min(t(0), t(x) + t(y)) )
 \end{equation}
-where $t^{(-1)}: [0, t(0)] \to [0,1]$ is the pseudo-inverse of $t$, defined as $t^{(-1)}(u) = \sup \{z \in [0,1] \mid t(z) \ge u \}$ (or, due to strict decrease and continuity, often simply the standard inverse on the range of $t$). The inclusion of $\min(t(0), \dots)$ in Equation~\eqref{eq:additive_generator_t_norm} ensures that the argument of $t^{(-1)}$ remains within its domain $[0, t(0)]$.
+where $t^{(-1)}: [0, t(0)] \to [0,1]$ is the pseudo-inverse of $t$, defined as $t^{(-1)}(u) = \sup \{z \in [0,1] \mid t(z) \ge u \}$. The sum operation in equation \ref{eq:additive_generator_t_norm} is the reason why these generators are called \emph{additive}.
 
 \begin{notation}{Multiplicative Generators}
-    Parallel to additive generators, continuous Archimedean t-norms can also be represented using multiplicative generators. The key differences are:
+    Parallel to additive generators, continuous Archimedean t-norms can also be represented using multiplicative generators \cite[Def.~3.36]{Klement2000}. The key differences are:
     \begin{itemize}
         \item A multiplicative generator $\theta$ is strictly \emph{increasing} (rather than decreasing)
         \item $\theta(1)=1$ (rather than $t(1)=0$)
+        \item The formula analogous to Equation \ref{eq:additive_generator_t_norm} uses maximum and multiplication instead of minimum and addition:
+        \[T(x,y) = \theta^{(-1)}(\max(\theta(0), \theta(x) \cdot \theta(y)))\]
         \item For strict t-norms, $\theta(0)=0$ (rather than $t(0)=\infty$)
         \item For nilpotent t-norms, $\theta(0) \in ]0,1[$ (rather than $t(0)$ finite)
     \end{itemize}
-    The relationship between both types of generators is given by $\theta(x) = e^{-t(x)}$ and $t(x) = -\log(\theta(x))$.
+    The relationship between both types of generators is given by: \[\theta(x) = e^{-t(x)}\text{ and }t(x) = -\log(\theta(x))\]
     \end{notation}
 
-The value $t(0)$ is particularly significant as it determines the nature of the continuous Archimedean t-norm:
+    \begin{theorem}[Representation of Continuous Archimedean T-norms {\cite[Thm.~5.1]{Klement2000}}]
+        A t-norm $T$ is a continuous Archimedean t-norm if and only if it possesses a continuous additive generator $t: [0,1] \to [0,\infty]$. This generator is unique up to a positive multiplicative constant.
+      \end{theorem}
+    
+    This theorem is crucial because it guarantees that the entire class of continuous Archimedean t-norms can be characterized and constructed using these generator functions. Consequently, through the equivalence, they can also be represented by multiplicative generators \cite[Cor.~5.4]{Klement2000}.
+
+The value $t(0)$ is particularly significant as it determines the nature of the continuous Archimedean t-norm \cite[Cor.~3.30]{Klement2000}:
 \begin{itemize}
     \item If $t(0) = \infty$, then $\min(t(0), t(x) + t(y)) = t(x) + t(y)$, and the resulting t-norm $T$ is \textbf{strict} (e.g., for $t(x) = -\log(x)$, $T(x,y) = xy$, the product t-norm).
     \item If $t(0)$ is finite (i.e., $t(0) < \infty$), the resulting t-norm $T$ is \textbf{nilpotent} (e.g., for $t(x) = 1-x$, $T(x,y) = \max(0, x+y-1)$, the Łukasiewicz t-norm).
 \end{itemize}
-This representation via additive generators, as detailed in \cite[Sec.~3.2, Def.~3.25]{Klement2000}, not only simplifies the study of continuous Archimedean t-norms but also provides a constructive mechanism, highlighting the deep connection between their algebraic properties and the analytical properties of their associated generator functions.
-
-
-\subsection{Representation of Continuous Archimedean T-norms}
-A fundamental result, often attributed to Ling (1965) based on earlier work for topological semigroups by Mostert and Shields (1957), states that every continuous Archimedean t-norm possesses an additive generator \cite[Thm.~5.1]{Klement2000}. Specifically:
-\textit{A function $T:^2 \to$ is a continuous Archimedean t-norm if and only if there exists a continuous, strictly decreasing function $t: \to [0, \infty]$ with $t(1)=0$, such that $T(x,y) = t^{(-1)}(\min(t(0), t(x)+t(y)))$. This generator $t$ is unique up to a positive multiplicative constant.}
-
-This theorem is crucial because it guarantees that the entire class of continuous Archimedean t-norms can be characterized and constructed using these generator functions. Consequently, through the equivalence, they can also be represented by multiplicative generators.
-
-\subsection{Constructing Families of T-norms from Generators}
-Generators provide a powerful method for constructing parametric families of t-norms. The general approach involves:
+This representation via additive generators not only simplifies the study of continuous Archimedean t-norms but also provides a mechanism for constructing them, which is the idea behind the families of t-norms. The general approach involves:
 \begin{enumerate}
-    \item Starting with a known (prototypical) generator function. For example:
+    \item Starting with a known generator function. For example:
     \begin{itemize}
         \item $t_L(x) = 1-x$, the additive generator for the Łukasiewicz t-norm ($T_L$).
         \item $t_P(x) = -\log x$, the additive generator for the Product t-norm ($T_P$).
     \end{itemize}
     \item Introducing one or more parameters (often denoted by $\lambda, p, \dots$) into the structure of this generator function to create a parameterized generator $t_\lambda(x)$.
-    \item Applying the construction formula (Equation~\eqref{eq:additive_generator_t_norm} or \eqref{eq:multiplicative_generator_t_norm}) with $t_\lambda(x)$ (or its corresponding $\theta_\lambda(x)$) to obtain a parametric family of t-norms $T_\lambda(x,y)$.
+    \item Applying the construction formula (Equation~\eqref{eq:additive_generator_t_norm}) with $t_\lambda(x)$ to obtain a parametric family of t-norms $T_\lambda(x,y)$.
 \end{enumerate}
 The properties of the resulting t-norm family (e.g., whether its members are strict or nilpotent, their continuity with respect to the parameter) depend on how the parameter affects $t_\lambda(0)$ and the overall shape of $t_\lambda$. Many well-known t-norm families are derived in this manner.
 
-\subsection{Examples of T-norm Families}
-Below are some prominent families of continuous Archimedean t-norms, along with their definitions and key generator properties. These are based on the comprehensive Appendix A in \cite{Klement2000}.
 
-\textbf{1. Schweizer-Sklar T-norms} ($T_\lambda^{SS}$) for $\lambda \in [-\infty, \infty]$ \cite[A.6]{Klement2000}
+\begin{example}[Examples of T-norm Families]\label{ex:families_tnorms}
+    Below are some families of continuous Archimedean t-norms, along with their definitions and key generator properties. These are extracted from \cite[App.~A]{Klement2000}.
+
+    \textbf{1. Schweizer-Sklar T-norms} ($T_\lambda^{SS}$) for $\lambda \in [-\infty, \infty]$ 
 \begin{itemize}
     \item $T_\lambda^{SS}(x,y) = \begin{cases} T_M(x,y) & \text{if } \lambda = -\infty \\ T_P(x,y) & \text{if } \lambda = 0 \\ T_D(x,y) & \text{if } \lambda = \infty \\ (\max(x^\lambda + y^\lambda - 1, 0))^{1/\lambda} & \text{if } \lambda \in ]-\infty, 0[ \cup ]0, \infty[ \end{cases}$
     \item Additive generator (for $\lambda \in ]-\infty, 0[ \cup ]0, \infty[$): $t_\lambda^{SS}(x) = \frac{1-x^\lambda}{\lambda}$ (if $\lambda=0$, $t_0^{SS}(x) = -\log x$).
@@ -184,7 +183,7 @@ Below are some prominent families of continuous Archimedean t-norms, along with 
     \item $t_\lambda^{SS}(0) = \frac{1}{\lambda} < \infty$ for $\lambda \in ]0, \infty[$, hence $T_\lambda^{SS}$ is nilpotent. ($T_\infty^{SS} = T_D$ is not Archimedean).
 \end{itemize}
 
-\textbf{2. Hamacher T-norms} ($T_\lambda^H$) for $\lambda \in [0, \infty]$ \cite[A.4]{Klement2000}
+\textbf{2. Hamacher T-norms} ($T_\lambda^H$) for $\lambda \in [0, \infty]$ 
 \begin{itemize}
     \item $T_\lambda^H(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = \infty \text{ and } (x,y) \neq (0,0) \\ 0 & \text{if } \lambda = \infty \text{ and } x=y=0 \\ \frac{xy}{\lambda + (1-\lambda)(x+y-xy)} & \text{if } \lambda \in [0, \infty[ \end{cases}$
     (Note: $T_0^H = T_P$)
@@ -192,7 +191,7 @@ Below are some prominent families of continuous Archimedean t-norms, along with 
     \item $t_\lambda^H(0) = \infty$ for all $\lambda \in [0, \infty[$, hence $T_\lambda^H$ is strict.
 \end{itemize}
 
-\textbf{3. Frank T-norms} ($T_\lambda^F$) for $\lambda \in [0, \infty]$ \cite[A.3]{Klement2000}
+\textbf{3. Frank T-norms} ($T_\lambda^F$) for $\lambda \in [0, \infty]$ 
 \begin{itemize}
     \item $T_\lambda^F(x,y) = \begin{cases} T_M(x,y) & \text{if } \lambda = 0 \\ T_P(x,y) & \text{if } \lambda = 1 \\ T_L(x,y) & \text{if } \lambda = \infty \\ \log_\lambda \left(1 + \frac{(\lambda^x-1)(\lambda^y-1)}{\lambda-1}\right) & \text{if } \lambda \in ]0, 1[ \cup ]1, \infty[ \end{cases}$
     \item Additive generator (for $\lambda \in ]0, 1[ \cup ]1, \infty[$): $t_\lambda^F(x) = \log_\lambda \left(\frac{\lambda^x-1}{\lambda-1}\right)$. (For $\lambda=1$, $t_1^F(x) = -\log x$; for $\lambda=\infty$, $t_\infty^F(x) = 1-x$).
@@ -200,7 +199,7 @@ Below are some prominent families of continuous Archimedean t-norms, along with 
     \item $t_\infty^F(0) = 1 < \infty$, hence $T_\infty^F = T_L$ is nilpotent.
 \end{itemize}
 
-\textbf{4. Yager T-norms} ($T_\lambda^Y$) for $\lambda \in [0, \infty]$ \cite[A.8]{Klement2000}
+\textbf{4. Yager T-norms} ($T_\lambda^Y$) for $\lambda \in [0, \infty]$
 \begin{itemize}
     \item $T_\lambda^Y(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = 0 \\ T_M(x,y) & \text{if } \lambda = \infty \\ \max\left(1 - ((1-x)^\lambda + (1-y)^\lambda)^{1/\lambda}, 0\right) & \text{if } \lambda \in ]0, \infty[ \end{cases}$
     (Note: $T_1^Y = T_L$)
@@ -208,7 +207,7 @@ Below are some prominent families of continuous Archimedean t-norms, along with 
     \item $t_\lambda^Y(0) = 1 < \infty$ for all $\lambda \in ]0, \infty[$, hence $T_\lambda^Y$ is nilpotent.
 \end{itemize}
 
-\textbf{5. Dombi T-norms} ($T_\lambda^D$) for $\lambda \in [0, \infty]$ \cite[A.2]{Klement2000}
+\textbf{5. Dombi T-norms} ($T_\lambda^D$) for $\lambda \in [0, \infty]$ 
 \begin{itemize}
     \item $T_\lambda^D(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = 0 \\ T_M(x,y) & \text{if } \lambda = \infty \\ \frac{1}{1 + \left(\left(\frac{1}{x}-1\right)^\lambda + \left(\frac{1}{y}-1\right)^\lambda\right)^{1/\lambda}} & \text{if } \lambda \in ]0, \infty[ \text{ (for } x,y > 0) \end{cases}$
     ($T(x,0)=T(0,x)=0$ for $x \in$). (Note: $T_1^D = T_H$ with parameter $\gamma=1$, the Hamacher product)
@@ -216,7 +215,7 @@ Below are some prominent families of continuous Archimedean t-norms, along with 
     \item $t_\lambda^D(0) = \infty$ for all $\lambda \in ]0, \infty[$, hence $T_\lambda^D$ is strict.
 \end{itemize}
 
-\textbf{6. Sugeno-Weber T-norms} ($T_\lambda^{SW}$) for $\lambda \in [-1, \infty]$ \cite[A.7]{Klement2000}
+\textbf{6. Sugeno-Weber T-norms} ($T_\lambda^{SW}$) for $\lambda \in [-1, \infty]$
 \begin{itemize}
     \item $T_\lambda^{SW}(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = -1 \\ T_P(x,y) & \text{if } \lambda = \infty \\ \max\left(\frac{x+y-1+\lambda xy}{1+\lambda}, 0\right) & \text{if } \lambda \in ]-1, \infty[ \end{cases}$
     (Note: $T_0^{SW} = T_L$)
@@ -225,12 +224,12 @@ Below are some prominent families of continuous Archimedean t-norms, along with 
     \item $t_\infty^{SW}(0) = \infty$, hence $T_\infty^{SW} = T_P$ is strict.
 \end{itemize}
 
-\textbf{7. Aczél-Alsina T-norms} ($T_\lambda^{AA}$) for $\lambda \in [0, \infty]$ \cite[A.1]{Klement2000}
+\textbf{7. Aczél-Alsina T-norms} ($T_\lambda^{AA}$) for $\lambda \in [0, \infty]$
 \begin{itemize}
     \item $T_\lambda^{AA}(x,y) = \begin{cases} T_D(x,y) & \text{if } \lambda = 0 \\ T_M(x,y) & \text{if } \lambda = \infty \\ e^{-\left((-\log x)^\lambda + (-\log y)^\lambda\right)^{1/\lambda}} & \text{if } \lambda \in ]0, \infty[ \end{cases}$
     (Note: $T_1^{AA} = T_P$)
     \item Additive generator (for $\lambda \in ]0, \infty[$): $t_\lambda^{AA}(x) = (-\log x)^\lambda$.
     \item $t_\lambda^{AA}(0) = \infty$ for all $\lambda \in ]0, \infty[$, hence $T_\lambda^{AA}$ is strict.
 \end{itemize}
+\end{example}
 
-This overview demonstrates the utility of generators in unifying the understanding and construction of various t-norm families, clearly delineating their fundamental characteristics through the properties of these generating functions. clearly delineating their fundamental characteristics through the properties of these generating functions.
