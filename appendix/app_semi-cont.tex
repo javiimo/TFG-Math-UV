@@ -118,11 +118,11 @@ This result significantly simplifies the verification of continuity for Archimed
 
 \subsection{Non-continuous T-norms}
 
-While continuous t-norms are well-classified (section \ref{sec:class_tnorms}), not all t-norms are continuous:\\
+While continuous t-norms are well-classified (section \ref{sec:class_tnorms}), not all t-norms are continuous, they can exhibit quite irregular continuity behavior:\\
 
-The \textbf{drastic product $T_D$} is a key example of a non-continuous t-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable when the other is fixed (\cite[Rem.~1.21(i), Prop.~1.22]{Klement2000}). However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).
+The \textbf{drastic product $T_D$} is a key example of a non-continuous t-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable. However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).\\
 
-The \textbf{nilpotent minimum $T^{nM}$} (\cite[Rem.~1.21(i), p.~16]{Klement2000}) is defined as:
+The \textbf{nilpotent minimum $T^{nM}$} is lower semicontinuous (left-continuous in each variable) but it is not right-continuous at points on the line $x+y=1$ when approached from $x+y>1$ \cite[Rem.~1.21(i)]{Klement2000}. It is defined as:
   \[
   T^{nM}(x,y) =
   \begin{cases}
@@ -130,9 +130,9 @@ The \textbf{nilpotent minimum $T^{nM}$} (\cite[Rem.~1.21(i), p.~16]{Klement2000}
     \min(x,y) & \text{otherwise.}
   \end{cases}
   \]
-This t-norm is lower semicontinuous, which for monotone functions implies it is left-continuous in each variable (\cite[Prop.~1.22, p.~17]{Klement2000}). It is not continuous (specifically, not right-continuous at points on the line $x+y=1$ when approached from $x+y>1$).
 
-The \textbf{Krause t-norm $T^K$} (\cite[App.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is neither left- nor right-continuous, but has a continuous diagonal section. This highlights that t-norms can exhibit quite irregular continuity behavior.
+
+The \textbf{Krause t-norm $T^K$} (\cite[App.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is neither left- nor right-continuous, but has a continuous diagonal section.
 
 \signal{
 \begin{remark}[Importance of Left-Continuity]
