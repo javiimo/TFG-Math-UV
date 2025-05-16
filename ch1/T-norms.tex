@@ -106,8 +106,61 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 \signal{
   Lo de Archimedean sirve para el teorema 1.8.1 de \cite{FULLER2}. Y tb con la law of large numbers con LR-fuzzy numbers.}
 
+  \signal{Strict T-norms iff satisfy conditional cancellation}
+
+  \signal{Tambien lo de que la T-norm e distributiva con max/sup sirve para justificar la definicion del producto cartesiano, así que esa propiedad la tendré que meter por aquí igual.}
+
+
+The following algebraic properties will be needed when defining fuzzy logics and to classify continuous t-norms \cite[Def.~2.1 \& 2.13]{Klement2000}:
+
+\begin{definition}[Nilpotent Element and Nilpotent T-norm]
+Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{nilpotent element} of $T$ if there exists $n \in \mathbb{N}$ such that $a_T^{(n)} = 0$, where $a_T^{(n)} = T(a, a_T^{(n-1)})$ with $a_T^{(1)}=a$.
+
+A t-norm is called nilpotent if and only if it is continuous and every $a\in ]0,1[$ is nilpotent.
+\end{definition}
+
+\begin{definition}[Strict T-norm]
+  A t-norm is called strict if it is continuous and strictly monotone.
+\end{definition}
+
+
+\begin{definition}[Zero Divisor]
+Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{zero divisor} of $T$ if there exists $b \in ]0,1[$ such that $T(a,b)=0$.
+\end{definition}
+
+\begin{definition}[Idempotent Element]
+  Let $T$ be a t-norm. An element $a \in [0,1]$ is an \emph{idempotent element} of $T$ if $T(a,a)=a$. The elements $0$ and $1$ are always trivial idempotent elements.
+  \end{definition}
+  
+
+\begin{definition}[Archimedean T-norm]
+A t-norm $T$ is \emph{Archimedean} if for each $(x,y) \in ]0,1[^2$ there is an $n \in \mathbb{N}$ with $x_T^{(n)} < y$. \cite[Def.~2.9]{Klement2000}  
+
+In particular, a \textit{continuous} t-norm $T$ is Archimedean if and only if $T(x,x) < x \forall x \in ]0,1[$, i.e. it doesn't have non-trivial idempotent elements. \cite[Thm.~2.12]{Klement2000}
+\end{definition}
+
+
+When a t-norm is continuous and Archimedean, there's a crucial relationship between its algebraic properties. It cannot be simultaneously strict and possess nilpotent elements (or zero divisors):
+
+\begin{theorem}{Algebraic properties of continuous Archimedean T-norms \cite[Thm.~2.18]{Klement2000}}\label{thm:alg_arch_cont}
+Let $T$ be a continuous Archimedean t-norm. Then the following are equivalent:
+\begin{romanenum}
+    \item $T$ is \emph{nilpotent}.
+    \item There exists some nilpotent element of $T$.
+    \item There exists some zero divisor of $T$.
+    \item $T$ is not \emph{strict}.
+\end{romanenum}
+\end{theorem}
+
+% \begin{remark}\label{rem:split_tnorms}
+%   Continuous Archimedean t-norms can be splitted into two classes according to their nilpotent elements \cite[Cor.~3.30]{Klement2000}: strict (having no nilpotent elements except $0$) and nilpotent (where every element in $]0,1[$ is nilpotent).
+% \end{remark}
+
+
   \begin{example}[Basic T-norms {\cite[Ex.~1.2]{Klement2000}}]\label{ex:basic_tnorms}
-    The following are the four fundamental (basic) t-norms, which serve as canonical examples because they represent the extremal and most important cases with respect to the order relation and algebraic properties defined in Section~\ref{sec:class_tnorms}. From weaker to stronger they are: $T_D \leq T_L \leq T_P \leq T_M$.
+    These four t-norms are canonical examples because they represent the extremal and most representative cases with respect to the order relation (see definition \ref{def:weaker}) and algebraic properties. From weaker to stronger they are: $T_D \leq T_L \leq T_P \leq T_M$. 
+    
+    All of them are plotted in figures \ref{fig:2D_tnorms} and \ref{fig:tnorms_3D_plots}.
       \begin{itemize}
         \item \textbf{Minimum ($T_M$):} 
             This is the strongest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). Every element is idempotent (indeed it is the only t-norm satisfying that \cite[Lem.~1.2.3]{FULLER2}), therefore it is not Archimedean. It has no zero divisors and no nilpotent elements other than 0.
@@ -125,53 +178,29 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
       \end{itemize}
     \end{example}
 
-  \subsection{Classification of T-norms}
 
-\signal{Añadir lo de strict Archimedean y divisores de zero y eso.}
-\begin{definition}[Archimedean t-norm]
-  A continuous t-norm that satisfies $T(x,x)<x \forall x\in ]0,1[$ is called an Archimedean t-norm.
-\end{definition}
-
-\begin{proposition}[Characterization of Archimedean t-norms]
-  For all Archimedean t-norms there exists a continuous decreasing function $f:[0,1] \longrightarrow [0,\infty[$ with $f(1)=0$ such that: 
-  \[ 
-  T(x,y)= f^{-1}(\min\{f(x)+f(y), f(0)\}) \text{ where } f^{-1} =
-  \begin{cases}
-    f^{-1}(y) & \text{if } y\in [0,f(0) ]\\
-    0 & \text{otherwise}
-  \end{cases}
-  \text{ is a pseudo-inverse}.
-  \]
-\end{proposition}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ch1/figures/tnorms_2D_plots.png}
+    \caption{Level curves of basic t-norms ($T_M$, $T_P$, $T_L$, $T_D$) in the unit square $[0,1]^2$. The different shapes of the white level curves illustrate the distinct behaviors and algebraic properties of each t-norm.}
+    \label{fig:2D_tnorms}
+\end{figure}
 
 
-\signal{
-\begin{definition}[Nilpotent t-norm]
-  
-\end{definition}}
-
-\begin{definition}[Weaker t-norm]
-  Given $T_1, T_2$ t-norms, then $T_1$ is weaker than $T_2$ $(T_1 \leq T_2)$ if $T_1(x,y)\leq T_2(x,y)\forall x,y\in [0,1]$.\\
-  In that case, it is equivalent to say $T_2$ is stronger than $T_1$ $(T_2 \geq T_1)$
-
-\end{definition}
-\begin{remark}
-  This defines a partial order relation in the set of t-norms.
-\end{remark}
-\signal{The weaker the t-norm, the stronger the associated s-norm. Lo pongo como un remark igual.}
-
-\signal{
-There are many results like all t-norms are between the weak and the min, all t-conorms are between max and strong, or that min is the only t-norm that satisfies $T(a,a)=a$ (igual es por esto ultimo q se usa tanto. Qué implicaciones tiene que lukasiewicz no cumpla eso?)}
-
-\signal{Tambien lo de que la T-norm e distributiva con max/sup sirve para justificar la definicion del producto cartesiano, así que esa propiedad la tendré que meter por aquí igual.}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ch1/figures/tnorms_3D_plots.png}
+    \caption{3D surface plots of the basic t-norms ($T_M$, $T_P$, $T_L$, $T_D$) over the unit square $[0,1]^2$. The minimum t-norm forms a sharp ridge along $x=y$, the product t-norm is smoothly curved, the Łukasiewicz t-norm is planar except for a triangular region where it is zero, and the drastic t-norm is flat except for the edges. All of them are identical at the boundaries of the unit square.}
+    \label{fig:tnorms_3D_plots}
+\end{figure}
 
 
 \noindent\rule{\textwidth}{2pt}
 
 
-\subsection{Classification of T-norms}
+\subsection{Classification of T-norms}\label{sec:class_tnorms}
 The first and most straight forward way to classify them is by defining the following partial order on the set of all t-norms. 
-\begin{definition}[Weaker/Stronger t-norm {\cite[Def.~1.4]{Klement2000}}]
+\begin{definition}[Weaker/Stronger t-norm {\cite[Def.~1.4]{Klement2000}}]\label{def:weaker}
   Given two t-norms $T_1$ and $T_2$, $T_1$ is said to be \emph{weaker} than $T_2$ (denoted $T_1 \leq T_2$) if $T_1(x,y) \leq T_2(x,y) \forall x,y \in [0,1]$.
   Equivalently, $T_2$ is said to be \emph{stronger} than $T_1$.
 \end{definition}
@@ -180,73 +209,60 @@ The first and most straight forward way to classify them is by defining the foll
   It's a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ and $T_M$ are the drastic and the minimum t-norms respectively (\cite[Rem.~1.5]{Klement2000}).
 \end{remark}
 
-The interpretation is that a weaker t-norm can be seen as a stricter and more pessimistic intersection (conjunction in the fuzzy logic derived), returning lower membership values than a stronger one. Notice that it is not a total order: there are pairs of t-norms where none of them is weaker than the other. Some examples, such as the product $T_P$ and Yager $T_2^Y$ t-norms, are shown in \cite[Fig.~6.1]{Klement2000}.\\
+The interpretation is that a weaker t-norm can be seen as a stricter and more pessimistic intersection (conjunction in the fuzzy logic derived), returning lower membership values than a stronger one. Notice that it is not a total order: there are pairs of t-norms where none of them is weaker than the other. Some examples, such as the product $T_P$ and Yager $T_2^Y$ (see \ref{ex:families_tnorms} for the definition of the Yager family) t-norms, are shown in \cite[Fig.~6.1]{Klement2000}.\\
 
 
-In order to further classify t-norms, the following algebraic properties will be needed \cite[Def.~2.1]{Klement2000}:
+Another way to classify t-norms is based on their continuity properties. Continuous t-norms can be divided into two main classes (Fig.~\ref{fig:tnorm_classification}): Archimedean and non-Archimedean t-norms. The Archimedean t-norms can be further subdivided into strict and nilpotent t-norms (using the theorem \ref{thm:alg_arch_cont})\footnote{This classification is also characterized by the behavior of their generator functions at 0. For a more detailed discussion and definitions related to generators, see Appendix \ref{app:generators_tnorms}}:
 
-\begin{definition}[Nilpotent Element]
-Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{nilpotent element} of $T$ if there exists $n \in \mathbb{N}$ such that $a_T^{(n)} = 0$, where $a_T^{(n)} = T(a, a_T^{(n-1)})$ with $a_T^{(1)}=a$.
-\end{definition}
-
-\begin{definition}[Zero Divisor]
-Let $T$ be a t-norm. An element $a \in ]0,1[$ is a \emph{zero divisor} of $T$ if there exists $b \in ]0,1[$ such that $T(a,b)=0$.
-\end{definition}
-
-\begin{definition}[Idempotent Element]
-  Let $T$ be a t-norm. An element $a \in [0,1]$ is an \emph{idempotent element} of $T$ if $T(a,a)=a$. The elements $0$ and $1$ are always trivial idempotent elements.
-  \end{definition}
-  
-
-\begin{definition}[Archimedean T-norm]
-A t-norm $T$ is \emph{Archimedean} if for each $(x,y) \in ]0,1[^2$ there is an $n \in \mathbb{N}$ with $x_T^{(n)} < y$. \cite[Def.~2.9]{Klement2000}  
-
-In particular, a \textit{continuous} t-norm $T$ is Archimedean if and only if $T(x,x) < x \forall x \in ]0,1[$, i.e. it doesn't have non-trivial idempotent elements. \cite[Thm.~2.12]{Klement2000}
-\end{definition}
-
-This Archimedean property is the key idea that is used to classify continuous t-norms since continuous Archimedean t-norms can be splitted into two classes (closed under isomorphisms): strict (isomorphic to $T_P$) and nilpotent (isomorphic to $T_L$). \signal{Then, it is possible to express any continuous (Archimedean or not) t-norm as an ordinal sum of continuous archimedean t-norms.}\\
-
-Before defining t-norms
-
-
-
-\subsection{Classification of Continuous T-norms}
-
-Continuous t-norms form a particularly well-structured class, admitting elegant representation theorems. Their study often revolves around whether they are Archimedean.
-
-\subsubsection{Continuous Archimedean T-norms and Generators}
-The structure of continuous Archimedean t-norms is intimately linked to certain functions called generators.
-\begin{definition}[Additive Generator and Pseudo-inverse]
-  An \emph{additive generator} of a t-norm $T$ is a strictly decreasing function $t: [0,1] \to [0,\infty]$ which is right-continuous in $0$ and satisfies $t(1)=0$, such that $T(x,y) = t^{(-1)}(t(x) + t(y))$ for all $(x,y) \in [0,1]^2$, provided $t(x)+t(y) \in \mathrm{Ran}(t) \cup [t(0),\infty]$ (\cite[Def.~3.25, p.~70]{Klement2000}).
-  The function $t^{(-1)}: [0,\infty] \to [0,1]$ is the \emph{pseudo-inverse} of $t$, defined as $t^{(-1)}(y) = \sup \{ x \in [0,1] \mid t(x) > y \}$ (adapted from \cite[Def.~3.2, p.~68 and Cor.~3.3]{Klement2000} for strictly decreasing $t$). \signal{`Ran(t)` denotes the range of $t$, i.e., the set of all values $t(x)$ for $x \in [0,1]$ \cite[p. xvii]{Klement2000}.}
-\end{definition}
-
-\begin{theorem}[Representation of Continuous Archimedean T-norms {\cite[Thm.~5.1, p.~122]{Klement2000}}]
-  A t-norm $T$ is a continuous Archimedean t-norm if and only if it possesses a continuous additive generator $t: [0,1] \to [0,\infty]$. This generator is unique up to a positive multiplicative constant.
-\end{theorem}
-Continuous Archimedean t-norms are further categorized based on the behavior of their generator at $0$:
 \begin{itemize}
-    \item $T$ is \textbf{strict} if its continuous additive generator $t$ satisfies $t(0)=\infty$. This means $T(x,y)>0$ whenever $x,y > 0$. Strict t-norms are strictly monotone on $]0,1]^2$. (\cite[Cor.~3.30(i), p.~88; Def.~2.13(i), p.~42]{Klement2000}).
-    \item $T$ is \textbf{nilpotent} if its continuous additive generator $t$ satisfies $t(0)<\infty$. This implies that for any $x,y \in ]0,1[$, there exists $n$ such that $T(x, \dots, x)$ ($n$ times) is $0$. Every $a \in ]0,1[$ is a nilpotent element. (\cite[Cor.~3.30(ii), p.~88; Def.~2.13(ii), p.~42]{Klement2000}).
+    \item $T$ is \textbf{strict} if it doesn't have any nilpotent elements except $0$. This means $T(x,y)>0$ whenever $x,y > 0$. (\cite[Cor.~3.30(i)]{Klement2000}).
+    \item $T$ is \textbf{nilpotent} if every element in $]0,1[$ is nilpotent. This implies that for any $x,y \in ]0,1[$, there exists $n$ such that $T(x, \dots, x)$ ($n$ times) is $0$. (\cite[Cor.~3.30(ii)]{Klement2000}).
 \end{itemize}
 
-\subsubsection{Isomorphism of Continuous Archimedean T-norms}
-The concept of isomorphism reveals a deep structural similarity among t-norms within these classes.
-\begin{definition}[Isomorphic T-norms {\cite[Def.~2.27, p.~51; Prop.~2.28(iv), p.~52]{Klement2000}}]
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=60mm},
+    level 2/.style={sibling distance=30mm},
+    every node/.style={draw,rounded corners,align=center}
+]
+\node {Continuous\\ T-norms}
+    child {
+        node {Archimedean\\ T-norms}
+        child {
+            node {Strict\\ (e.g. $T_P$)}
+        }
+        child {
+            node {Nilpotent\\ (e.g. $T_L$)}
+        }
+    }
+    child {
+        node {Non-Archimedean\\ (e.g. $T_M$)}
+    };
+\end{tikzpicture}
+\caption{Classification of continuous t-norms}
+\label{fig:tnorm_classification}
+\end{figure}
+
+
+
+Indeed, strict and nilpotent t-norms form two classes that are closed under certain isomorphic transformations: 
+
+\begin{definition}[Isomorphic T-norms {\cite[Prop.~2.28(iv)]{Klement2000}}]
   Two t-norms $T_1$ and $T_2$ are \emph{isomorphic} if there exists a strictly increasing bijection $\varphi: [0,1] \to [0,1]$ (an automorphism of the unit interval) such that $T_2(x,y) = \varphi^{-1}(T_1(\varphi(x), \varphi(y)))$ for all $x,y \in [0,1]$.
 \end{definition}
-Isomorphic t-norms share the same algebraic structure, merely operating on rescaled inputs and outputs via $\varphi$. A fundamental result is:
-\begin{proposition}[{\cite[Cor.~5.7, p.~125, referring to Prop.~5.9 and Prop.~5.10]{Klement2000}}]
-  \begin{enumerate}
+This definition is completely analogous for t-conorms. The isomorphism can be understood as a rescaling of the unit interval. The original t-norm is applied to this scaled domain and then the scale is reverted to make the output comparable to the original inputs $x,y$ (otherwise, the one identity property might not hold). Isomorphic t-norms share the same algebraic structure, merely operating on rescaled inputs and outputs via $\varphi$. A fundamental result is that (up to isomorphism) there are only two distinct types of continuous Archimedean t-norms: the product type and the Łukasiewicz type.
+\begin{proposition}[{Classes of continuous Archimedean t-norms \cite[Cor.~5.7]{Klement2000}}]
+  {\color{white}.}
+  \begin{enumerate} 
       \item Every strict t-norm is isomorphic to the Product t-norm $T_P$.
       \item Every nilpotent t-norm is isomorphic to the Łukasiewicz t-norm $T_L$.
   \end{enumerate}
 \end{proposition}
-This implies that, up to isomorphism, there are only two distinct types of continuous Archimedean t-norms: the product type and the Łukasiewicz type.
 
-\subsubsection{General Continuous T-norms and Ordinal Sums}
-Continuous t-norms that are not Archimedean must have non-trivial idempotent elements. These are constructed using ordinal sums.
-\begin{definition}[Ordinal Sum of T-norms {\cite[Def.~3.44, p.~97]{Klement2000}}]
+For general continuous t-norms that are not Archimedean, there must be non-trivial idempotent elements. These are constructed using ordinal sums.
+\begin{definition}[Ordinal Sum of T-norms {\cite[Def.~3.44]{Klement2000}}]
 Let $(T_\alpha)_{\alpha \in A}$ be a family of t-norms and $(]a_\alpha, e_\alpha[)_{\alpha \in A}$ be a family of non-empty, pairwise disjoint open subintervals of $[0,1]$. The t-norm $T$ defined by
 \[
 T(x,y) =
@@ -257,58 +273,26 @@ T(x,y) =
 \]
 is called the \emph{ordinal sum} of the summands $(a_\alpha, e_\alpha, T_\alpha)$, $\alpha \in A$.
 \end{definition}
-Intuitively, an ordinal sum "glues" copies of the t-norms $T_\alpha$ (scaled to fit the intervals $[a_\alpha, e_\alpha]$) onto the diagonal of the unit square. Outside these "active" regions, the t-norm behaves like the minimum $T_M$. The endpoints $a_\alpha, e_\alpha$ become idempotent elements of $T$.
+Intuitively (see figure ), an ordinal sum constructs a t-norm by combining scaled copies of other t-norms on the unit square $[0,1]^2$. For each interval $]a_\alpha, e_\alpha[$ along the main diagonal, a t-norm $T_\alpha$ operates within the square region $[a_\alpha, e_\alpha]^2$. Inside these "active" regions, inputs are first scaled down from $[a_\alpha, e_\alpha]$ to $[0,1]$ via linear transformations, then $T_\alpha$ is applied, and finally the result is scaled back to $[a_\alpha, e_\alpha]$. Outside these regions, the t-norm defaults to the minimum $T_M$, which ensures continuity (if the $T_\alpha$ are continuous) and makes the interval endpoints $a_\alpha, e_\alpha$ into idempotent elements of the resulting t-norm.
 
-\begin{theorem}[Representation of Continuous T-norms {\cite[Thm.~5.11, p.~140]{Klement2000}}]
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{ch1/figures/ordinal_sums.png}
+    \caption{Visualization of an ordinal sum of t-norms. Each colored square along the diagonal corresponds to an "active" region where a rescaled t-norm (e.g., Product or Łukasiewicz) operates. Outside these regions, the minimum t-norm $T_M$ is used. The construction illustrates how continuous t-norms can be built from Archimedean components via ordinal sums.}
+    \label{fig:ordinal_sum_tnorm}
+\end{figure}
+
+
+
+\begin{theorem}[Representation of Continuous T-norms {\cite[Thm.~5.11]{Klement2000}}]
   A function $T: [0,1]^2 \to [0,1]$ is a continuous t-norm if and only if $T$ is uniquely representable as an ordinal sum of continuous Archimedean t-norms.
 \end{theorem}
-\begin{remark}
+\signal{\begin{remark}
   A continuous t-norm is \emph{ordinally irreducible} if its only ordinal sum representation is $T = ((0,1,T))$. For continuous t-norms, being ordinally irreducible is equivalent to being Archimedean (\cite[Prop.~3.53, p.~99 and context]{Klement2000}). Thus, the "building blocks" in the ordinal sum representation are precisely the continuous Archimedean t-norms (isomorphic to $T_P$ or $T_L$). If the family of subintervals is empty, the ordinal sum is defined as $T_M$.
-\end{remark}
+\end{remark}}
 
-\subsection{Further Examples: Parametric Families of T-norms}
-Beyond the four basic t-norms, several parametric families offer a spectrum of behaviors and are widely used. Their construction often relies on generators.
-\begin{definition}[Multiplicative Generator {\cite[Def.~3.36, p.~91]{Klement2000}}]
-  A \emph{multiplicative generator} $\theta: [0,1] \to [0,1]$ of a t-norm $T$ is a strictly increasing function, right-continuous in $0$, with $\theta(1)=1$, such that $T(x,y) = \theta^{(-1)}(\theta(x) \cdot \theta(y))$, assuming $\theta(x)\cdot\theta(y)$ is in a suitable range. \signal{This is a simplified statement; the book's definition includes range conditions.}
-\end{definition}
-\begin{remark}[Duality of Generators {\cite[Rem.~3.34, p.~90]{Klement2000}}]
-  If $t(x)$ is an additive generator, then $\theta(x) = e^{-c \cdot t(x)}$ (for some $c>0$) is a multiplicative generator, and if $\theta(x)$ is a multiplicative generator, then $t(x) = -c \cdot \log(\theta(x))$ is an additive generator.
-\end{remark}
+Non-Continuous t-norms lack these well-behaved (\signal{what exactly are they lacking, generators?}) properties and no further classification other than the one induced by their specific continuity and algebraic properties will be discussed in this work. Some examples and how monotonicity of t-norms affect their continuity is included in the appendix \ref{app:semicont-tnorms}.
 
-\begin{example}[Parametric Families of T-norms (selected from {\cite[Chapter 4]{Klement2000}})]
-  \begin{itemize}
-    \item \textbf{Schweizer-Sklar T-norms ($T_\lambda^{SS}$), $\lambda \in [-\infty, \infty]$:}
-    $T_\lambda^{SS}(x,y) = (\max(0, x^\lambda + y^\lambda - 1))^{1/\lambda}$.
-    Includes $T_M (\lambda=-\infty)$, $T_P (\lambda \to 0)$, $T_L (\lambda=1)$, $T_D (\lambda=\infty)$. Additive generator $t_\lambda^{SS}(x) = \frac{1-x^\lambda}{\lambda}$ for $\lambda \neq 0$.
-    \item \textbf{Frank T-norms ($T_\lambda^F$), $\lambda \in [0, \infty]$:}
-    $T_\lambda^F(x,y) = \log_\lambda \left(1 + \frac{(\lambda^x-1)(\lambda^y-1)}{\lambda-1}\right)$ for $\lambda \in ]0,\infty[, \lambda \neq 1$.
-    Includes $T_M (\lambda=0)$, $T_P (\lambda=1)$, $T_L (\lambda=\infty)$. All $T_\lambda^F$ for $\lambda \in ]0,\infty]$ are continuous Archimedean. Additive generator $t_\lambda^F(x) = -\log \frac{\lambda^x-1}{\lambda-1}$.
-    \item \textbf{Yager T-norms ($T_p^Y$), $p \in [0, \infty]$:} \signal{The book uses $\lambda$ for Yager, but $p$ is more common in literature to avoid clash with Frank's parameter.}
-    $T_p^Y(x,y) = \max(0, 1 - ((1-x)^p + (1-y)^p)^{1/p})$ for $p \in ]0,\infty[$.
-    Includes $T_D (p \to 0)$, $T_L (p=1)$, $T_M (p=\infty)$. All $T_p^Y$ for $p \in ]0,\infty[$ are continuous nilpotent Archimedean. Additive generator $t_p^Y(x) = (1-x)^p$.
-  \end{itemize}
-  \signal{Many other families exist, like Hamacher, Dombi, Aczél-Alsina, Sugeno-Weber, Mayor-Torrens. Refer to \cite[Table 4.1, p.~119]{Klement2000} and Appendix A therein for a comprehensive list and properties.}
-\end{example}
-
-\subsection{Non-Continuous T-norms and Left-Continuity}
-While continuous t-norms are well-classified, not all t-norms are continuous.
-The \textbf{drastic product $T_D$} is a key example of a non-continuous t-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable when the other is fixed (\cite[Rem.~1.21(i), Prop.~1.22]{Klement2000}). However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).
-
-The \textbf{nilpotent minimum $T^{nM}$} (\cite[Rem.~1.21(i), p.~16]{Klement2000}) is defined as:
-  \[
-  T^{nM}(x,y) =
-  \begin{cases}
-    0 & \text{if } x+y \leq 1 \\
-    \min(x,y) & \text{otherwise.}
-  \end{cases}
-  \]
-This t-norm is lower semicontinuous, which for monotone functions implies it is left-continuous in each variable (\cite[Prop.~1.22, p.~17]{Klement2000}). It is not continuous (specifically, not right-continuous at points on the line $x+y=1$ when approached from $x+y>1$).
-
-The \textbf{Krause t-norm $T^K$} (\cite[App.~B.1, Thm.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is stated to be "neither left- nor right-continuous, but has a continuous diagonal section." This highlights that t-norms can exhibit quite irregular continuity behavior.
-
-\begin{remark}[Importance of Left-Continuity]
-For non-continuous t-norms, the property of \emph{left-continuity} (in each variable) is often a desirable, or even required, condition in certain applications, particularly in fuzzy logic. For instance, in residuum-based logics, if a t-norm $T$ is left-continuous, its corresponding residuated implication $I(x,y) = \sup\{z \in [0,1] \mid T(x,z) \le y\}$ exhibits well-behaved properties. Specifically, a commutative, integral lattice-ordered monoid based on $T$ is residuated if and only if $T$ is left-continuous (\cite[Prop.~2.47, p.~63]{Klement2000}). This ensures that the implication adequately captures deductive reasoning. While the intuitive notion that "a microscopic decrease of the truth degree of a conjunct should not macroscopically decrease the truth degree of the conjunction" points towards continuity, left-continuity is a weaker but often sufficient condition for preserving logical coherence in such frameworks.
-\end{remark}
 
 
 \noindent\rule{\textwidth}{2pt}

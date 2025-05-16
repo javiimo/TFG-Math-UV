@@ -116,6 +116,29 @@ For Archimedean t-norms (those for which $T(x,x) < x$ for all $x \in ]0,1[$), an
 \end{proposition}
 This result significantly simplifies the verification of continuity for Archimedean t-norms. If such a t-norm is known to be left-continuous (e.g., due to properties of its additive or multiplicative generator, which are often easier to analyze for one-sided continuity), it is automatically fully continuous. This is a non-trivial property that does not hold for general monotone functions.
 
+\subsection{Non-continuous T-norms}
+
+While continuous t-norms are well-classified (section \ref{sec:class_tnorms}), not all t-norms are continuous:\\
+
+The \textbf{drastic product $T_D$} is a key example of a non-continuous t-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable when the other is fixed (\cite[Rem.~1.21(i), Prop.~1.22]{Klement2000}). However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).
+
+The \textbf{nilpotent minimum $T^{nM}$} (\cite[Rem.~1.21(i), p.~16]{Klement2000}) is defined as:
+  \[
+  T^{nM}(x,y) =
+  \begin{cases}
+    0 & \text{if } x+y \leq 1 \\
+    \min(x,y) & \text{otherwise.}
+  \end{cases}
+  \]
+This t-norm is lower semicontinuous, which for monotone functions implies it is left-continuous in each variable (\cite[Prop.~1.22, p.~17]{Klement2000}). It is not continuous (specifically, not right-continuous at points on the line $x+y=1$ when approached from $x+y>1$).
+
+The \textbf{Krause t-norm $T^K$} (\cite[App.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is neither left- nor right-continuous, but has a continuous diagonal section. This highlights that t-norms can exhibit quite irregular continuity behavior.
+
+\signal{
+\begin{remark}[Importance of Left-Continuity]
+For non-continuous t-norms, the property of \emph{left-continuity} (in each variable) is often a desirable, or even required, condition in certain applications, particularly in fuzzy logic. For instance, in residuum-based logics, if a t-norm $T$ is left-continuous, its corresponding residuated implication $I(x,y) = \sup\{z \in [0,1] \mid T(x,z) \le y\}$ exhibits well-behaved properties. Specifically, a commutative, integral lattice-ordered monoid based on $T$ is residuated if and only if $T$ is left-continuous (\cite[Prop.~2.47, p.~63]{Klement2000}). This ensures that the implication adequately captures deductive reasoning. While the intuitive notion that "a microscopic decrease of the truth degree of a conjunct should not macroscopically decrease the truth degree of the conjunction" points towards continuity, left-continuity is a weaker but often sufficient condition for preserving logical coherence in such frameworks.
+\end{remark}}
+
 \section{Generators and continuous Archimedean T-norms}
 \label{app:generators_tnorms}
 Continuous archimedean t-norms can be elegantly characterized and constructed through the concept of generators. 
