@@ -1,0 +1,184 @@
+\chapter{Propositional logic and algebraic logic.}
+
+\subsection{Brief History}
+
+The study of understanding and formalizing reasoning began in ancient Greece with Aristotle's work on syllogisms, which provided the foundation for deductive reasoning for nearly two millennia. The Stoic philosophers also made significant early contributions to what we now recognize as propositional logic, though much of their work was lost to time. While Leibniz later envisioned a universal formal language for reasoning, it wasn't until the 19th century that modern mathematical logic truly emerged.\\
+
+The field saw major developments through Boole's algebra of logic, De Morgan's work on relations, and most crucially, Frege's introduction of predicate logic with quantification in his Begriffsschrift (1879). This period was driven by a need for greater mathematical rigor, especially in analysis and geometry. Peano further contributed by developing formal axioms for arithmetic and emphasizing logical symbolism in proofs.\\
+
+The early 20th century brought both ambitious hopes and fundamental limitations. While Russell and Whitehead attempted to derive all mathematics from logic in Principia Mathematica and Hilbert proposed his program for securing mathematical foundations, Gödel's incompleteness theorems (1931) revealed inherent limitations to formal systems. Tarski's work on semantics and truth later provided crucial tools for understanding formal languages and their models.\\
+
+\subsection{Formal Logic}
+
+A formal logic provides a precise framework for reasoning, consisting of a syntax and a semantics. 
+
+Syntax defines the language: its symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas (WFFs), such as $(P \rightarrow Q)$. Using these syntactic rules, specifically axioms and rules of inference (like Modus Ponens), we can derive new WFFs in a purely formal, symbolic manner, without any regard for their meaning. This process leads to the notion of provability: a formula $\phi$ is provable from a set of assumptions $\Gamma$ ($\Gamma \vdash \phi$) if there's a finite sequence of WFFs (a proof) where each step is an axiom, an assumption, or follows from previous steps by an inference rule. If $\phi$ is provable from no assumptions ($\vdash \phi$), it's a theorem of the logic.
+
+Semantics, on the other hand, assigns meaning and truth to these WFFs. For classical propositional logic, this is often done using truth tables, where each row represents a distinct model (a specific truth assignment to the propositional variables) and determines the truth value of the formula in that model. A formula is valid (or a tautology, written $\models \phi$) if it is true in all possible models (all rows of its truth table). Alfred Tarski generalized this notion of truth-in-a-model for more expressive logics like first-order logic, where models are richer mathematical structures. The fundamental goal of a logical system is to align its syntactic derivations with semantic truth: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$). When a logic is both sound and complete, provability and validity become equivalent concepts, perfectly capturing semantic truth through syntactic manipulation.
+
+\subsection{Algebraic Logic}
+
+The connection to algebraic logic arises from observing that the structure of logical truths and equivalences often mirrors the structure of certain algebraic systems. Classical propositional logic, for instance, is intimately linked to Boolean algebra. This connection can be formalized in two main ways, one starting from syntax and the other from semantics, ultimately revealing a deep correspondence.
+
+From the syntactic side, we can construct an "algebra of formulas" or, more precisely, a Lindenbaum-Tarski algebra. Here, formulas are grouped into equivalence classes based on provable equivalence (e.g., $[\phi] = \{\psi \mid \vdash (\phi \leftrightarrow \psi)\}$). The logical connectives then induce operations on these equivalence classes (e.g., $[\phi] \wedge [\psi] = [\phi \wedge \psi]$). This process, applied to classical propositional logic, yields a Boolean algebra, demonstrating how an algebraic structure naturally emerges from the logic's deductive apparatus. For other logics, this construction yields different algebras (like Heyting algebras for intuitionistic logic or MV-algebras for Łukasiewicz fuzzy logic).
+
+From the semantic side, we can use a class of algebraic structures to define the semantics of a logic. The elements of a chosen algebra (e.g., $\{0,1\}$ for classical logic, or the interval $[0,1]$ for many fuzzy logics) serve as the truth values, and the algebra's operations define the truth functions for the logical connectives. A formula is then considered valid in this "algebraic semantics" if it evaluates to a designated truth value (like '1') under all valuations into the relevant algebras. When a logic is sound and complete with respect to such an algebraic semantics, it signifies that the Lindenbaum-Tarski algebra (derived from syntax) is essentially the "freest" or most general algebraic model for that logic, and its structure faithfully reflects the semantic properties defined by the chosen class of algebras. This establishes that the study of logical properties can be translated into the study of properties of their corresponding algebraic counterparts, a cornerstone of algebraic logic.
+
+The algebraic study of fuzzy logics has identified several important classes of ordered algebraic structures, many of which are based on the real unit interval $[0,1]$:
+\begin{itemize}
+    \item \textbf{Residuated Lattices}: These form a very general algebraic foundation for a wide range of fuzzy and substructural logics. They combine a lattice structure (for conjunction $\wedge$ and disjunction $\vee$) with a monoid operation $\otimes$ (modeling a strong conjunction, often a t-norm) and its residuum $\rightarrow$ (modeling implication), satisfying the adjointness property: $x \otimes y \leq z \iff x \leq y \rightarrow z$.
+    \item \textbf{MTL-algebras (Monoidal t-norm based Logic algebras)}: These are prelinear residuated lattices (i.e., satisfying $(x \rightarrow y) \vee (y \rightarrow x) = 1$). They are the algebraic counterparts of Monoidal t-norm Logic, which aims to capture the tautologies common to all logics based on left-continuous t-norms and their residua.
+    \item \textbf{BL-algebras (Basic Logic algebras)}: These are MTL-algebras that additionally satisfy the divisibility condition ($x \wedge y = x \otimes (x \rightarrow y)$). They serve as the algebraic semantics for Basic Logic, the logic of all continuous t-norms and their residua.
+    \item \textbf{MV-algebras (Łukasiewicz Logic algebras)}: These are BL-algebras that are also involutive (i.e., $\neg \neg x = x$, where $\neg x = x \rightarrow 0$). They are the algebraic semantics for Łukasiewicz logic, based on the Łukasiewicz t-norm.
+    \item \textbf{Gödel algebras (G-algebras)}: These are BL-algebras where the monoidal operation $\otimes$ is idempotent ($x \otimes x = x$), meaning $\otimes$ coincides with lattice meet $\wedge$. They correspond to Gödel logic, based on the minimum t-norm. Gödel algebras are a subclass of Heyting algebras (the algebraic semantics for intuitionistic logic).
+    \item \textbf{Product algebras ($\Pi$-algebras)}: These are BL-algebras satisfying specific additional axioms corresponding to product logic, based on the product t-norm.
+\end{itemize}
+These algebraic structures provide the standard semantics for their respective fuzzy logical systems, enabling the formal investigation of their properties, completeness theorems, and relationships.
+
+
+
+
+\subsection{Algebraic Logic}
+
+The connection to algebraic logic arises from the observation that the structure of provable statements and logical equivalences within a deductive system often mirrors the structure of certain algebraic systems. Classical propositional logic, for instance, is intimately linked to Boolean algebra. This profound connection can be understood by examining how algebraic structures emerge from both the syntax (proof theory) and the semantics (model theory) of a logic, with soundness and completeness theorems bridging the two.
+
+\paragraph{1. Algebras from Syntax: The Lindenbaum-Tarski Construction}
+
+From the syntactic side, for any given logic (defined by its language, axioms, and inference rules) and a theory $T$ within that logic, we can construct a canonical algebraic structure known as the Lindenbaum-Tarski algebra, denoted $L_T$. This construction does not initially depend on any pre-defined set of truth values like $\{0,1\}$ or $[0,1]$.
+
+\begin{itemize}
+\item \textbf{Elements:} The elements of $L_T$ are equivalence classes of formulas. Two formulas, $\varphi$ and $\psi$, are considered equivalent ($\varphi \approx \psi$) if they are provably interchangeable within the theory $T$, meaning $T \vdash (\varphi \leftrightarrow \psi)$. We denote the equivalence class of $\varphi$ as $[\varphi]$.
+\item \textbf{Operations:} The logical connectives of the logic induce operations on these equivalence classes. For example, $[\varphi] \wedge_{Syn} [\psi] = [\varphi \wedge \psi]$, and $[\varphi] \to_{Syn} [\psi] = [\varphi \to \psi]$.
+\item \textbf{Structure:} The type of algebraic structure that $L_T$ forms (e.g., Boolean algebra, Heyting algebra, MV-algebra, BL-algebra) is entirely determined by the axioms and inference rules of the logic and theory $T$. The axioms force $L_T$ to satisfy certain algebraic laws. For example, if the logic includes the axiom of excluded middle ($\varphi \vee \neg \varphi$), then $L_T$ will satisfy the corresponding law of Boolean algebras ($[\varphi] \vee \neg [\varphi] = [1]$).
+\end{itemize}
+
+The Lindenbaum-Tarski algebra $L_T$ is, in a sense, the freest or most general algebraic model for the theory $T$. It perfectly reflects what is provable: $T \vdash \varphi$ if and only if $[\varphi]$ is the top element (representing truth or provability) in $L_T$. This algebra serves as a canonical model \emph{built from syntax}, where truth within this specific algebra corresponds directly to provability in $T$.
+
+\paragraph{2. Algebras for Semantics: Choosing the Interpretation of Truth}
+
+From the semantic side, we \emph{choose} a class of algebraic structures to provide meaning and define the notion of logical validity.
+
+\begin{itemize}
+\item \textbf{Truth Values:} The elements of these chosen algebras serve as the truth values (e.g., $\{0,1\}$ for classical logic; the interval $[0,1]$ for many fuzzy logics).
+\item \textbf{Truth Functions:} The operations of these algebras define the truth functions for the logical connectives.
+\item \textbf{Validity:} A formula $\varphi$ is considered a tautology or valid with respect to a chosen class of semantic algebras, $A_{Sem}$, if $\varphi$ evaluates to a designated true value (typically $1$ or the top element of the algebra) under all possible assignments of truth values to its propositional variables, within \emph{every} algebra belonging to the class $A_{Sem}$.
+\end{itemize}
+
+\paragraph{Example: Basic Logic (BL) and its Semantics}
+
+\begin{itemize}
+\item \textbf{Syntax of BL:} Hájek's Basic Logic (BL) is defined by a set of axioms (like (A1)--(A7) from Chapter 2 of the provided book) and Modus Ponens.
+\begin{itemize}
+\item The \textbf{Lindenbaum-Tarski algebra $L_{BL}$} (for the theory of BL itself, i.e., just its axioms) is, by construction and proof, a \textbf{BL-algebra}. It embodies exactly what is provable in BL.
+\end{itemize}
+\item \textbf{Semantic Choice 1 (Standard Semantics):} We might choose to interpret BL using the standard real unit interval $[0,1]$, where conjunction $\&$ is interpreted by a \emph{specific} continuous t-norm (e.g., Łukasiewicz t-norm: $\max(0, x+y-1)$) and implication $\to$ by its residuum. Let's call this specific semantic algebra $A_{luk, Standard}$.
+\begin{itemize}
+\item $A_{luk, Standard}$ \emph{is} a BL-algebra (in fact, it is an MV-algebra, which is a special kind of BL-algebra).
+\end{itemize}
+\item \textbf{Semantic Choice 2 (General Class):} Alternatively, we might choose the class of \emph{all linearly ordered BL-algebras} as our semantic framework.
+\end{itemize}
+
+\paragraph{3. The Bridge: Soundness and Completeness}
+
+The critical link between the syntactic Lindenbaum-Tarski algebra ($L_T$) and the chosen class of semantic algebras ($A_{Sem}$) is established by soundness and completeness theorems.
+
+\begin{itemize}
+\item \textbf{Soundness:} A logic is sound with respect to $A_{Sem}$ if everything provable ($T \vdash \varphi$) is also valid in all algebras in $A_{Sem}$. This usually means that the axioms are valid in $A_{Sem}$ and inference rules preserve validity.
+\item \textbf{Completeness:} A logic is complete with respect to $A_{Sem}$ if everything valid in all algebras in $A_{Sem}$ is also provable.
+\end{itemize}
+
+\paragraph{Nuances and the Impact of Semantic Choice on Completeness:}
+
+\begin{itemize}
+\item The Lindenbaum-Tarski algebra $L_T$ is \emph{always} an algebraic model where truth perfectly aligns with provability in $T$.
+\item The choice of $A_{Sem}$ determines what we \emph{consider} to be the intended models.
+\begin{itemize}
+\item \textbf{If $L_T$ (or a structure closely related to it, like its image under an embedding) is representative of the algebras in $A_{Sem}$, then completeness holds.} This means $A_{Sem}$ is general enough. For instance, BL is complete with respect to the class of \emph{all linearly ordered BL-algebras}. The Lindenbaum-Tarski algebra for any maximal consistent BL-theory is a linearly ordered BL-algebra.
+\item \textbf{If $A_{Sem}$ is too restrictive or too specific, completeness may fail.} For example, BL is \emph{not} complete with respect to the \emph{single} standard Łukasiewicz algebra $A_{luk, Standard}$ on $[0,1]$. The formula $\neg \neg \varphi \leftrightarrow \varphi$ (double negation elimination) is valid in $A_{luk, Standard}$ (since $\neg x = 1 - x$). However, $\neg \neg \varphi \leftrightarrow \varphi$ is \emph{not provable} in BL alone (it requires an additional axiom, as in Łukasiewicz logic L).
+\begin{itemize}
+\item In this case:
+\begin{itemize}
+\item $[\neg \neg \varphi \leftrightarrow \varphi]$ is \emph{not} the top element in the Lindenbaum-Tarski algebra $L_{BL}$ (because it's not provable in BL). $L_{BL}$ is a BL-algebra that does not necessarily satisfy $\neg \neg x = x$.
+\item But $\neg \neg \varphi \leftrightarrow \varphi$ evaluates to $1$ in the specific semantic algebra $A_{luk, Standard}$.
+\item This shows an incompleteness: $A_{luk, Standard}$ validates something ($\neg \neg \varphi \leftrightarrow \varphi$) that BL's syntax doesn't prove. The chosen semantic algebra $A_{luk, Standard}$ has more properties (it's an MV-algebra) than are forced by the general BL axioms. The Lindenbaum-Tarski algebra $L_{BL}$ is more general than $A_{luk, Standard}$ in the sense that it doesn't satisfy all the laws that $A_{luk, Standard}$ does.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+
+\signal{Choosing a different algebra (or class of algebras) for the semantics means you are choosing a different set of "permissible worlds" or "interpretive frameworks" (models) in which to evaluate the truth of your logical formulas. POR ESO DEPENDE DEL ALGEBRA QUE ELIJAS, SI SE CUMPLE LA COMPLETITUD O NO!!
+
+
+
+
+
+
+
+
+% Yes, that's exactly right!
+
+% **Choosing a different algebra (or class of algebras) for the semantics means you are choosing a different set of "permissible worlds" or "interpretive frameworks" (models) in which to evaluate the truth of your logical formulas.**
+
+% Let's break this down:
+
+% 1.  **The Logic's Syntax is Fixed:**
+%     You start with a specific logical system defined by its:
+%     *   Language (symbols, connectives)
+%     *   Axioms
+%     *   Inference rules
+%     This syntactic setup determines what can be *proven* (⊢ φ). The Lindenbaum-Tarski algebra for this logic is uniquely determined by this syntax and reflects exactly what is provable.
+
+% 2.  **The Role of Semantic Algebras:**
+%     When you define the semantics for this logic, you specify:
+%     *   **What constitutes a "model" or an "interpretation."**
+%     *   **How formulas are assigned truth values within these models.**
+
+%     A key part of defining "what constitutes a model" is specifying the algebraic structure of the truth values. The "algebra for the semantics" is the structure (or class of structures) that your truth values and the operations on them must conform to.
+
+%     *   **Example 1: Classical Propositional Logic (CPL)**
+%         *   **Syntax:** Standard axioms for CPL, Modus Ponens.
+%         *   **Semantic Choice A (Standard):** You choose the **two-element Boolean algebra {0,1} (2)** as your semantic algebra. This means:
+%             *   Truth values are 0 or 1.
+%             *   Connectives are interpreted as the standard Boolean operations on {0,1}.
+%             *   A formula is a tautology if it's true under all assignments of 0/1 to variables in this specific algebra.
+%             *   CPL is sound and complete with respect to **2**.
+%         *   **Semantic Choice B (General):** You choose the **class of all Boolean algebras (BA)** as your semantic framework. This means:
+%             *   A model is any Boolean algebra.
+%             *   Truth values are elements of that Boolean algebra.
+%             *   Connectives are the operations of that Boolean algebra.
+%             *   A formula is a tautology if it evaluates to the top element (1) in *every* Boolean algebra under all assignments.
+%             *   CPL is also sound and complete with respect to the class of all **BA**. (In fact, if it's true in all BAs, it's true in **2**, and vice-versa for CPL formulas).
+
+%     *   **Example 2: A Fuzzy Logic like Gödel Logic (G)**
+%         *   **Syntax:** Axioms of BL + the axiom φ → (φ & φ), Modus Ponens.
+%         *   **Semantic Choice A (Standard Gödel Algebra on [0,1]):** You choose the algebra ([0,1], min, →_G, 0, 1) where →_G is Gödel implication. Let's call this G_[0,1].
+%             *   Models are valuations into this specific algebra G_[0,1].
+%             *   G is sound and complete with respect to G_[0,1].
+%         *   **Semantic Choice B (All Linearly Ordered Heyting Algebras):** You choose the class of all linearly ordered Heyting algebras (which are essentially Gödel algebras).
+%             *   Models are valuations into *any* linearly ordered Heyting algebra.
+%             *   G is also sound and complete with respect to this class.
+%         *   **Semantic Choice C (All Heyting Algebras - for Intuitionistic Logic):** If you were dealing with Intuitionistic Logic (which is a sublogic of G), the Lindenbaum-Tarski algebra would be a Heyting algebra. You would then typically prove completeness with respect to the class of all Heyting algebras, or equivalently, Kripke models.
+
+% 3.  **How the Choice of Semantic Algebra(s) Affects Completeness:**
+
+%     *   **A Broader Class of Semantic Algebras:** If you choose a very general class of algebras for your semantics (e.g., all BL-algebras for Basic Logic), it's "easier" to achieve completeness. This is because if a formula is *not* provable, its equivalence class in the (correspondingly general) Lindenbaum-Tarski algebra provides a counterexample. Since this Lindenbaum-Tarski algebra belongs to the broad class, you've found a semantic counterexample.
+%     *   **A More Restrictive Class of Semantic Algebras:** If you choose a very specific algebra (like the standard Łukasiewicz algebra on [0,1]) or a narrow class of algebras for your semantics, it becomes "harder" to achieve completeness for a *general* logic.
+%         *   Your specific semantic algebra(s) might satisfy additional properties (laws) that are not derivable from the logic's basic axioms alone.
+%         *   Therefore, these specific algebras might validate certain formulas that are *not* provable in the (more general) logic.
+%         *   If this happens, the logic is *incomplete* with respect to that *specific, restrictive class* of semantic algebras.
+%         *   **Example:** BL is incomplete with respect to the single standard Łukasiewicz algebra on [0,1] because the Łukasiewicz algebra validates ¬¬φ ↔ φ, but BL does not prove it.
+
+% **In essence:**
+
+% *   The **Lindenbaum-Tarski algebra** is the algebraic structure *dictated by the logic's syntax*. It's the "most honest" algebraic reflection of what the logic can prove.
+% *   The **choice of semantic algebras** is your decision about what constitutes the "intended range of interpretations" or the "universe of truth."
+% *   **Completeness** is the property that these two perspectives align: what is provable is exactly what is true in all your chosen semantic models.
+% *   If you **choose a different set of semantic algebras, you are choosing a different set of models.** This new set of models might:
+%     *   Validate more formulas than your logic can prove (if the new set is more restrictive/has more properties).
+%     *   Validate fewer formulas (if the new set is broader, though this is less common when starting from an established logic).
+%     *   This directly impacts whether your original logic is complete with respect to this *new* choice of semantic models.
+
+% You are making the models conform to a particular algebraic structure when you "choose" a semantic algebra. If that chosen structure has more laws than what the logic's syntax can derive, then the logic will be incomplete with respect to models restricted to that specific algebraic form. The Lindenbaum-Tarski algebra, being derived only from syntax, won't necessarily have those extra laws.
+}

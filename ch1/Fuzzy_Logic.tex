@@ -31,3 +31,32 @@ of t-norms are known as families of copulas under different names}
 
     Łukasiewicz Logic's additive t-norm balances compensation between criteria, allowing alternatives to offset weaknesses in one dimension with strengths in others—a critical feature for complex trade-off analysis.
 }
+
+
+
+
+
+
+
+
+\subsection{Approximate Reasoning and Pavelka-Style Completeness}
+
+Classical deductive systems typically deal with absolute truth: premises are assumed to be fully true (truth value 1), and sound inference rules guarantee that conclusions are also fully true. However, in many real-world scenarios and in the spirit of fuzzy logic, we often reason with information that is only partially true or true to a certain degree. This leads to the field of **approximate reasoning**, where we are interested in the degree to which a conclusion follows from premises that themselves have degrees of truth.
+
+A significant contribution to formalizing reasoning with degrees of truth was made by Jan Pavelka in the 1970s, particularly for logics related to Łukasiewicz logic. His work was later refined and integrated into the broader t-norm based framework by Hájek. The core idea is to extend a fuzzy logical system (like Łukasiewicz logic, denoted L) with rational truth constants $\bar{r}$ for every rational $r \in [0,1] \cap \mathbb{Q}$. A formula $(\bar{r} \rightarrow \phi)$ can then be interpreted as stating "$\phi$ is true to a degree at least $r$".
+
+This framework allows for the definition of two key concepts for a given theory $T$ (a set of axioms, each potentially associated with a truth degree or assumed to be fully true):
+
+\begin{itemize}
+    \item \textbf{Truth Degree of $\phi$ over $T$}: $||\phi||_T = \inf\{e(\phi) \mid e \text{ is a model of } T\}$. This is the lowest degree to which $\phi$ is true in all models that satisfy the theory $T$.
+    \item \textbf{Provability Degree of $\phi$ over $T$}: $|\phi|_T = \sup\{r \mid T \vdash (\bar{r} \rightarrow \phi)\}$. This is the highest degree $r$ such that it is provable from $T$ that $\phi$ is true to degree at least $r$.
+\end{itemize}
+
+Pavelka's completeness theorem for Rational Pavelka Logic (RPL), which is Łukasiewicz logic extended with rational truth-value constants and appropriate "bookkeeping" axioms for these constants, establishes a fundamental connection between these semantic and syntactic degrees.
+
+\begin{theorem}[Pavelka-style Completeness for RPL]
+For any theory $T$ in Rational Pavelka Logic and any formula $\phi$:
+\[ |\phi|_T = ||\phi||_T \]
+\end{theorem}
+
+This remarkable result states that the highest degree to which a formula is provable from a theory $T$ is precisely the lowest degree to which it is true in all models of $T$. It provides a formal calculus for "approximate reasoning" where conclusions can be derived with associated degrees of truth based on the degrees of truth of the premises. For instance, if we have premises $A_1, \dots, A_k$ with associated truth degrees $r_1, \dots, r_k$, and we can syntactically derive a conclusion $C$ with an associated provability degree $s$ that depends on $r_1, \dots, r_k$, Pavelka's theorem ensures that this syntactically derived degree $s$ is the "best possible" semantic guarantee for the truth of $C$. While the original RPL is specific to Łukasiewicz logic due to its reliance on the properties of the Łukasiewicz t-norm and its residuum, the general concept of graded provability and its relation to graded truth is a cornerstone of advanced fuzzy logic.
