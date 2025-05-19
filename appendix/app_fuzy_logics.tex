@@ -1,22 +1,38 @@
 \chapter{Propositional logic and algebraic logic.}
 
-\subsection{Brief History}
+This appendix aims to give some context and the most important notions in order to understand the connection between logic and algebra. 
 
-The study of understanding and formalizing reasoning began in ancient Greece with Aristotle's work on syllogisms, which provided the foundation for deductive reasoning for nearly two millennia. The Stoic philosophers also made significant early contributions to what we now recognize as propositional logic, though much of their work was lost to time. While Leibniz later envisioned a universal formal language for reasoning, it wasn't until the 19th century that modern mathematical logic truly emerged.\\
+\subsection*{Brief History}
+
+The study of understanding and formalizing reasoning\footnote{This subsection is based on \cite[p.~5-8]{ConciseLogicBook} with some additional comments regarding Peano, Hilbert and Tarski from \cite{MathLogicBook}.} began in ancient Greece with Aristotle's work on syllogisms, which provided the foundation for deductive reasoning for nearly two millennia. The Stoic philosophers also made significant early contributions to what we now recognize as propositional logic, though much of their work was lost to time. While Leibniz later envisioned a universal formal language for reasoning, it wasn't until the 19th century that modern mathematical logic truly emerged.\\
 
 The field saw major developments through Boole's algebra of logic, De Morgan's work on relations, and most crucially, Frege's introduction of predicate logic with quantification in his Begriffsschrift (1879). This period was driven by a need for greater mathematical rigor, especially in analysis and geometry. Peano further contributed by developing formal axioms for arithmetic and emphasizing logical symbolism in proofs.\\
 
 The early 20th century brought both ambitious hopes and fundamental limitations. While Russell and Whitehead attempted to derive all mathematics from logic in Principia Mathematica and Hilbert proposed his program for securing mathematical foundations, Gödel's incompleteness theorems (1931) revealed inherent limitations to formal systems. Tarski's work on semantics and truth later provided crucial tools for understanding formal languages and their models.\\
 
-\subsection{Formal Logic}
+\section{Formal Logic}
 
-A formal logic provides a precise framework for reasoning, consisting of a syntax and a semantics. 
+A formal logic provides a precise framework for reasoning, consisting of a syntax and a semantics. Examples of formal logics are:
 
-Syntax defines the language: its symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas (WFFs), such as $(P \rightarrow Q)$. Using these syntactic rules, specifically axioms and rules of inference (like Modus Ponens), we can derive new WFFs in a purely formal, symbolic manner, without any regard for their meaning. This process leads to the notion of provability: a formula $\phi$ is provable from a set of assumptions $\Gamma$ ($\Gamma \vdash \phi$) if there's a finite sequence of WFFs (a proof) where each step is an axiom, an assumption, or follows from previous steps by an inference rule. If $\phi$ is provable from no assumptions ($\vdash \phi$), it's a theorem of the logic.
+\begin{itemize}
+    \item Propositional logic (also called Sentential logic)\cite[Ch.~6]{ConciseLogicBook}: it deals with statements and combinations of them through connectives.
+    \item Predicate logic (also called First Order Logic)\cite[Ch.~8]{ConciseLogicBook}: extends propositional logic by introducing predicates, terms, variables over individual domains, and quantifiers ($\oldforall$, $\exists$) to make general statements about these individuals. 
+    \item Other families of formal logics often build upon, extend, or modify the principles of propositional or predicate logic. Some examples include: modal logics, temporal logics, intuitionistic logic, many-valued logics and others are all different kinds of formal logics, each with their own distinct syntax and/or semantics.
 
-Semantics, on the other hand, assigns meaning and truth to these WFFs. For classical propositional logic, this is often done using truth tables, where each row represents a distinct model (a specific truth assignment to the propositional variables) and determines the truth value of the formula in that model. A formula is valid (or a tautology, written $\models \phi$) if it is true in all possible models (all rows of its truth table). Alfred Tarski generalized this notion of truth-in-a-model for more expressive logics like first-order logic, where models are richer mathematical structures. The fundamental goal of a logical system is to align its syntactic derivations with semantic truth: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$). When a logic is both sound and complete, provability and validity become equivalent concepts, perfectly capturing semantic truth through syntactic manipulation.
+\end{itemize}
 
-\subsection{Algebraic Logic}
+As stated in \cite[p.~67]{MathLogicBook}, when the "working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
+
+
+
+\paragraph{Syntax} defines the language: its symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that don't make sense and wouldn't be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".} (WFFs), such as $(P \rightarrow Q)$. Using these syntactic rules, specifically axioms and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference. Then other rules can be deduced. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic.
+\cite[p.~39,64]{ResiduatedLattices2007}}), we can derive new WFFs in a purely formal, symbolic manner, without any regard for their meaning. This process leads to the notion of provability: a formula $\phi$ is provable from a set of assumptions $\Gamma$ ($\Gamma \vdash \phi$) if there's a finite sequence of WFFs (a proof) where each step is an axiom, an assumption, or follows from previous steps by an inference rule. %\signal{If $\phi$ is provable from no assumptions ($\vdash \phi$), it's a theorem of the logic.}
+
+\paragraph{Semantics,} on the other hand, assigns meaning and truth to these WFFs. For classical propositional logic, this is often done using truth tables, where each row represents a distinct model (a specific truth assignment to the propositional variables) and determines the truth value of the formula in that model. A formula is valid (or a tautology, written $\models \phi$) if it is true in all possible models (all rows of its truth table). Alfred Tarski generalized this notion of truth-in-a-model for more expressive logics like first-order logic, where models are richer mathematical structures. \\
+
+The fundamental goal of a logical system is to align its syntactic derivations with semantic truth: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$). When a logic is both sound and complete, provability and validity become equivalent concepts, perfectly capturing semantic truth through syntactic manipulation.
+
+\section{Algebraic Logic}
 
 The connection to algebraic logic arises from observing that the structure of logical truths and equivalences often mirrors the structure of certain algebraic systems. Classical propositional logic, for instance, is intimately linked to Boolean algebra. This connection can be formalized in two main ways, one starting from syntax and the other from semantics, ultimately revealing a deep correspondence.
 
@@ -182,3 +198,21 @@ The critical link between the syntactic Lindenbaum-Tarski algebra ($L_T$) and th
 
 % You are making the models conform to a particular algebraic structure when you "choose" a semantic algebra. If that chosen structure has more laws than what the logic's syntax can derive, then the logic will be incomplete with respect to models restricted to that specific algebraic form. The Lindenbaum-Tarski algebra, being derived only from syntax, won't necessarily have those extra laws.
 }
+
+
+
+\subsection{Substructural Logics and Residuated Lattices}
+
+Many logics, including classical and intuitionistic logic, satisfy certain "structural rules" in their Gentzen-style formulations, such as:
+\begin{itemize}
+    \item \textbf{Weakening:} Allows adding arbitrary formulas to antecedents or succedents.
+    \item \textbf{Contraction:} Allows replacing multiple occurrences of a formula with a single one.
+    \item \textbf{Exchange:} Allows reordering formulas.
+\end{itemize}
+\textbf{Substructural logics} are logics where one or more of these structural rules are restricted or absent. Examples include relevance logics (lack weakening), linear logic (lacks weakening and contraction), and fuzzy logics.
+
+The algebraic study of substructural logics reveals that their algebraic counterparts are often \textbf{residuated lattices} (or related structures).
+A residuated lattice is, at its core, a lattice $(L, \land, \lor)$ equipped with a monoid operation $\cdot$ (fusion) and two binary operations $\backslash$ (left residual) and $/$ (right residual) satisfying the residuation property:
+\[ x \cdot y \le z \iff y \le x \backslash z \iff x \le z / y \]
+This is a generalization of the relationship in Heyting algebras ($x \land y \le z \iff y \le x \to z$) where fusion is meet, and the implication $\to$ is the residual. In Boolean algebras, $x \cdot y = x \land y$ and $x \to y = \neg x \lor y$. The implication $\to$ in logics often corresponds to a residual operation.
+The absence or presence of structural rules in the logic corresponds to specific algebraic properties of the residuated lattices (e.g., commutativity of $\cdot$ for exchange, integrality for weakening, idempotence of $\cdot$ for contraction).

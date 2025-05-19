@@ -66,10 +66,10 @@ The reasoning regarding the properties is entirely analogous to the previous cas
 Complement was defined by Zadeh \cite{Zadeh1965} as\footnote{This is not the only definition that satisfies the axioms of a complement and is compatible with the classical limit, but it is the simplest one and will be used in this text. Other alternatives and their axioms can be found in \cite{Sladoje2007}. In \cite{Klement2000}, this is called the standard negation $N_s$.}:
 
 \begin{definition}[Complement]
-  The complement of a fuzzy set $A\in \fuzzy{X}$ is another fuzzy set with membership function given by $^\lnot A(x) \coleq 1 - A(x) \forall x\in X$
+  The complement of a fuzzy set $A\in \fuzzy{X}$ is another fuzzy set with membership function given by $\overline{A}(x) \coleq 1 - A(x) \forall x\in X$
 \end{definition}
 
-Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\lnot A(x)= 1 - A(x) \notin \{0,1\}$.\\
+Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\overline{ A}(x)= 1 - A(x) \notin \{0,1\}$.\\
 
 One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
 
@@ -79,9 +79,9 @@ Another important property that classical union and intersection satisfy is De M
 
 \[ G_{xz}(t + s) \leq 1 - T(1 - G_{xy}(t), 1 - G_{yz}(s))\]
 
-Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a relationship between t-norms and t-conorms, which is formalized in the following proposition:
+Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a relationship between t-norms and t-conorms\footnote{The relation from proposition \ref{prop:rel_tnorm_tconorm} directly mirrors the classical set union definition via intersection and negation ($A\cup B \coleq \neg (\neg A \cap \neg B)$), which can be visualized with a Venn diagram. Therefore, it is natural that this condition is equivalent to the De Morgan's Laws.}, which is formalized in the following proposition:
 
-\begin{proposition}[Relationship between t-norm and t-conorm]
+\begin{proposition}[Relationship between t-norm and t-conorm]\label{prop:rel_tnorm_tconorm}
   Given a t-norm $T$, the t-conorm is $S(a,b)\coleq 1 - T(1-a, 1-b)$ if and only if the union and intersection defined by that pair satisfy the De Morgan's Laws.
 \end{proposition}
 \begin{remark}
@@ -93,11 +93,11 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 
   $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\
   [0.5em]
-  $\lnot S(a,b) = T(\lnot a, \lnot b) \iff 1 - S(a,b) = T(1-a, 1-b) \iff S(a,b) = 1 - T(1-a, 1-b)$\\
+  $\overline{ S(a,b)} = T(\overline{ a}, \overline{ b}) \iff 1 - S(a,b) = T(1-a, 1-b) \iff S(a,b) = 1 - T(1-a, 1-b)$\\
 
   $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\
   [0.5em]
-  $\lnot T(a,b) = S(\lnot a, \lnot b) \iff 1 - T(a,b) = S(1-a, 1-b) \iff T(a,b) = 1 - S(1-a, 1-b)$
+  $\overline{ T(a,b)} = S(\overline{ a}, \overline{ b}) \iff 1 - T(a,b) = S(1-a, 1-b) \iff T(a,b) = 1 - S(1-a, 1-b)$
 
 \end{proof}
 
