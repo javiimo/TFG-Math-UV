@@ -20,7 +20,7 @@ Osea que a qué nos referimos con epistemologic uncertainty? A que nos falta inf
 
 \subsection{Probability-Possibility Transformations}
 %https://www.researchgate.net/publication/2743789_On_PossibilityProbability_Transformations
-From the paper: \cite{Dubois1993}: 
+From the paper: \cite{Dubois1997}: 
 it is recalled in this paper that the probabilistic representations and the possibilisticones are not just two equivalent representations of uncertainty
 
 The possibilisticrepresentation is weaker because it explicitly handles imprecision (e.g. incompleteknowledge) and because possibility measures are based on an \textbf{ordering structure} rather than an \textbf{additive one}.
@@ -48,7 +48,7 @@ Classical measure theory, particularly probability theory, relies heavily on the
 
 \begin{definition}[Fuzzy Measure (Capacity)]
 Let $\Omega$ be a universal set. A \textbf{fuzzy measure} (or capacity) $\mu$ is a set function
-\[ \mu: \powerset{\Omega} \to [0, 1] \]
+\[ \mu: 2^\Omega \to [0, 1] \]
 that assigns a value to each subset of $\Omega$ (often called an event or criterion) such that:
 \begin{enumerate}
     \item \textbf{Boundary Conditions:}
@@ -65,7 +65,7 @@ The crucial departure from classical probability (in its general form) is the ab
 \subsection{Representations of Fuzzy Measures}
 A fuzzy measure $\mu$ is fundamentally defined by its $2^{|\Omega|}$ values assigned to all subsets of $\Omega$. This is its standard representation. However, alternative representations exist that can be more convenient for certain analyses or computations.
 \begin{definition}[Möbius Transform]
-For a fuzzy measure $\mu$ on a finite set $\Omega$, its \textbf{Möbius transform} $m: \powerset{\Omega} \to \mathbb{R}$ is another set function defined as:
+For a fuzzy measure $\mu$ on a finite set $\Omega$, its \textbf{Möbius transform} $m: 2^\Omega \to \mathbb{R}$ is another set function defined as:
 \[ m(A) = \sum_{B \subseteq A} (-1)^{|A \setminus B|} \mu(B), \quad \forall A \subseteq \Omega \]
 Conversely, the fuzzy measure can be recovered from its Möbius transform:
 \[ \mu(A) = \sum_{B \subseteq A} m(B), \quad \forall A \subseteq \Omega \]
@@ -75,7 +75,7 @@ The Möbius transform provides an alternative way to characterize the fuzzy meas
 \subsection{Types of Fuzzy Measures}
 The general definition of a fuzzy measure is quite broad. Within this framework, numerous specific types of fuzzy measures have been defined to capture different kinds of uncertainty, non-additivity, or interaction patterns. Two of the most prominent are probability measures and possibility measures, which will be the focus of the next section. Other types, such as belief measures or $\lambda$-measures, also exist and offer different ways to model non-additive information. The choice of fuzzy measure type is crucial when these measures are employed in more complex frameworks, such as for aggregation or integration, which are important applications discussed in subsequent chapters.
 
-Fuzzy measures are classified based on several criteria. These include restrictions on their output values (e.g., 0-1 or Boolean measures), their behavior concerning additivity (additive, subadditive, superadditive) and modularity (submodular, supermodular, modular), which describe interactions between set contributions. Symmetry, where the measure depends only on set cardinality, is another criterion. Decomposability defines how the measure of a union of disjoint sets is derived from the measures of its components, with $\lambda$-fuzzy measures and possibility measures being key examples. Measures can also be classified by their duality properties, their relationship to $k$-monotonicity or $k$-alternativity (leading to belief and plausibility measures), or by their construction method, such as distorted probability measures.
+Fuzzy measures are classified based on several criteria. These include restrictions on their output values (e.g., 0-1 or Boolean measures), their behavior concerning additivity \signal{This is probably mentioned in the previous subsection when we presented fuzzy measures as a generalization of probability} (additive, subadditive, superadditive) and modularity \signal{say what is modularity}(submodular, supermodular, modular), which describe interactions between set contributions. Symmetry, where the measure depends only on set cardinality, is another criterion. Decomposability defines how the measure of a union of disjoint sets is derived from the measures of its components, with $\lambda$-fuzzy measures and possibility measures being key examples. Measures can also be classified by their duality properties, their relationship to $k$-monotonicity or $k$-alternativity (leading to belief and plausibility measures), or by their construction method, such as distorted probability measures.
 
 \subsection*{Special Mention: Probability and Possibility}
 
@@ -85,68 +85,6 @@ Within this classification framework:
 
 \textbf{Possibility measures} (Pos) are characterized by the property $\text{Pos}(A \cup B) = \max\{\text{Pos}(A), \text{Pos}(B)\}$ (Definition 2.14). This makes them a specific type of \textit{decomposable fuzzy measure} (Note 2.26, using the maximum t-conorm). They are inherently \textit{subadditive} (page 7, bottom paragraph) and are a type of \textit{plausibility measure} (Note 2.18). Their duals are \textit{necessity measures}, which are a type of \textit{belief measure}.
 
-\begin{figure}[h!]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}[
-    % Styles
-    basic/.style={draw, text width=3cm, text centered, rounded corners, minimum height=1cm, drop shadow},
-    maincat/.style={basic, fill=LightSkyBlue, font=\bfseries},
-    subcat/.style={basic, fill=PaleGreen, text width=2.8cm},
-    highlight/.style={basic, fill=Gold, font=\bfseries, text width=3.2cm, minimum height=1.2cm},
-    detail/.style={font=\tiny, text width=3cm, text centered},
-    link/.style={-{Stealth[length=2.5mm, width=2mm]}, thick},
-    dashedlink/.style={link, dashed}
-]
-
-% Nodes
-\node[maincat] (fm) {Fuzzy Measures};
-
-% Branch 1: Additivity/Modularity
-\node[subcat, below left=1.5cm and 1.5cm of fm] (additive) {Additive Measures};
-\node[highlight, below=1cm of additive] (prob) {Probability Measures};
-\node[detail, below=0.2cm of prob] (probdetail) {(Modular, Self-Dual, Belief \& Plausibility, $S_L$-Decomposable)};
-\path[link] (additive) edge (prob);
-
-% Branch 2: Decomposability
-\node[subcat, below right=0.8cm and 2cm of fm] (decomposable) {Decomposable Measures};
-\node[highlight, below left=1cm and -0.2cm of decomposable] (poss) {Possibility Measures};
-\node[detail, below=0.2cm of poss] (possdetail) {(max-decomposable, Plausibility, Subadditive)};
-\node[subcat, fill=LightPink, below right=1cm and -0.2cm of decomposable] (lambda) {$\lambda$-Fuzzy Measures};
-\node[detail, below=0.2cm of lambda] (lambdadetail) {($\lambda=0 \implies$ Additive, \\ $\lambda<0 \implies$ Plausibility, \\ $\lambda>0 \implies$ Belief)};
-\path[link] (decomposable) edge (poss);
-\path[link] (decomposable) edge (lambda);
-
-% Branch 3: Belief/Plausibility (k-order properties)
-\node[subcat, below left=3.5cm and -2.5cm of fm] (belief) {Belief Measures};
-\node[subcat, below right=3.5cm and -2.5cm of fm] (plaus) {Plausibility Measures};
-\node[subcat, fill=Lavender, below=1cm of belief] (nec) {Necessity Measures};
-\node[detail, below=0.2cm of nec] (necdetail) {(Dual of Possibility)};
-\path[link] (belief) edge (nec);
-
-% Cross-links (dashed)
-\path[dashedlink, blue] (prob.east) edge[bend left=15] ($(belief.west)+(0,0.2)$);
-\path[dashedlink, blue] (prob.east) edge[bend right=15] ($(plaus.west)-(0,0.2)$);
-\path[dashedlink, red] (poss.east) edge[bend left=10] (plaus.west);
-\path[dashedlink, green] (nec.east) edge[bend right=10] (belief.west);
-
-% Connect main categories to root
-\path[link] (fm) edge (additive);
-\path[link] (fm) edge (decomposable);
-\path (fm) edge[link] node[midway, above, sloped, font=\scriptsize] {k-order props.} (belief);
-\path (fm) edge[link] node[midway, above, sloped, font=\scriptsize] {k-order props.} (plaus);
-
-% Other less central types (can be added for completeness if space allows)
-\node[subcat, fill=Wheat, above right=0.5cm and 1.5cm of fm, text width=2.5cm] (other) {Other types:};
-\node[detail, below=0.2cm of other, text width=2.5cm] (otherdetail) {0-1 (Boolean)\\Symmetric\\Sub/Supermodular\\Distorted Prob.};
-\path[link] (fm) edge (other);
-
-
-\end{tikzpicture}%
-}
-\caption{Simplified classification map of Fuzzy Measures, highlighting Probability and Possibility measures and their key properties/relationships.}
-\label{fig:fuzzy_classification}
-\end{figure}
 
 \section{Probability and Possibility Measures}
 Probability and possibility measures are two distinct yet related formalisms for quantifying uncertainty, both falling under the umbrella of fuzzy measures.
@@ -195,7 +133,7 @@ The core assumption underlying many transformations is that \textbf{possibility 
 
 \subsubsection{Transformations from Probability to Possibility (P$\to\Pi$)}
 The goal here is to summarize or bound a precise probability distribution $p$ (defined on elementary events) with a possibility distribution $\pi$ (which induces $\Pi$) such that $p(x) \le \pi(x)$ for all $x \in \Omega$, and often, to preserve the ranking of probabilities.
-One common method, attributed to Dubois and Prade \cite{DuboisPrade1983}, is the \textbf{least-specific dominating possibility distribution}.
+One common method, attributed to Dubois and Prade \cite{Dubois1997}, is the \textbf{least-specific dominating possibility distribution}.
 Given a probability distribution $p=(p_1, \dots, p_n)$ over a finite universe $\Omega = \{\omega_1, \dots, \omega_n\}$, with elements ordered such that $p_1 \ge p_2 \ge \dots \ge p_n$ (where $p_k$ is the probability of $\omega_k$). The possibility degree for $\omega_k$ is defined based on cumulative probabilities:
 \[ \pi(\omega_k) = \sum_{i=k}^{n} p_i \]
 This is typically normalized so that $\max_k \pi(\omega_k) = \pi(\omega_1) = 1$.
