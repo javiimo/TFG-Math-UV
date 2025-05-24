@@ -29,7 +29,7 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[node distance=1cm and 2.5cm]
         
-        \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic};
+        \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic}; 
     
         \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
             \textbf{Propositional Logic Syntax}
@@ -37,123 +37,21 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
                 \setlength\itemsep{0em}
                 \item Propositional Variables ($P, Q$)
                 \item Truth Constants (e.g., $\bar{0}, \bar{1}$)
-                \item Logical Connectives (\&, $\rightarrow$, $\land$, $\lor$, $\neg$)
+                \item Logical Connectives ($\Rightarrow$, $\land$, $\lor$, $\neg$)
                 \item Formation Rules for WFFs
             \end{itemize}
         };
     
         \node[block_ext, right=of prop_syntax] (pred_syntax) {
-            \textbf{First-Order Logic Syntax (Extends Propositional)}
+            \textbf{FOL Syntax (Extends Propositional)}
+
+            \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements plus:}}
             \begin{itemize}
                 \setlength\itemsep{0em}
-                \item \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements}}
-                \item \textbf{Plus:}
-                \item Object Variables ($x, y$)
-                \item Object Constants ($c, d$)
-                \item Predicate Symbols ($P(-), R(-,-)$)
-                \item Function Symbols ($f(-), g(-,-)$) (optional)
-                \item Quantifiers ($\forall, \exists$)
-                \item Terms (variables, constants, functions on terms)
-                \item Atomic Formulas (predicates on terms)
-                \item Extended Formation Rules for WFFs
-            \end{itemize}
-        };
-        \path [line] (prop_syntax.east) -- (pred_syntax.west) node [midway, above, font=\footnotesize] {Extends with};
-    \end{tikzpicture}}
-    \caption{Diagram summarizing the extension of syntax from fuzzy propositional logic to fuzzy predicate logic. Based on the ideas from \cite[Ch.~2,5]{Hajek1998}.}
-    \label{fig:syntax_diagram}
-    \end{figure}
-
-\paragraph{Semantics} assigns meaning to these WFFs, primarily by defining how truth is determined. For classical propositional logic, this involves assigning truth values (True or False) to atomic propositions and the meaning of the logical connectives, often illustrated using truth tables \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}. Each distinct assignment of truth values to atomic propositions constitutes a model (or valuation \cite[Sec.~3.1]{Agler2013SymbolicLogic}). A WFF is semantically valid (e.g., a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if it is true in all possible models. For predicate logic, semantics include as well interpretations over a domain of discourse, assigning objects to names and sets of objects (or n-tuples) to predicates \cite[Ch.~6.4]{Agler2013SymbolicLogic}.
-
-\begin{figure}[h!]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \begin{tikzpicture}[node distance=1cm and 2.5cm]
-        \node[title] (title_sem) {Semantics: Propositional to Predicate Logic};
-        \node[block, below=0.5cm of title_sem, xshift=-1cm] (prop_sem) {
-            \textbf{Propositional Logic Semantics}
-            \begin{itemize}
-                \setlength\itemsep{0em}
-                \item Truth Value Algebra (e.g., $[0,1]$ with t-norm, residuum)
-                \item Evaluation $e$: assigns truth values to propositional variables
-                \item Truth functions for connectives
-                \item Tautology: True for all evaluations
-            \end{itemize}
-        };
-        \node[block_ext, right=of prop_sem] (pred_sem) {
-            \textbf{First-Order Logic Semantics (Extends Propositional)}
-            \begin{itemize}
-                \setlength\itemsep{0em}
-                \item \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra}}
-                \item \textbf{Plus:}
-                \item Domain of Discourse $U$
-                \item Interpretation $(\cdot)^\mathcal{M}$:
-                    \begin{itemize}
-                    \setlength\itemsep{0em}
-                        \item Constants $\rightarrow$ elements in $U$
-                        \item Function symbols $\rightarrow$ crisp functions on $U$
-                        \item Predicate symbols $\rightarrow$ fuzzy relations on $U$
-                    \end{itemize}
-                \item Variable assignment $v$: object variables $\rightarrow$ elements in $U$
-                \item Truth for atomic formulas via fuzzy relations
-                \item Truth for connectives (as propositional)
-                \item Truth for quantifiers (inf/sup over domain)
-                \item Tautology: True in all structures $\mathcal{M}$ for all $v$
-            \end{itemize}
-        };
-        \path [line] (prop_sem.east) -- (pred_sem.west) node [midway, above, font=\footnotesize] {Extends with};
-    \end{tikzpicture}}
-    \caption{Diagram summarizing the extension of semantics from fuzzy propositional logic to fuzzy predicate logic. Based on the ideas from \cite[Ch.~2,5]{Hajek1998}.}
-    \label{fig:semantics_diagram}
-    \end{figure} 
-
-\paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), it is called a theorem of the logic.\\
-
-The fundamental goal of a logical system is to ensure its proof system correctly captures semantic truth. This relationship is characterized by two key meta-logical properties:
-\begin{itemize}
-    \item \textbf{Soundness}: If a formula $\phi$ is provable from a set of premises $\Gamma$ ($\Gamma \vdash \phi$), then $\phi$ is a semantic consequence of $\Gamma$ ($\Gamma \models \phi$). For theorems, if $\vdash \phi$, then $\models \phi$ (i.e., only valid formulas are provable).\cite[Lemma~1.2.7]{Hajek1998}
-    \item \textbf{Completeness}: If a formula $\phi$ is a semantic consequence of $\Gamma$ ($\Gamma \models \phi$), then $\phi$ is provable from $\Gamma$ ($\Gamma \vdash \phi$). For theorems, if $\models \phi$, then $\vdash \phi$ (i.e., all valid formulas are provable).\cite[Lemma~1.2.9]{Hajek1998}
-\end{itemize}
-When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
-
-\rule{\textwidth}{0.4mm}
-
-
-A formal logic is typically characterized by its syntax, semantics, and a proof system.
-
-\paragraph{Syntax} defines the formal language: its vocabulary of basic symbols and rules for constructing well-formed formulas (WFFs)\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that don't make sense and wouldn't be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".\cite[Sec.~2.3.3]{Agler2013SymbolicLogic}}. Figure~\ref{fig:syntax_diagram} illustrates these components. Propositional logic (PL) syntax (left in Fig.~\ref{fig:syntax_diagram}) includes propositional variables (e.g., $P, Q$) and logical connectives (e.g., $\neg, \rightarrow$) used to form WFFs like $(P \rightarrow Q)$ \cite[Sec.~2.3.3]{Agler2013SymbolicLogic}. First-order logic (FOL) syntax (right in Fig.~\ref{fig:syntax_diagram}) extends PL by adding new vocabulary such as object variables (e.g., $x,y$), object constants (e.g., $c,d$), predicate symbols (e.g., $P(-)$), function symbols (e.g., $f(-)$), and quantifiers ($\forall, \exists$). From variables, constants, and function applications, a syntactic category called \textit{terms} is formed; these generally refer to objects. \textit{Atomic formulas} are then constructed by applying predicate symbols to terms. These, along with the propositional connectives and quantifiers, are used in the extended formation rules to build complex WFFs.
-
-\begin{figure}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \begin{tikzpicture}[node distance=1cm and 2.5cm]
-        
-        \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic};
-    
-        \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
-            \textbf{Propositional Logic Syntax}
-            \begin{itemize}
-                \setlength\itemsep{0em}
-                \item Propositional Variables ($P, Q$)
-                \item Truth Constants (e.g., $\bar{0}, \bar{1}$)
-                \item Logical Connectives (\&, $\rightarrow$, $\land$, $\lor$, $\neg$)
-                \item Formation Rules for WFFs
-            \end{itemize}
-        };
-    
-        \node[block_ext, right=of prop_syntax] (pred_syntax) {
-            \textbf{First-Order Logic Syntax (Extends Propositional)}
-            \begin{itemize}
-                \setlength\itemsep{0em}
-                \item \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements}}
-                \item \textbf{Plus:}
-                \item Object Variables ($x, y$)
-                \item Object Constants ($c, d$)
-                \item Predicate Symbols ($P(-), R(-,-)$)
-                \item Function Symbols ($f(-), g(-,-)$) (optional)
-                \item Quantifiers ($\forall, \exists$)
-                \item Terms (variables, constants, functions on terms)
+                \item Object Symbols: Variables ($x$), Constants ($c$)
+                \item Structure Symbols: Predicates ($P(\cdot)$), Functions ($f(\cdot)$)
+                \item Quantifiers ($\oldforall, \exists$)
+                \item Terms (functions on objects)
                 \item Atomic Formulas (predicates on terms)
                 \item Extended Formation Rules for WFFs
             \end{itemize}
@@ -164,8 +62,7 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
     \label{fig:syntax_diagram}
     \end{figure}
 
-\paragraph{Semantics} assigns meaning to WFFs, primarily by defining how their truth is determined. Key semantic components are outlined in Figure~\ref{fig:semantics_diagram}. For propositional logic (left in Fig.~\ref{fig:semantics_diagram}), this involves a truth-value algebra (e.g., classical \{True, False\}, or a continuous range like $[0,1]$ for many-valued logics), an evaluation function $e$ assigning truth values from this algebra to propositional variables, and truth functions defining how connectives operate on these values (often given by truth tables in classical PL \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}). A specific assignment of truth values to atomic propositions constitutes a model (or valuation \cite[Sec.~3.1]{Agler2013SymbolicLogic}). A WFF is semantically valid (a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if true in all models. As Figure~\ref{fig:semantics_diagram} (right) shows, first-order logic semantics extends this framework. It introduces a domain of discourse $U$ and an interpretation $\mathcal{M}$ that maps constants to elements in $U$, function symbols to functions on $U$, and predicate symbols to relations on $U$ \cite[Ch.~6.4]{Agler2013SymbolicLogic}. A variable assignment $v$ maps object variables to elements in $U$. The truth of quantified formulas is typically defined using infima/suprema over the domain elements.
-
+\paragraph{Semantics} assigns meaning to these WFFs, primarily by defining how truth is determined. For classical propositional logic, this involves assigning truth values (True or False) to atomic propositions and the meaning of the logical connectives, often illustrated using truth tables \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}. Each distinct assignment of truth values to atomic propositions constitutes a model \cite[Sec.~3.1]{Agler2013SymbolicLogic}. A WFF is semantically valid (e.g., a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if it is true in all possible models. For predicate logic, semantics include as well interpretations over a domain of discourse, assigning objects to names and sets of objects (or n-tuples) to predicates \cite[Ch.~6.4]{Agler2013SymbolicLogic}.
 
 \begin{figure}[h!]
     \centering
@@ -176,40 +73,38 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
             \textbf{Propositional Logic Semantics}
             \begin{itemize}
                 \setlength\itemsep{0em}
-                \item Truth Value Algebra (e.g., $[0,1]$ with t-norm, residuum)
+                \item Truth Value Algebra $\mathbf{L}$ (e.g., $[0,1]$ with t-norm, residuum)
                 \item Evaluation $e$: assigns truth values to propositional variables
                 \item Truth functions for connectives
-                \item Tautology: True for all evaluations
             \end{itemize}
         };
         \node[block_ext, right=of prop_sem] (pred_sem) {
-            \textbf{First-Order Logic Semantics (Extends Propositional)}
+            \textbf{FOL Semantics (Extends Propositional)}
+
+            \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra plus:}}
             \begin{itemize}
                 \setlength\itemsep{0em}
-                \item \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra}}
-                \item \textbf{Plus:}
                 \item Domain of Discourse $U$
-                \item Interpretation $(\cdot)^\mathcal{M}$:
+                \item Interpretation (Model) $\mathcal{M}$ maps:
                     \begin{itemize}
                     \setlength\itemsep{0em}
                         \item Constants $\rightarrow$ elements in $U$
-                        \item Function symbols $\rightarrow$ crisp functions on $U$
-                        \item Predicate symbols $\rightarrow$ fuzzy relations on $U$
+                        \item Function symbols $\rightarrow$ functions on $U$
+                        \item Predicate symbols $\rightarrow$ fuzzy relations on $U$ ($r_P: U^n \to \mathbf{L}$)
                     \end{itemize}
-                \item Variable assignment $v$: object variables $\rightarrow$ elements in $U$
+                \item Variable Assignment $v: \text{ObjVars} \to U$
                 \item Truth for atomic formulas via fuzzy relations
                 \item Truth for connectives (as propositional)
                 \item Truth for quantifiers (inf/sup over domain)
-                \item Tautology: True in all structures $\mathcal{M}$ for all $v$
             \end{itemize}
         };
         \path [line] (prop_sem.east) -- (pred_sem.west) node [midway, above, font=\footnotesize] {Extends with};
     \end{tikzpicture}}
-    \caption{Semantic components for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
+    \caption{Diagram summarizing the extension of semantics from fuzzy propositional logic to fuzzy predicate logic. Based on the ideas from \cite[Ch.~2,5]{Hajek1998}.}
     \label{fig:semantics_diagram}
     \end{figure} 
 
-\paragraph{Proof System (or Deductive System)} provides formal rules to derive WFFs. It typically consists of axioms (initial WFFs assumed true) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}) for deriving new WFFs from existing ones \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), it is called a theorem of the logic.
+\paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), i.e. using only the axioms without specific assumptions, it is called a theorem of the logic.\\
 
 The fundamental goal of a logical system is to ensure its proof system correctly captures semantic truth. This relationship is characterized by two key meta-logical properties:
 \begin{itemize}
@@ -218,27 +113,125 @@ The fundamental goal of a logical system is to ensure its proof system correctly
 \end{itemize}
 When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
 
+% \rule{\textwidth}{0.4mm}
+
+
+% A formal logic is typically characterized by its syntax, semantics, and a proof system.
+
+% \paragraph{Syntax} defines the formal language: its vocabulary of basic symbols and rules for constructing well-formed formulas (WFFs)\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that don't make sense and wouldn't be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".\cite[Sec.~2.3.3]{Agler2013SymbolicLogic}}. Figure~\ref{fig:syntax_diagram} illustrates these components. Propositional logic (PL) syntax (left in Fig.~\ref{fig:syntax_diagram}) includes propositional variables (e.g., $P, Q$) and logical connectives (e.g., $\neg, \rightarrow$) used to form WFFs like $(P \rightarrow Q)$ \cite[Sec.~2.3.3]{Agler2013SymbolicLogic}. First-order logic (FOL) syntax (right in Fig.~\ref{fig:syntax_diagram}) extends PL by adding new vocabulary such as object variables (e.g., $x,y$), object constants (e.g., $c,d$), predicate symbols (e.g., $P(-)$), function symbols (e.g., $f(-)$), and quantifiers ($\forall, \exists$). From variables, constants, and function applications, a syntactic category called \textit{terms} is formed; these generally refer to objects. \textit{Atomic formulas} are then constructed by applying predicate symbols to terms. These, along with the propositional connectives and quantifiers, are used in the extended formation rules to build complex WFFs.
+
+% \begin{figure}[!ht]
+%     \centering
+%     \resizebox{\textwidth}{!}{%
+%     \begin{tikzpicture}[node distance=1cm and 2.5cm]
+        
+%         \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic}; 
+    
+%         \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
+%             \textbf{Propositional Logic Syntax}
+%             \begin{itemize}
+%                 \setlength\itemsep{0em}
+%                 \item Propositional Variables ($P, Q$)
+%                 \item Truth Constants (e.g., $\bar{0}, \bar{1}$)
+%                 \item Logical Connectives (\&, $\rightarrow$, $\land$, $\lor$, $\neg$)
+%                 \item Formation Rules for WFFs
+%             \end{itemize}
+%         };
+    
+%         \node[block_ext, right=of prop_syntax] (pred_syntax) {
+%             \textbf{First-Order Logic Syntax (Extends Propositional)}
+%             \begin{itemize}
+%                 \setlength\itemsep{0em}
+%                 \item \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements plus:}}
+%                 \item Object Symbols: Variables ($x$), Constants ($c$)
+%                 \item Structure Symbols: Predicates ($P(\cdot)$), Functions ($f(\cdot)$)
+%                 \item Quantifiers ($\oldforall, \exists$)
+%                 \item Terms (functions on objects)
+%                 \item Atomic Formulas (predicates on terms)
+%                 \item Extended Formation Rules for WFFs
+%             \end{itemize}
+%         };
+%         \path [line] (prop_syntax.east) -- (pred_syntax.west) node [midway, above, font=\footnotesize] {Extends with};
+%     \end{tikzpicture}}
+%     \caption{Syntax elements for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
+%     \label{fig:syntax_diagram}
+%     \end{figure}
+
+% \paragraph{Semantics} assigns meaning to WFFs, primarily by defining how their truth is determined. Key semantic components are outlined in Figure~\ref{fig:semantics_diagram}. For propositional logic (left in Fig.~\ref{fig:semantics_diagram}), this involves a truth-value algebra (e.g., classical \{True, False\}, or a continuous range like $[0,1]$ for many-valued logics), an evaluation function $e$ assigning truth values from this algebra to propositional variables, and truth functions defining how connectives operate on these values (often given by truth tables in classical PL \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}). A specific assignment of truth values to atomic propositions constitutes a model (or valuation \cite[Sec.~3.1]{Agler2013SymbolicLogic}). A WFF is semantically valid (a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if true in all models. As Figure~\ref{fig:semantics_diagram} (right) shows, first-order logic semantics extends this framework. It introduces a domain of discourse $U$ and an interpretation $\mathcal{M}$ that maps constants to elements in $U$, function symbols to functions on $U$, and predicate symbols to relations on $U$ \cite[Ch.~6.4]{Agler2013SymbolicLogic}. A variable assignment $v$ maps object variables to elements in $U$. The truth of quantified formulas is typically defined using infima/suprema over the domain elements.
+
+
+% \begin{figure}[h!]
+%     \centering
+%     \resizebox{\textwidth}{!}{%
+%     \begin{tikzpicture}[node distance=1cm and 2.5cm]
+%         \node[title] (title_sem) {Semantics: Propositional to Predicate Logic};
+%         \node[block, below=0.5cm of title_sem, xshift=-1cm] (prop_sem) {
+%             \textbf{Propositional Logic Semantics}
+%             \begin{itemize}
+%                 \setlength\itemsep{0em}
+%                 \item Truth Value Algebra (e.g., $[0,1]$ with t-norm, residuum)
+%                 \item Evaluation $e$: assigns truth values to propositional variables
+%                 \item Truth functions for connectives
+%                 \item Tautology: True for all evaluations
+%             \end{itemize}
+%         };
+%         \node[block_ext, right=of prop_sem] (pred_sem) {
+%             \textbf{First-Order Logic Semantics (Extends Propositional)}
+%             \begin{itemize}
+%                 \setlength\itemsep{0em}
+%                 \item \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra}}
+%                 \item \textbf{Plus:}
+%                 \item Domain of Discourse $U$
+%                 \item Interpretation $(\cdot)^\mathcal{M}$:
+%                     \begin{itemize}
+%                     \setlength\itemsep{0em}
+%                         \item Constants $\rightarrow$ elements in $U$
+%                         \item Function symbols $\rightarrow$ crisp functions on $U$
+%                         \item Predicate symbols $\rightarrow$ fuzzy relations on $U$
+%                     \end{itemize}
+%                 \item Variable assignment $v$: object variables $\rightarrow$ elements in $U$
+%                 \item Truth for atomic formulas via fuzzy relations
+%                 \item Truth for connectives (as propositional)
+%                 \item Truth for quantifiers (inf/sup over domain)
+%                 \item Tautology: True in all structures $\mathcal{M}$ for all $v$
+%             \end{itemize}
+%         };
+%         \path [line] (prop_sem.east) -- (pred_sem.west) node [midway, above, font=\footnotesize] {Extends with};
+%     \end{tikzpicture}}
+%     \caption{Semantic components for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
+%     \label{fig:semantics_diagram}
+%     \end{figure} 
+
+% \paragraph{Proof System (or Deductive System)} provides formal rules to derive WFFs. It typically consists of axioms (initial WFFs assumed true) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}) for deriving new WFFs from existing ones \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), it is called a theorem of the logic.
+
+% The fundamental goal of a logical system is to ensure its proof system correctly captures semantic truth. This relationship is characterized by two key meta-logical properties:
+% \begin{itemize}
+%     \item \textbf{Soundness}: If a formula $\phi$ is provable from a set of premises $\Gamma$ ($\Gamma \vdash \phi$), then $\phi$ is a semantic consequence of $\Gamma$ ($\Gamma \models \phi$). For theorems, if $\vdash \phi$, then $\models \phi$ (i.e., only valid formulas are provable).\cite[Lemma~1.2.7]{Hajek1998}
+%     \item \textbf{Completeness}: If a formula $\phi$ is a semantic consequence of $\Gamma$ ($\Gamma \models \phi$), then $\phi$ is provable from $\Gamma$ ($\Gamma \vdash \phi$). For theorems, if $\models \phi$, then $\vdash \phi$ (i.e., all valid formulas are provable).\cite[Lemma~1.2.9]{Hajek1998}
+% \end{itemize}
+% When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
 
 
 
-\rule{\textwidth}{0.4mm}
-A formal logic provides a precise framework for reasoning, consisting of a syntax and a semantics. Examples of formal logics are:
 
-\begin{itemize}
-    \item Propositional logic (also called Sentential logic)\cite[Ch.~6]{ConciseLogicBook}: it deals with statements and combinations of them through connectives.
-    \item Predicate logic (also called First Order Logic)\cite[Ch.~8]{ConciseLogicBook}: extends propositional logic by introducing predicates, terms, variables over individual domains, and quantifiers ($\oldforall$, $\exists$) to make general statements about these individuals. 
-    \item Other families of formal logics often build upon, extend, or modify the principles of propositional or predicate logic. Some examples include: modal logics, temporal logics, intuitionistic logic, many-valued logics and others are all different kinds of formal logics, each with their own distinct syntax and/or semantics.
+% \rule{\textwidth}{0.4mm}
+% A formal logic provides a precise framework for reasoning, consisting of a syntax and a semantics. Examples of formal logics are:
 
-\end{itemize}
+% \begin{itemize}
+%     \item Propositional logic (also called Sentential logic)\cite[Ch.~6]{ConciseLogicBook}: it deals with statements and combinations of them through connectives.
+%     \item Predicate logic (also called First Order Logic)\cite[Ch.~8]{ConciseLogicBook}: extends propositional logic by introducing predicates, terms, variables over individual domains, and quantifiers ($\oldforall$, $\exists$) to make general statements about these individuals. 
+%     \item Other families of formal logics often build upon, extend, or modify the principles of propositional or predicate logic. Some examples include: modal logics, temporal logics, intuitionistic logic, many-valued logics and others are all different kinds of formal logics, each with their own distinct syntax and/or semantics.
 
-As stated in \cite[p.~67]{MathLogicBook}, when the "working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
+% \end{itemize}
+
+% As stated in \cite[p.~67]{MathLogicBook}, when the "working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
 
 
-\paragraph{Syntax} defines the language: its symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that don't make sense and wouldn't be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".} (WFFs), such as $(P \rightarrow Q)$. Using these syntactic rules, specifically axioms and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}), we can derive new WFFs in a purely formal, symbolic manner, without any regard for their meaning. This process leads to the notion of provability: a formula $\phi$ is provable from a set of axioms called theory $\Gamma$ ($\Gamma \vdash \phi$) if there's a finite sequence of WFFs (a proof) where each step is an axiom, an assumption, or follows from previous steps by an inference rule \cite[Sec.~1.2, Defs.~1.2.6, 1.2.8]{Hajek1998}. If $\phi$ is provable from no assumptions ($\vdash \phi$), it's a theorem of the logic. \signal{Cuidado, que creo que las rules of inference a lo mejor no son parte de la syntax, sino que vienen después de definir syntax y semantics como una proof theory.}
+% \paragraph{Syntax} defines the language: its symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that don't make sense and wouldn't be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".} (WFFs), such as $(P \rightarrow Q)$. Using these syntactic rules, specifically axioms and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}), we can derive new WFFs in a purely formal, symbolic manner, without any regard for their meaning. This process leads to the notion of provability: a formula $\phi$ is provable from a set of axioms called theory $\Gamma$ ($\Gamma \vdash \phi$) if there's a finite sequence of WFFs (a proof) where each step is an axiom, an assumption, or follows from previous steps by an inference rule \cite[Sec.~1.2, Defs.~1.2.6, 1.2.8]{Hajek1998}. If $\phi$ is provable from no assumptions ($\vdash \phi$), it's a theorem of the logic. \signal{Cuidado, que creo que las rules of inference a lo mejor no son parte de la syntax, sino que vienen después de definir syntax y semantics como una proof theory.}
 
-\paragraph{Semantics,} on the other hand, assigns meaning and truth to these WFFs. For classical propositional logic, this is often done using truth tables, where each row represents a distinct model (a specific truth assignment to the propositional variables) and determines the truth value of the formula in that model \cite[Sec.~1.2]{Hajek1998}. A formula is valid (called a tautology, written $\models \phi$) if it is true in all possible models (all rows of its truth table) \cite[Sec.~1.2.2]{Hajek1998}. Alfred Tarski generalized this notion of truth in a model for more expressive logics like first-order logic, where models are richer mathematical structures \cite[Sec.~1.3, Defs.~1.3.1, 1.3.8]{Hajek1998}.\footnote{Model theory from Tarski, though fundamental to algebraic logic, is beyond the scope of this work.}\\
+% \paragraph{Semantics,} on the other hand, assigns meaning and truth to these WFFs. For classical propositional logic, this is often done using truth tables, where each row represents a distinct model (a specific truth assignment to the propositional variables) and determines the truth value of the formula in that model \cite[Sec.~1.2]{Hajek1998}. A formula is valid (called a tautology, written $\models \phi$) if it is true in all possible models (all rows of its truth table) \cite[Sec.~1.2.2]{Hajek1998}. Alfred Tarski generalized this notion of truth in a model for more expressive logics like first-order logic, where models are richer mathematical structures \cite[Sec.~1.3, Defs.~1.3.1, 1.3.8]{Hajek1998}.\footnote{Model theory from Tarski, though fundamental to algebraic logic, is beyond the scope of this work.}\\
 
-The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$) \cite[Lemmas~1.2.7, 1.2.9 and Thm.~1.2.11]{Hajek1998}. When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
+% The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$) \cite[Lemmas~1.2.7, 1.2.9 and Thm.~1.2.11]{Hajek1998}. When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
 
 
 \section{Algebraic Logic}
