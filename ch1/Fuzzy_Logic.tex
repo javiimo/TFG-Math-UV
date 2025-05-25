@@ -7,6 +7,110 @@ The implication connective is rooted in the residuation (or adjointness) propert
 
 
 
+
+
+The transition from classical to fuzzy sets requires extending the notion of truth from binary to graded values. This involves generalizing logical connectives while preserving their essential properties and meaning in the continuous domain.
+\signal{THE FIGURES DO NOT SAY ANYTHING ABOUT CLASSICAL As illustrated in Figure~\ref{fig:syntax_diagram}, fuzzy propositional logic syntax builds upon classical propositional variables and connectives, potentially adding truth constants. For fuzzy predicate logic, this is further extended with object symbols (variables, constants), structure symbols (predicates, functions), and quantifiers. Semantically (Figure~\ref{fig:semantics_diagram}), propositional fuzzy logic requires a truth value algebra (e.g., $[0,1]$ with t-norms and residua) and evaluation functions. Predicate logic then incorporates a domain of discourse, interpretations of constants, functions, and crucially, predicates as fuzzy relations mapping to this truth value algebra.}\\
+
+The task of defining connectives for truth values in the continuous interval $[0,1]$ requires creating a framework that is both intuitively meaningful and mathematically sound. The development of many valued propositional calculi follows several key principles \cite[p.27]{Hajek1998}:
+\begin{enumerate}
+    \item We primarily deal with \textbf{propositional logic} as the foundation.
+    \item The set of truth values is the real unit interval $[0,1]$, where $1$ represents absolute truth and $0$ absolute falsity. The natural linear ordering of reals plays a crucial role.
+    \item The logic is \textbf{truth-functional}: each $k$-ary logical connective $c$ is associated with a truth function $f_c: [0,1]^k \to [0,1]$. The truth degree of a compound formula $c(\phi_1, \dots, \phi_k)$ is determined solely by the truth degrees of its constituent formulas $\phi_1, \dots, \phi_k$.
+    \item Fuzzy logic must be a \textbf{generalization of classical two-valued logic}. This means that for truth values restricted to $\{0,1\}$, the fuzzy connectives must behave identically to their classical counterparts.
+\end{enumerate}
+With these principles, we can start constructing the connectives.
+
+\paragraph{Conjunction, Disjunction, and Negation}\signal{Esto lo puedo acortar yo creo}In classical logic, conjunction corresponds to set intersection. When generalizing to fuzzy sets, the truth function for conjunction should capture the intuition that \say{a large truth degree of $\phi \text{ \& } \psi$ should indicate that both the truth degree of $\phi$ and the truth degree of $\psi$ is large}\cite[p.27]{Hajek1998}. This leads to the adoption of \textbf{t-norms} (triangular norms) as the truth functions for fuzzy conjunction. The three basic continuous t-norms (\luka, Gödel/minimum, and Product) are particularly important as they give rise to three fundamental fuzzy logics: Lukasiewicz logic ($\L$), Gödel logic ($G$) and Product logic ($\Pi$), respectively. \signal{MENCIONAR QUÉ AXIOMAS SON ESOS QUE LOS HACEN ESPECIALES Y SI EL HECHO DE QUE ESAS T-NORMAS GENEREN TODAS LAS NORMAS CONTINUAS, TIENE ALGUNA IMPLICACIÓN. Each of these logics is characterized by specific axioms that reflect the algebraic properties of its underlying t-norm, making them cornerstones in the study of fuzzy logical systems.}
+
+Fuzzy \textbf{disjunction (OR)} and fuzzy \textbf{negation (NOT)} are generalized from their classical set-theoretic counterparts (union and complement, respectively) and are typically defined using t-conorms and fuzzy complement functions, as detailed in Section~\ref{sec:set_operations}.
+
+\subsection{Fuzzy Implications}
+
+\signal{Falta entender bien el concepto de implicación material. Lo que se entiende por implicación material (propiedad del residuo) y lo que no y qué repercusiones tiene eso para la lógica.}
+
+The implication connective ($P \rightarrow Q$, "IF $P$ THEN $Q$") is arguably the most critical for logical reasoning and building rule-based systems, such as those used to model expert opinion in MCDM, a topic that will be explored further in the next chapter. Its generalization to fuzzy logic presents a rich variety of approaches. A fuzzy implication $I(x,y)$ (where $x$ is the truth value of the antecedent and $y$ that of the consequent) aims to quantify "to what extent $q$ is at least as true as $p$" (\cite[p.57]{FULLER2}). Different formalizations capture this intuition in different ways. The choice among them depends heavily on the specific application and the desired properties.
+
+\paragraph{R-Implications (Residuated Implications)}
+This class of implications arises directly from the residuation principle you introduced earlier and is fundamental in algebraic fuzzy logic. Given a t-norm $T$ (representing conjunction), its corresponding R-implication $I_R$ is defined as the residuum of $T$:
+\[I_R(x,y) = \sup \{z \in [0,1] \mid T(x,z) \le y\}\]
+This definition ensures that $I_R(x,y)$ is the weakest (largest) truth value $z$ such that when $x$ is conjoined with $z$ (using $T$), the result is no stronger (no greater) than $y$ (\cite[Def. 2.1.5, p.29]{Hajek1998}). This property is crucial for the soundness of modus ponens in fuzzy logic. \signal{Esto se puede extendar a left semicont.}
+\begin{example}[R-Implications from Continuous T-norms \cite{Hajek1998}]
+The main continuous t-norms yield the following R-implications:
+\begin{itemize}
+    \item The \textbf{Łukasiewicz Implication} (from $T_L(x,y) = \max(0, x+y-1)$):
+    \[I_L(x,y) = \min(1, 1-x+y)\]
+    \item The \textbf{Gödel Implication} (from $T_G(x,y) = \min(x,y)$):
+    \[I_G(x,y) = \begin{cases} 1 & \text{if } x \le y \\ y & \text{if } x > y \end{cases}\]
+    \item The \textbf{Goguen (or Product) Implication} (from $T_P(x,y) = xy$):
+    \[I_P(x,y) = \begin{cases} 1 & \text{if } x \le y \\ y/x & \text{if } x > y \end{cases}\]
+\end{itemize}
+\end{example}
+R-implications are vital for constructing axiomatic fuzzy logical systems because they possess strong algebraic properties that ensure logical coherence. \signal{Explicar esto más.}
+
+\paragraph{S-Implications (Standard Implications)}
+This family of implications is derived from the classical logical equivalence $P \rightarrow Q \equiv \neg P \lor Q$. A fuzzy S-implication is defined using a fuzzy negation and a t-conorm $S$ \cite[p.59]{FULLER2}:
+\[I_S(x,y) = S(\overline{x}, y)\]
+\begin{example}[S-Implications]
+Common examples include:
+\begin{itemize}
+    \item The \textbf{Kleene-Dienes Implication}, using standard negation $\overline{x}=1-x$ and maximum t-conorm $S(a,b)=\max(a,b)$:
+    \[I_{KD}(x,y) = \max(1-x, y)\]
+    \item If the Łukasiewicz t-conorm $S_L(a,b) = \min(1, a+b)$ is used with standard negation, the resulting S-implication is $I_L(x,y) = \min(1, 1-x+y)$, which is identical to the Łukasiewicz R-implication.
+\end{itemize}
+\end{example}
+
+\paragraph{Implications from T-norms (for Fuzzy Rules)}
+In many practical applications, especially in fuzzy control and Multiple-Input Single-Output (MISO) fuzzy systems used in MCDM, implications are defined directly using a t-norm:
+\[I(x,y) = T(x,y)\]
+\begin{example}[T-norm based Implications \cite{FULLER2}]
+Popular examples include:
+\begin{itemize}
+    \item The \textbf{Mamdani Implication}: $I_M(x,y) = \min(x,y)$ (using the Gödel t-norm).
+    \item The \textbf{Larsen Implication}: $I_{La}(x,y) = xy$ (using the Product t-norm).
+\end{itemize}
+\end{example}
+It is crucial to recognize that, as \cite[p.60]{FULLER2} notes, ``these implications do not verify the properties of material implication'' in all respects. For instance, with the Mamdani implication, $I_M(0,0) = \min(0,0) = 0$, whereas classical and most other fuzzy implications yield $I(0,0)=1$. However, in the context of fuzzy rule-based systems, if an antecedent is false (truth value 0), the rule often contributes nothing to the output, making this behavior desirable.
+
+\paragraph{Standard Strict Implication}
+The most direct generalization of the classical idea that $P \rightarrow Q$ is true if and only if the truth value of $P$ is less than or equal to the truth value of $Q$ is the \textbf{Standard Strict Implication} (\cite[p.58]{FULLER2}):
+\[I_{SS}(x,y) = \begin{cases} 1 & \text{if } x \le y \\ 0 & \text{if } x > y \end{cases}\]
+While intuitive, this implication is highly sensitive to small changes in input values (e.g., $I_{SS}(0.8, 0.8)=1$ but $I_{SS}(0.8, 0.7999)=0$), making it less suitable for applications dealing with imprecise numerical data \cite[p.58]{FULLER2}.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsection{Fuzzy implications}
 S-implications
 R-implications

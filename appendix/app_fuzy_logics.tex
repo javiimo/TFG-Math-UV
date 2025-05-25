@@ -1,6 +1,6 @@
 \chapter{Propositional logic and algebraic logic.}
 
-This appendix aims to give some context and the most important notions in order to understand the connection between logic and algebra. The specific details are too many to be addressed here, and therefore no formal definitions are stated. It is intended to help build a better intuition for what it means that a logic has an algebraic structure. 
+This appendix provides essential context and key concepts for understanding the connection between logic and algebra. While comprehensive coverage of all details is beyond scope, the focus remains on building intuition about what formal logic is and what it means for a logic to possess algebraic structure. 
 
 \subsection*{Brief History}
 
@@ -105,10 +105,83 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
     \label{fig:semantics_diagram}
     \end{figure} 
 
-\paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), i.e. using only the axioms without specific assumptions, it is called a theorem of the logic.\\
+\paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), i.e. using only the axioms without specific assumptions, it is called a theorem of the logic.\\
 
-% The fundamental goal of a logical system is to ensure its proof system correctly captures semantic truth. This relationship is characterized by two key meta-logical properties:
 The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$) \cite[Lemmas~1.2.7, 1.2.9]{Hajek1998}. When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
+
+
+
+
+\section{Algebraic Logic}
+\label{app:alg_log}
+Algebraic logic investigates the connections between logical systems and algebraic structures, a field advanced by Tarski's work on propositional formulas \cite[p.~1]{BlokPigozzi1989}. \signal{The key insight is that provable statements and logical equivalences within a deductive system correspond to properties of operations in algebraic structures.} For example, classical propositional logic maps directly to Boolean algebras. This relationship can be understood through both the syntax (proof theory) and semantics (model theory) of a logic.
+
+\paragraph{From the Syntactic Side} For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra}. The process begins by grouping formulas into equivalence classes. Two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$. This notion of equivalence must be compatible with the logical connectives, meaning $\leftrightarrow$ behaves as a congruence relation \cite[p.~1-2]{BlokPigozzi1989}. The logical connectives (e.g., $\wedge, \lor, \rightarrow$) then naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).
+
+The specific type of algebraic structure that results (e.g., a Boolean algebra for classical propositional logic, or a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}) is entirely determined by the axioms and inference rules of the logic itself. In this algebra, a formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the "top" element (often denoted $1$ or $\top$), representing provable truth. The Lindenbaum-Tarski algebra is, in a specific sense, the "most general" algebraic model for the logic, as it satisfies precisely those algebraic laws corresponding to the logic's theorems and no others.
+
+\paragraph{From the Semantic Side} We can define the meaning or interpretation of a logic by choosing a class of algebraic structures, $\mathcal{K}$, to serve as its models.\footnote{A class $\mathcal{K}$ is typically a collection of algebraic structures that share the same signature (sets of operations with same ary) and satisfy common defining properties. Often, $\mathcal{K}$ forms a \textit{variety} (defined by equations) or a \textit{quasivariety} (defined by quasi-equations) \cite[Def.~2.2]{BlokPigozzi1989}.}
+
+The elements of an algebra $A \in \mathcal{K}$ are the truth values. For classical propositional logic, this is typically the two-element Boolean algebra $\mathbf{2} = (\{0,1\}, \land, \lor, \neg, 0, 1)$. For many fuzzy logics, the truth values come from the real unit interval $[0,1]$, equipped with suitable operations like t-norms and their residua \cite[Ch.~2]{Hajek1998}.
+
+A \textit{valuation} (or interpretation) $v$ is a homomorphism from the algebra of formulas into an algebra $A \in \mathcal{K}$. This means $v$ maps propositional variables to elements of $A$ and preserves operations corresponding to connectives. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} if $v(\phi)$ evaluates to a designated "true" value (typically $1$) for all valuations $v$ into every algebra $A \in \mathcal{K}$. For fuzzy logics, these are often called $1$-tautologies \cite[Ch.~2]{Hajek1998}.
+
+\paragraph{Bridging Syntax and Semantics} The crucial link between both approaches is established through soundness and completeness theorems. A logic is \textbf{sound} with respect to a class of algebras $\mathcal{K}$ if every provable formula is a $\mathcal{K}$-tautology. It is \textbf{complete} if every $\mathcal{K}$-tautology is a theorem.
+
+When a logic is sound and complete with respect to $\mathcal{K}$, its Lindenbaum-Tarski algebra is characteristically embedded within $\mathcal{K}$. This means that logical consequence can be effectively translated into equational consequence within $\mathcal{K}$ \cite[Abstract]{BlokPigozzi1989}. Logics with particularly strong and well-defined translations between logical deduction and algebraic reasoning are termed \textbf{algebraizable} \cite[Def.~2.10]{BlokPigozzi1989}.\\
+
+For example, Hájek's Basic Logic (BL) \cite[Ch.~2]{Hajek1998} is complete with respect to the class of all linearly ordered BL-algebras \cite[Thm.~2.3.15]{Hajek1998}. However, BL is \textit{not} complete with respect to the \textit{single} standard Łukasiewicz algebra on $[0,1]$. The formula $\neg \neg \phi \leftrightarrow \phi$ (double negation elimination) is a tautology in this particular algebra but not provable in BL. Thus, the Lindenbaum-Tarski algebra of BL does not satisfy $\neg \neg x = x$, while the standard Łukasiewicz algebra does. This illustrates that the Lindenbaum-Tarski algebra of BL is more general, validating only what is provable in BL, and that completeness often requires a broader class of algebraic models.\\
+
+For semantic purposes (defining truth, checking validity), it's often simpler to work with concrete algebras of truth values rather than directly with the (often infinite and complex) Lindenbaum-Tarski algebra of equivalence classes. Soundness and completeness theorems allow us to do so by showing that provability (tied to the Lindenbaum-Tarski algebra) corresponds to validity in these (often simpler) algebraic models.\\
+
+\signal{It is essentially what you get if you "quotient" the $L_T$ algebra by its relationship with truth.}\\
+
+\signal{I think that $\mathcal{K}$ contains $L_T$ when we have soundness and completeness.}
+
+This algebraic perspective is particularly fruitful for fuzzy logics, where the truth values are typically ordered and often continuous\footnote{\signal{For non-continuous see perfect MV-algebras.}}. The algebraic study of fuzzy logics has identified several important classes of ordered algebraic structures, many of which are based on the real unit interval $[0,1]$ as the set of truth values:
+\begin{itemize}
+    \item \textbf{Residuated Lattices}: These form a very general algebraic foundation for a wide range of fuzzy and substructural logics. They combine a lattice structure (for conjunction $\wedge$ and disjunction $\vee$) with a monoid operation $\otimes$ (modeling a strong, typically conjunctive, connective, often a t-norm) and its residuum $\rightarrow$ (modeling implication). These operations are linked by the adjointness property: $x \otimes y \leq z \iff x \leq y \rightarrow z$, which captures a fundamental deductive relationship.
+    \item \textbf{MTL-algebras (Monoidal t-norm based Logic algebras)}: These are residuated lattices that are also prelinear (i.e., they satisfy the condition $(x \rightarrow y) \vee (y \rightarrow x) = 1$, reflecting a total order of truth values or a linear framework for comparing implications). They serve as the algebraic counterparts of Monoidal t-norm Logic (MTL), which axiomatizes the tautologies common to all logics based on left-continuous t-norms and their residua.
+    \item \textbf{BL-algebras (Basic Logic algebras)}: These are MTL-algebras that additionally satisfy the divisibility condition: $x \wedge y = x \otimes (x \rightarrow y)$. They are the algebraic semantics for Basic Logic (BL), which is the logic of all continuous t-norms and their residua.
+    \item \textbf{MV-algebras (Łukasiewicz Logic algebras)}: These are BL-algebras that are also involutive, meaning they satisfy $\neg \neg x = x$ (where the negation is defined as $\neg x = x \rightarrow 0$, with $0$ being the bottom element). They are the algebraic semantics for Łukasiewicz logic, which is based on the Łukasiewicz t-norm.
+    \item \textbf{Gödel algebras (G-algebras)}: These are BL-algebras where the monoidal operation $\otimes$ is idempotent ($x \otimes x = x$), which implies that $\otimes$ coincides with the lattice meet operation $\wedge$. They correspond to Gödel logic, based on the minimum t-norm. Gödel algebras are a subclass of Heyting algebras (the algebraic semantics for intuitionistic logic).
+    \item \textbf{Product algebras ($\Pi$-algebras)}: These are BL-algebras satisfying specific additional axioms that characterize product logic, which is based on the algebraic product t-norm.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Substructural Logics and Residuated Lattices}
+
+Many logics, including classical and intuitionistic logic, satisfy certain "structural rules" in their Gentzen-style formulations, such as:
+\begin{itemize}
+    \item \textbf{Weakening:} Allows adding arbitrary formulas to antecedents or succedents.
+    \item \textbf{Contraction:} Allows replacing multiple occurrences of a formula with a single one.
+    \item \textbf{Exchange:} Allows reordering formulas.
+\end{itemize}
+\textbf{Substructural logics} are logics where one or more of these structural rules are restricted or absent. Examples include relevance logics (lack weakening), linear logic (lacks weakening and contraction), and fuzzy logics.
+
+The algebraic study of substructural logics reveals that their algebraic counterparts are often \textbf{residuated lattices} (or related structures).
+A residuated lattice is, at its core, a lattice $(L, \land, \lor)$ equipped with a monoid operation $\cdot$ (fusion) and two binary operations $\backslash$ (left residual) and $/$ (right residual) satisfying the residuation property:
+\[ x \cdot y \le z \iff y \le x \backslash z \iff x \le z / y \]
+This is a generalization of the relationship in Heyting algebras ($x \land y \le z \iff y \le x \to z$) where fusion is meet, and the implication $\to$ is the residual. In Boolean algebras, $x \cdot y = x \land y$ and $x \to y = \neg x \lor y$. The implication $\to$ in logics often corresponds to a residual operation.
+The absence or presence of structural rules in the logic corresponds to specific algebraic properties of the residuated lattices (e.g., commutativity of $\cdot$ for exchange, integrality for weakening, idempotence of $\cdot$ for contraction).
+
+
+
+
 
 % \rule{\textwidth}{0.4mm}
 
@@ -231,72 +304,7 @@ The fundamental goal of a logical system is to align its syntactic derivations w
 % The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$) \cite[Lemmas~1.2.7, 1.2.9 and Thm.~1.2.11]{Hajek1998}. When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
 
 
-\section{Algebraic Logic}
-\label{app:alg_log}
-Algebraic logic investigates the connections between logical systems and algebraic structures, a field advanced by Tarski's work on propositional formulas \cite[p.~1]{BlokPigozzi1989}. \signal{The key insight is that provable statements and logical equivalences within a deductive system correspond to properties of operations in algebraic structures.} For example, classical propositional logic maps directly to Boolean algebras. This relationship can be understood through both the syntax (proof theory) and semantics (model theory) of a logic.
 
-\paragraph{From the Syntactic Side} For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra}. The process begins by grouping formulas into equivalence classes. Two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$. This notion of equivalence must be compatible with the logical connectives, meaning $\leftrightarrow$ behaves as a congruence relation \cite[p.~1-2]{BlokPigozzi1989}. The logical connectives (e.g., $\wedge, \lor, \rightarrow$) then naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).
-
-The specific type of algebraic structure that results (e.g., a Boolean algebra for classical propositional logic, or a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}) is entirely determined by the axioms and inference rules of the logic itself. In this algebra, a formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the "top" element (often denoted $1$ or $\top$), representing provable truth. The Lindenbaum-Tarski algebra is, in a specific sense, the "most general" algebraic model for the logic, as it satisfies precisely those algebraic laws corresponding to the logic's theorems and no others.
-
-\paragraph{From the Semantic Side} We can define the meaning or interpretation of a logic by choosing a class of algebraic structures, $\mathcal{K}$, to serve as its models.\footnote{A class $\mathcal{K}$ is typically a collection of algebraic structures that share the same signature (sets of operations with same ary) and satisfy common defining properties. Often, $\mathcal{K}$ forms a \textit{variety} (defined by equations) or a \textit{quasivariety} (defined by quasi-equations) \cite[Def.~2.2]{BlokPigozzi1989}.}
-
-The elements of an algebra $A \in \mathcal{K}$ are the truth values. For classical propositional logic, this is typically the two-element Boolean algebra $\mathbf{2} = (\{0,1\}, \land, \lor, \neg, 0, 1)$. For many fuzzy logics, the truth values come from the real unit interval $[0,1]$, equipped with suitable operations like t-norms and their residua \cite[Ch.~2]{Hajek1998}.
-
-A \textit{valuation} (or interpretation) $v$ is a homomorphism from the algebra of formulas into an algebra $A \in \mathcal{K}$. This means $v$ maps propositional variables to elements of $A$ and preserves operations corresponding to connectives. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} if $v(\phi)$ evaluates to a designated "true" value (typically $1$) for all valuations $v$ into every algebra $A \in \mathcal{K}$. For fuzzy logics, these are often called $1$-tautologies \cite[Ch.~2]{Hajek1998}.
-
-\paragraph{Bridging Syntax and Semantics} The crucial link between both approaches is established through soundness and completeness theorems. A logic is \textbf{sound} with respect to a class of algebras $\mathcal{K}$ if every provable formula is a $\mathcal{K}$-tautology. It is \textbf{complete} if every $\mathcal{K}$-tautology is a theorem.
-
-When a logic is sound and complete with respect to $\mathcal{K}$, its Lindenbaum-Tarski algebra is characteristically embedded within $\mathcal{K}$. This means that logical consequence can be effectively translated into equational consequence within $\mathcal{K}$ \cite[Abstract]{BlokPigozzi1989}. Logics with particularly strong and well-defined translations between logical deduction and algebraic reasoning are termed \textbf{algebraizable} \cite[Def.~2.10]{BlokPigozzi1989}.\\
-
-For example, Hájek's Basic Logic (BL) \cite[Ch.~2]{Hajek1998} is complete with respect to the class of all linearly ordered BL-algebras \cite[Thm.~2.3.15]{Hajek1998}. However, BL is \textit{not} complete with respect to the \textit{single} standard Łukasiewicz algebra on $[0,1]$. The formula $\neg \neg \phi \leftrightarrow \phi$ (double negation elimination) is a tautology in this particular algebra but not provable in BL. Thus, the Lindenbaum-Tarski algebra of BL does not satisfy $\neg \neg x = x$, while the standard Łukasiewicz algebra does. This illustrates that the Lindenbaum-Tarski algebra of BL is more general, validating only what is provable in BL, and that completeness often requires a broader class of algebraic models.\\
-
-For semantic purposes (defining truth, checking validity), it's often simpler to work with concrete algebras of truth values rather than directly with the (often infinite and complex) Lindenbaum-Tarski algebra of equivalence classes. Soundness and completeness theorems allow us to do so by showing that provability (tied to the Lindenbaum-Tarski algebra) corresponds to validity in these (often simpler) algebraic models.\\
-
-\signal{It is essentially what you get if you "quotient" the $L_T$ algebra by its relationship with truth.}\\
-
-\signal{I think that $\mathcal{K}$ contains $L_T$ when we have soundness and completeness.}
-
-This algebraic perspective is particularly fruitful for fuzzy logics, where the truth values are typically ordered and often continuous\footnote{\signal{For non-continuous see perfect MV-algebras.}}. The algebraic study of fuzzy logics has identified several important classes of ordered algebraic structures, many of which are based on the real unit interval $[0,1]$ as the set of truth values:
-\begin{itemize}
-    \item \textbf{Residuated Lattices}: These form a very general algebraic foundation for a wide range of fuzzy and substructural logics. They combine a lattice structure (for conjunction $\wedge$ and disjunction $\vee$) with a monoid operation $\otimes$ (modeling a strong, typically conjunctive, connective, often a t-norm) and its residuum $\rightarrow$ (modeling implication). These operations are linked by the adjointness property: $x \otimes y \leq z \iff x \leq y \rightarrow z$, which captures a fundamental deductive relationship.
-    \item \textbf{MTL-algebras (Monoidal t-norm based Logic algebras)}: These are residuated lattices that are also prelinear (i.e., they satisfy the condition $(x \rightarrow y) \vee (y \rightarrow x) = 1$, reflecting a total order of truth values or a linear framework for comparing implications). They serve as the algebraic counterparts of Monoidal t-norm Logic (MTL), which axiomatizes the tautologies common to all logics based on left-continuous t-norms and their residua.
-    \item \textbf{BL-algebras (Basic Logic algebras)}: These are MTL-algebras that additionally satisfy the divisibility condition: $x \wedge y = x \otimes (x \rightarrow y)$. They are the algebraic semantics for Basic Logic (BL), which is the logic of all continuous t-norms and their residua.
-    \item \textbf{MV-algebras (Łukasiewicz Logic algebras)}: These are BL-algebras that are also involutive, meaning they satisfy $\neg \neg x = x$ (where the negation is defined as $\neg x = x \rightarrow 0$, with $0$ being the bottom element). They are the algebraic semantics for Łukasiewicz logic, which is based on the Łukasiewicz t-norm.
-    \item \textbf{Gödel algebras (G-algebras)}: These are BL-algebras where the monoidal operation $\otimes$ is idempotent ($x \otimes x = x$), which implies that $\otimes$ coincides with the lattice meet operation $\wedge$. They correspond to Gödel logic, based on the minimum t-norm. Gödel algebras are a subclass of Heyting algebras (the algebraic semantics for intuitionistic logic).
-    \item \textbf{Product algebras ($\Pi$-algebras)}: These are BL-algebras satisfying specific additional axioms that characterize product logic, which is based on the algebraic product t-norm.
-\end{itemize}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Substructural Logics and Residuated Lattices}
-
-Many logics, including classical and intuitionistic logic, satisfy certain "structural rules" in their Gentzen-style formulations, such as:
-\begin{itemize}
-    \item \textbf{Weakening:} Allows adding arbitrary formulas to antecedents or succedents.
-    \item \textbf{Contraction:} Allows replacing multiple occurrences of a formula with a single one.
-    \item \textbf{Exchange:} Allows reordering formulas.
-\end{itemize}
-\textbf{Substructural logics} are logics where one or more of these structural rules are restricted or absent. Examples include relevance logics (lack weakening), linear logic (lacks weakening and contraction), and fuzzy logics.
-
-The algebraic study of substructural logics reveals that their algebraic counterparts are often \textbf{residuated lattices} (or related structures).
-A residuated lattice is, at its core, a lattice $(L, \land, \lor)$ equipped with a monoid operation $\cdot$ (fusion) and two binary operations $\backslash$ (left residual) and $/$ (right residual) satisfying the residuation property:
-\[ x \cdot y \le z \iff y \le x \backslash z \iff x \le z / y \]
-This is a generalization of the relationship in Heyting algebras ($x \land y \le z \iff y \le x \to z$) where fusion is meet, and the implication $\to$ is the residual. In Boolean algebras, $x \cdot y = x \land y$ and $x \to y = \neg x \lor y$. The implication $\to$ in logics often corresponds to a residual operation.
-The absence or presence of structural rules in the logic corresponds to specific algebraic properties of the residuated lattices (e.g., commutativity of $\cdot$ for exchange, integrality for weakening, idempotence of $\cdot$ for contraction).
 
 
 
