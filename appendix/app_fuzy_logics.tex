@@ -11,6 +11,7 @@ The field saw major developments through Boole's algebra of logic, De Morgan's w
 The early 20th century brought both ambitious hopes and fundamental limitations. While Russell and Whitehead attempted to derive all mathematics from logic in Principia Mathematica and Hilbert proposed his program for securing mathematical foundations, Gödel's incompleteness theorems (1931) revealed inherent limitations to formal systems. Tarski's work on semantics and truth later provided crucial tools for understanding formal languages and their models.\\
 
 \section{Formal Logic}
+\label{app:form_log}
 
 A formal logic provides a precise framework for reasoning. Examples of formal logics are:
 
@@ -64,7 +65,7 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
 
 \paragraph{Semantics} assigns meaning to these WFFs, primarily by defining how truth is determined. For classical propositional logic, this involves assigning truth values (True or False) to atomic propositions and the meaning of the logical connectives, often illustrated using truth tables \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}. Each distinct assignment of truth values to atomic propositions constitutes a model \cite[Sec.~3.1]{Agler2013SymbolicLogic}. A WFF is semantically valid (e.g., a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if it is true in all possible models. For predicate logic, semantics include as well interpretations over a domain of discourse, assigning objects to names and sets of objects (or n-tuples) to predicates \cite[Ch.~6.4]{Agler2013SymbolicLogic}.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[node distance=1cm and 2.5cm]
@@ -106,12 +107,8 @@ A formal logic is typically characterized by its syntax, semantics, and a proof 
 
 \paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), i.e. using only the axioms without specific assumptions, it is called a theorem of the logic.\\
 
-The fundamental goal of a logical system is to ensure its proof system correctly captures semantic truth. This relationship is characterized by two key meta-logical properties:
-\begin{itemize}
-    \item \textbf{Soundness}: If a formula $\phi$ is provable from a set of premises $\Gamma$ ($\Gamma \vdash \phi$), then $\phi$ is a semantic consequence of $\Gamma$ ($\Gamma \models \phi$). For theorems, if $\vdash \phi$, then $\models \phi$ (i.e., only valid formulas are provable).\cite[Lemma~1.2.7]{Hajek1998}
-    \item \textbf{Completeness}: If a formula $\phi$ is a semantic consequence of $\Gamma$ ($\Gamma \models \phi$), then $\phi$ is provable from $\Gamma$ ($\Gamma \vdash \phi$). For theorems, if $\models \phi$, then $\vdash \phi$ (i.e., all valid formulas are provable).\cite[Lemma~1.2.9]{Hajek1998}
-\end{itemize}
-When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
+% The fundamental goal of a logical system is to ensure its proof system correctly captures semantic truth. This relationship is characterized by two key meta-logical properties:
+The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$) \cite[Lemmas~1.2.7, 1.2.9]{Hajek1998}. When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
 
 % \rule{\textwidth}{0.4mm}
 
@@ -235,7 +232,8 @@ When a logic is both sound and complete, provability and validity become equival
 
 
 \section{Algebraic Logic}
-Algebraic logic investigates the connections between logical systems and algebraic structures, a field advanced by Tarski's work on propositional formulas \cite[p.~1]{BlokPigozzi1989}. The key insight is that provable statements and logical equivalences within a deductive system correspond to properties of operations in algebraic structures. For example, classical propositional logic maps directly to Boolean algebras. This relationship can be understood through both the syntax (proof theory) and semantics (model theory) of a logic.
+\label{app:alg_log}
+Algebraic logic investigates the connections between logical systems and algebraic structures, a field advanced by Tarski's work on propositional formulas \cite[p.~1]{BlokPigozzi1989}. \signal{The key insight is that provable statements and logical equivalences within a deductive system correspond to properties of operations in algebraic structures.} For example, classical propositional logic maps directly to Boolean algebras. This relationship can be understood through both the syntax (proof theory) and semantics (model theory) of a logic.
 
 \paragraph{From the Syntactic Side} For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra}. The process begins by grouping formulas into equivalence classes. Two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$. This notion of equivalence must be compatible with the logical connectives, meaning $\leftrightarrow$ behaves as a congruence relation \cite[p.~1-2]{BlokPigozzi1989}. The logical connectives (e.g., $\wedge, \lor, \rightarrow$) then naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).
 
