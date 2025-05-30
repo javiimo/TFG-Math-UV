@@ -1,160 +1,98 @@
-In the literature\cite{HistoryFL2017}, fuzzy logic is understood in 2 different ways: broad ($\FLb$) or narrow ($\FLn$, also called mathematical fuzzy logic). The former is regarding Zadeh's agenda (more practical) and the latter is more related to the formal logics that can be derived from fuzzy sets. However, this section only aims to very briefly introduce without proof some of the main results and concepts related to $\FLn$: \signal{fuzzy implications, different fuzzy logics derived from t-norms and approximate reasoning. HAJEK DICE QUE NO ESTÁ ACABADO EL FLn, VER POR QUÉ. PAG 14PDF}\\
 
-Some books (such as \cite{HistoryFL2017}) first present the departure from classical bivalence of truth values to the generalization of degrees of truth. Then arises the equivalence between truth values of fuzzy predicates like "This car is expensive", and the membership of that car to the fuzzy set that represents the concept of expensive. However in this work, the inverse order has been followed as it is more familiar to someone with a background in mathematics. The next two paragraphs aim to illustrate the relationship between set operations and their logical counterparts, which will be used for defining fuzzy logical connectives.\\
+\subsection{Fuzzy Conjunctions, Implications, and Foundational Logics}
 
+In classical logic, conjunction corresponds to set intersection. When generalizing to fuzzy sets, the truth function for conjunction should capture the intuition that \say{a large truth degree of $\phi \text{ \& } \psi$ should indicate that both the truth degree of $\phi$ and the truth degree of $\psi$ is large}\cite[p.27]{Hajek1998}. This leads to the adoption of \textbf{t-norms} (triangular norms) as the truth functions for fuzzy conjunction.
 
-In classical propositional logic\footnote{See appendix \ref{app:form_log} for a brief introduction to the concepts of formal logic}, there is a very straightforward relation between set-membership and truth values. It is the same to state \say{$x$ belongs to $A$} or \say{(it is true that) $x$ is $A$}. This direct correspondence extends to the fundamental operations of sets and logical connectives: stating that \say{$x$ belongs to the intersection of $A$ and $B$} (denoted $x \in A \cap B$) is equivalent to asserting that \say{$x$ is $A$ AND $x$ is $B$} (the logical conjunction $P_A(x) \land P_B(x)$ is true). The case for union $\cup$ and disjunction $\lor$ is analogous. Finally, the concept of an element $x$ belonging to the negation of set $A$ ($x \in \overline{A}$), meaning $x$ does not belong to $A$, directly mirrors logical negation ($\neg$). When working with fuzzy sets, we consider partial truth (degrees of truth as degrees of membership).\\
+A t-norm $T(x, y)$ is a binary operation on $[0,1]$ which is associative, commutative, non-decreasing in both arguments, and uses $1$ as a unit element ($T(1, x) = x$). Selection of a specific t-norm for conjunction is fundamental in specifying a system of fuzzy logic, as it determines the behavior of "and" at the truth-functional level.
 
-The implication connective is rooted in the residuation (or adjointness) property, which views implication $I$ ($A \Rightarrow B$, or "if $A$, then $B$") as a form of logical division: $A \land I \models B$ in logic (or $A \cap I \subseteq B$ in set theory). The goal is to find the weakest proposition (or largest set)\footnote{Intersection with a larger set $I$ is less restrictive respect to inclusion of sets. If intersection with the largest set is contained, intersection with any smaller set will also be contained.} $I$ such that combining $A$ with $I$ through conjunction (intersection) yields something at least as strong as (contained in) $B$. This largest $I$ satisfying the condition defines the implication $A \Rightarrow B$, internalizing the notion of logical consequence. Logical equivalence ($A \iff B$, or "$A$ if and only if $B$") occurs when both $A \Rightarrow B$ and $B \Rightarrow A$ hold. In set theory, this corresponds to mutual subset relations ($A \subseteq B$ and $B \subseteq A$), which can only be true when sets $A$ and $B$ are identical. Thus, logical equivalence between propositions directly corresponds to set equality.\\
+Once a t-norm is chosen, the implication connective (denoted as $x \Rightarrow y$) is usually derived through the principle of \textbf{residuation}, that is, as the largest $z$ such that $T(x, z) \le y$; formally, $x \Rightarrow y = \sup\{z \in [0,1] \mid T(x, z) \le y\}$. This ensures the property of adjointness, guaranteeing the deduction rule modus ponens. For this residuum to be well defined and to satisfy adjointness, the t-norm $T$ must be at least \textbf{left-continuous}~\cite[p.272]{GodoMonoidal}.
 
+This insight underpins \textbf{Monoidal T-norm Logic (MTL)}, which captures exactly the common tautologies of all fuzzy systems based on left-continuous t-norms and their residua~\cite{GodoMonoidal}. MTL is formulated with two primitive conjunctions: strong conjunction ($\&$, interpreted by a left-continuous t-norm) and weak conjunction ($\wedge$, interpreted by min). In general, for logics based on merely left-continuous t-norms, weak conjunction is not definable from strong conjunction and implication, which is why it must be included as a primitive. The algebraic semantics of MTL are given by linearly ordered prelinear residuated lattices, or MTL-algebras.
 
-The transition from classical to fuzzy sets necessitates extending the notion of truth from binary to graded values. When considering truth values in fuzzy logic, two fundamental questions arise. First, why use the unit interval [0,1]? And second, what does it mean for a proposition to have a specific truth degree like 0.7?
+If continuity of the t-norm is imposed (rather than just left-continuity), the so-called \emph{divisibility property} holds: $x * (x \Rightarrow y) = \min(x, y)$. In this case, the min-conjunction becomes definable in terms of strong conjunction and implication, and the class of logics is known as \textbf{Basic Logic (BL)}~\cite[Sec. 2.2]{Hajek1998}. BL-algebras provide the algebraic semantics for these logics.
 
-Regarding the first question, truth degrees in fuzzy logic are assumed to be linearly ordered, with 1 representing absolute truth and 0 representing absolute falsity. While finite truth value sets are possible, using the complete unit interval [0,1] provides a continuous scale that can accommodate any desired granularity. This aligns with real world scenarios like questionnaires where responses may be captured on various scales (e.g., 4 point or 11 point), all of which can be normalized to [0,1].
+Significantly, all continuous t-norms can be decomposed (as an ordinal sum) from three basic shapes: the \textbf{Łukasiewicz t-norm} ($T_L(x, y) = \max(0, x+y-1)$), the \textbf{Gödel t-norm} ($T_G(x, y) = \min(x, y)$), and the \textbf{Product t-norm} ($T_P(x, y) = x y$)~\cite[Thm. 2.1.16]{Hajek1998}. These yield the three major systems of fuzzy logic, obtained by extending BL with axioms reflecting these t-norms:
+\begin{itemize}
+    \item \textbf{Łukasiewicz Logic ($\L$)} is characterized by involutive negation ($1-x$) and an axiom equivalent to $\lnot\lnot\phi \rightarrow \phi$. Its algebraic structures are MV-algebras~\cite[Ch. 3]{Hajek1998}.
+    \item \textbf{Gödel Logic (G)} is based on the minimum t-norm and is characterized by the idempotence of its conjunction: $\phi \rightarrow (\phi \& \phi)$; its semantics are given by G-algebras, a subclass of linearly ordered Heyting algebras~\cite[Sec. 4.2]{Hajek1998}.
+    \item \textbf{Product Logic ($\Pi$)} is based on the product t-norm and incorporates additional properties characteristic of multiplication. Its standard negation is the Gödel-style negation: $\lnot x$ is $1$ if $x=0$, $0$ if $x>0$; algebraically, its models are product algebras~\cite[Sec. 4.1]{Hajek1998}.
+\end{itemize}
 
-For the second question, the meaning of truth degrees must be considered differently for atomic versus compound propositions. For atomic propositions, truth degrees represent direct evaluations, such as responses to questions like "Do you like Haydn?" where answers like "absolutely yes" or "more or less" map to different points in [0,1]. Importantly, truth degrees across different propositions cannot be directly compared. That is, answering "absolutely yes" (1.0) to liking Haydn and "more or less" (0.7) to being old does not imply liking Haydn more than being old, just as classical yes/no answers would not be comparable across different questions.
-
-For compound propositions, most fuzzy logics are truth functional, meaning the truth degree of a complex formula is determined by a function of the truth degrees of its components. For example, if disjunction is defined using the maximum function, then a truth degree of 0.7 for $\phi \lor \psi$ indicates that the maximum of the truth degrees of $\phi$ and $\psi$ is 0.7, constraining their possible values much like classical logic's truth tables constrain possible truth value combinations.\\ 
-
-The task of defining connectives for truth values in the continuous interval $[0,1]$ requires creating a framework that is both intuitively meaningful and mathematically sound. The development of many valued propositional calculi follows several key principles \cite[p.27]{Hajek1998}:
-\begin{enumerate}
-    \item We primarily deal with \textbf{propositional logic} as the foundation.
-    \item The set of truth values is the real unit interval $[0,1]$, where $1$ represents absolute truth and $0$ absolute falsity. The natural linear ordering of reals plays a crucial role.
-    \item The logic is \textbf{truth-functional}: each $k$-ary logical connective $c$ is associated with a truth function $f_c: [0,1]^k \to [0,1]$. The truth degree of a compound formula $c(\phi_1, \dots, \phi_k)$ is determined solely by the truth degrees of its constituent formulas $\phi_1, \dots, \phi_k$.
-    \item Fuzzy logic must be a \textbf{generalization of classical two-valued logic}. This means that for truth values restricted to $\{0,1\}$, the fuzzy connectives must behave identically to their classical counterparts.
-\end{enumerate}
-With these principles, we can start constructing the connectives.
-
-\paragraph{Conjunction, Disjunction, and Negation}\signal{Esto lo puedo acortar yo creo}In classical logic, conjunction corresponds to set intersection. When generalizing to fuzzy sets, the truth function for conjunction should capture the intuition that \say{a large truth degree of $\phi \text{ \& } \psi$ should indicate that both the truth degree of $\phi$ and the truth degree of $\psi$ is large}\cite[p.27]{Hajek1998}. This leads to the adoption of \textbf{t-norms} (triangular norms) as the truth functions for fuzzy conjunction. The three basic continuous t-norms (\luka, Gödel/minimum, and Product) are particularly important as they give rise to three fundamental fuzzy logics: Lukasiewicz logic ($\L$), Gödel logic ($G$) and Product logic ($\Pi$), respectively. \signal{MENCIONAR QUÉ AXIOMAS SON ESOS QUE LOS HACEN ESPECIALES Y SI EL HECHO DE QUE ESAS T-NORMAS GENEREN TODAS LAS NORMAS CONTINUAS, TIENE ALGUNA IMPLICACIÓN. Each of these logics is characterized by specific axioms that reflect the algebraic properties of its underlying t-norm, making them cornerstones in the study of fuzzy logical systems.}
-
-Fuzzy \textbf{disjunction (OR)} and fuzzy \textbf{negation (NOT)} are generalized from their classical set-theoretic counterparts (union and complement, respectively) and are typically defined using t-conorms and fuzzy complement functions, as detailed in Section~\ref{sec:set_operations}.
+Fuzzy \textbf{disjunction (OR)} and \textbf{negation (NOT)} in these logics are typically generalized from classical set union and complement. Negation is defined in MTL, BL, and their extensions as $\lnot \phi := \phi \rightarrow 0$. Its specific properties depend on the logic (involutive in $\L$, not so in G and $\Pi$). Disjunction is definable, e.g., in MTL, by $\phi \vee \psi := \big((\phi \rightarrow \psi) \rightarrow \psi\big) \wedge \big((\psi \rightarrow \phi) \rightarrow \phi\big)$~\cite[Def. 1]{GodoMonoidal}~\cite[Def. 2.2.1]{Hajek1998}; additional forms and their interpretations are described in Section~\ref{sec:set_operations}.
 
 \subsection{Fuzzy Implications}
-
-\signal{Falta entender bien el concepto de implicación material. Lo que se entiende por implicación material (propiedad del residuo) y lo que no y qué repercusiones tiene eso para la lógica.}
 
 The implication connective ($P \rightarrow Q$, "IF $P$ THEN $Q$") is arguably the most critical for logical reasoning and building rule-based systems, such as those used to model expert opinion in MCDM, a topic that will be explored further in the next chapter. Its generalization to fuzzy logic presents a rich variety of approaches. A fuzzy implication $I(x,y)$ (where $x$ is the truth value of the antecedent and $y$ that of the consequent) aims to quantify "to what extent $q$ is at least as true as $p$" (\cite[p.57]{FULLER2}). Different formalizations capture this intuition in different ways. The choice among them depends heavily on the specific application and the desired properties.
 
 \paragraph{R-Implications (Residuated Implications)}
-This class of implications arises directly from the residuation principle you introduced earlier and is fundamental in algebraic fuzzy logic. Given a t-norm $T$ (representing conjunction), its corresponding R-implication $I_R$ is defined as the residuum of $T$:
-\[I_R(x,y) = \sup \{z \in [0,1] \mid T(x,z) \le y\}\]
-This definition ensures that $I_R(x,y)$ is the weakest (largest) truth value $z$ such that when $x$ is conjoined with $z$ (using $T$), the result is no stronger (no greater) than $y$ (\cite[Def. 2.1.5, p.29]{Hajek1998}). This property is crucial for the soundness of modus ponens in fuzzy logic. \signal{Esto se puede extendar a left semicont.}
-\begin{example}[R-Implications from Continuous T-norms \cite{Hajek1998}]
-The main continuous t-norms yield the following R-implications:
+This class of implications arises directly from the residuation principle and forms the "native" implication for the logics MTL, BL, Ł, G, and $\Pi$. Given a left-continuous t-norm $T$ (representing the strong conjunction $\&$ of the logic), its corresponding R-implication $I_R$ is defined as its residuum:
+\[
+I_R(x, y) = \sup\{z \in [0,1] \mid T(x, z) \le y\}
+\]
+This property (adjointness: $T(x,z) \le y$ iff $z \le I_R(x, y)$) is essential for the soundness of modus ponens in such logics, and underlies the algebraic semantics of MTL-algebras, BL-algebras, MV-algebras, G-algebras, and product algebras~\cite[Sec. 2.3, Ch. 3, Ch. 4]{Hajek1998}~\cite{GodoMonoidal}.
+
+\begin{example}[R-Implications from Continuous T-norms~\cite{Hajek1998}]
+The main continuous t-norms lead to these R-implications (standard in the respective logics):
 \begin{itemize}
-    \item The \textbf{Łukasiewicz Implication} (from $T_L(x,y) = \max(0, x+y-1)$):
-    \[I_L(x,y) = \min(1, 1-x+y)\]
-    \item The \textbf{Gödel Implication} (from $T_G(x,y) = \min(x,y)$):
-    \[I_G(x,y) = \begin{cases} 1 & \text{if } x \le y \\ y & \text{if } x > y \end{cases}\]
-    \item The \textbf{Goguen (or Product) Implication} (from $T_P(x,y) = xy$):
-    \[I_P(x,y) = \begin{cases} 1 & \text{if } x \le y \\ y/x & \text{if } x > y \end{cases}\]
+    \item \textbf{Łukasiewicz implication}:
+        \[
+        I_L(x, y) = \min(1, 1-x+y)
+        \]
+    \item \textbf{Gödel implication}:
+        \[
+        I_G(x, y) = 
+        \begin{cases}
+            1 & \text{if } x \le y \\
+            y & \text{if } x > y
+        \end{cases}
+        \]
+    \item \textbf{Goguen (Product) implication}:
+        \[
+        I_P(x, y) = 
+        \begin{cases}
+            1 & \text{if } x \le y \\
+            y/x & \text{if } x > y
+        \end{cases}
+        \]
 \end{itemize}
+Left-continuous but non-continuous t-norms yield further R-implications at the MTL level~\cite{GodoMonoidal}.
 \end{example}
-R-implications are vital for constructing axiomatic fuzzy logical systems because they possess strong algebraic properties that ensure logical coherence. \signal{Explicar esto más.}
 
 \paragraph{S-Implications (Standard Implications)}
-This family of implications is derived from the classical logical equivalence $P \rightarrow Q \equiv \neg P \lor Q$. A fuzzy S-implication is defined using a fuzzy negation and a t-conorm $S$ \cite[p.59]{FULLER2}:
-\[I_S(x,y) = S(\overline{x}, y)\]
-\begin{example}[S-Implications]
-Common examples include:
-\begin{itemize}
-    \item The \textbf{Kleene-Dienes Implication}, using standard negation $\overline{x}=1-x$ and maximum t-conorm $S(a,b)=\max(a,b)$:
-    \[I_{KD}(x,y) = \max(1-x, y)\]
-    \item If the Łukasiewicz t-conorm $S_L(a,b) = \min(1, a+b)$ is used with standard negation, the resulting S-implication is $I_L(x,y) = \min(1, 1-x+y)$, which is identical to the Łukasiewicz R-implication.
-\end{itemize}
-\end{example}
+S-implications generalize the classical equivalence $(P \rightarrow Q) \equiv (\lnot P \vee Q)$, and are defined using a fuzzy negation and a t-conorm $S$:
+\[
+I_S(x, y) = S(\overline{x}, y)
+\]
+For example, with standard negation and maximum t-conorm, the Kleene-Dienes implication is recovered:
+\[
+I_{KD}(x, y) = \max(1-x, y)
+\]
+If the Łukasiewicz t-conorm is used ($S_L(a, b) = \min(1, a+b)$), the resulting implication coincides with the Łukasiewicz R-implication.
 
-\paragraph{Implications from T-norms (for Fuzzy Rules)}
-In many practical applications, especially in fuzzy control and Multiple-Input Single-Output (MISO) fuzzy systems used in MCDM, implications are defined directly using a t-norm:
-\[I(x,y) = T(x,y)\]
-\begin{example}[T-norm based Implications \cite{FULLER2}]
-Popular examples include:
-\begin{itemize}
-    \item The \textbf{Mamdani Implication}: $I_M(x,y) = \min(x,y)$ (using the Gödel t-norm).
-    \item The \textbf{Larsen Implication}: $I_{La}(x,y) = xy$ (using the Product t-norm).
-\end{itemize}
-\end{example}
-It is crucial to recognize that, as \cite[p.60]{FULLER2} notes, ``these implications do not verify the properties of material implication'' in all respects. For instance, with the Mamdani implication, $I_M(0,0) = \min(0,0) = 0$, whereas classical and most other fuzzy implications yield $I(0,0)=1$. However, in the context of fuzzy rule-based systems, if an antecedent is false (truth value 0), the rule often contributes nothing to the output, making this behavior desirable.
+\paragraph{Implications Defined Directly by T-norms}
+In many practical settings, particularly fuzzy control and systems modeling, implications are simply defined as $I(x, y) = T(x, y)$, e.g., Mamdani's and Larsen's implications. Although practical, these fail to satisfy the full properties of material implication (such as $I(0,0) = 1$) and generally do not supply adjointness, so they are best viewed as separate from the formal logics above.
 
 \paragraph{Standard Strict Implication}
-The most direct generalization of the classical idea that $P \rightarrow Q$ is true if and only if the truth value of $P$ is less than or equal to the truth value of $Q$ is the \textbf{Standard Strict Implication} (\cite[p.58]{FULLER2}):
-\[I_{SS}(x,y) = \begin{cases} 1 & \text{if } x \le y \\ 0 & \text{if } x > y \end{cases}\]
-While intuitive, this implication is highly sensitive to small changes in input values (e.g., $I_{SS}(0.8, 0.8)=1$ but $I_{SS}(0.8, 0.7999)=0$), making it less suitable for applications dealing with imprecise numerical data \cite[p.58]{FULLER2}.
+A different fuzzy implication is $I_{SS}(x,y)$, which is $1$ when $x\le y$ and $0$ otherwise. While highly direct, it is too brittle for practical purposes and not used in the formal fuzzy logics discussed here.
 
- 
+\subsection{Characteristics and Intuitions of Foundational Fuzzy Logics}
 
+The foundational logics—MTL, BL, $\L$, G, and $\Pi$—form a hierarchy: MTL is most general, based on all left-continuous t-norms and their residua; BL restricts to continuous t-norms; and each of $\L$, G, $\Pi$ is a further axiomatic specialization of BL connected to a distinguished continuous t-norm.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Fuzzy implications}
-S-implications
-R-implications
-t-norm implications
-\signal{$(\fuzzy{X},\cup , \cap , \lnot)$ is a complete, completely distributive, lattice with an involution. This extends the boolean algebra.}
-
-\signal{The notion of equality is replaced by a graded relation (often measured via the biresiduum $\leftrightarrow$)}
-
-\signal{Fuzzy description logics explained %https://www.umbertostraccia.it/cs/download/papers/KES09/KES09.pdf
-
-The Lukasiewicz t-conorm is closely related to the basic binary operation of multi-valued
-algebras. Additionally, t-norms and t-conorms form examples of aggregation operators. They
-play a significant role in the axiomatic definition of the concept of triangular norm-based measure
-and, in particular, of the concept of probability of fuzzy events; the Frank family of t-norms and
-t-conorms plays a particular role [6]. 
-
-%https://cake.fiu.edu/Publications/Ngan+al-18-LC.Logic_Connectives_of_Complex_Fuzzy_Sets_ROMJIST_downloaded.pdf 
-
-It should be mentioned that t-norms overlap with copulas [3, 24]: commutative associative
-copulas are t-norms; t-norms which satisfy the 1-Lipschitz condition are copulas. Some families
-of t-norms are known as families of copulas under different names}
-
-\signal{
-    Lukasiewicz logic algebraic structure and formal implications thanks to the residual property.\\
-
-    Gödel Logic uses 
-    $a \otimes b = \min(a, b)$, which tends to produce conservative scores dominated by the weakest criterion. While useful for risk-averse scenarios, it fails to differentiate alternatives when all criteria are partially satisfied.
-
-    Product Logic employs 
-    $a \otimes b = a \cdot b$, amplifying the impact of low-scoring criteria. This can lead to premature elimination of alternatives with one poor attribute.
-
-    Łukasiewicz Logic's additive t-norm balances compensation between criteria, allowing alternatives to offset weaknesses in one dimension with strengths in others—a critical feature for complex trade-off analysis.
-}
-
-
-
-
-
-
-
+\begin{itemize}
+    \item \textbf{Generality}: MTL omits the divisibility property ($x*(x \Rightarrow y)=\min(x,y)$), so min-conjunction is not definable from strong conjunction and implication; BL recovers it for continuous t-norms.
+    \item \textbf{Negation}: $\L$ has involutive (double) negation, G and $\Pi$ use a Gödel-type negation, while MTL and BL only ensure weaker forms (involutive negation may be added as an axiom for special subclasses like IMTL~\cite{GodoMonoidal}).
+    \item \textbf{Nature of conjunction (t-norm)}:
+        \begin{itemize}
+            \item $\L$: Additive-like, compensatory.
+            \item G: Minimum, conservative (weakest link/idempotent).
+            \item $\Pi$: Product, multiplicative.
+        \end{itemize}
+    \item \textbf{Deduction theorem}: G has a stronger deduction theorem than the others; in $\L$, $\Pi$, BL, and MTL, only a weaker, "n-fold" deduction theorem holds.
+    \item \textbf{Completeness}: BL, $\L$, G, and $\Pi$ are complete with respect to their standard [0,1] semantics as based on continuous t-norms. MTL is complete w.r.t.\ linearly ordered MTL-algebras and, non-trivially, for the left-continuous t-norms~\cite{Jenei2001MTLCompl}. G has full (not only 1-tautology) completeness for arbitrary theories~\cite[Thm. 4.2.17]{Hajek1998}; completeness of BL and $\L$ is for 1-tautologies, and extensions vary.
+    \item \textbf{Relationship to classical logic}: Pairwise combinations of $\L$, G, and $\Pi$ generate classical logic~\cite[Thm. 4.3.9]{Hajek1998}.
+\end{itemize}
+Each logic is therefore tailored for different reasoning needs. MTL, as the most general, accommodates any left-continuous t-norm and provides the universal backbone for fuzzy deduction systems.
 
 \subsection{Approximate Reasoning and Pavelka-Style Completeness}
 
@@ -173,7 +111,11 @@ Pavelka's completeness theorem for Rational Pavelka Logic (RPL), which is Łukas
 
 \begin{theorem}[Pavelka-style Completeness for RPL]
 For any theory $T$ in Rational Pavelka Logic and any formula $\phi$:
-\[ |\phi|_T = ||\phi||_T \]
+\[
+ |\phi|_T = ||\phi||_T 
+\]
 \end{theorem}
 
-This remarkable result states that the highest degree to which a formula is provable from a theory $T$ is precisely the lowest degree to which it is true in all models of $T$. It provides a formal calculus for "approximate reasoning" where conclusions can be derived with associated degrees of truth based on the degrees of truth of the premises. For instance, if we have premises $A_1, \dots, A_k$ with associated truth degrees $r_1, \dots, r_k$, and we can syntactically derive a conclusion $C$ with an associated provability degree $s$ that depends on $r_1, \dots, r_k$, Pavelka's theorem ensures that this syntactically derived degree $s$ is the "best possible" semantic guarantee for the truth of $C$. While the original RPL is specific to Łukasiewicz logic due to its reliance on the properties of the Łukasiewicz t-norm and its residuum, the general concept of graded provability and its relation to graded truth is a cornerstone of advanced fuzzy logic.
+This remarkable result states that the highest degree to which a formula is provable from a theory $T$ is precisely the lowest degree to which it is true in all models of $T$. It provides a formal calculus for "approximate reasoning" where conclusions can be derived with associated degrees of truth based on the degrees of truth of the premises. For instance, if premises $A_1, \ldots, A_k$ have associated truth degrees $r_1, \ldots, r_k$, and a conclusion $C$ can be derived (possibly using fuzzy deductions) with provability degree $s$ that depends on $r_1, \ldots, r_k$, Pavelka's theorem ensures that $s$ is the best possible semantic guarantee for $C$. While the original RPL is specific to Łukasiewicz logic due to the properties of the Łukasiewicz t-norm and its residuum, the general concept carries over to truth-functional logics where analogous positional properties hold.
+
+This highlights a specific strength of Łukasiewicz logic for fine-grained approximate reasoning with degrees of truth. In contrast, for MTL and its extensions (unless they collapse to Łukasiewicz logic), Pavelka-style completeness in this exact sense is, in general, unattainable because of differences in the interplay between syntax and semantics, and the greater diversity of their algebraic models~\cite[Rem. 4.1.22, Rem. 4.2.22]{Hajek1998}.
