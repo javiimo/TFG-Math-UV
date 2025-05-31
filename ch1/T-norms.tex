@@ -63,13 +63,23 @@ The reasoning regarding the properties is entirely analogous to the previous cas
     
 \end{definition}
 
-Complement was defined by Zadeh \cite{Zadeh1965} as\footnote{This is not the only definition that satisfies the axioms of a complement and is compatible with the classical limit, but it is the simplest one and will be used in this text. Other alternatives and their axioms can be found in \cite{Sladoje2007}. In \cite{Klement2000}, this is called the standard negation $N_s$.}:
+Complements of fuzzy sets are not unique in contrast to crisp sets. Although in this work, only the standard negation will be used, the general definition is included for completeness \cite[p.~50]{HistoryFL2017}: 
 
 \begin{definition}[Complement]
-  The complement of a fuzzy set $A\in \fuzzy{X}$ is another fuzzy set with membership function given by $\overline{A}(x) \coleq 1 - A(x) \forall x\in X$
+Let $c : [0,1] \rightarrow [0,1]$ be a function satisfying at least conditions i and ii below, but conditions iii and iv are also often required:
+  \begin{romanenum}
+    \item \textbf{Antitonicity:} If $a \leq b$, then $c(a) \geq c(b)$
+    \item \textbf{Boundary condition:} $c(0) = 1$ and $c(1) = 0$ 
+    \item $c$ is \textbf{continuous}
+    \item \textbf{Involution:} $c(c(a)) = a \forall a \in [0,1]$
+  \end{romanenum}
+  A complement of a fuzzy set $A \in \fuzzy{X}$ based on $c$ is another fuzzy set $c(A)$ defined by the membership function $[c(A)](x) = c(A(x))$ for all $x \in X$.\\
+
+  The standard complement (proposed by Zadeh in \cite{Zadeh1965}) corresponds to $c(a) = 1 - a$.
 \end{definition}
 
-Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $\overline{ A}(x)= 1 - A(x) \notin \{0,1\}$.\\
+
+Notice that this definition of complement is consistent with the classical definition of complement but implies that an element might have \textbf{non-zero partial membership} to both a fuzzy set and its complement: Let $A$ be a fuzzy set on $X$ and $x \in X / A(x)\notin \{0,1\}$ then $c( A)(x)= 1 - A(x) \notin \{0,1\}$.\\
 
 One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
 
@@ -93,13 +103,15 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 
   $\quad \boxed{\text{not}(A \text{ or } B) = (\text{not } A) \text{ and } (\text{not } B)}$\\
   [0.5em]
-  $\overline{ S(a,b)} = T(\overline{ a}, \overline{ b}) \iff 1 - S(a,b) = T(1-a, 1-b) \iff S(a,b) = 1 - T(1-a, 1-b)$\\
+  $c( S(a,b)) = T(c( a), c( b)) \iff 1 - S(a,b) = T(1-a, 1-b) \iff S(a,b) = 1 - T(1-a, 1-b)$\\
 
   $\quad \boxed{\text{not}(A \text{ and } B) = (\text{not } A) \text{ or } (\text{not } B)}$\\
   [0.5em]
-  $\overline{ T(a,b)} = S(\overline{ a}, \overline{ b}) \iff 1 - T(a,b) = S(1-a, 1-b) \iff T(a,b) = 1 - S(1-a, 1-b)$
+  $c( T(a,b)) = S(c( a), c( b)) \iff 1 - T(a,b) = S(1-a, 1-b) \iff T(a,b) = 1 - S(1-a, 1-b)$
 
 \end{proof}
+
+Any triplet of union, intersection and complement operations that satisfy the De Morgan laws, is called a De Morgan triplet\cite[p.~52]{HistoryFL2017}. The proposition above is a sufficient and necessary condition for building a triplet with any given t-norm (or t-conorm) and the standard negation.\\
 
 \signal{Creo que además de esto de las leyes de de Morgan, también nos da que el modus ponen funciona si se cumple la propiedad esa. Además no sé si se llama residual property.}
 
