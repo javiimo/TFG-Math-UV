@@ -5,11 +5,13 @@ According to Nguyen \cite{NGUYEN1978}:
 an extension of closed bounded intervals, [...]} 
 \\
 
+\signal{Another way to think about fuzzy numbers is as a special case of fuzzy intervals.}
+
 \signal{Explain that we want to define fuzzy numbers to work with fuzzy attributes later on}
 
 
 \begin{definition}[Normal Fuzzy Set]
-    A fuzzy set $A\in \fuzzy{X}$ is called \textbf{normal} if there exists $x\in X$ such that $A(x)=1$. Otherwise it is called \textbf{subnormal}.
+    A fuzzy set $A\in \fuzzy{X}$ is called normal if there exists $x\in X$ such that $A(x)=1$. Otherwise it is called subnormal.
 \end{definition}
 
 \begin{definition}[$\alpha$-cut]
@@ -25,7 +27,7 @@ an extension of closed bounded intervals, [...]}
 \end{definition}
 
 \begin{remark}
-    From the definition of $\alpha$-cut, the \textbf{nested property} states that for
+    From the definition of $\alpha$-cut, the nested property states that for
     $\alpha_1, \alpha_2 \in [0,1]$ if $\alpha_1\leq \alpha_2$ then $[A]^{\alpha_2}\subseteq [A]^{\alpha_1}$
 \end{remark}
 
@@ -72,11 +74,7 @@ The condition of bounded support can be relaxed to define \textit{quasi-fuzzy nu
 $$\textnormal{(iv}_{\textnormal{bis}}\textnormal{) } \lim{t}{\infty}A(t) = 0 \quad \land \quad \lim{t}{-\infty}A(t) = 0$$
 \end{note}
 
-The following proposition establishes that the membership function of any fuzzy number can be partitioned into three contiguous intervals: one where it monotonically increases, one where it equals 1, and one where it monotonically decreases. This characterization shows that every fuzzy number can be represented as an LR-fuzzy number (see example \ref{ex:fuzzy_num} for the definition).
-
-\signal{Esta proposición no me acuerdo de dónde la saqué.}
-
-\signal{No sé si debería meterme en rollos de semicontinuidad inferior y superior de los extremos de los niveles. Con esta definición de fuzzy number, creo que me lo puedo ahorrar.}
+The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment without proof) establishes that the membership function of any fuzzy number can be partitioned into three contiguous intervals: one where it monotonically increases, one where it equals 1, and one where it monotonically decreases. This characterization shows that every fuzzy number can be represented as an LR-fuzzy number (see example \ref{ex:fuzzy_num} for the definition).
 
 \begin{proposition}[Membership function of fuzzy numbers]
     Let $A\in \fuzzy{\R}$ be a fuzzy number, then it satisfies:
@@ -184,7 +182,131 @@ That is because the image under $f:\R \longrightarrow \R$ continuous of a compac
 
 
 \subsection{Fuzzy Arithmetic}
+\label{sec:fuzzy_arithmetic}
 
+Building upon the extension principle, arithmetic operations for fuzzy numbers can be defined. These are very useful for defining and solving fuzzy linear programming problems where crisp constraint may be relaxed with fuzzy ones or for aggregating different criteria represented by fuzzy numbers. Their most common implementation is using the minimum t-norm and triangular numbers.
+
+\paragraph{Sup-Min Based Arithmetic for LR-Fuzzy Numbers}
+Let $\tilde{A} = (a_1, a_2, \alpha_L, \alpha_R)_{LR}$ and $\tilde{B} = (b_1, b_2, \beta_L, \beta_R)_{LR}$ be two fuzzy numbers of LR-type. Using the sup-min extension principle, the following operational rules can be derived \cite[p.16]{FULLER2}.
+
+\begin{proposition}[Addition and Subtraction of LR-Fuzzy Numbers]
+\label{prop:lr_add_sub}
+The sum and difference of $\tilde{A}$ and $\tilde{B}$ are given by:
+\begin{align}
+\tilde{A} \oplus \tilde{B} &= (a_1+b_1, a_2+b_2, \alpha_L+\beta_L, \alpha_R+\beta_R)_{LR} \\
+\tilde{A} \ominus \tilde{B} &= (a_1-b_2, a_2-b_1, \alpha_L+\beta_R, \alpha_R+\beta_L)_{LR}
+\end{align}
+\end{proposition}
+
+\begin{proposition}[Scalar Multiplication of LR-Fuzzy Numbers]
+\label{prop:lr_scalar_mult}
+For a real number $\lambda \in \mathbb{R}$, the scalar multiplication $\lambda \odot \tilde{A}$ is:
+\begin{equation}
+\lambda \odot \tilde{A} =
+\begin{cases}
+(\lambda a_1, \lambda a_2, \lambda\alpha_L, \lambda\alpha_R)_{LR} & \text{if } \lambda \ge 0 \\
+(\lambda a_2, \lambda a_1, |\lambda|\alpha_R, |\lambda|\alpha_L)_{LR} & \text{if } \lambda < 0
+\end{cases}
+\end{equation}
+If $\tilde{A}$ is a quasi-triangular fuzzy number, i.e., $a_1=a_2=a$, denoted $\tilde{A}=(a, \alpha_L, \alpha_R)_{LR}$, then for $\lambda < 0$:
+\begin{equation}
+\lambda \odot \tilde{A} = (\lambda a, \lambda a, |\lambda|\alpha_R, |\lambda|\alpha_L)_{LR} = (\lambda a, |\lambda|\alpha_R, |\lambda|\alpha_L)_{LR}
+\end{equation}
+\end{proposition}
+
+\begin{remark}
+For triangular fuzzy numbers, which are a special case of LR-fuzzy numbers where $L(x)=R(x)=\max(0, 1-x)$:
+\begin{itemize}
+    \item If $\tilde{A} = (a, \alpha_L, \alpha_R)$ (peak $a$, left spread $\alpha_L$, right spread $\alpha_R$) and $\tilde{B} = (b, \beta_L, \beta_R)$, then:
+    \begin{align*}
+    \tilde{A} \oplus \tilde{B} &= (a+b, \alpha_L+\beta_L, \alpha_R+\beta_R) \\
+    \tilde{A} \ominus \tilde{B} &= (a-b, \alpha_L+\beta_R, \alpha_R+\beta_L)
+    \end{align*}
+    \item If $\tilde{A} = (a, \alpha)$ (symmetric triangular, peak $a$, spread $\alpha$) and $\tilde{B} = (b, \beta)$, then:
+    \begin{align*}
+    \tilde{A} \oplus \tilde{B} &= (a+b, \alpha+\beta) \\
+    \tilde{A} \ominus \tilde{B} &= (a-b, \alpha+\beta) \\
+    \lambda \odot \tilde{A} &= (\lambda a, |\lambda|\alpha)
+    \end{align*}
+\end{itemize}
+These simplified forms are widely used in practical applications \cite[p.17]{FULLER2}.
+\end{remark}
+
+
+
+The product of two fuzzy numbers $\tilde{A}$ and $\tilde{B}$ using the sup-min extension principle is defined as:
+\begin{equation}
+\mu_{\tilde{A} \otimes \tilde{B}}(z) = \sup_{x \cdot y = z} \min(\mu_{\tilde{A}}(x), \mu_{\tilde{B}}(y))
+\end{equation}
+Unlike addition and subtraction, the product of two LR-fuzzy numbers is not, in general, an LR-fuzzy number itself, and simple formulas for its parameters are usually not available.
+However, computations can often be simplified by working with $\alpha$-cuts and usign the Nguyen's theorem \cite[Thm. 1.3.2]{FULLER2}:
+
+\begin{theorem}
+\label{thm:alpha_cut_product}
+Let $f: \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be a continuous function, and let $\tilde{A}$ and $\tilde{B}$ be fuzzy numbers. Then the $\alpha$-cut of $f(\tilde{A}, \tilde{B})$ is given by:
+\begin{equation}
+[f(\tilde{A}, \tilde{B})]^\alpha = f([\tilde{A}]^\alpha, [\tilde{B}]^\alpha) = \{f(x,y) \mid x \in [\tilde{A}]^\alpha, y \in [\tilde{B}]^\alpha \}
+\end{equation}
+\end{theorem}
+
+For the product operation, $f(x,y) = xy$. Thus, $[\tilde{A} \otimes \tilde{B}]^\alpha = [\tilde{A}]^\alpha \cdot [\tilde{B}]^\alpha$.
+If $\tilde{A}$ and $\tilde{B}$ are non-negative fuzzy numbers (i.e., their supports are in $\mathbb{R}^+_0$), and their $\alpha$-cuts are $[\tilde{A}]^\alpha = [a_1(\alpha), a_2(\alpha)]$ and $[\tilde{B}]^\alpha = [b_1(\alpha), b_2(\alpha)]$, then the $\alpha$-cut of their product is:
+\begin{equation}
+[\tilde{A} \otimes \tilde{B}]^\alpha = [a_1(\alpha)b_1(\alpha), a_2(\alpha)b_2(\alpha)]
+\end{equation}
+This holds if and only if $\tilde{A}$ and $\tilde{B}$ are both non-negative \cite[p.18]{FULLER2}.
+If one or both fuzzy numbers can take negative values, the interval multiplication for the $\alpha$-cuts becomes more complex:
+\begin{equation}
+[\tilde{A}]^\alpha \cdot [\tilde{B}]^\alpha = [\min(P), \max(P)]
+\end{equation}
+where $P = \{a_1(\alpha)b_1(\alpha), a_1(\alpha)b_2(\alpha), a_2(\alpha)b_1(\alpha), a_2(\alpha)b_2(\alpha)\}$.
+
+
+
+\paragraph{T-norm Based Addition of Fuzzy Numbers}
+When employing the sup-T extension principle with an Archimedean t-norm $T$ (having an additive generator $f$), the sum of fuzzy numbers takes a specific form.
+Let $\tilde{A}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be $n$ fuzzy numbers of LR-type with common spreads $\alpha, \beta$.
+Let $f$ be the additive generator of $T$, and $L,R$ be the shape functions. The following theorem \cite[Thm. 1.7.1]{FULLER2}:
+
+\begin{theorem}
+\label{thm:tnorm_addition_lr}
+Let $T$ be an Archimedean t-norm with additive generator $f$. Let $\tilde{a}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be fuzzy numbers of LR-type. If $L$ and $R$ are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then the membership function of the T-sum $\tilde{A}_n = \tilde{a}_1 \oplus_T \dots \oplus_T \tilde{a}_n$ is given by:
+\begin{equation}
+\mu_{\tilde{A}_n}(z) =
+\begin{cases}
+1 & \text{if } A_n \le z \le B_n \\
+f^{[-1]}\left( n \cdot f\left(L\left(\frac{A_n-z}{n\alpha}\right)\right) \right) & \text{if } A_n - n\alpha \le z < A_n \\
+f^{[-1]}\left( n \cdot f\left(R\left(\frac{z-B_n}{n\beta}\right)\right) \right) & \text{if } B_n < z \le B_n + n\beta \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+where $A_n = \sum_{i=1}^n a_i$, $B_n = \sum_{i=1}^n b_i$, and $f^{[-1]}$ is the pseudo-inverse of $f$.
+\end{theorem}
+\begin{remark}
+This theorem provides a computationally efficient way to calculate the t-norm based sum of LR-fuzzy numbers under specific conditions. It has been generalized for varying spreads and different conditions on $f, L, R$ by several authors \cite[p.29]{FULLER2}. For example, it remains valid if $f$ is convex and $L,R$ are concave.
+\end{remark}
+The product of two fuzzy numbers $\tilde{A}$ and $\tilde{B}$ using the sup-T extension principle, where $T$ is a t-norm, is defined as \cite[p.20]{FULLER2}:
+\begin{equation}
+\mu_{\tilde{A} \otimes_T \tilde{B}}(z) = \sup_{x \cdot y = z} T(\mu_{\tilde{A}}(x), \mu_{\tilde{B}}(y))
+\end{equation}
+Similar to the sup-min product, closed-form expressions for the resulting membership function are not always straightforward for general LR-fuzzy numbers. However, the functional relationship described next provides significant insight for specific cases involving identical positive LR-fuzzy numbers.
+
+
+\paragraph{Functional Relationship Between T-norm Based Addition and Multiplication}
+A remarkable functional relationship exists between t-norm based addition and t-norm based multiplication for positive LR-fuzzy numbers of the same type. The following theorem \cite[Thm. 1.8.1]{FULLER2}:
+
+\begin{theorem}
+\label{thm:functional_relationship_add_mult}
+Let $T$ be an Archimedean t-norm with an additive generator $f$. Let $\tilde{M}_i = \tilde{M} = (a,b,\alpha,\beta)_{LR}$ for $i=1,\dots,n$ be $n$ identical positive fuzzy numbers of LR-type (i.e., their support is in $\mathbb{R}^+$). If $L$ and $R$ are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then for $z \ge 0$:
+\begin{equation}
+\mu_{(\tilde{M}_1 \oplus_T \dots \oplus_T \tilde{M}_n)}(nz) = \mu_{(\tilde{M}_1 \otimes_T \dots \otimes_T \tilde{M}_n)}(z^n) = f^{[-1]}(n \cdot f(\mu_{\tilde{M}}(z)))
+\end{equation}
+where $\oplus_T$ denotes t-norm based addition and $\otimes_T$ denotes t-norm based multiplication.
+\end{theorem}
+
+\begin{remark}
+This theorem establishes that the membership function of the sum of $n$ identical fuzzy numbers, when evaluated at $nz$, is equal to the membership function of the product of these $n$ fuzzy numbers evaluated at $z^n$. Both are determined by scaling the transformed membership function of the original fuzzy number $\tilde{M}$ using its generator $f$. This relationship is particularly useful in analyzing the behavior of aggregated fuzzy quantities. An immediate consequence is that if $e^*_n(\tilde{M}) = (\tilde{M} \oplus_T \dots \oplus_T \tilde{M})/n$ (where division by $n$ is scalar multiplication by $1/n$), then $\lim_{n\to\infty} e^*_n(\tilde{M})$ converges to the core $[a,b]$ of $\tilde{M}$ \cite{FULLER2}{p.33}.
+\end{remark}
 
 \signal{
 \subsection{Metrics for fuzzy numbers}
