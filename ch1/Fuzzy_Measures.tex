@@ -1,150 +1,144 @@
-\signal{Possibility is normalized so that 1 membership is attained at some point. And it models the compatibility of 2 states. That is of being 1.80 height and being tall states.
+% \signal{Possibility is normalized so that 1 membership is attained at some point. And it models the compatibility of 2 states. That is of being 1.80 height and being tall states.
 
-Probability Models aleatoric uncertainty y Possibility models epistemic uncertainty?\\
+% Probability Models aleatoric uncertainty y Possibility models epistemic uncertainty?\\
 
-Probability-Possibility Transformations:
-Under certain conditions, one can associate a family of probability distributions with a given possibility distribution. For instance, the possibility distribution can be seen as an upper envelope for a set of probability measures that are consistent with the available imprecise information. Such transformations (e.g., the Dubois-Prade method) allow one to move between the two representations, albeit at the cost of introducing conservatism or ambiguity.\\
-
-
-Bayesian Models for modeling both uncertainties:\\
-
-Epistemic Uncertainty:
-
-Bayesian models explicitly account for uncertainty about the model parameters by placing a prior over them and computing a posterior after observing data. This kind of uncertainty reflects our lack of knowledge due to limited data and can be reduced by gathering more information.\\
-
-Aleatoric Uncertainty:
-
-This type of uncertainty represents the inherent noise in the data itself (for example, measurement error). In Bayesian modeling, aleatoric uncertainty is often incorporated into the likelihood function. It is considered irreducible since it stems from the randomness in the data generation process.\\
-
-Osea que a qué nos referimos con epistemologic uncertainty? A que nos falta info (data) o a que tenemos toda la info que se puede tener y no podemos reducir ese gap de incetidumbre porque es un problema de definición imprecisa. Tengo que diferenciar entre vagueza y epistemologico entonces?
-
-\subsection{Probability-Possibility Transformations}
-%https://www.researchgate.net/publication/2743789_On_PossibilityProbability_Transformations
-From the paper: \cite{Dubois1997}: 
-it is recalled in this paper that the probabilistic representations and the possibilisticones are not just two equivalent representations of uncertainty
-
-The possibilisticrepresentation is weaker because it explicitly handles imprecision (e.g. incompleteknowledge) and because possibility measures are based on an \textbf{ordering structure} rather than an \textbf{additive one}.
-
-the principle of insufficient reason from possibility toprobability, and the principle of maximum specificity from probability topossibility.
-
-Mencionar: consistency principle, principle of insufficient reason and principle of maximum specificity
-}
+% Probability-Possibility Transformations:
+% Under certain conditions, one can associate a family of probability distributions with a given possibility distribution. For instance, the possibility distribution can be seen as an upper envelope for a set of probability measures that are consistent with the available imprecise information. Such transformations (e.g., the Dubois-Prade method) allow one to move between the two representations, albeit at the cost of introducing conservatism or ambiguity.\\
 
 
+% Bayesian Models for modeling both uncertainties:\\
+
+% Epistemic Uncertainty:
+
+% Bayesian models explicitly account for uncertainty about the model parameters by placing a prior over them and computing a posterior after observing data. This kind of uncertainty reflects our lack of knowledge due to limited data and can be reduced by gathering more information.\\
+
+% Aleatoric Uncertainty:
+
+% This type of uncertainty represents the inherent noise in the data itself (for example, measurement error). In Bayesian modeling, aleatoric uncertainty is often incorporated into the likelihood function. It is considered irreducible since it stems from the randomness in the data generation process.\\
+
+% Osea que a qué nos referimos con epistemologic uncertainty? A que nos falta info (data) o a que tenemos toda la info que se puede tener y no podemos reducir ese gap de incetidumbre porque es un problema de definición imprecisa. Tengo que diferenciar entre vagueza y epistemologico entonces?
+
+% \subsection{Probability-Possibility Transformations}
+% %https://www.researchgate.net/publication/2743789_On_PossibilityProbability_Transformations
+% From the paper: \cite{Dubois1997}: 
+% it is recalled in this paper that the probabilistic representations and the possibilisticones are not just two equivalent representations of uncertainty
+
+% The possibilisticrepresentation is weaker because it explicitly handles imprecision (e.g. incompleteknowledge) and because possibility measures are based on an \textbf{ordering structure} rather than an \textbf{additive one}.
+
+% the principle of insufficient reason from possibility toprobability, and the principle of maximum specificity from probability topossibility.
+
+% Mencionar: consistency principle, principle of insufficient reason and principle of maximum specificity
+% }
 
 
 
 
-\signal{Y HABLAR TAMBIÉN DE PLAUSIBILITY MEASURE Y CÓMO ESO SE RELACIONA CON EL LAS OTRAS MEASURES. MIRA EN Joseph Y. Halpern - Reasoning about Uncertainty-The MIT Press (2003)}
+
+
+% \signal{Y HABLAR TAMBIÉN DE PLAUSIBILITY MEASURE Y CÓMO ESO SE RELACIONA CON EL LAS OTRAS MEASURES. MIRA EN Joseph Y. Halpern - Reasoning about Uncertainty-The MIT Press (2003)}
 
 
 The study of fuzzy measures emerged as a generalization of classical measure theory, motivated by the increasing realization that the additivity axiom, fundamental in traditional measurement and probability theories as formalized by Borel, Lebesgue, and Kolmogorov, was often "too restrictive and, consequently, unrealistic" for modeling real-world complexities \cite[p.~10]{FuzzyMeasureHistory}. An alternative to classical measure theory came with Choquet's theory of capacities in 1954, followed by Dempster's and Shafer's development of belief and plausibility measures\footnote{Belief and plausibility measures are defined using a "basic probability assignment", which distributes a total measure of evidence across subsets $A_i \,(i\in \mathcal{I}\subseteq \N)$ of outcomes. When these subsets are "consonant" (they can be ordered with inclusion: $A_i \subseteq  A_{i+1}\forall i\in \mathcal{I}$), these measures become equivalent to possibility and necessity measures, respectively. This makes possibility and necessity special, highly structured cases within the broader Dempster-Shafer framework \cite[Thm.~3.23, Thm.~3.25]{FuzzyMeasureHistory}.} (superadditive and subadditive functions) in the late 1960s and 1970s to handle interval-valued probabilities. Simultaneously, the concept of a fuzzy set, introduced by Zadeh in 1965, laid the groundwork for possibility measures. It was within this context of fuzzy sets that Sugeno, in 1974, conceived fuzzy measures and fuzzy integrals, replacing the strict additivity requirement with weaker axioms of monotonicity and continuity, thereby paving the way for a more nuanced mathematical framework capable of capturing intrinsic nonadditive aspects of real-world phenomena like measurement errors and subjective judgments \cite[p.~13]{FuzzyMeasureHistory}.\\
 
-Classical measure theory, particularly probability theory, relies heavily on the principle of additivity. This principle dictates how the measure of a union of disjoint sets relates to the measures of the individual sets. While powerful, this additivity can be restrictive in scenarios where interactions, redundancies, or synergies between elements are significant.
-
 \begin{definition}[Fuzzy Measure (Capacity)]
-Let $\Omega$ be a universal set. A \textbf{fuzzy measure} (or capacity) $\mu$ is a set function
-\[ \mu: 2^\Omega \to [0, 1] \]
+Let $\Omega$ be a universal set. A fuzzy measure (or capacity) $\nu$ is a set function
+\[ \nu: 2^\Omega \to [0, 1] \]
 that assigns a value to each subset of $\Omega$ (often called an event or criterion) such that:
 \begin{enumerate}
     \item \textbf{Boundary Conditions:}
     \begin{itemize}
-        \item $\mu(\emptyset) = 0$ (the measure of the empty set is zero).
-        \item $\mu(\Omega) = 1$ (the measure of the universal set is one).
+        \item $\nu(\emptyset) = 0$ (the measure of the empty set is zero).
+        \item $\nu(\Omega) = 1$ (the measure of the universal set is one).
     \end{itemize}
-    \item \textbf{Monotonicity:} For any $A, B \subseteq \Omega$, if $A \subseteq B$, then $\mu(A) \le \mu(B)$.
+    \item \textbf{Monotonicity:} For any $A, B \subseteq \Omega$, if $A \subseteq B$, then $\nu(A) \le \nu(B)$.
 \end{enumerate}
 \end{definition}
 
-The crucial departure from classical probability (in its general form) is the absence of a strict additivity requirement for disjoint sets. This allows fuzzy measures to model situations where, for example, the combined importance of two criteria $A$ and $B$ might be greater than the sum of their individual importances (synergy) or less (redundancy). The value $\mu(A)$ quantifies the weight, importance, degree of belief, or capacity associated with the subset $A$.
+The crucial departure from classical probability (in its general form) is the absence of a strict additivity requirement for disjoint sets. This allows fuzzy measures to model situations where, for example, the combined importance of two criteria $A$ and $B$ might be greater than the sum of their individual importances (synergy) or less (redundancy). The value $\nu(A)$ quantifies the weight, importance, degree of belief, or capacity associated with the subset $A$.
 
-\subsection{Representations of Fuzzy Measures}
-A fuzzy measure $\mu$ is fundamentally defined by its $2^{|\Omega|}$ values assigned to all subsets of $\Omega$. This is its standard representation. However, alternative representations exist that can be more convenient for certain analyses or computations.
-\begin{definition}[Möbius Transform]
-For a fuzzy measure $\mu$ on a finite set $\Omega$, its \textbf{Möbius transform} $m: 2^\Omega \to \mathbb{R}$ is another set function defined as:
-\[ m(A) = \sum_{B \subseteq A} (-1)^{|A \setminus B|} \mu(B), \quad \forall A \subseteq \Omega \]
-Conversely, the fuzzy measure can be recovered from its Möbius transform:
-\[ \mu(A) = \sum_{B \subseteq A} m(B), \quad \forall A \subseteq \Omega \]
-\end{definition}
-The Möbius transform provides an alternative way to characterize the fuzzy measure and is particularly useful in analyzing interactions between elements, a topic explored when considering how these measures are used in aggregation processes. For very small universal sets, a Hasse diagram can visually represent the fuzzy measure values for all subsets.
-
-\subsection{Types of Fuzzy Measures}
-The general definition of a fuzzy measure is quite broad. Within this framework, numerous specific types of fuzzy measures have been defined to capture different kinds of uncertainty, non-additivity, or interaction patterns. Two of the most prominent are probability measures and possibility measures, which will be the focus of the next section. Other types, such as belief measures or $\lambda$-measures, also exist and offer different ways to model non-additive information. The choice of fuzzy measure type is crucial when these measures are employed in more complex frameworks, such as for aggregation or integration, which are important applications discussed in subsequent chapters.
-
-Fuzzy measures are classified based on several criteria. These include restrictions on their output values (e.g., 0-1 or Boolean measures), their behavior concerning additivity \signal{This is probably mentioned in the previous subsection when we presented fuzzy measures as a generalization of probability} (additive, subadditive, superadditive) and modularity \signal{say what is modularity}(submodular, supermodular, modular), which describe interactions between set contributions. Symmetry, where the measure depends only on set cardinality, is another criterion. Decomposability defines how the measure of a union of disjoint sets is derived from the measures of its components, with $\lambda$-fuzzy measures and possibility measures being key examples. Measures can also be classified by their duality properties, their relationship to $k$-monotonicity or $k$-alternativity (leading to belief and plausibility measures), or by their construction method, such as distorted probability measures.
-
-\subsection*{Special Mention: Probability and Possibility}
-
-Within this classification framework:
-
-\textbf{Probability measures} are a cornerstone. They are defined as \textit{additive fuzzy measures} (Definition 2.4), meaning $\mu(A \cup B) = \mu(A) + \mu(B)$ for disjoint sets $A$ and $B$, and $\mu(N)=1$. Due to their additivity, they are also \textit{modular} (Note 2.6), \textit{self-dual} (Note 2.1 implies this as additive measures are self-dual), and simultaneously \textit{belief measures} and \textit{plausibility measures} (Note 2.17). They are also decomposable with respect to the Łukasiewicz t-conorm (Note 2.25).
-
-\textbf{Possibility measures} (Pos) are characterized by the property $\text{Pos}(A \cup B) = \max\{\text{Pos}(A), \text{Pos}(B)\}$ (Definition 2.14). This makes them a specific type of \textit{decomposable fuzzy measure} (Note 2.26, using the maximum t-conorm). They are inherently \textit{subadditive} (page 7, bottom paragraph) and are a type of \textit{plausibility measure} (Note 2.18). Their duals are \textit{necessity measures}, which are a type of \textit{belief measure}.
+A fuzzy measure $\nu$ is fundamentally defined by its $2^{|N|}$ values assigned to all subsets of the universal set $N$ \cite[p. 41]{beliakov2023discrete}. They are classified based on several criteria such as based on their behavior concerning additivity and modularity, which describe interactions between set contributions.
+Regarding additivity, which considers disjoint sets $A,B \subseteq N$ (i.e., $A \cap B = \emptyset$):
+\begin{itemize}
+    \item a measure is additive if $\nu(A \cup B) = \nu(A) + \nu(B)$ \cite[Def. 2.4, Eq. 2.1]{beliakov2023discrete};
+    \item it is subadditive if $\nu(A \cup B) \leq \nu(A) + \nu(B)$ \cite[Def. 2.10, Eq. 2.8]{beliakov2023discrete};
+    \item and superadditive if $\nu(A \cup B) \geq \nu(A) + \nu(B)$ \cite[Def. 2.10, Eq. 2.9]{beliakov2023discrete}.
+\end{itemize}
+Modularity describes how the measure of unions and intersections relates to the sum of individual measures for any sets $A,B \subseteq N$:
+\begin{itemize}
+    \item a measure is submodular if $\nu(A \cup B) + \nu(A \cap B) \leq \nu(A) + \nu(B)$ \cite[Def. 2.8, Eq. 2.3]{beliakov2023discrete};
+    \item it is supermodular if $\nu(A \cup B) + \nu(A \cap B) \geq \nu(A) + \nu(B)$ \cite[Def. 2.8, Eq. 2.4]{beliakov2023discrete};
+    \item and modular if equality holds: $\nu(A \cup B) + \nu(A \cap B) = \nu(A) + \nu(B)$ \cite[Eq. 2.5]{beliakov2023discrete}. Notably, a measure is modular if and only if it is additive \cite[Note 2.6]{beliakov2023discrete}.
+\end{itemize}
+Symmetry is another criterion, where the measure $\nu(A)$ depends only on the set cardinality $|A|$, i.e., if $|A|=|B|$ then $\nu(A)=\nu(B)$ \cite[Def. 2.6]{beliakov2023discrete}. Finally, decomposability defines how the measure of a union of disjoint sets $A, B \subseteq N$ (with $A \cap B = \emptyset$) is derived from the measures of its components, generally as $\nu(A \cup B) = f(\nu(A), \nu(B))$ for some function $f$ \cite[Def. 2.20, Eq. 2.18]{beliakov2023discrete}. Key examples of decomposable measures include:
+\begin{itemize}
+    \item $\lambda$-fuzzy measures, where for disjoint $A,B$, the union is given by $\nu(A \cup B) = \nu(A) + \nu(B) + \lambda\nu(A)\nu(B)$ \cite[Def. 2.18, Eq. 2.14]{beliakov2023discrete};
+    \item possibility measures, which satisfy $Pos(A \cup B) = \max\{Pos(A), Pos(B)\}$ (a property that, for possibility measures, holds even for non-disjoint sets $A,B$ \cite[Def. 2.14]{beliakov2023discrete}).
+\end{itemize}
 
 
-\section{Probability and Possibility Measures}
+\subsection{Probability and Possibility Measures}
 Probability and possibility measures are two distinct yet related formalisms for quantifying uncertainty, both falling under the umbrella of fuzzy measures.
 
 \begin{definition}[Probability Measure]
-A \textbf{probability measure} $P$ is a fuzzy measure that additionally satisfies the axiom of \textbf{finite additivity} for disjoint sets:
+A probability measure $P$ is a fuzzy measure that additionally satisfies the axiom of finite additivity for disjoint sets:
 For any two disjoint sets $A, B \subseteq \Omega$ (i.e., $A \cap B = \emptyset$):
 \[ P(A \cup B) = P(A) + P(B) \]
 \end{definition}
 A probability measure quantifies the likelihood or frequency of an event occurring, or the degree of belief that a proposition is true. The sum of probabilities for a complete set of mutually exclusive elementary events is 1.
 
 \begin{definition}[Possibility Measure]
-A \textbf{possibility measure} $\Pi$, pioneered by Zadeh \cite{Zadeh1978}, is a fuzzy measure characterized by the axiom of \textbf{maxitivity} (or sup-additivity):
+A possibility measure $\Pi$, pioneered by Zadeh \cite{Zadeh1978}, is a fuzzy measure characterized by the axiom of maxitivity (or sup-additivity):
 For any two sets $A, B \subseteq \Omega$:
 \[ \Pi(A \cup B) = \max(\Pi(A), \Pi(B)) \]
 \end{definition}
-A possibility measure quantifies the degree to which an event is considered possible, plausible, or compatible with available knowledge. It is often derived from a \textbf{possibility distribution} $\pi: \Omega \to [0, 1]$, where $\pi(x)$ is the possibility that a variable takes the value $x$. Then, for any $A \subseteq \Omega$, $\Pi(A) = \sup_{x \in A} \pi(x)$. Normalization typically requires $\sup_{x \in \Omega} \pi(x) = 1$, which implies $\Pi(\Omega) = 1$.
+A possibility measure quantifies the degree to which an event is considered possible, plausible, or compatible with available knowledge. It is often derived from a possibility distribution $\pi: \Omega \to [0, 1]$, where $\pi(x)$ is the possibility that a variable takes the value $x$. Then, for any $A \subseteq \Omega$, $\Pi(A) = \sup_{x \in A} \pi(x)$. Normalization typically requires $\sup_{x \in \Omega} \pi(x) = 1$, which implies $\Pi(\Omega) = 1$.
 
-\subsection{Conceptual Differences: An Example}
-Consider a standard six-sided die.
-\begin{itemize}
-    \item \textbf{Probability:} If the die is fair, the probability of rolling any specific number $x \in \{1, ..., 6\}$ is $P(\{x\}) = 1/6$.
-    The probability of rolling an even number is $P(\text{even}) = P(\{2\}) + P(\{4\}) + P(\{6\}) = 1/6 + 1/6 + 1/6 = 3/6 = 1/2$.
-    Similarly, $P(\text{odd}) = 1/2$. Note that $P(\text{even}) + P(\text{odd}) = 1$.
-    Also, $P(\text{even} \cup \text{odd}) = P(\Omega) = 1$.
+\signal{Me falta meter lo del ejemplo del dado feo que creo que aclara bastante la diferencia.}
 
-    \item \textbf{Possibility:} If our knowledge only states that "it is possible to roll any number from 1 to 6," we might assign a possibility distribution $\pi(x) = 1$ for all $x \in \{1, ..., 6\}$.
-    Then, the possibility of rolling an even number is $\Pi(\text{even}) = \max(\pi(2), \pi(4), \pi(6)) = \max(1,1,1) = 1$.
-    Similarly, $\Pi(\text{odd}) = \max(\pi(1), \pi(3), \pi(5)) = 1$.
-    Here, $\Pi(\text{even}) = 1$ means "it is fully possible to roll an even number." It does not mean it is certain.
-    Crucially, it is not required that $\Pi(A) + \Pi(\overline{A}) = 1$. In this example, $\Pi(\text{even}) = 1$ and $\Pi(\overline{\text{even}}) = \Pi(\text{odd}) = 1$. This reflects a state of incomplete information: it's fully possible to be even, and fully possible to be odd.
-    Also, $\Pi(\text{even} \cup \text{odd}) = \max(\Pi(\text{even}), \Pi(\text{odd})) = \max(1,1) = 1$.
-\end{itemize}
-Associated with every possibility measure is a dual \textbf{necessity measure} $N$, defined as $N(A) = 1 - \Pi(\overline{A})$. $N(A)$ quantifies the degree to which event $A$ is certainly true or necessarily implied. For our dice example, $N(\text{even}) = 1 - \Pi(\text{odd}) = 1 - 1 = 0$. It is not necessary to roll an even number.
+% \subsection{Conceptual Differences: An Example}
+% Consider a standard six-sided die.
+% \begin{itemize}
+%     \item \textbf{Probability:} If the die is fair, the probability of rolling any specific number $x \in \{1, ..., 6\}$ is $P(\{x\}) = 1/6$.
+%     The probability of rolling an even number is $P(\text{even}) = P(\{2\}) + P(\{4\}) + P(\{6\}) = 1/6 + 1/6 + 1/6 = 3/6 = 1/2$.
+%     Similarly, $P(\text{odd}) = 1/2$. Note that $P(\text{even}) + P(\text{odd}) = 1$.
+%     Also, $P(\text{even} \cup \text{odd}) = P(\Omega) = 1$.
+
+%     \item \textbf{Possibility:} If our knowledge only states that "it is possible to roll any number from 1 to 6," we might assign a possibility distribution $\pi(x) = 1$ for all $x \in \{1, ..., 6\}$.
+%     Then, the possibility of rolling an even number is $\Pi(\text{even}) = \max(\pi(2), \pi(4), \pi(6)) = \max(1,1,1) = 1$.
+%     Similarly, $\Pi(\text{odd}) = \max(\pi(1), \pi(3), \pi(5)) = 1$.
+%     Here, $\Pi(\text{even}) = 1$ means "it is fully possible to roll an even number." It does not mean it is certain.
+%     Crucially, it is not required that $\Pi(A) + \Pi(\overline{A}) = 1$. In this example, $\Pi(\text{even}) = 1$ and $\Pi(\overline{\text{even}}) = \Pi(\text{odd}) = 1$. This reflects a state of incomplete information: it's fully possible to be even, and fully possible to be odd.
+%     Also, $\Pi(\text{even} \cup \text{odd}) = \max(\Pi(\text{even}), \Pi(\text{odd})) = \max(1,1) = 1$.
+% \end{itemize}
+Associated with every possibility measure is a dual necessity measure $N$, defined as $N(A) = 1 - \Pi(\overline{A})$. $N(A)$ quantifies the degree to which event $A$ is certainly true or necessarily implied. For our dice example, $N(\text{even}) = 1 - \Pi(\text{odd}) = 1 - 1 = 0$. It is not necessary to roll an even number.
 
 \subsection{Probability-Possibility Transformations}
-Despite their distinct conceptual foundations, probability and possibility measures are not entirely disconnected. The relationship $N(A) \le P(A) \le \Pi(A)$ suggests an ordering and provides a basis for transformations.
-
-\subsubsection{Rationale and Core Assumption}
-Transformations between these measures are often sought for practical reasons:
+Despite their distinct conceptual foundations, probability and possibility measures are not entirely disconnected. The relationship $N(A) \le P(A) \le \Pi(A)$ \signal{Mencionar los principios de los que salle esta desigualdad} suggests an ordering and provides a basis for transformations. Transformations between these measures are often wanted for practical reasons:
 \begin{itemize}
     \item We might have probabilistic information but need a possibilistic model for certain types of reasoning (e.g., reasoning about feasibility under uncertainty).
     \item We might have possibilistic information (e.g., from expert elicitation of what's feasible) but need a probability distribution for decision-making processes that require expected utility calculations.
 \end{itemize}
-The core assumption underlying many transformations is that \textbf{possibility acts as an upper bound for probability}: $P(A) \le \Pi(A)$ for all $A \subseteq \Omega$. This implies that what is probable must first be possible. An event cannot be likely if it's not even deemed possible to some corresponding degree. The set of all probability measures $P$ consistent with a given possibility measure $\Pi$ is called a credal set.
+The core assumption underlying many transformations is that possibility acts as an upper bound for probability: $P(A) \le \Pi(A)$ for all $A \subseteq \Omega$. This implies that what is probable must first be possible. An event cannot be likely if it's not even deemed possible to some corresponding degree. The set of all probability measures $P$ consistent with a given possibility measure $\Pi$ is called a credal set.
 
 \subsubsection{Transformations from Probability to Possibility (P$\to\Pi$)}
 The goal here is to summarize or bound a precise probability distribution $p$ (defined on elementary events) with a possibility distribution $\pi$ (which induces $\Pi$) such that $p(x) \le \pi(x)$ for all $x \in \Omega$, and often, to preserve the ranking of probabilities.
-One common method, attributed to Dubois and Prade \cite{Dubois1997}, is the \textbf{least-specific dominating possibility distribution}.
+One common method, attributed to Dubois and Prade \cite{Dubois1997}, is the least-specific dominating possibility distribution.
 Given a probability distribution $p=(p_1, \dots, p_n)$ over a finite universe $\Omega = \{\omega_1, \dots, \omega_n\}$, with elements ordered such that $p_1 \ge p_2 \ge \dots \ge p_n$ (where $p_k$ is the probability of $\omega_k$). The possibility degree for $\omega_k$ is defined based on cumulative probabilities:
 \[ \pi(\omega_k) = \sum_{i=k}^{n} p_i \]
 This is typically normalized so that $\max_k \pi(\omega_k) = \pi(\omega_1) = 1$.
-\textbf{Intuition:} The most probable element is fully possible. The possibility of less probable elements reflects the cumulative probability of them and all elements less probable than them. This ensures the order-preserving property and consistency with $P(A) \le \Pi(A)$. Such transformations inherently involve a loss of information, as the additivity of probability is replaced by the weaker maxitivity of possibility.
+Intuition: The most probable element is fully possible. The possibility of less probable elements reflects the cumulative probability of them and all elements less probable than them. This ensures the order-preserving property and consistency with $P(A) \le \Pi(A)$. Such transformations inherently involve a loss of information, as the additivity of probability is replaced by the weaker maxitivity of possibility.
 
 \subsubsection{Transformations from Possibility to Probability ($\Pi\to$P)}
 The goal is to select a single probability distribution $p$ from the credal set $\mathcal{P}(\Pi)$ defined by a possibility distribution $\pi$. This often involves an "information filling-in" step, guided by principles like maximum entropy or insufficient reason.
-A well-known example is the \textbf{pignistic transform} (context of belief functions, of which possibility measures are a special case). For a consonant belief structure (like possibility), given distinct possibility levels $1 = \alpha_0 > \alpha_1 > \dots > \alpha_m = 0$, we define $\alpha$-cuts $E_j = \{\omega : \pi(\omega) \ge \alpha_j\}$. The probability mass $(\alpha_{j-1} - \alpha_j)$ that "drops" between two successive possibility levels is distributed uniformly among the elements in the narrower (more possible) set $E_{j-1}$:
+A well-known example is the pignistic transform (context of belief functions, of which possibility measures are a special case). Given distinct possibility levels (in general, a consonant belief) $1 = \alpha_0 > \alpha_1 > \dots > \alpha_m = 0$, we define $\alpha$-cuts $E_j = \{\omega : \pi(\omega) \ge \alpha_j\}$. The probability mass $(\alpha_{j-1} - \alpha_j)$ that "drops" between two successive possibility levels is distributed uniformly among the elements in the narrower (more possible) set $E_{j-1}$:
 \[ p(\omega) = \sum_{j=1}^{m} \frac{\alpha_{j-1} - \alpha_j}{|E_{j-1}|} \mathbf{1}_{\{\omega \in E_{j-1}\}} \]
-\textbf{Intuition:} Elements that are equally highly possible share the available probability mass assigned to that level of possibility. This transform selects the probability distribution that is maximally non-committal (maximizes entropy) within the constraints imposed by the possibility measure. These transformations add assumptions to select one specific probability distribution from many consistent ones.
+Elements that are equally highly possible share the available probability mass assigned to that level of possibility. This transform selects the probability distribution that is maximally non-committal (maximizes entropy) within the constraints imposed by the possibility measure. These transformations add assumptions to select one specific probability distribution from many consistent ones.
 
-\subsubsection{Limitations and Assumptions of Transformations}
-It is crucial to understand that transformations are not universally applicable without careful consideration of their underlying assumptions:
-\begin{enumerate}
-    \item \textbf{The $P(A) \le \Pi(A)$ Postulate:} This is a fundamental modeling choice, not an inherent law. It is justified if the possibility measure truly represents available information about the upper bounds of potential probabilities (e.g., $\Pi$ derived from imprecise observations constraining $P$). It can be problematic if $P$ and $\Pi$ are derived from entirely independent sources or model fundamentally different aspects of a problem.
-    \item \textbf{Information Loss/Gain:} Transforming $P \to \Pi$ loses the precision of additivity. Transforming $\Pi \to P$ involves making assumptions (like maximum entropy or insufficient reason) to pick one $P$ out of a set of possibilities. The choice of transformation method itself is an assumption.
-    \item \textbf{Semantic Alignment:} Transformations are most meaningful when probability and possibility are indeed modeling different facets of the \textit{same underlying uncertainty}. If they model completely unrelated concepts, applying formal transformations can be a category mistake, as the numbers, despite being in $[0, 1]$, have entirely different semantics.
-\end{enumerate}
+\signal{Tengo que añadir las limitaciones de este tipo de transformaciones y referenciarlo todo esto a sus papers.}
+% \subsubsection{Limitations and Assumptions of Transformations}
+% It is crucial to understand that transformations are not universally applicable without careful consideration of their underlying assumptions:
+% \begin{enumerate}
+%     \item \textbf{The $P(A) \le \Pi(A)$ Postulate:} This is a fundamental modeling choice, not an inherent law. It is justified if the possibility measure truly represents available information about the upper bounds of potential probabilities (e.g., $\Pi$ derived from imprecise observations constraining $P$). It can be problematic if $P$ and $\Pi$ are derived from entirely independent sources or model fundamentally different aspects of a problem.
+%     \item \textbf{Information Loss/Gain:} Transforming $P \to \Pi$ loses the precision of additivity. Transforming $\Pi \to P$ involves making assumptions (like maximum entropy or insufficient reason) to pick one $P$ out of a set of possibilities. The choice of transformation method itself is an assumption.
+%     \item \textbf{Semantic Alignment:} Transformations are most meaningful when probability and possibility are indeed modeling different facets of the \textit{same underlying uncertainty}. If they model completely unrelated concepts, applying formal transformations can be a category mistake, as the numbers, despite being in $[0, 1]$, have entirely different semantics.
+% \end{enumerate}

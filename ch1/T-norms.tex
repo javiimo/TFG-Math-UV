@@ -42,7 +42,9 @@ Therefore, the concept of intersection (conjunction) of fuzzy sets is generally 
     is called a triangular norm or t-norm. Defines the \textbf{intersection} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cap B) (x) = T(A(x),B(x)) \forall x \in X$ 
 \end{definition}
 
-\remark{It can be shown that thanks to the one identity and the monotonicity, all t-norms are identical in the boundary of $[0,1]^2$. In particular, they are the same in $\{0,1\}^2$, which is why any t-norm restricted to a boolean domain is the same as the classical intersection.}
+\begin{remark}
+  It can be shown that thanks to the one identity and the monotonicity, all t-norms are identical in the boundary of $[0,1]^2$. In particular, they are the same in $\{0,1\}^2$, which is why any t-norm restricted to a boolean domain is the same as the classical intersection.
+\end{remark}
 
 Its dual operator can also be obtained by a similar reasoning as before, but instead of considering the probability distribution of finding both points closer than a given distance, it considers the probability distribution ($G_{uv}(t) = 1 - F_{uv}(t)$) of finding them further apart than that distance. In this case, both inequalities are $\leq$ since larger probabilities indicate that greater distances are more likely.
 \begin{equation}\label{eq:Gtriangle_inequality}

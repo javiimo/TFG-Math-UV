@@ -98,12 +98,16 @@
   \end{proposition}
   
   \begin{proof}
-  \[ \Pi_X(A \times B)(x) = \sup_{y \in Y} T(A(x), B(y)) = T(A(x), \sup_{y \in Y} B(y)) \leq
-   \begin{cases}
-    \min(A(x), 1) = A(x) & \text{if } B \text{ is normalized}\\
-    \min(A(x), \sup_{y \in Y} B(y)) \leq A(x) & \text{otherwise}
-  \end{cases}
-  \]
+  \begin{equation*}
+    \begin{split}
+      \Pi_X(A \times B)(x) &= \sup_{y \in Y} T(A(x), B(y))= \\
+      &= T(A(x), \sup_{y \in Y} B(y)) \leq
+      \begin{cases}
+        \min(A(x), 1) = A(x) & \text{if } B \text{ is normalized}\\
+        \min(A(x), \sup_{y \in Y} B(y)) \leq A(x) & \text{otherwise}
+      \end{cases}
+    \end{split}
+  \end{equation*}
   Since $A(x)$ is a constant with respect to the supremum over $y$, and t-norms are non-decreasing and left-continuous\footnote{If the function was only left-continuous but not non-decreasing, then that equality would instead be the $\geq$ inequality.} in their second argument, then the second equality holds. The inequality before the cases is justified using that the minimum t-norm is the strongest t-norm.
   \end{proof}
   
@@ -245,6 +249,6 @@ Which is again a generalization of vector set-valued functions where: $$f(A_1,\l
 In terms of boolean membership function:
 $$\chi _{f(A_1,\ldots,A_n)}(y)=\sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}T(\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)) = \sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}min\{\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)\}$$
 
-Where we have used that every t-norm operates the same on boolean memberships. \signal{Debería haber puesto esto como un remark cuando presento la intersección y la unión.}\\
+Where we have used that every t-norm operates the same on boolean memberships.\\
 
-\signal{Hay otros principios de extensión como el de Ramik con extensiones canónicas y order preserving operators, etc. No sé hasta qué punto eso podrá serme útil.}
+\signal{Hay otros principios de extensión como el de Ramik con extensiones canónicas y order preserving operators, etc. No sé hasta qué punto eso podrá serme útil. Igual lo menciono en una frase y ya.}

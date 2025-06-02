@@ -5,9 +5,7 @@ According to Nguyen \cite{NGUYEN1978}:
 an extension of closed bounded intervals, [...]} 
 \\
 
-\signal{Another way to think about fuzzy numbers is as a special case of fuzzy intervals.}
-
-\signal{Explain that we want to define fuzzy numbers to work with fuzzy attributes later on}
+\signal{Aquí me falta introducir esto como que otra forma de entender los fuzzy numbers es que son un caso especial de fuzzy intervals. Y también motivar para qué me sirven los fuzzy numbers en MCDM: modelizar atributos, MISO, fuzzy linear programming, ANFIS y esas cosas.}
 
 
 \begin{definition}[Normal Fuzzy Set]
@@ -70,7 +68,7 @@ is closed in $\R$. %For $\alpha = 0$, $[A]^0 = \textnormal{cl}(\textnormal{Supp}
 \end{notation}
 
 \begin{note}
-The condition of bounded support can be relaxed to define \textit{quasi-fuzzy numbers} \signal{(Which properties still hold and which are lost?)}:
+The condition of bounded support can be relaxed to define \textit{quasi-fuzzy numbers}:
 $$\textnormal{(iv}_{\textnormal{bis}}\textnormal{) } \lim{t}{\infty}A(t) = 0 \quad \land \quad \lim{t}{-\infty}A(t) = 0$$
 \end{note}
 
@@ -146,48 +144,47 @@ The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment withou
 
 
 
+% \subsection{Nguyen's Theorems}
+% \signal{We use continuous functions because that way, we get the image of an interval is an interval as well. So then we get another fuzzy number because it maintains the convexity property?
+
+% That is because the image under $f:\R \longrightarrow \R$ continuous of a compact is compact and of a connected set is a connected set. Therefore continuous functions move closed intervals to closed intervals.}
+
+% \begin{theorem}[First Nguyen Theorem]
+%     Let $f:\, \R \longrightarrow \R$ a continuous function and $A\in \R$ any fuzzy number \signal{(creo que vale para LR fuzzy num)}. Then,
+%     \[
+%     [f(A)]^{\alpha} = f([A]^{\alpha})=\{f(x)\mid x\in [A]^\alpha\}
+%     \]
+%     Moreover, if $f$ is monotonically increasing (if $f$ were decreasing, the order of the interval would be reversed), then:
+%     \[
+%     [f(A)]^{\alpha} = f([a_1(\alpha), a_2(\alpha)])=
+%     [f(a_1(\alpha)), f(a_2(\alpha))]
+%     \]
+%     where $[\cdot]^\alpha$ denotes the $\alpha$-cut of a fuzzy set and $a_1(\alpha), a_2(\alpha)$ the extremes of the $\alpha$-cut.
+% \end{theorem}
+
+% \signal{Sup- t-norm convolution para la generalización lo menciono?? Y eso de la convolución es útil para algo más?}
+
+% \begin{theorem}[Second Nguyen Theorem]
+%     Let $f:\, \R \times \R\longrightarrow \R$ a continuous function and $A,B$ \signal{any} fuzzy numbers. Then,
+%     \[
+%     [f(A,B)]^{\alpha} = f([A]^{\alpha},[B]^{\alpha})=\{f(x_1,x_2)\mid x_1\in [A]^\alpha, \, x_2\in [B]^\alpha\}
+%     \signal{=[A]^\alpha [B]^\alpha}
+%     \]
+%     where $[\cdot]^\alpha$ denotes the $\alpha$-cut of a fuzzy set.
+% \end{theorem}
+
+
+% \signal{Añado generalization of Nguyen Theorems by Fuller in section 1.9 of \cite{FULLER2}?}
+
+
+
+
+
+
+
+
 \subsection{Nguyen's Theorems}
-\signal{We use continuous functions because that way, we get the image of an interval is an interval as well. So then we get another fuzzy number because it maintains the convexity property?
-
-That is because the image under $f:\R \longrightarrow \R$ continuous of a compact is compact and of a connected set is a connected set. Therefore continuous functions move closed intervals to closed intervals.}
-
-%https://sci-hub.se/10.1016/0165-0114(91)90139-H
-\begin{theorem}[First Nguyen Theorem]
-    Let $f:\, \R \longrightarrow \R$ a continuous function and $A\in \R$ any fuzzy number \signal{(creo que vale para LR fuzzy num)}. Then,
-    \[
-    [f(A)]^{\alpha} = f([A]^{\alpha})=\{f(x)\mid x\in [A]^\alpha\}
-    \]
-    Moreover, if $f$ is monotonically increasing (if $f$ were decreasing, the order of the interval would be reversed), then:
-    \[
-    [f(A)]^{\alpha} = f([a_1(\alpha), a_2(\alpha)])=
-    [f(a_1(\alpha)), f(a_2(\alpha))]
-    \]
-    where $[\cdot]^\alpha$ denotes the $\alpha$-cut of a fuzzy set and $a_1(\alpha), a_2(\alpha)$ the extremes of the $\alpha$-cut.
-\end{theorem}
-
-\signal{Sup- t-norm convolution para la generalización lo menciono?? Y eso de la convolución es útil para algo más?}
-
-\begin{theorem}[Second Nguyen Theorem]
-    Let $f:\, \R \times \R\longrightarrow \R$ a continuous function and $A,B$ \signal{any} fuzzy numbers. Then,
-    \[
-    [f(A,B)]^{\alpha} = f([A]^{\alpha},[B]^{\alpha})=\{f(x_1,x_2)\mid x_1\in [A]^\alpha, \, x_2\in [B]^\alpha\}
-    \signal{=[A]^\alpha [B]^\alpha}
-    \]
-    where $[\cdot]^\alpha$ denotes the $\alpha$-cut of a fuzzy set.
-\end{theorem}
-
-
-\signal{Añado generalization of Nguyen Theorems by Fuller in section 1.9 of \cite{FULLER2}?}
-
-
-
-
-
-
-
-
-\subsection{Nguyen's Theorems}
-Nguyen's theorems provide fundamental results for computing the $\alpha$-cuts of fuzzy numbers that result from applying functions, based on Zadeh's extension principle. These theorems are crucial because they allow us to perform operations on fuzzy numbers by working with their $\alpha$-cuts (which are crisp intervals) directly. The following theorem \cite[Thm. 1.3.1, p. 17]{FULLER2}, \cite{NGUYEN1978}:
+Nguyen's theorems (\cite[Thm. 1.3.1, 1.3.2]{FULLER2}) provide fundamental results for computing the $\alpha$-cuts of fuzzy numbers that result from applying functions, based on Zadeh's extension principle \cite{NGUYEN1978}. These theorems are crucial because they allow us to perform operations on fuzzy numbers by working with their $\alpha$-cuts (which are crisp intervals) directly:
 
 \begin{theorem}[First Nguyen Theorem]
     Let $f: \mathbb{R} \to \mathbb{R}$ be a continuous function and $A$ be a fuzzy number. Then, the $\alpha$-cut of the fuzzy number $f(A)$ (obtained via the extension principle) is given by:
@@ -211,13 +208,12 @@ Nguyen's theorems provide fundamental results for computing the $\alpha$-cuts of
 \begin{remark}
 Since $A$ is a fuzzy number, its $\alpha$-cuts $[A]^\alpha$ are closed and bounded intervals (compact and connected sets in $\mathbb{R}$). A continuous function $f: \mathbb{R} \to \mathbb{R}$ maps compact sets to compact sets and connected sets (intervals) to connected sets (intervals). Therefore, $f([A]^\alpha)$ is also a closed and bounded interval. This property ensures that $f(A)$ (whose $\alpha$-cuts are these $f([A]^\alpha)$) is indeed a fuzzy number, as its $\alpha$-cuts remain convex (i.e., are intervals) and satisfy other necessary properties. \signal{Y qué pasa con la propiedad de convexity?}
 \end{remark}
-The following theorem \cite[Thm. 1.3.2, p. 18]{FULLER2}, \cite{NGUYEN1978}:
+
 \begin{theorem}[Second Nguyen Theorem]
     Let $f: \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be a continuous function (in both arguments) and $A, B$ be fuzzy numbers. Then, the $\alpha$-cut of the fuzzy number $f(A,B)$ (obtained via the extension principle) is given by:
     \[
     [f(A,B)]^{\alpha} = f([A]^{\alpha}, [B]^{\alpha}) = \{f(x_1, x_2) \mid x_1 \in [A]^\alpha, x_2 \in [B]^\alpha\}
     \]
-    \signal{Regarding the notation $=[A]^\alpha [B]^\alpha$: This specific notation is typically used when $f$ represents multiplication, i.e., $f(x_1, x_2) = x_1 \cdot x_2$. In that case, $f([A]^\alpha, [B]^\alpha)$ becomes the interval product $[A]^\alpha \cdot [B]^\alpha$. The theorem statement is more general: $f([A]^\alpha, [B]^\alpha)$ means applying the function $f$ to elements from the respective intervals. For example, if $f(x_1, x_2) = x_1 + x_2$, then $f([A]^\alpha, [B]^\alpha) = [A]^\alpha + [B]^\alpha$ (interval addition).}
 \end{theorem}
 % \begin{proof}
 %     (Intuition) Similar to the first theorem, the extension principle for a two-place function is $(f(A,B))(z) = \sup_{x_1,x_2: f(x_1,x_2)=z} \min(A(x_1), B(x_2))$.
@@ -226,25 +222,23 @@ The following theorem \cite[Thm. 1.3.2, p. 18]{FULLER2}, \cite{NGUYEN1978}:
 %     Continuity of $f$ ensures that the image of the compact set $[A]^\alpha \times [B]^\alpha$ is a compact interval, preserving the fuzzy number structure.
 % \end{proof}
 
-\subsubsection{Generalization of Nguyen's Theorem by Fullér and Keresztfalvi}
-The original Nguyen's theorem for two-place functions implicitly relies on Zadeh's extension principle, which uses a sup-min convolution to aggregate membership degrees. Fullér and Keresztfalvi generalized this result to cases where the extension principle is defined via a sup-T-norm convolution, where $T$ is an arbitrary t-norm \cite[Sec. 1.9]{FULLER2}.
+\paragraph{Generalization of Nguyen's Theorem:}
+The original Nguyen's theorem for two-place functions implicitly relies on Zadeh's sup-min extension principle. Fullér and Keresztfalvi generalized this result to cases where the extension principle uses an arbitrary t-norm \cite[Sec. 1.9]{FULLER2}.
 
 The generalized extension principle defines the membership of $z$ in $f(A,B)$ as:
 \[
 (f(A,B))(z) = \sup_{f(x,y)=z} T(A(x), B(y))
 \]
-\signal{Comment: Sup-t-norm convolution para la generalización lo menciono?? Y eso de la convolución es útil para algo más?
-Response: Yes, the sup-T-norm convolution is central to this generalization. It allows for more flexibility in modeling how the membership degrees of $A$ and $B$ combine. Different t-norms represent different logical interpretations of "conjunction" or "aggregation." For example, $T(a,b) = \min(a,b)$ (Zadeh's original), $T(a,b) = ab$ (product t-norm), or $T(a,b) = \max(0, a+b-1)$ (Lukasiewicz t-norm) each lead to different fuzzy arithmetic operations.}
 
 The generalized theorem states the condition for the equality:
 \begin{equation} \label{eq:nguyen_generalized}
-[f(A, B)]_\alpha = \bigcup_{T(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta), \quad \alpha \in (0, 1]
+[f(A, B)]^\alpha = \bigcup_{T(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta), \quad \alpha \in (0, 1]
 \end{equation}
-(Note: $[A]^\xi$ and $A_\xi$ are often used interchangeably for $\alpha$-level sets.)
 
-It's important to see that if $T(x,y) = \min(x,y)$, then $T(\xi, \eta) \ge \alpha$ implies $\xi \ge \alpha$ and $\eta \ge \alpha$. In this case, the union $\bigcup_{\min(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta)$ simplifies. Since $f([A]^\xi, [B]^\eta) \subseteq f([A]^\alpha, [B]^\alpha)$ for $\xi, \eta \ge \alpha$ (due to the nesting property of $\alpha$-cuts and assuming $f$ behaves well with set inclusion, e.g., for interval operations), the largest set in the union is $f([A]^\alpha, [B]^\alpha)$. Thus, Equation \eqref{eq:nguyen_generalized} reduces to:
+
+It's important to see that if $T(x,y) = \min(x,y)$, then $T(\xi, \eta) \ge \alpha$ implies $\xi \ge \alpha$ and $\eta \ge \alpha$. In this case, the union $\bigcup_{\min(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta)$ simplifies. Since $f([A]^\xi, [B]^\eta) \subseteq f([A]^\alpha, [B]^\alpha)$ for $\xi, \eta \ge \alpha$ (due to the nesting property of $\alpha$-cuts and assuming $f$ behaves well \signal{explicar eso de que se porte bien qué es} with set inclusion, e.g., for interval operations), the largest set in the union is $f([A]^\alpha, [B]^\alpha)$. Thus, Equation \eqref{eq:nguyen_generalized} reduces to:
 \[
-[f(A, B)]_\alpha = f([A]^\alpha, [B]^\alpha)
+[f(A, B)]^\alpha = f([A]^\alpha, [B]^\alpha)
 \]
 which is precisely Nguyen's original second theorem.
 
@@ -260,13 +254,6 @@ Fullér and Keresztfalvi provide the following key results \cite[Thms. 1.9.1, 1.
 % \begin{proof}
 %     (Intuition for Theorem 2) The conditions (continuous $f$, u.s.c. $T$, and $A, B$ being u.s.c. with compact support) ensure that the function $\varphi(x,y) = T(A(x), B(y))$ is u.s.c. and the domain over which the supremum is taken, $f^{-1}(z) \cap (\text{supp} A \times \text{supp} B)$, is compact. An u.s.c. function on a compact set attains its maximum. This guarantees that the condition of the first theorem (supremum is attained) is met.
 % \end{proof}
-This generalization is significant as it extends the computational convenience of Nguyen's theorem to a broader class of fuzzy operations defined by various t-norms, which are common in fuzzy logic and systems.
-The examples provided in \cite[p. 35]{FULLER2} illustrate how the $\alpha$-cuts of $f(A,B)$ can be generated for different t-norms like the weak t-norm $T_W$, product t-norm $T_P(x,y)=xy$, and Lukasiewicz t-norm $T_L(x,y) = \max(0, x+y-1)$.
-For $T_P(x,y) = xy$, the formula becomes:
-\[ [f(A, B)]_\alpha = \bigcup_{\xi \cdot \eta \ge \alpha} f([A]^\xi, [B]^\eta) = \bigcup_{\xi \in [\alpha,1]} f([A]^\xi, [B]^{\alpha/\xi}) \]
-And for $T_L(x,y) = \max(0, x+y-1)$, it becomes:
-\[ [f(A, B)]_\alpha = \bigcup_{\max(0,\xi+\eta-1) \ge \alpha} f([A]^\xi, [B]^\eta) = \bigcup_{\xi \in [\alpha,1]} f([A]^\xi, [B]^{\alpha+1-\xi}) \]
-(assuming $\alpha+1-\xi \le 1$). These specific forms are useful for practical computations with different t-norm based arithmetic.
 
 
 
@@ -408,6 +395,7 @@ This theorem establishes that the membership function of the sum of $n$ identica
 
 \signal{
 \subsection{Metrics for fuzzy numbers}
+Esta sección igual la dejo igual no. Porque si acabo viendo lo de fuzzy TOPSIS por ejemplo, puede que necesite calcular distancias entre fuzzy numbers y me tocará definirlo. Si no, lo dejo fuera.
+}
 
-\subsection{Defuzzification and Fuzzy Linear Programming Problems}}
 %Most methods used for solving such problems are based on ranking functions, alfa-cuts, using duality results or penalty functions. In these methods, authors deal with crisp formulations of the fuzzy problems. Recently, some heuristic algorithms have also been proposed. In these methods, some authors solve the fuzzy problem directly, while others solve the crisp problems approximately.

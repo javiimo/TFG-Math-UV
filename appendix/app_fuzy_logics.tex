@@ -182,7 +182,24 @@ The absence or presence of structural rules in the logic corresponds to specific
 
 
 
+\subsection{Characteristics and Intuitions of Foundational Fuzzy Logics}
 
+The foundational logics—MTL, BL, $\L$, G, and $\Pi$—form a hierarchy: MTL is most general, based on all left-continuous t-norms and their residua; BL restricts to continuous t-norms; and each of $\L$, G, $\Pi$ is a further axiomatic specialization of BL connected to a distinguished continuous t-norm.
+
+\begin{itemize}
+    \item \textbf{Generality}: MTL omits the divisibility property ($x*(x \Rightarrow y)=\min(x,y)$), so min-conjunction is not definable from strong conjunction and implication; BL recovers it for continuous t-norms.
+    \item \textbf{Negation}: $\L$ has involutive (double) negation, G and $\Pi$ use a Gödel-type negation, while MTL and BL only ensure weaker forms (involutive negation may be added as an axiom for special subclasses like IMTL~\cite{GodoMonoidal}).
+    \item \textbf{Nature of conjunction (t-norm)}:
+        \begin{itemize}
+            \item $\L$: Additive-like, compensatory.
+            \item G: Minimum, conservative (weakest link/idempotent).
+            \item $\Pi$: Product, multiplicative.
+        \end{itemize}
+    \item \textbf{Deduction theorem}: G has a stronger deduction theorem than the others; in $\L$, $\Pi$, BL, and MTL, only a weaker, "n-fold" deduction theorem holds.
+    \item \textbf{Completeness}: BL, $\L$, G, and $\Pi$ are complete with respect to their standard [0,1] semantics as based on continuous t-norms. MTL is complete w.r.t.\ linearly ordered MTL-algebras and, non-trivially, for the left-continuous t-norms~\cite{Jenei2001MTLCompl}. G has full (not only 1-tautology) completeness for arbitrary theories~\cite[Thm. 4.2.17]{Hajek1998}; completeness of BL and $\L$ is for 1-tautologies, and extensions vary.
+    \item \textbf{Relationship to classical logic}: Pairwise combinations of $\L$, G, and $\Pi$ generate classical logic~\cite[Thm. 4.3.9]{Hajek1998}.
+\end{itemize}
+Each logic is therefore tailored for different reasoning needs. MTL, as the most general, accommodates any left-continuous t-norm and provides the universal backbone for fuzzy deduction systems.
 
 % \rule{\textwidth}{0.4mm}
 
