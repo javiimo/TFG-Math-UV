@@ -3,47 +3,165 @@
 The fuzzy sets that have been studied in this chapter are their original definition from Zadeh in \cite{Zadeh1965}, also known as type-1. However, different problems have motivated the definition of variations or extensions of these fuzzy sets leading to a long list of fuzzy sets, most of them briefly presented in this section:
 
 \begin{itemize}
-    \item \textbf{Type-2 Fuzzy Sets} \cite{Zadeh1975}: \textbf{Difference from Type-1:} Membership grades are themselves fuzzy sets over $[0,1]$ (often simplified to interval type-2, where membership is an interval). \textbf{Motivation:} To model uncertainty *about* the membership function itself, e.g., when expert opinions vary or data is noisy, leading to more robust performance.
+    \item \textbf{Type-2 Fuzzy Sets} \cite{Zadeh1975}: Membership grades are themselves fuzzy sets, modelling uncertainty \emph{about} the membership function itself. \textbf{Interval Type-2 Fuzzy Sets} is a common simplification where the secondary membership is an interval.
+ 
+    \item \textbf{Type-n Fuzzy Sets} \cite{Turksen1986_TypeNRelated}: Generalize Type-2 sets by defining membership as a fuzzy set of Type-($n-1$), primarily of theoretical interest.
 
-    \item \textbf{Higher-Type Fuzzy Sets (Type-n)} \cite{Turksen1986_TypeNRelated}: \textbf{Difference from Type-1/Type-2:} Membership is a fuzzy set of Type-(n-1). Generalizes Type-2 to arbitrary levels. \textbf{Motivation:} Largely theoretical interest for modeling extreme uncertainty; rarely used beyond Type-2 due to complexity.
+    \item \textbf{Intuitionistic Fuzzy Sets (IFS)} \cite{Atanassov1986}: Characterized by independent membership $\mu(x)$ and non-membership $\nu(x)$ degrees, constrained by $\mu(x) + \nu(x) \leq 1$. The remainder $1 - (\mu(x) + \nu(x))$ represents hesitation.
 
-    \item \textbf{L-Fuzzy Sets} \cite{Goguen1967}: \textbf{Difference from Type-1:} Membership grades are taken from an arbitrary lattice L, not necessarily the real unit interval $[0,1]$. \textbf{Motivation:} Abstract generalization bridging fuzzy set theory with multivalued logics and category theory.
+    \item \textbf{Interval-Valued Intuitionistic Fuzzy Sets (IVIFS)} \cite{AtanassovGargov1989}: Extend IFS by representing both membership and non-membership degrees as intervals within $[0,1]$.
 
-    \item \textbf{Intuitionistic Fuzzy Sets (IFS)} \cite{Atanassov1986}: \textbf{Difference from Type-1:} Characterized by a membership degree $\mu(x)$ and a non-membership degree $\nu(x)$, with the constraint $\mu(x) + \nu(x) \leq 1$. The remainder $1 - (\mu(x) + \nu(x))$ represents hesitation/indeterminacy. \textbf{Motivation:} To explicitly account for hesitation or uncertainty in decision-making and evaluations.
+    \item \textbf{Pythagorean Fuzzy Sets (PFS)} \cite{Yager2013_Pythagorean}: Similar to IFS, but use a relaxed constraint $\mu(x)^2 + \nu(x)^2 \leq 1$. 
 
-    \item \textbf{Interval-Valued Intuitionistic Fuzzy Sets (IVIFS)} \cite{AtanassovGargov1989}: \textbf{Difference from IFS/Type-1:} Both membership and non-membership degrees are intervals within $[0,1]$, still satisfying the IFS constraint for interval bounds. \textbf{Motivation:} To further model increased uncertainty in IFS where experts provide ranges instead of crisp values for membership/non-membership.
+    \item \textbf{q-Rung Orthopair Fuzzy Sets (q-ROFS)} \cite{Yager2017_qRung}: Generalize IFS and PFS with the constraint $\mu(x)^q + \nu(x)^q \leq 1$ for $q \ge 1$.
 
-    \item \textbf{Hesitant Fuzzy Sets (HFS)} \cite{Torra2010}: \textbf{Difference from Type-1:} Membership of an element is a *set* of several possible values in $[0,1]$. \textbf{Motivation:} To represent situations where there is hesitation among several possible membership degrees, e.g., in group decision-making with differing opinions.
+    \item \textbf{Spherical Fuzzy Sets (SFS)} \cite{GundogduKahraman2019_Spherical}: Extend orthopairs to three components: membership $\mu(x)$, non-membership $\nu(x)$, and indeterminacy $\pi(x)$, constrained by $\mu(x)^2 + \nu(x)^2 + \pi(x)^2 \leq 1$. They handle these aspects on a unit sphere.
 
-    \item \textbf{Pythagorean Fuzzy Sets (PFS)} \cite{Yager2013_Pythagorean}: \textbf{Difference from IFS/Type-1:} Uses membership $p$ and non-membership $q$ like IFS, but with a relaxed constraint: $p^2 + q^2 \leq 1$. \textbf{Motivation:} To allow a wider range of (membership, non-membership) pairs than IFS, improving flexibility in decision-making modeling.
+    \item \textbf{Hesitant Fuzzy Sets (HFS)} \cite{Torra2010}: Assign a set of several possible membership values in $[0,1]$ to an element. This directly models hesitation among different membership degrees.
 
-    \item \textbf{q-Rung Orthopair Fuzzy Sets (q-ROFS)} \cite{Yager2017_qRung}: \textbf{Difference from PFS/IFS/Type-1:} Generalizes PFS with membership $p$ and non-membership $m$ constrained by $p^q + m^q \leq 1$ for some $q \ge 1$. \textbf{Motivation:} Provides a family of models tuned by $q$, allowing even greater flexibility and a larger domain for membership/non-membership values.
+    \item \textbf{Bipolar Fuzzy Sets} \cite{Zhang1994_Bipolar}: Represent independent positive membership (satisfaction of a property) and negative membership (satisfaction of a counter-property). This models situations with bipolar or dichotomous information. \textbf{Bipolar Complex / Bipolar Spherical Fuzzy Sets} extend the bipolar concept using complex numbers or spherical orthopairs. This allows for richer representations in polarity-aware scenarios.
 
-    \item \textbf{Neutrosophic Sets (NS)} \cite{Smarandache1998_Neutrosophic}: \textbf{Difference from IFS/Type-1:} Defined by three independent components: Truth-membership (T), Indeterminacy-membership (I), and Falsity-membership (F), each in $[0,1]$ (for Single-Valued Neutrosophic Sets, SVNS \cite{Wang2010_SVNS}). \textbf{Motivation:} To generalize IFS by making the indeterminacy component independent, allowing for the explicit quantification of truth, falsity, and indeterminacy in situations with inherent paradox or ambiguity.
+    \item \textbf{Neutrosophic Sets (NS)} \cite{Smarandache1998_Neutrosophic, Wang2010_SVNS}: Defined by three independent components: Truth (T), Indeterminacy (I), and Falsity (F) memberships. Single-Valued Neutrosophic Sets (SVNS) constrain T, I, F to $[0,1]$.
 
-    \item \textbf{Multi-Valued / Refined Neutrosophic Sets}: \textbf{Difference from NS/Type-1:} T, I, F components can themselves be intervals or subsets of $[0,1]$, or indeterminacy can be split into subcomponents (e.g., contradiction vs. ignorance). \textbf{Motivation:} To increase descriptive power for highly uncertain systems by allowing more granular or multi-valued truth components.
+    \item \textbf{Picture Fuzzy Sets (PiFS)} \cite{Cuong2013_Picture}: Characterized by positive, neutral, and negative membership degrees, with their sum being $\leq 1$. These are suited for scenarios like voting with explicit "yes, abstain, no" options.
 
-    \item \textbf{Picture Fuzzy Sets (PFS)} \cite{Cuong2013_Picture}: \textbf{Difference from IFS/Type-1:} Has membership (positive) $p$, neutrality $i$, and non membership (negative) $q$, with $p+i+q \leq 1$ (often $=1$). \textbf{Motivation:} To model "yes, neutral, no" responses explicitly, such as in voting or survey scenarios where an abstention/neutral option is distinct.
+    \item \textbf{Rough Fuzzy Sets \& Fuzzy Rough Sets} \cite{DuboisPrade1990_FuzzyRough}: Hybrid models combining fuzzy sets and rough sets. They blend graded membership with boundary uncertainty from indiscernibility.
 
-    \item \textbf{Spherical Fuzzy Sets (SFS)} \cite{GundogduKahraman2019_Spherical}: \textbf{Difference from PFS/Type-1:} Uses three components ($T$, $I$, $F$) like neutrosophic/picture, but with the constraint $T^2 + I^2 + F^2 \leq 1$. \textbf{Motivation:} To handle uncertainty more flexibly than Picture FS by allowing more balanced combinations of membership, neutrality, and non membership, generalizing Picture FS with an L2 norm.
+    \item \textbf{Soft Sets} \cite{Molodtsov1999_Soft}: A parameterized family of crisp subsets, mapping parameters to subsets of a universe. An alternative tool for uncertainty dealing with parameterization.
 
-    \item \textbf{Bipolar Fuzzy Sets} \cite{Zhang1994_Bipolar}: \textbf{Difference from Type-1:} Represents positive membership $\mu^+(x) \in [0,1]$ (satisfaction of property) and negative membership $\mu^-(x) \in [-1,0]$ or $\in [0,1]$ (satisfaction of counter-property) independently. \textbf{Motivation:} To model problems with bipolar information, such as "pros and cons" or "likes and dislikes," where positive and negative aspects are distinct.
+    \item \textbf{Fuzzy Soft Sets} \cite{MajiBiswasRoy2001_FuzzySoft}: Extend soft sets by allowing the parameterized subsets to be fuzzy sets rather than crisp ones. This combines parameterization with graded membership.
 
-    \item \textbf{m-Polar Fuzzy Sets} \cite{Chen2014_mPolar}: \textbf{Difference from Bipolar/Type-1:} Generalizes bipolar fuzzy sets to $m$ poles, assigning a vector of $m$ membership degrees $A: X \to [0,1]^m$. \textbf{Motivation:} To handle situations with multiple independent criteria or perspectives of membership simultaneously.
+    \item \textbf{Fuzzy Multisets}: Assign a multiset of membership counts or grades instead of a single grade. Useful when the frequency or repetition of membership observations is significant.
 
-    \item \textbf{Rough Sets} \cite{Pawlak1982_Rough}: \textbf{Difference from Fuzzy Sets:} Not a fuzzy set per se. Approximates a crisp set using a pair of crisp sets (lower and upper approximations) based on an indiscernibility relation. \textbf{Motivation:} To handle vagueness due to indiscernibility or incomplete information, common in data mining and knowledge discovery. Included due to its hybridization with fuzzy sets.
+    \item \textbf{L-Fuzzy Sets} \cite{Goguen1967}: Generalize Type-1 sets by taking membership grades from an arbitrary lattice L, not restricted to the interval $[0,1]$. This provides an order-theoretic abstraction.
 
-    \item \textbf{Fuzzy-Rough Sets / Rough-Fuzzy Sets} \cite{DuboisPrade1990_FuzzyRough}: \textbf{Difference from Type-1/Rough Sets:} Hybrid model. Fuzzy-rough sets: rough set approximations are fuzzy sets. Rough-fuzzy sets: applying fuzziness to the indiscernibility relation or a fuzzy set of rough sets. \textbf{Motivation:} To combine the strengths of fuzzy sets (graded membership) and rough sets (boundary region uncertainty) to handle combined uncertainty from vagueness and indiscernibility.
+    \item \textbf{Complex Fuzzy Sets}: Membership grades are complex numbers, typically $r \cdot e^{i\theta}$. This encodes both magnitude (degree of membership) and phase (additional information).
 
-    \item \textbf{Soft Sets} \cite{Molodtsov1999_Soft}: \textbf{Difference from Type-1:} A parameterized family of crisp subsets of a universe, mapping parameters to subsets $f: A \to \mathcal{P}(X)$. No direct numeric membership. \textbf{Motivation:} To handle parameter uncertainty and dynamic criteria as an alternative general tool for uncertainty, without restrictive conditions.
+    \item \textbf{Quantum Fuzzy Sets} \cite{Pykacz2015_Quantum}: Interpret a quantum register's state-vector as the characteristic function of a fuzzy set. This applies principles from quantum mechanics to model membership.
 
-    \item \textbf{Fuzzy Soft Sets} \cite{MajiBiswasRoy2001_FuzzySoft}: \textbf{Difference from Soft Sets/Type-1:} Extends soft sets by allowing the mapped subsets $f(a)$ to be fuzzy sets rather than crisp subsets. \textbf{Motivation:} To combine the parameterization of soft sets with the graded membership of fuzzy sets for more nuanced decision modeling.
+    \item \textbf{Plithogenic Sets} \cite{Smarandache2018_Plithogenic}: Generalize crisp, fuzzy, IFS, and NS by characterizing elements with multiple attributes. Each attribute value has an appurtenance degree and a contradiction degree.
 
-    \item \textbf{Hypersoft Sets} \cite{Smarandache2018_Hypersoft}: \textbf{Difference from Soft Sets/Type-1:} Extends soft sets to handle tuples or hierarchies of parameters, allowing multi-parameter combined conditions. \textbf{Motivation:} To address limitations of classical soft sets by considering multiple, possibly dependent, parameters simultaneously in group decision-making.
+    \item \textbf{Hypersoft Sets} \cite{Smarandache2018_Hypersoft}: Extend soft sets to handle tuples or hierarchies of parameters (multi-argument approximate functions). This addresses multi-attribute decision-making.
+    \begin{itemize}
+        \item \textbf{Fuzzy Hypersoft Sets}: Combine fuzzy membership with the multi-parameter structures of hypersoft sets.
+        \item \textbf{Plithogenic Soft Sets \& Plithogenic Hypersoft Sets}: Merge Plithogenic fuzziness into soft set or hypersoft set parameterizations.
+    \end{itemize}
 
-    \item \textbf{Fuzzy Hypersoft Sets}: \textbf{Difference from Hypersoft/Type-1:} Combines fuzzy sets with hypersoft sets; each combined attribute value (from parameter tuples) is associated with a fuzzy membership grade. \textbf{Motivation:} For extremely granular multi-attribute decision-making where attributes appear in groups and evaluations are fuzzy.
+    \item \textbf{Multipolar Fuzzy Sets (m-Polar Fuzzy Sets)} \cite{Chen2014_mPolar}: Generalize bipolar fuzzy sets to $m$ poles, assigning a vector of $m$ membership degrees from $[0,1]^m$. Models multi-polar evidence or criteria.
 
-    \item \textbf{Plithogenic Sets} \cite{Smarandache2018_Plithogenic}: \textbf{Difference from Type-1/NS/IFS:} Incorporates an attribute with multiple possible values, each having a degree of appurtenance (which can be fuzzy, intuitionistic, neutrosophic) and a contradiction degree with other attribute values. \textbf{Motivation:} To provide a unifying superset for crisp, fuzzy, IFS, and neutrosophic sets, representing complex real-world scenarios with multi-faceted states and contradictions between attribute values.
+    \item \textbf{k-Polar Intuitionistic Fuzzy Sets (IKFS)}: Assign $k$ distinct pairs of intuitionistic membership/non-membership degrees to each element. Captures multi-source or multi-criteria hesitation.
 
-    \item \textbf{Quantum Fuzzy Sets} \cite{Pykacz2015_Quantum}: \textbf{Difference from Type-1:} Membership is defined in a quantum probabilistic sense. \textbf{Motivation:} Theoretical efforts to combine fuzzy set theory with quantum logic, still an emerging concept.
+    \item \textbf{Multi-Neutrosophic Sets}: Evaluate truth, indeterminacy, and falsity through multiple sources, yielding n-tuples of (T,I,F) components.
+    \begin{itemize}
+        \item \textbf{Tripolar Neutrosophic Sets}: A specific type organizing truth, indeterminacy, and falsity along three distinct polar axes.
+    \end{itemize}
+
+    \item \textbf{Multi-Grade Fuzzy Sets}: Assign several membership grades (e.g., linguistic terms like ``low,'' ``medium,'' ``high'') from a structured, ordered scale. Captures more nuanced membership.
 \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{landscape}
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[
+        event/.style={
+            draw=nodecolor, 
+            thick,
+            fill=nodecolor!20,
+            rounded corners=3pt,
+            minimum height=1.5em,
+            text width=3.5cm, % Adjust as needed
+            align=center,
+            font=\scriptsize
+        },
+        connector/.style={
+            draw=connectorcolor,
+            thick,
+            -{Stealth[length=2mm, width=1.5mm]}
+        }
+    ]
+        % Define timeline start and end years
+        \def\ystart{1965}
+        \def\yend{2020} % Extended a bit for clarity at the end
+        \def\timelinewidth{32} % Width of the timeline in cm
+        \def\unit{\timelinewidth/(\yend-\ystart)} % cm per year
+
+        % Draw the main timeline axis
+        \draw[timelinecolor, -{Stealth[length=3mm, width=2.5mm]}, very thick] (0,0) -- (\timelinewidth+0.5,0) node[right, black, font=\small] {Year};
+
+        % Draw year ticks and labels
+        \foreach \year in {1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020} {
+            \pgfmathsetmacro{\xpos}{(\year-\ystart)*\unit}
+            \draw[timelinecolor, thick] (\xpos, -0.2) -- (\xpos, 0.2) node[below=3pt, black, font=\tiny] {\year};
+        }
+
+        % --- Fuzzy Set Type Nodes ---
+        % Arguments: year, y-offset, anchor (for text), text content, bibkey, node name (unique)
+        \newcommand{\timelineevent}[6]{
+            \pgfmathsetmacro{\eventx}{(\unit*#1)-(\unit*\ystart)}
+            \node[event, anchor=#3] (#5_node) at (\eventx, #2) {#4 \cite{#5}};
+            \draw[connector] (#5_node.#3) -- (\eventx, 0);
+        }
+        
+        \newcommand{\timelineeventshift}[7]{ % With x-shift for close events
+            \pgfmathsetmacro{\eventx}{(\unit*#1)-(\unit*\ystart) + #6}
+            \node[event, anchor=#3] (#5_node) at (\eventx, #2) {#4 \cite{#5}};
+            \draw[connector] (#5_node.#3) -- (\eventx-#6, 0); % Connector to actual year
+        }
+
+
+        % 1960s
+        \timelineevent{1965}{1.5}{south}{Classical Fuzzy Sets}{Zadeh1965}{clfs}
+        \timelineevent{1967}{-1.5}{north}{L-Fuzzy Sets}{Goguen1967}{lfs}
+
+        % 1970s
+        \timelineevent{1975}{1.5}{south}{Type-2 Fuzzy Sets}{Zadeh1975}{t2fs}
+
+        % 1980s
+        \timelineevent{1982}{-1.5}{north}{Rough Sets}{Pawlak1982_Rough}{rs}
+        \timelineeventshift{1986}{2.0}{south}{Intuitionistic FS}{Atanassov1986}{-0.1}{ifs} % Shifted slightly
+        \timelineeventshift{1986}{-2.0}{north}{Higher-Type FS (related)}{Turksen1986_TypeNRelated}{0.1}{htfs} % Shifted slightly
+        \timelineevent{1989}{1.5}{south}{Interval-Valued IFS}{AtanassovGargov1989}{ivifs}
+        
+        % 1990s
+        \timelineevent{1990}{-1.5}{north}{Fuzzy-Rough Sets}{DuboisPrade1990_FuzzyRough}{frs}
+        \timelineevent{1994}{1.5}{south}{Bipolar Fuzzy Sets}{Zhang1994_Bipolar}{bfs}
+        \timelineevent{1998}{-1.5}{north}{Neutrosophic Sets}{Smarandache1998_Neutrosophic}{ns}
+        \timelineevent{1999}{1.5}{south}{Soft Sets}{Molodtsov1999_Soft}{ss}
+
+        % 2000s
+        \timelineevent{2001}{-1.5}{north}{Fuzzy Soft Sets}{MajiBiswasRoy2001_FuzzySoft}{fss}
+        
+        % 2010s
+        \timelineeventshift{2010}{2.0}{south}{Hesitant Fuzzy Sets}{Torra2010}{-0.15}{hfs}
+        \timelineeventshift{2010}{-2.0}{north}{Single-Valued NS}{Wang2010_SVNS}{0.15}{svns}
+        \timelineeventshift{2013}{1.5}{south}{Pythagorean FS}{Yager2013_Pythagorean}{-0.15}{pyfs}
+        \timelineeventshift{2013}{-1.5}{north}{Picture Fuzzy Sets}{Cuong2013_Picture}{0.15}{pfs}
+        \timelineevent{2014}{1.5}{south}{m-Polar Fuzzy Sets}{Chen2014_mPolar}{mpfs}
+        \timelineevent{2015}{-1.5}{north}{Quantum Fuzzy Sets}{Pykacz2015_Quantum}{qfs}
+        \timelineevent{2017}{1.5}{south}{q-Rung Orthopair FS}{Yager2017_qRung}{qrofs}
+        \timelineeventshift{2018}{-2.0}{north}{Hypersoft Sets}{Smarandache2018_Hypersoft}{-0.15}{hs}
+        \timelineeventshift{2018}{2.0}{south}{Plithogenic Sets}{Smarandache2018_Plithogenic}{0.15}{pls}
+        \timelineevent{2019}{-1.5}{north}{Spherical Fuzzy Sets}{GundogduKahraman2019_Spherical}{sphs}
+
+    \end{tikzpicture}
+    \caption{Timeline of Fuzzy Set Type Introductions. References: Classical Fuzzy Sets \cite{Zadeh1965}, L-Fuzzy Sets \cite{Goguen1967}, Type-2 Fuzzy Sets \cite{Zadeh1975}, Rough Sets \cite{Pawlak1982_Rough}, Intuitionistic Fuzzy Sets \cite{Atanassov1986}, Higher-Type FS (related) \cite{Turksen1986_TypeNRelated}, Interval-Valued IFS \cite{AtanassovGargov1989}, Fuzzy-Rough Sets \cite{DuboisPrade1990_FuzzyRough}, Bipolar Fuzzy Sets \cite{Zhang1994_Bipolar}, Neutrosophic Sets \cite{Smarandache1998_Neutrosophic}, Soft Sets \cite{Molodtsov1999_Soft}, Fuzzy Soft Sets \cite{MajiBiswasRoy2001_FuzzySoft}, Hesitant Fuzzy Sets \cite{Torra2010}, Single-Valued Neutrosophic Sets \cite{Wang2010_SVNS}, Pythagorean Fuzzy Sets \cite{Yager2013_Pythagorean}, Picture Fuzzy Sets \cite{Cuong2013_Picture}, m-Polar Fuzzy Sets \cite{Chen2014_mPolar}, Quantum Fuzzy Sets \cite{Pykacz2015_Quantum}, q-Rung Orthopair Fuzzy Sets \cite{Yager2017_qRung}, Hypersoft Sets \cite{Smarandache2018_Hypersoft}, Plithogenic Sets \cite{Smarandache2018_Plithogenic}, Spherical Fuzzy Sets \cite{GundogduKahraman2019_Spherical}.}
+    \label{fig:fuzzy_timeline}
+\end{figure}
+
+\end{landscape}
