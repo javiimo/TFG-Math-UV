@@ -1,0 +1,49 @@
+\signal{Aquí mencionar por encima alternativas sin entrar en mucho detalle: type-1 (pertenencia puntual), type-2 (pertenencia intervalar), complex memberships, intuitionistic, hesitant, multiplicative versions of hesitant and intuitionistic, bipolar and multipolar, fuzzy-rough sets, Neutrosophic and Plithogenic sets, picture fuzzy sets...}
+
+The fuzzy sets that have been studied in this chapter are their original definition from Zadeh in \cite{Zadeh1965}, also known as type-1. However, different problems have motivated the definition of variations or extensions of these fuzzy sets leading to a long list of fuzzy sets, most of them briefly presented in this section:
+
+\begin{itemize}
+    \item \textbf{Type-2 Fuzzy Sets} \cite{Zadeh1975}: \textbf{Difference from Type-1:} Membership grades are themselves fuzzy sets over $[0,1]$ (often simplified to interval type-2, where membership is an interval). \textbf{Motivation:} To model uncertainty *about* the membership function itself, e.g., when expert opinions vary or data is noisy, leading to more robust performance.
+
+    \item \textbf{Higher-Type Fuzzy Sets (Type-n)} \cite{Turksen1986_TypeNRelated}: \textbf{Difference from Type-1/Type-2:} Membership is a fuzzy set of Type-(n-1). Generalizes Type-2 to arbitrary levels. \textbf{Motivation:} Largely theoretical interest for modeling extreme uncertainty; rarely used beyond Type-2 due to complexity.
+
+    \item \textbf{L-Fuzzy Sets} \cite{Goguen1967}: \textbf{Difference from Type-1:} Membership grades are taken from an arbitrary lattice L, not necessarily the real unit interval $[0,1]$. \textbf{Motivation:} Abstract generalization bridging fuzzy set theory with multivalued logics and category theory.
+
+    \item \textbf{Intuitionistic Fuzzy Sets (IFS)} \cite{Atanassov1986}: \textbf{Difference from Type-1:} Characterized by a membership degree $\mu(x)$ and a non-membership degree $\nu(x)$, with the constraint $\mu(x) + \nu(x) \leq 1$. The remainder $1 - (\mu(x) + \nu(x))$ represents hesitation/indeterminacy. \textbf{Motivation:} To explicitly account for hesitation or uncertainty in decision-making and evaluations.
+
+    \item \textbf{Interval-Valued Intuitionistic Fuzzy Sets (IVIFS)} \cite{AtanassovGargov1989}: \textbf{Difference from IFS/Type-1:} Both membership and non-membership degrees are intervals within $[0,1]$, still satisfying the IFS constraint for interval bounds. \textbf{Motivation:} To further model increased uncertainty in IFS where experts provide ranges instead of crisp values for membership/non-membership.
+
+    \item \textbf{Hesitant Fuzzy Sets (HFS)} \cite{Torra2010}: \textbf{Difference from Type-1:} Membership of an element is a *set* of several possible values in $[0,1]$. \textbf{Motivation:} To represent situations where there is hesitation among several possible membership degrees, e.g., in group decision-making with differing opinions.
+
+    \item \textbf{Pythagorean Fuzzy Sets (PFS)} \cite{Yager2013_Pythagorean}: \textbf{Difference from IFS/Type-1:} Uses membership $p$ and non-membership $q$ like IFS, but with a relaxed constraint: $p^2 + q^2 \leq 1$. \textbf{Motivation:} To allow a wider range of (membership, non-membership) pairs than IFS, improving flexibility in decision-making modeling.
+
+    \item \textbf{q-Rung Orthopair Fuzzy Sets (q-ROFS)} \cite{Yager2017_qRung}: \textbf{Difference from PFS/IFS/Type-1:} Generalizes PFS with membership $p$ and non-membership $m$ constrained by $p^q + m^q \leq 1$ for some $q \ge 1$. \textbf{Motivation:} Provides a family of models tuned by $q$, allowing even greater flexibility and a larger domain for membership/non-membership values.
+
+    \item \textbf{Neutrosophic Sets (NS)} \cite{Smarandache1998_Neutrosophic}: \textbf{Difference from IFS/Type-1:} Defined by three independent components: Truth-membership (T), Indeterminacy-membership (I), and Falsity-membership (F), each in $[0,1]$ (for Single-Valued Neutrosophic Sets, SVNS \cite{Wang2010_SVNS}). \textbf{Motivation:} To generalize IFS by making the indeterminacy component independent, allowing for the explicit quantification of truth, falsity, and indeterminacy in situations with inherent paradox or ambiguity.
+
+    \item \textbf{Multi-Valued / Refined Neutrosophic Sets}: \textbf{Difference from NS/Type-1:} T, I, F components can themselves be intervals or subsets of $[0,1]$, or indeterminacy can be split into subcomponents (e.g., contradiction vs. ignorance). \textbf{Motivation:} To increase descriptive power for highly uncertain systems by allowing more granular or multi-valued truth components.
+
+    \item \textbf{Picture Fuzzy Sets (PFS)} \cite{Cuong2013_Picture}: \textbf{Difference from IFS/Type-1:} Has membership (positive) $p$, neutrality $i$, and non membership (negative) $q$, with $p+i+q \leq 1$ (often $=1$). \textbf{Motivation:} To model "yes, neutral, no" responses explicitly, such as in voting or survey scenarios where an abstention/neutral option is distinct.
+
+    \item \textbf{Spherical Fuzzy Sets (SFS)} \cite{GundogduKahraman2019_Spherical}: \textbf{Difference from PFS/Type-1:} Uses three components ($T$, $I$, $F$) like neutrosophic/picture, but with the constraint $T^2 + I^2 + F^2 \leq 1$. \textbf{Motivation:} To handle uncertainty more flexibly than Picture FS by allowing more balanced combinations of membership, neutrality, and non membership, generalizing Picture FS with an L2 norm.
+
+    \item \textbf{Bipolar Fuzzy Sets} \cite{Zhang1994_Bipolar}: \textbf{Difference from Type-1:} Represents positive membership $\mu^+(x) \in [0,1]$ (satisfaction of property) and negative membership $\mu^-(x) \in [-1,0]$ or $\in [0,1]$ (satisfaction of counter-property) independently. \textbf{Motivation:} To model problems with bipolar information, such as "pros and cons" or "likes and dislikes," where positive and negative aspects are distinct.
+
+    \item \textbf{m-Polar Fuzzy Sets} \cite{Chen2014_mPolar}: \textbf{Difference from Bipolar/Type-1:} Generalizes bipolar fuzzy sets to $m$ poles, assigning a vector of $m$ membership degrees $A: X \to [0,1]^m$. \textbf{Motivation:} To handle situations with multiple independent criteria or perspectives of membership simultaneously.
+
+    \item \textbf{Rough Sets} \cite{Pawlak1982_Rough}: \textbf{Difference from Fuzzy Sets:} Not a fuzzy set per se. Approximates a crisp set using a pair of crisp sets (lower and upper approximations) based on an indiscernibility relation. \textbf{Motivation:} To handle vagueness due to indiscernibility or incomplete information, common in data mining and knowledge discovery. Included due to its hybridization with fuzzy sets.
+
+    \item \textbf{Fuzzy-Rough Sets / Rough-Fuzzy Sets} \cite{DuboisPrade1990_FuzzyRough}: \textbf{Difference from Type-1/Rough Sets:} Hybrid model. Fuzzy-rough sets: rough set approximations are fuzzy sets. Rough-fuzzy sets: applying fuzziness to the indiscernibility relation or a fuzzy set of rough sets. \textbf{Motivation:} To combine the strengths of fuzzy sets (graded membership) and rough sets (boundary region uncertainty) to handle combined uncertainty from vagueness and indiscernibility.
+
+    \item \textbf{Soft Sets} \cite{Molodtsov1999_Soft}: \textbf{Difference from Type-1:} A parameterized family of crisp subsets of a universe, mapping parameters to subsets $f: A \to \mathcal{P}(X)$. No direct numeric membership. \textbf{Motivation:} To handle parameter uncertainty and dynamic criteria as an alternative general tool for uncertainty, without restrictive conditions.
+
+    \item \textbf{Fuzzy Soft Sets} \cite{MajiBiswasRoy2001_FuzzySoft}: \textbf{Difference from Soft Sets/Type-1:} Extends soft sets by allowing the mapped subsets $f(a)$ to be fuzzy sets rather than crisp subsets. \textbf{Motivation:} To combine the parameterization of soft sets with the graded membership of fuzzy sets for more nuanced decision modeling.
+
+    \item \textbf{Hypersoft Sets} \cite{Smarandache2018_Hypersoft}: \textbf{Difference from Soft Sets/Type-1:} Extends soft sets to handle tuples or hierarchies of parameters, allowing multi-parameter combined conditions. \textbf{Motivation:} To address limitations of classical soft sets by considering multiple, possibly dependent, parameters simultaneously in group decision-making.
+
+    \item \textbf{Fuzzy Hypersoft Sets}: \textbf{Difference from Hypersoft/Type-1:} Combines fuzzy sets with hypersoft sets; each combined attribute value (from parameter tuples) is associated with a fuzzy membership grade. \textbf{Motivation:} For extremely granular multi-attribute decision-making where attributes appear in groups and evaluations are fuzzy.
+
+    \item \textbf{Plithogenic Sets} \cite{Smarandache2018_Plithogenic}: \textbf{Difference from Type-1/NS/IFS:} Incorporates an attribute with multiple possible values, each having a degree of appurtenance (which can be fuzzy, intuitionistic, neutrosophic) and a contradiction degree with other attribute values. \textbf{Motivation:} To provide a unifying superset for crisp, fuzzy, IFS, and neutrosophic sets, representing complex real-world scenarios with multi-faceted states and contradictions between attribute values.
+
+    \item \textbf{Quantum Fuzzy Sets} \cite{Pykacz2015_Quantum}: \textbf{Difference from Type-1:} Membership is defined in a quantum probabilistic sense. \textbf{Motivation:} Theoretical efforts to combine fuzzy set theory with quantum logic, still an emerging concept.
+\end{itemize}

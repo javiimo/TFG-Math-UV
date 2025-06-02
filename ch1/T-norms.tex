@@ -42,6 +42,8 @@ Therefore, the concept of intersection (conjunction) of fuzzy sets is generally 
     is called a triangular norm or t-norm. Defines the \textbf{intersection} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cap B) (x) = T(A(x),B(x)) \forall x \in X$ 
 \end{definition}
 
+\remark{It can be shown that thanks to the one identity and the monotonicity, all t-norms are identical in the boundary of $[0,1]^2$. In particular, they are the same in $\{0,1\}^2$, which is why any t-norm restricted to a boolean domain is the same as the classical intersection.}
+
 Its dual operator can also be obtained by a similar reasoning as before, but instead of considering the probability distribution of finding both points closer than a given distance, it considers the probability distribution ($G_{uv}(t) = 1 - F_{uv}(t)$) of finding them further apart than that distance. In this case, both inequalities are $\leq$ since larger probabilities indicate that greater distances are more likely.
 \begin{equation}\label{eq:Gtriangle_inequality}
 d(x, z) \leq d(x, y) + d(y, z) \quad \longrightarrow \quad G_{xz}(t + s) \leq S(G_{xy}(t), G_{yz}(s))
@@ -83,7 +85,7 @@ Notice that this definition of complement is consistent with the classical defin
 
 One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
 
-However, there are t-norms and t-conorms such as the ones named after \luka that do satisfy both laws\footnote{Indeed, all continuous t-norms in agreement with non-contradiction are isomorphic to \luka \cite[p.~7]{LukasiewiczNonContrad}.}. Another example is the drastic t-norm which also satisfies the law of non-contradiction, but not the law of excluded middle. See example \ref{ex:basic_tnorms} for their formal expressions. \signal{All of this, has implications for the derived logic that will be explained in section \ref{sec:fuzzy_logic}. }\\
+However, there are t-norms and t-conorms such as the ones named after \luka that do satisfy both laws\footnote{Indeed, all continuous t-norms in agreement with non-contradiction are isomorphic to \luka \cite[p.~7]{LukasiewiczNonContrad}.}. Another example is the drastic t-norm which also satisfies the law of non-contradiction, but not the law of excluded middle. See example \ref{ex:basic_tnorms} for their formal expressions. All of this, has implications for the derived logic (see section \ref{sec:fuzzy_logic}).\\
 
 Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of t-norm and t-conorm, these laws are not automatically satisfied. However, there are specific pairs that do fulfill them. To illustrate the relationship between t-norms and t-conorms that satisfy De Morgan's Laws, we can use our probabilistic metric space analogy. Reconsidering the probabilistic metrics $F,G$ introduced earlier and substituting $F = 1 - G$ into equation \ref{eq:Ftriangle_inequality}, we obtain:
 
@@ -112,16 +114,6 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 \end{proof}
 
 Any triplet of union, intersection and complement operations that satisfy the De Morgan laws, is called a De Morgan triplet\cite[p.~52]{HistoryFL2017}. The proposition above is a sufficient and necessary condition for building a triplet with any given t-norm (or t-conorm) and the standard negation.\\
-
-\signal{Creo que además de esto de las leyes de de Morgan, también nos da que el modus ponen funciona si se cumple la propiedad esa. Además no sé si se llama residual property.}
-
-\signal{
-  Lo de Archimedean sirve para el teorema 1.8.1 de \cite{FULLER2}. Y tb con la law of large numbers con LR-fuzzy numbers.}
-
-  \signal{Strict T-norms iff satisfy conditional cancellation}
-
-  \signal{Tambien lo de que la T-norm e distributiva con max/sup sirve para justificar la definicion del producto cartesiano, así que esa propiedad la tendré que meter por aquí igual.}
-
 
 The following algebraic properties will be needed when defining fuzzy logics and to classify continuous t-norms \cite[Def.~2.1 \& 2.13]{Klement2000}:
 
@@ -175,7 +167,7 @@ Let $T$ be a continuous Archimedean t-norm. Then the following are equivalent:
     All of them are plotted in figures \ref{fig:2D_tnorms} and \ref{fig:tnorms_3D_plots}.
       \begin{itemize}
         \item \textbf{Minimum ($T_M$):} Also called Gödel t-norm.
-            This is the strongest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). Every element is idempotent (indeed it is the only t-norm satisfying that \cite[Lem.~1.2.3]{FULLER2} \signal{igual este paréntesis debería escribirlo como un resultado mejor}), therefore it is not Archimedean. It has no zero divisors and no nilpotent elements other than 0.
+            This is the strongest t-norm (\cite[Rem.~1.5(i)]{Klement2000}). Every element is idempotent (indeed it is the only t-norm satisfying that \cite[Lem.~1.2.3]{FULLER2}), therefore it is not Archimedean. It has no zero divisors and no nilpotent elements other than 0.
     
         \[T_M(x, y) = \min(x, y) \quad S_M(x, y) = \max(x, y)
     \]
