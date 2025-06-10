@@ -65,3 +65,18 @@ This scoring mechanism imposes a quadratic penalty when multiple large intervent
 \paragraph{Risk Concurrency:} Analogous to size concurrency, risk concurrency quantifies the degree of overlap among interventions with elevated risk levels. In this case, each intervention \(i\in I\) has a risk value which is the average of its nonzero risk values $r_t^{(i)}$ (see Assumption 1) across all start times. Then, interventions are clustered via K-means into three groups: \texttt{'low'}, \texttt{'mid'}, and \texttt{'high'} risk. The score is completely identical to the one from size concurrency.
 
 \signal{Aquí imagino que lo que haré es un fuzzy clustering}
+
+
+\signal{
+
+In their foundational work, Cover and Thomas define the entropy $H(X)$ of a discrete random variable $X$ as a measure of uncertainty or randomness associated with the possible outcomes \cite[Section 2.1]{Entropy}. The entropy is calculated by the following formula:
+\[
+H(X) = - \sum_x p(x)\, \log p(x)
+\]
+where $p(x)$ denotes the probability of outcome $x$.
+
+According to Cover and Thomas \cite[p.~14]{Entropy}, entropy is minimized when the distribution is deterministic, meaning that a single outcome has probability one and all others have probability zero. In this case, $H(X)=0$, reflecting the absence of uncertainty. Conversely, entropy is maximized by the uniform distribution. Specifically, for a variable $X$ with $|X|$ possible outcomes, the entropy satisfies the inequality
+\[
+H(X) \leq \log |X| 
+\]
+with equality if and only if $X$ is uniformly distributed \cite[Theorem 2.6.4, p.~27]{Entropy}. Therefore, a uniform distribution corresponds to maximum entropy, while a deterministic distribution yields the minimum possible entropy.}
