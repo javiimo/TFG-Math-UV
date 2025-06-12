@@ -80,3 +80,21 @@ According to Cover and Thomas \cite[p.~14]{Entropy}, entropy is minimized when t
 H(X) \leq \log |X| 
 \]
 with equality if and only if $X$ is uniformly distributed \cite[Theorem 2.6.4, p.~27]{Entropy}. Therefore, a uniform distribution corresponds to maximum entropy, while a deterministic distribution yields the minimum possible entropy.}
+
+
+
+
+
+
+
+
+
+\signal{O SI NO, PUEDO DIVIDIR POR LA MASA TOTAL. The softmax function \(\sigma\) transforms a real-valued vector \(z \in \mathbb{R}^n\) into a probability distribution \cite[eq.~2, p.~2]{Gao2018Softmax}. It is defined as:
+\[
+\sigma_i(z) = \frac{\exp(\lambda z_i)}{\sum_{j} \exp(\lambda z_j)}
+\]
+where \(\lambda\) is an inverse temperature parameter\footnote{It is called temperature because the origin of the softmax function comes from Physics. In particular, it is the Boltzmann distribution used in statistical mechanics. John S. Bridle called it softmax as a smooth approximation to the max and its use is widespread in machine learning.\cite{Bridle1990}}. The output vector \(\sigma(z)\) always lies in the unit simplex, which means every component is non-negative and their sum equals one; this is stated as \(\|\sigma(z)\|_1 = 1\) for any \(z\) \cite[p.~4]{Gao2018Softmax}. Furthermore, it can be proved that the softmax function is monotone, therefore the hierarchy is preserved\cite[eq.~33, p.~6]{Gao2018Softmax}:
+\[
+\left( \sigma(z) - \sigma(z') \right)^\top (z - z') \geq 0,\qquad\forall z, z' \in \mathbb{R}^n
+\]}
+
