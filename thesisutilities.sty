@@ -2,6 +2,7 @@
 %% Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ProvidesPackage{thesisutilities}[2025/01/21 Custom Abstract Environments]
+\RequirePackage{changepage}
 \RequirePackage{natbib}
 \RequirePackage{etoolbox}
 \RequirePackage{multirow}
@@ -174,6 +175,9 @@
   \end{enumerate}
 }
 
+% Assumption environment with theorem-like italics
+\theoremstyle{plain}
+\newtheorem*{assumption}{Assumption}
 
 
 

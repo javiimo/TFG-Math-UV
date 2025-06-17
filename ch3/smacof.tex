@@ -1,20 +1,21 @@
 \subsection{Retriving the physical location of the interventions}
-One of the assumptions that will be made is that there is a component of the risk that comes from the location of an intervention. This is intuitive since interventions in densely populated areas or near critical infrastructure likely carry higher risks than those in remote locations. However, location is not the only factor, the risk also depends on other variables like the type of maintenance work. \\
+Some information that the challenge providers have access to, such as the physical location of each intervention, is not public. This will be later on used to compute the environmental impact and the concurrency of close interventions. In order to determine a plausible physical location of the interventions, a two step approach is proposed: first the relative positioning between interventions must be determined, then these positions should be aligned with the map of France. Making some assumptions will allow us to extract this meaningful information from the available data while maintaining the integrity of the original problem structure.\\
 
-Therefore, we will attempt to infer the approximate location of the interventions stating the following:
-\begin{notation}{Assumption 1:}
-    Two interventions \(i\) and \(j\) are close if their overall mean risks (averaged accross all possible start times and scenarios)
-    \[
-    \overline{r}_t^{(i)} = \frac{1}{\left|\mathcal{T}_i\right|}\sum_{\mathcal{T}_i}\mu_t^{(i,\tau)}, 
-    \qquad \text{where }\mu_t^{(i,\tau)} \coleq \frac{1}{|S|}\sum_{s\in S} \mathrm{risk}_{s,t}^{(i,\tau)}, \quad
-    \mathcal{T}_i\coleq \{\tau\in \N:\,1\leq \tau \leq T-d_{i,\tau}\}
-    \]
-    vary in the same direction, i.e.,
-    \[
-    \operatorname{sgn}\Big(\overline{r}_{t+1}^{(i)}-\overline{r}_t^{(i)}\Big)=\operatorname{sgn}\Big(\overline{r}_{t+1}^{(j)}-\overline{r}_t^{(j)}\Big),\quad t\in\{1,\dots , T-1\}
-    \]
-    This affirms that the risk variation of an intervention over time is strongly correlated with its location.
-    \end{notation}
+We will start with the assumption that there is a component of the risk that comes from the location of an intervention. This is intuitive since interventions in densely populated areas or near critical infrastructure likely carry higher risks than those in remote locations. However, location is not the only factor, the risk also depends on other variables like the type of maintenance work. \\ 
+
+\begin{assumption}
+  Two interventions \(i\) and \(j\) are close if their overall mean risks (averaged accross all possible start times and scenarios)
+  \[
+  \overline{r}_t^{(i)} = \frac{1}{\left|\mathcal{T}_i\right|}\sum_{\mathcal{T}_i}\mu_t^{(i,\tau)}, 
+  \qquad \text{where }\mu_t^{(i,\tau)} \coleq \frac{1}{|S|}\sum_{s\in S} \mathrm{risk}_{s,t}^{(i,\tau)}, \quad
+  \mathcal{T}_i\coleq \{\tau\in \N:\,1\leq \tau \leq T-d_{i,\tau}\}
+  \]
+  vary in the same direction, i.e.,
+  \[
+  \operatorname{sgn}\Big(\overline{r}_{t+1}^{(i)}-\overline{r}_t^{(i)}\Big)=\operatorname{sgn}\Big(\overline{r}_{t+1}^{(j)}-\overline{r}_t^{(j)}\Big),\quad t\in\{1,\dots , T-1\}
+  \]
+  This affirms that the risk variation of an intervention over time is strongly correlated with its location.
+\end{assumption}
 
 
 In practice, this condition will rarely hold for all time periods $t$. However, we can use it to define a similarity measure between interventions by counting how often their risk variations align. Specifically, for each pair of interventions $(i,j)$, we compute a similarity score by adding 1 when their risk variations match in sign and subtracting 1 when they differ. Then it is normalized to the interval $[-1,1]$. This yields a symmetric similarity matrix that captures the degree of correlation between intervention risks over time.
@@ -189,9 +190,20 @@ For details about the global linear convergence to a stationary point conditions
     \Return $\{\hat{d}_{ij}\}$\;
 \end{algorithm}
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{ch3/figures/points.png}
     \caption{Visualization of the resulting MDS map showing the relative positions of the interventions from \texttt{X12} in a two-dimensional space based on their dissimilarities derived from assumption 1.}
     \label{fig:mds_map}
 \end{figure}
+
+Once the cloud of points (i.e. the distance matrix) is obtained via SMACOF, the next step involves placing those points on the map of France, enabling the computation of distances to national parks. Since no intervention property can be directly linked to a specific geographical position, the approach consists of isotropically stretching (uniformly in both axes) and translating the cloud of points onto the French map, as illustrated in figure \ref{fig:map_france}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{ch3/figures/Map of France.png}
+    \caption{Visualization of the intervention locations after stretching and translating the MDS point cloud to fit the French territory. Green areas represent the regional natural parks.}
+    \label{fig:map_france}
+\end{figure}
+
+
