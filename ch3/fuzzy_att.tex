@@ -1,6 +1,19 @@
-In this section, 4 categories of attributes are defined using two concepts from fuzzy logic. Our approach will be to define these properties for each intervention.
+To enrich our decision-making model, we introduce four fuzzy attributes. These attributes evaluate the temporal distribution of interventions based on their size, risk, spatial proximity to each other, and environmental sensitivity. They are built upon the principles of fuzzy logic to translate crisp, quantitative data into a more expressive, linguistic framework suitable for multi-criteria analysis.\\
 
-First we define a fuzzy linguistic variable for each attribute. In the case of distances (between interventions and between parks and interventions), we will assign its values using fuzzy numbers, in specific trapezoidal and triangular fuzzy numbers (see figure \ref{fig:fuzzy_distance}). On the other hand, memberships to degrees of size and degrees of risk will be assigned via fuzzy cmeans, where each intervention may have multiple non-zero membership degrees to different clusters, their centroids can be seen in table \ref{tab:fuzzy_centroids}.
+Our methodology for constructing these attributes follows a three-stage process. Crisp numerical data from each intervention is transformed into fuzzy sets over the intervention space, which represent the extent to which an intervention possesses a certain qualitative (linguistic) property. Second, for any given solution, 
+we take the fuzzy subset of active interventions in each day and aggregate (add\footnote{Adding the memberships of a fuzzy set is equivalent to computing the cardinality of that fuzzy set.}) these memberships into a "daily mass". This time series quantifies the total presence of that fuzzy property among the interventions active on each day of the planning horizon. Finally, we evaluate the temporal uniformity of this mass distribution using a scalar score derived from Shannon's entropy, allowing for a concise comparison between different solutions.\\
+
+The initial stage, fuzzification, is achieved through one of two methods depending on the nature of the attribute. For properties based on distance, we define a \textbf{linguistic variable}. In this case, the linguistic variable \textit{Distance} defines 5 linguistic terms (close, mid-close, mid, mid-far, far), which are defined over a numerical base variable (distance in meters). The meaning of each linguistic term is captured by a membership function, $\mu(x)$, which assigns a compatibility degree in $[0, 1]$ to each value of the base variable. This degree of compatibility is conceptually distinct from probability, as it is not a frequency of any event. The membership functions the five terms are specified by trapezoidal and triangular numbers as shown in Figure~\ref{fig:fuzzy_distance}. Therefore, 5 values need to be chosen by the decision maker, which specify the boundaries of each fuzzy number.\\
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\linewidth]{ch3/figures/Fuzzy distance.png}
+    \caption{Fuzzy distance linguistic variable with close, mid-close, mid, mid-far and far membership functions. Five values (a,b,c,d,e) are required for defining the compatibility functions of the terms: 2 trapezoidal fuzzy numbers for close and far and 3 triangular fuzzy numbers for mid-close, mid and mid-far.}
+    \label{fig:fuzzy_distance}
+    \end{figure}
+
+For attributes like intervention size and risk, where clear-cut boundaries are harder to set, we employ a data-driven approach using \textbf{fuzzy c-means clustering}. This unsupervised algorithm partitions the set of interventions into a specified number of clusters (in our case, five) based on their data. Unlike hard clustering, it assigns each intervention a membership degree to every cluster, reflecting partial associations. For example, an intervention could be 80\% medium and 20\% mid-large size. We apply this technique to the mean size and mean risk of each intervention, with the resulting cluster centroids, representing the prototypical value for each fuzzy category, shown in Table~\ref{tab:fuzzy_centroids}.
 
 \begin{table}[!ht]
     \centering
@@ -18,26 +31,41 @@ First we define a fuzzy linguistic variable for each attribute. In the case of d
     \caption{Fuzzy cluster centroids for intervention size and risk levels.}
     \label{tab:fuzzy_centroids}
     \end{table}
+
+With these fuzzification methods established, we now define the four concurrency attributes.
+
+\paragraph{Size Concurrency and Risk Concurrency.}
+These two attributes are structurally analogous, designed to measure the daily concentration of large-workload and high-risk interventions, respectively. The base variable for \textbf{Size Concurrency} is the mean intervention size. For each intervention $i$, this is the average total workload over all of its valid scheduling options $\tau \in \mathcal{T}_i$:
+
+\[
+    \text{mean\_size}_i \coleq \frac{1}{|\mathcal{T}_i|} \sum_{\tau\in \mathcal{T}_i} \text{size}_{i,\tau},
+    \qquad \text{with }\,
+    \text{size}_{i,\tau} \coleq \left(\sum_{c \in C} \sum_{t=1}^{\mathcal{T}} r_{c,t}(i,\tau)\right) \times d_{i,\tau}, \,\, \mathcal{T}_i = \{ \tau \mid \text{size}_{i,\tau} > 0 \}
+\]
+
+where \(C\) is the set of resources, \(r_{c,t}(i,\tau)\) is the consumption of resource \(c\) at time \(t\) when intervention \(i\) starts at \(\tau\), and \(d_{i,\tau}\) is the duration. Only start times with non-zero \(\text{size}_{i,\tau}\) are considered. \\
+The base variable for \textbf{Risk Concurrency} is the mean intervention risk, calculated as the average of its non-zero risk values $r_t^{(i)}$ (see definition from Assumption 1) across all possible start times. 
+
+For both attributes, we use fuzzy c-means to assign each intervention $i$ a vector of five membership values (e.g., $\mu_{\text{small}}(i), \dots, \mu_{\text{large}}(i)$). The daily mass for a specific cluster is then the cardinality of the corresponding fuzzy set of active interventions $\mathcal{I}(t)$ at timestep $t$:
+\[
+    \text{Mass}_{\text{cluster}}(t) = \sum_{i \in \mathcal{I}(t)} \mu_{\text{cluster}}(i)
+\]
+
+
     
     
-    \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=\linewidth]{ch3/figures/Fuzzy distance.png}
-    \caption{Fuzzy distance linguistic variable with close, mid-close, mid, mid-far and far membership functions.}
-    \label{fig:fuzzy_distance}
-    \end{figure}
 
-In order to go from the membership values of interventions to membership values of a particular solution, we will leverage the distribution of daily masses of memberships over the planning horizon.
 
-The idea is the following:
-
-In the case of the distance matrix of distances intervention to intervention. We start by applying the fuzzy variable to the crisp distance matrix. This is a mapping from a real valued distance to 5 membership values, which can be represented with 5 matrices, one for each fuzzy distance (intervention to intervention) set. This are 5 fuzzy sets over the pairs of interventions. Afterwards, to compute the daily mass of each of those 5 fuzzy sets, we are going to take the cardinality of the each of those 5 fuzzy sets restricted to the unique pairs of active interventions in a day. Do this for each day in the time horizon. After that, we have a unique mass value for each day (see figure \ref{fig:fuzzy_att_concurrency}). 
-
-In the case of the distance matrix from interventions (rows) to parks (colums). The approach is similar, we apply a different fuzzy distance variable and get 5 matrices. But in this case, since columns represent parks instead of interventions, we aggregate row wise each matrix using a t-conorm which converts each of the five matrices into a vector which corresponds to a five closeness to park value per intervention. Which are 5 closeness to park membership vectors (a fuzzy set over the set of interventions). Then the approach to generate the daily masses is analogous to the previous case. We take the fuzzy subset corresponding to the active interventions in any given day and add their memberships (cardinal of that fuzzy subset).
-
-Regarding the risk and size, we have a mean size and a mean risk for each intervention (a vector). This is then fuzzy clustered into 5 clusters, therefore converting each vector of mean values into 5 vectors of memberships. Then the daily masses are computed analogously to the vectors from the distances to parks.
-
- 
+\paragraph{Closeness Concurrency and Environmental Impact Concurrency.}
+These attributes assess spatial concentration using the linguistic variable \textit{Distance}. \textbf{Closeness Concurrency} quantifies the degree to which spatially proximate interventions are scheduled simultaneously. After applying the \textit{Distance} linguistic variable to the distance matrix derived in section \ref{sec:dist_mat}, five membership matrices are obtained for each pair of interventions $(i, j)$, corresponding to the fuzzy terms close, mid-close, mid, mid-far, and far (denoted as $\mu_{\text{close}}(i, j),\dots ,\mu_{\text{far}}(i, j)$). The daily mass for a term is the sum of membership degrees over all unique pairs of concurrently active interventions:
+\[
+    \text{Mass}_{\text{close}}(t) = \sum_{\{i,j\} \subseteq \mathcal{I}(t), i \neq j} \mu_{\text{close}}(i, j)
+\]
+\textbf{Environmental Impact Concurrency} measures the simultaneous execution of interventions near environmentally sensitive areas (national parks). In this case, the distance matrix is from an intervention $i$ to a park $p$. 
+For each intervention $i$, after applying the linguistic variable Distance to its distance to each park p, the values are aggregated into a single fuzzy membership value using a t-conorm (S-norm) operation, 
+such as the product t-conorm\footnote{The product t-norm is often used in control systems because it is strictly increasing in each argument, unlike the maximum or Lukasiewicz ones. That is also the reason it was chosen here, every single increase in membership to any park will be reflected in the aggregation.}:
+\[\mu_{\text{env\_close}}(i) =  1 - \prod_{p \in \text{Parks}} (1-\mu_{\text{close}}(i, p))\]
+The daily mass is then the sum of these aggregated values for the active interventions: \[\text{Mass}_{\text{env\_close}}(t) = \sum_{i \in \mathcal{I}(t)} \mu_{\text{env\_close}}(i)\] Figure~\ref{fig:fuzzy_att_concurrency} illustrates the resulting daily mass distributions for all four attribute categories.
 
 \begin{figure}[!ht]
     \begin{adjustwidth}{-1.6cm}{-1.6cm}
@@ -47,48 +75,9 @@ Regarding the risk and size, we have a mean size and a mean risk for each interv
     \label{fig:fuzzy_att_concurrency}
 \end{figure}
 
-
-
-\paragraph{Closeness Concurrency:} This attribute quantifies the degree to which interventions that are spatially "close" occur simultaneously. At each timestep \(t\), let \(\mathcal{I}(t)\) be the set of interventions active. For every unique pair \(\{i,j\}\) in \(\mathcal{I}(t)\), we...
-
-
-\paragraph{Environmental Impact Concurrency:} This score quantifies the level of simultaneous interventions with different degrees of environmental impact over the planning horizon. At each timestep \(t\), let \(\mathcal{I}(t)\) denote the set of active interventions. 
-
-\paragraph{Size Concurrency:} This attribute quantifies the degree of overlap among interventions with significant workload sizes. 
-
-First, we compute the \textbf{mean intervention size}: For each intervention \(i\), we consider all possible start times \(\tau\). For each start time \(\tau\), the total workload is used to compute the mean intervention size for intervention \(i\):
-
+\paragraph{Scoring Uniformity with Entropy.}
+For each of the 20 criteria (4 attributes $\times$ 5 fuzzy terms), we possess a daily mass distribution. A desirable schedule should distribute these masses as uniformly as possible over the planning horizon to avoid concentrating risks or resource-heavy tasks. We quantify this uniformity using Shannon's entropy. Given a daily mass vector $M = (m_1, \dots, m_\mathcal{T})$, we first normalize it to a distribution $P = (p_1, \dots, p_\mathcal{T})$, where $p_t = m_t / \sum_{k=1}^\mathcal{T} m_k$. The entropy is then calculated as:
 \[
-    \text{mean\_size}_i \coleq \frac{1}{|\mathcal{T}_i|} \sum_{\tau\in \mathcal{T}_i} \text{size}_{i,\tau},
-    \qquad \text{with }\,
-    \text{size}_{i,\tau} \coleq \left(\sum_{c \in C} \sum_{t=1}^{T} r_{c,t}(i,\tau)\right) \times d_{i,\tau}, \,\, \mathcal{T}_i = \{ \tau \mid \text{size}_{i,\tau} > 0 \}
+H(P) = - \sum_{t=1}^{\mathcal{T}} p_t \log_2(p_t)
 \]
-
-where \(C\) is the set of resources, \(r_{c,t}(i,\tau)\) is the consumption of resource \(c\) at time \(t\) when intervention \(i\) starts at \(\tau\), and \(d_{i,\tau}\) is the duration. Only start times with non-zero \(\text{size}_{i,\tau}\) are considered. 
-
-
-Then, interventions are clustered into \texttt{small}, \texttt{mid-small},\texttt{mid}, \texttt{mid-large} and \texttt{large} groups using fuzzy cmeans on their mean intervention sizes. At each timestep \(t\), let \(\mathcal{I}(t)\) denote the set of active interventions. 
-
-\paragraph{Risk Concurrency:} Analogous to size concurrency, risk concurrency quantifies the degree of overlap among interventions with elevated risk levels. In this case, each intervention \(i\in I\) has a risk value which is the average of its nonzero risk values $r_t^{(i)}$ (see Assumption 1) across all start times. Then, interventions are clustered via fuzzy cmeans into... The score is completely identical to the one from size concurrency.
-
-
-
-
-Finally, each daily mass distribution (we have 5 linguistic values $\times$ 4 linguistic variables = 20 mass distributions). 
-
-Since the total mass is the same for all the solutions (they all have to schedule the exact same interventions) and what varies is how that mass is distributed across the time horizon. We are going to consider that what would be best is to have those masses uniformly distributed and what would be worse is to have a peak day where all the dangerous, risky, huge and concentered in one place interventions, take place. With this intention we are going to normalize each distribution by their total mass (the shape of the distribution remains the same) and then take the minus entropy of that distribution.
-
-Notice that here, we do not have any probabilities and entropy only serves as a measure of how uniformity. No information or probabilistic interpretation would make sense in this case.
-
-In their foundational work, Cover and Thomas define the entropy $H(X)$ of a discrete random variable $X$ as a measure of uncertainty or randomness associated with the possible outcomes \cite[Section 2.1]{Entropy}. The entropy is calculated by the following formula:
-\[
-H(X) = - \sum_x p(x)\, \log p(x)
-\]
-where $p(x)$ denotes the probability of outcome $x$.
-
-According to Cover and Thomas \cite[p.~14]{Entropy}, entropy is minimized when the distribution is deterministic, meaning that a single outcome has probability one and all others have probability zero. In this case, $H(X)=0$, reflecting the absence of uncertainty. Conversely, entropy is maximized by the uniform distribution. Specifically, for a variable $X$ with $|X|$ possible outcomes, the entropy satisfies the inequality
-\[
-H(X) \leq \log |X| 
-\]
-with equality if and only if $X$ is uniformly distributed \cite[Theorem 2.6.4, p.~27]{Entropy}. Therefore, a uniform distribution corresponds to maximum entropy, while a deterministic distribution yields the minimum possible entropy.
-
+We employ entropy solely as a measure of uniformity, no probabilistic interpretation of the maintenance process is implied. A well-known result from  information theory \cite{Entropy} is that entropy is maximized for a uniform distribution and minimized for one where the mass is concentrated in a single point. Therefore, a higher entropy score corresponds to a more uniform, and thus more desirable, distribution of the fuzzy attribute over time. Final scores are normalized using the entropy of the uniform distribution over $\mathcal{T}$ days which equals $\log_2(\mathcal{T})$.

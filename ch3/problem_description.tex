@@ -26,10 +26,10 @@ This problem is formalized as an integer programming optimization model (followi
   \begin{tabular}{|c|p{13cm}|}
     \hline
     \textbf{Symbol} & \textbf{Description} \\ \hline
-    $T$ & Total number of time periods in the planning horizon. \\ \hline
-    $t$ & Time period index, with $t \in \{1,\ldots,T\}$. \\ \hline
-    $\tau$ & Starting time period for interventions, with $\tau \in \{1,\ldots,T\}$. \\ \hline
-    $I$ & Set of interventions. \\ \hline
+    $\mathcal{T}$ & Total number of time periods in the planning horizon. \\ \hline
+    $t$ & Time period index, with $t \in \{1,\ldots,\mathcal{T}\}$. \\ \hline
+    $\tau$ & Starting time period for interventions, with $\tau \in \{1,\ldots,\mathcal{T}\}$. \\ \hline
+    $\mathcal{I}$ & Set of interventions. \\ \hline
     $x_{i,\tau}$ & Binary variable: 1 if intervention $i\in I$ starts at period $\tau$, 0 otherwise. \\ \hline
     $d_{i,\tau}$ & Duration of intervention $i$ if started at period $\tau$. \\ \hline
     $C$ & Set of resources (teams). \\ \hline
@@ -55,8 +55,8 @@ This problem is formalized as an integer programming optimization model (followi
 where
 \[
 \begin{aligned}
-&\mathrm{obj}_1 = \frac{1}{T}\sum_{t=1}^{T} \mathrm{risk}_t,\quad \mathrm{obj}_2(\beta) = \frac{1}{T}\sum_{t=1}^{T} \max\Big\{0,\;Q_t^\beta-\mathrm{risk}_t\Big\},\\[1ex]
-&\quad\text{with: }\quad\mathrm{risk}_t = \frac{1}{|S_t|}\sum_{s\in S_t}\sum_{\substack{i\in I\\ \tau \le t < \tau+d_{i,\tau}}} \mathrm{risk}_{s,t}^{(i,\tau)}\,x_{i,\tau},\quad Q_t^\beta=\beta\text{-quantile of } \Big\{\mathrm{risk}_{s,t} : s\in S_t\Big\}.
+&\mathrm{obj}_1 = \frac{1}{\mathcal{T}}\sum_{t=1}^{\mathcal{T}} \mathrm{risk}_t,\quad \mathrm{obj}_2(\beta) = \frac{1}{\mathcal{T}}\sum_{t=1}^{\mathcal{T}} \max\Big\{0,\;Q_t^\beta-\mathrm{risk}_t\Big\},\\[1ex]
+&\quad\text{with: }\quad\mathrm{risk}_t = \frac{1}{|S_t|}\sum_{s\in S_t}\sum_{\substack{i\in \mathcal{I}\\ \tau \le t < \tau+d_{i,\tau}}} \mathrm{risk}_{s,t}^{(i,\tau)}\,x_{i,\tau},\quad Q_t^\beta=\beta\text{-quantile of } \Big\{\mathrm{risk}_{s,t} : s\in S_t\Big\}.
 \end{aligned}
 \]
 \noindent Here, $\mathrm{obj}_1$ is the mean cumulative planning risk and $\mathrm{obj}_2(\beta)$ quantifies the extremely high-risk scenarios and periods we want to avoid.
@@ -66,17 +66,17 @@ where
 
 \noindent Each intervention is scheduled exactly once:
 \[
-\sum_{\tau=1}^{T-d_{i,\tau}+1} x_{i,\tau} = 1,\quad \forall\, i\in I
+\sum_{\tau=1}^{\mathcal{T}-d_{i,\tau}+1} x_{i,\tau} = 1,\quad \forall\, i\in \mathcal{I}
 \]
 
 \noindent Intervention finishes within the horizon:
 \[
-t + d_{i,\tau} \le T+1,\quad \forall\, i\in I \text{ and } t \text{ with } x_{i,\tau}=1
+t + d_{i,\tau} \le \mathcal{T}+1,\quad \forall\, i\in \mathcal{I} \text{ and } t \text{ with } x_{i,\tau}=1
 \]
 
 \noindent Resource capacity limits:
 \[
-l_{c,t} \le \sum_{i\in I}\sum_{\tau \le t < \tau+d_{i,\tau}} r_{c,t}(i,\tau)\,x_{i,\tau} \le u_{c,t},\quad \forall\, c\in C,\; \forall\, t
+l_{c,t} \le \sum_{i\in \mathcal{I}}\sum_{\tau \le t < \tau+d_{i,\tau}} r_{c,t}(i,\tau)\,x_{i,\tau} \le u_{c,t},\quad \forall\, c\in C,\; \forall\, t
 \]
 
 \noindent Exclusion constraints:
@@ -86,7 +86,7 @@ l_{c,t} \le \sum_{i\in I}\sum_{\tau \le t < \tau+d_{i,\tau}} r_{c,t}(i,\tau)\,x_
 
 \noindent Binary variables:
 \[
-x_{i,\tau} \in \{0,1\},\quad \forall\, i\in I,\; \tau=1,\ldots,T-d_{i,\tau}+1
+x_{i,\tau} \in \{0,1\},\quad \forall\, i\in \mathcal{I},\; \tau=1,\ldots,\mathcal{T}-d_{i,\tau}+1
 \]
 
 
