@@ -21,7 +21,7 @@ This optimization is conditioned by crucial constraints that model real-world li
 This problem is formalized as an integer programming optimization model (following the description from \cite{ConsueloRoadef}), with its primary variables and parameters detailed in Table \ref{tab:variables}:
 
 
-\begin{table}[h]
+\begin{table}[!ht]
   \centering
   \begin{tabular}{|c|p{13cm}|}
     \hline
@@ -62,6 +62,7 @@ where
 \noindent Here, $\mathrm{obj}_1$ is the mean cumulative planning risk and $\mathrm{obj}_2(\beta)$ quantifies the extremely high-risk scenarios and periods we want to avoid.
 
 \vspace{1em}
+\newpage
 \noindent\textbf{Subject to:}
 
 \noindent Each intervention is scheduled exactly once:
