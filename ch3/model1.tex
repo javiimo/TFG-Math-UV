@@ -1,37 +1,62 @@
-Given the decision matrix constructed in the previous section, the subsequent challenge is to aggregate this information into a single, comprehensive score to rank the alternatives. A flat aggregation, where a single operator like OWA is applied to all criteria simultaneously, would fail to capture the inherent hierarchical relationships and non-compensatory nature of the criteria. 
-For instance, low risk concurrency should not compensate for high risk one. 
-To address this, we adopt a two-level aggregation strategy, with a lexicographic model operating within distinct conceptual blocks and a separate fusion model operating across them, inspired by the framework proposed by Yager \cite{LOOWA}.\\
+Given the decision matrix constructed in the previous section, the subsequent challenge is to aggregate this information into a single, comprehensive score to rank the alternatives. A flat aggregation, where a single operator like OWA is applied to all criteria simultaneously, would fail to capture the inherent hierarchical relationships and non-compensatory nature of the criteria. For instance, low risk concurrency should not compensate for a high risk one. To address this, we adopt a two-level aggregation strategy, with a lexicographic model operating within distinct conceptual blocks and a separate OWA operating across them. The lexicographic stage is inspired by the principles of non-compensatory decision rules, such as those surveyed by Fishburn \cite{epsilon}.\\
 
-The first level of aggregation addresses the four blocks of fuzzy attributes: Size, Risk, Closeness, and Environmental Impact. Due to the problem's logic, the criteria within each block are organized according to a strict lexicographic ordering. For example, for the "Size" concept, the preference is for larger maintenance tasks to be spreaded uniformly, leading to the priority order: \texttt{Size\_large} $>$ \texttt{Size\_mid-large} $>$ \texttt{Size\_medium}, and so on. 
-To model this, we employ the Lexicographic Ordinal OWA (LOOWA) operator. 
-The intuition behind LOOWA is that a lower priority criterion can never compensate for a higher priority one. It can only confirm or decrease the score established by its superiors, making the block score effectively the highest performance level that can be guaranteed without violating any higher priority requirements.
+The first level of aggregation addresses the four blocks of fuzzy attributes: Size, Risk, Closeness, and Environmental Impact. Due to the problem's logic, the criteria within each block are organized according to a strict lexicographic ordering. 
+Within each block, fuzzy attributes follow a strict lexicographic order reflecting their conceptual hierarchy:
 
-Following the formulation from Yager's paper, for each alternative $x$, we first define $C_j(x)$ as the satisfaction (score from the matrix) of the $j$-th priority criterion ($j=1$ being most important). We then construct an adaptive importance gate $T_j(x)$ for each criterion:
+\begin{itemize}
+    \item \texttt{Size}: \texttt{Size\_large} $>$ \texttt{Size\_mid\_large} $>$ \texttt{Size\_medium} $>$ \texttt{Size\_mid\_small} $>$ \texttt{Size\_small}
+    
+    \item \texttt{Risk}: \texttt{Risk\_high} $>$ \texttt{Risk\_mid\_high} $>$ \texttt{Risk\_mid} $>$ \texttt{Risk\_mid\_low} $>$ \texttt{Risk\_low}
+    
+    \item \texttt{Environmental Impact}: \texttt{EnvImpact\_close} $>$ \texttt{EnvImpact\_mid\_close} $>$ \texttt{EnvImpact\_mid}
+    
+    $>$\texttt{EnvImpact\_mid\_far} $>$ \texttt{EnvImpact\_far}
+    
+    \item \texttt{Closeness}: \texttt{Closeness\_close} $>$ \texttt{Closeness\_mid\_close} $>$ \texttt{Closeness\_mid} $>$ \texttt{Closeness\_mid\_far} $>$ \texttt{Closeness\_far}
+\end{itemize}
+
+
+To model this strict, non-compensatory hierarchy, we employ an epsilon-lexicographic approach. The core intuition is that a lower-priority criterion should only be used as a tie-breaker and can never compensate for a deficit in a higher-priority one.\\
+
+
+
+Our implementation achieves this by producing a single score for each alternative within a block. For an alternative $x$, if its score on the highest-priority criterion, $C_1(x)$, is distinct from all others, then its block score is simply $C_1(x)$. The lower-priority criteria are ignored. However, if two or more alternatives are tied on $C_1(x)$, the tie is resolved by adding small, rapidly diminishing contributions from the subsequent criteria. This is a practical, additive formulation of a lexicographic preference, where the score $S(x)$ for a tied alternative is computed as:
 \begin{equation}
-T_1(x) = 1.0, \quad T_j(x) = \min_{k<j} C_k(x) \quad \text{for } j>1
+S(x) = C_1(x) + \sum_{j=2}^{n} C_j(x) \cdot \frac{\varepsilon^{j-1}}{2}
 \end{equation}
+where $n$ is the number of criteria in the block and $\varepsilon$ is a small constant. Since our attributes have been rounded to the third decimal, then $\epsilon = 10^{-3}$ is chosen. The weights, determined by $\varepsilon^{j-1}/2$, decrease exponentially, ensuring that the contribution of criterion $C_j$ is always orders of magnitude smaller than that of $C_{j-1}$. This structure makes it impossible for a high score on a lower-priority criterion to overturn the verdict of a higher-priority one. The division by 2 serves as a safeguard for keeping the new scores closer to the original $C_1$ score than its immediate higher possible $C_1$ score. This method provides a computationally tractable score that respects the lexicographic hierarchy, using secondary information only when strictly necessary to resolve ties.\\
 
-The final aggregated score for the block, $S(x)$, is calculated by taking the maximum of the satisfaction scores after each is capped by its corresponding gate:
-\begin{equation}
-S(x) = \max_{j=1...5} \left\{ \min \left( C_j(x), T_j(x) \right) \right\}
-\end{equation}
+\begin{example}
+Consider a case with three alternatives A, B, and C, and two criteria C$_1$ and C$_2$ within a block, where C$_1$ has higher priority than C$_2$. Let:
 
-Since $T_j(x) \leq C_1(x)$ for all $j>1$, the score $S(x)$ reduces to $C_1(x)$ whenever any lower priority criterion matches or exceeds the highest priority score. This ensures that lower priority attributes cannot raise the score. They only affect it when they fall below their predecessors, thereby lowering $S(x)$. While Yager originally developed LOOWA for ordinal evaluations, our implementation applies it to $[0,1]$ fuzzy membership degrees, where the join/meet operations naturally become max/min operations on real numbers.
-This process is repeated for each of the four fuzzy blocks and for every alternative, transforming the 20 fuzzy attributes into four robust concept scores. The crisp attributes are handled separately: ``Highest Concurrency'' is a single value passed directly to the next stage, while the ``Seasonality'' attributes, which represent a trade-off rather than a hierarchy, are combined. Our implementation offers flexibility here, allowing for either a conventional weighted average or an OWA aggregation, depending on the decision-maker's preference. %<-- Change: Added detail about seasonality flexibility.
-\\
+\begin{itemize}
+    \item C$_1$(A) = 0.700, C$_2$(A) = 0.900
+    \item C$_1$(B) = 0.700, C$_2$(B) = 0.600
+    \item C$_1$(C) = 0.701, C$_2$(C) = 0.983
+\end{itemize}
 
-The second level of aggregation fuses the resulting vector of six scores: (Concurrency, Size, Risk, Environmental Impact, Closeness, and Seasonality). At this stage, a key consideration is that providing precise, justifiable importance weights between these high-level concepts (e.g., is risk 1.5 times more important than environmental impact?) is often difficult and subjective. Therefore, an approach that is driven by the decision-maker's general attitude is more appropriate. We use the standard Ordered Weighted Averaging (OWA) operator for this purpose. OWA aggregates the concept scores based purely on their sorted values (in descending order), allowing the model to reflect optimism or pessimism. This behavior is controlled by the \textit{orness} parameter, $\alpha \in [0, 1]$. An orness of $\alpha=1$ (the maximum operator) reflects an optimistic attitude that judges a schedule by its strongest aspect, while $\alpha=0$ (the minimum operator) reflects a pessimistic, risk-averse stance that focuses on the weakest link. A neutral attitude (arithmetic mean) is achieved with $\alpha=0.5$.\\
+The block scores would be computed as:
+\begin{align*}
+    S(A) &= 0.700 + 0.900 \cdot \frac{10^{-3}}{2} = 0.70045\\
+    S(B) &= 0.700 + 0.600 \cdot \frac{10^{-3}}{2} = 0.70030\\
+    S(C) &= 0.701
+\end{align*}
 
-%<-- Change: This entire paragraph is new, explaining the weight generation.
+Note that for C, since its C$_1$ score is unique, no tie breaking is needed. When rounded to three decimals, each score reverts to its original C$_1$ value, preserving the lexicographic structure (this would only change if a criterion achieved a value of 1, which is not present in our decision matrix).
+\end{example}
+
+This process is repeated for each of the four fuzzy blocks and for every alternative, transforming the 20 fuzzy attributes into four robust concept scores. The crisp attributes are handled separately: ``Highest Concurrency'' is a single value passed directly to the next stage, while the ``Seasonality'' attributes, which represent a trade-off rather than a hierarchy, are combined using a Weighted Average according to the decision maker's preferences.\\
+
+The second level of aggregation fuses the resulting vector of six scores: (Concurrency, Size, Risk, Environmental Impact, Closeness, and Seasonality). At this stage, a key consideration is that providing precise, justifiable importance weights between these high-level concepts (e.g., is risk 1.5 times more important than environmental impact?) is often difficult. Therefore, an approach that is driven by the decision-maker's general attitude is more appropriate. We use the standard Ordered Weighted Averaging (OWA) operator for this purpose. OWA aggregates the concept scores based purely on their sorted values (in descending order), allowing the model to reflect optimism or pessimism. This behavior is controlled by the \textit{orness} parameter, $\alpha \in [0, 1]$. An orness of $\alpha=1$ (the maximum operator) reflects an optimistic attitude that judges a schedule by its strongest aspect, while $\alpha=0$ (the minimum operator) reflects a pessimistic, risk-averse stance that focuses on the weakest link. A neutral attitude (arithmetic mean) is achieved with $\alpha=0.5$.\\
+
 Therefore, OWA weights are generated systematically from the chosen $\alpha$ value using Yager's power-quantifier method instead of setting them manually. This method defines a basic unit monotone increasing quantifier $Q(r) = r^a$, where the exponent $a$ is derived from the desired orness:
 \begin{equation}
 a = \frac{2}{\alpha} - 2, \quad \text{for } \alpha \in (0, 1)
 \end{equation}
-The individual weights $w_i$ for an aggregation of $n$ items are then calculated as $w_i = Q(i/n) - Q((i-1)/n)$. This ensures that the set of weights is properly normalized and precisely reflects the decision-maker's specified attitude without requiring them to define each weight individually.
-\\
+The individual weights $w_i$ for an aggregation of $n$ items are then calculated as $w_i = Q(i/n) - Q((i-1)/n)$. This ensures that the set of weights is properly normalized and precisely reflects the decision-maker's specified attitude without requiring them to define each weight individually.\\
 
-In summary, our two-level model approach rests on two ideas: first, the predefined lexicographic ordering within each fuzzy block, and second, the attitudinal aggregation of the six main concepts. The practical implementation of this model in our analysis script requires the decision-maker to specify: %<-- Change: Minor rephrasing for flow.
+In summary, our two-level model approach rests on two ideas: first, the predefined lexicographic ordering within each fuzzy block, and second, the attitudinal aggregation of the six main concepts. The practical implementation of this model in our analysis script requires the decision-maker to specify:
 \begin{romanenum}
     \item The \textbf{Seasonality preference}, specified either as a vector of weights (for a weighted average) or as an orness value (for an OWA aggregation).
-    \item The outer-level \textbf{orness} $\alpha$, which defines their overall attitude, from pessimistic to optimistic, when balancing the performance across the six main concepts.
+    \item The \textbf{orness} $\alpha$, which defines their overall attitude, from pessimistic to optimistic, when balancing the performance across the six main concepts.
 \end{romanenum}

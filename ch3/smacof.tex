@@ -2,7 +2,7 @@
 \label{sec:dist_mat}
 Some information that the challenge providers have access to, such as the physical location of each intervention, is not public. This will be later on used to compute the environmental impact and the concurrency of close interventions. In order to determine a plausible physical location of the interventions, a two step approach is proposed: first the relative positioning between interventions must be determined, then these positions should be aligned with the map of France. Making some assumptions will allow us to extract this meaningful information from the available data while maintaining the integrity of the original problem structure.\\
 
-We will start with the assumption that there is a component of the risk that comes from the location of an intervention. This is intuitive since interventions in densely populated areas or near critical infrastructure likely carry higher risks than those in remote locations. However, location is not the only factor, the risk also depends on other variables like the type of maintenance work. \\ 
+We will start with the assumption that there is a component of the risk that comes from the location of an intervention. This is intuitive since interventions in densely populated areas or near critical infrastructure likely carry higher risks than those in remote locations. However, it is important to notice that location is not the only factor, the risk also depends on other variables like the type of maintenance work. \\ 
 
 \begin{assumption}
   Two interventions \(i\) and \(j\) are close if their overall mean risks (averaged accross all possible start times and scenarios)
