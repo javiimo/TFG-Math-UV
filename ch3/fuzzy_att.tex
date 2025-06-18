@@ -28,7 +28,7 @@ For attributes like intervention size and risk, where clear-cut boundaries are h
     Large/High & 23,279.25 & 1,024.11 \\
     \hline
     \end{tabular}
-    \caption{Fuzzy cluster centroids for intervention size and risk levels.}
+    \caption{Fuzzy cluster centroids for intervention size and risk levels. Values in euros.}
     \label{tab:fuzzy_centroids}
     \end{table}
 
@@ -78,7 +78,7 @@ H(P) = - \sum_{t=1}^{\mathcal{T}} p_t \log_2(p_t)
 \]
 We employ entropy solely as a measure of uniformity, no probabilistic interpretation of the maintenance process is implied. A well-known result from  information theory \cite{Entropy} is that entropy is maximized for a uniform distribution and minimized for one where the mass is concentrated in a single point. Therefore, a higher entropy score corresponds to a more uniform, and thus more desirable, distribution of the fuzzy attribute over time. Final scores are normalized using the entropy of the uniform distribution over $\mathcal{T}$ days which equals $\log_2(\mathcal{T})$.\\
 
-The complete pipelines for these fuzzy are summarized in the diagrams from figure \ref{fig:risk-size_closeness_envimpact}.
+The complete pipelines for these fuzzy attributes are summarized in the diagrams from figure \ref{fig:risk-size_closeness_envimpact}.
 
 
 
