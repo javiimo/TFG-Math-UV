@@ -57,7 +57,9 @@ For both attributes, we use fuzzy c-means to assign each intervention $i$ a vect
 
 
 \paragraph{Closeness Concurrency and Environmental Impact Concurrency.}
-These attributes assess spatial concentration using the linguistic variable \textit{Distance}. \textbf{Closeness Concurrency} quantifies the degree to which spatially proximate interventions are scheduled simultaneously. After applying the \textit{Distance} linguistic variable to the distance matrix derived in section \ref{sec:dist_mat}, five membership matrices are obtained for each pair of interventions $(i, j)$, corresponding to the fuzzy terms close, mid-close, mid, mid-far, and far (denoted as $\mu_{\text{close}}(i, j),\dots ,\mu_{\text{far}}(i, j)$). The daily mass for a term is the sum of membership degrees over all unique pairs of concurrently active interventions:
+These attributes assess spatial concentration using the linguistic variable \textit{Distance}, whose fuzzy term boundaries are defined as follows (in kilometers): for interventions, the boundaries are 5, 15, 50, 100, and 200 km, while for parks they are 1, 10, 20, 60, and 150 km. These values correspond to (a,b,c,d,e) in figure \ref{fig:fuzzy_distance}.
+
+\textbf{Closeness Concurrency} quantifies the degree to which spatially proximate interventions are scheduled simultaneously. After applying the \textit{Distance} linguistic variable to the distance matrix derived in section \ref{sec:dist_mat}, five membership matrices are obtained for each pair of interventions $(i, j)$, corresponding to the fuzzy terms close, mid-close, mid, mid-far, and far (denoted as $\mu_{\text{close}}(i, j),\dots ,\mu_{\text{far}}(i, j)$). The daily mass for a term is the sum of membership degrees over all unique pairs of concurrently active interventions:
 \[
     \text{Mass}_{\text{close}}(t) = \sum_{\{i,j\} \subseteq \mathcal{I}(t), i \neq j} \mu_{\text{close}}(i, j)
 \]
@@ -67,17 +69,64 @@ such as the product t-conorm\footnote{The product t-norm is often used in contro
 \[\mu_{\text{env\_close}}(i) =  1 - \prod_{p \in \text{Parks}} (1-\mu_{\text{close}}(i, p))\]
 The daily mass is then the sum of these aggregated values for the active interventions: \[\text{Mass}_{\text{env\_close}}(t) = \sum_{i \in \mathcal{I}(t)} \mu_{\text{env\_close}}(i)\] Figure~\ref{fig:fuzzy_att_concurrency} illustrates the resulting daily mass distributions for all four attribute categories.
 
-\begin{figure}[!ht]
-    \begin{adjustwidth}{-1.6cm}{-1.6cm}
-    \includegraphics[width=1.07\linewidth]{ch3/figures/Fuzzy_att_concurrency.png}
-    \end{adjustwidth}
-    \caption{Distribution of daily masses of membership for an example solution throughout the planning horizon.}
-    \label{fig:fuzzy_att_concurrency}
-\end{figure}
+
 
 \paragraph{Scoring Uniformity with Entropy.}
 For each of the 20 criteria (4 attributes $\times$ 5 fuzzy terms), we possess a daily mass distribution. A desirable schedule should distribute these masses as uniformly as possible over the planning horizon to avoid concentrating risks or resource-heavy tasks. We quantify this uniformity using Shannon's entropy. Given a daily mass vector $M = (m_1, \dots, m_\mathcal{T})$, we first normalize it to a distribution $P = (p_1, \dots, p_\mathcal{T})$, where $p_t = m_t / \sum_{k=1}^\mathcal{T} m_k$. The entropy is then calculated as:
 \[
 H(P) = - \sum_{t=1}^{\mathcal{T}} p_t \log_2(p_t)
 \]
-We employ entropy solely as a measure of uniformity, no probabilistic interpretation of the maintenance process is implied. A well-known result from  information theory \cite{Entropy} is that entropy is maximized for a uniform distribution and minimized for one where the mass is concentrated in a single point. Therefore, a higher entropy score corresponds to a more uniform, and thus more desirable, distribution of the fuzzy attribute over time. Final scores are normalized using the entropy of the uniform distribution over $\mathcal{T}$ days which equals $\log_2(\mathcal{T})$.
+We employ entropy solely as a measure of uniformity, no probabilistic interpretation of the maintenance process is implied. A well-known result from  information theory \cite{Entropy} is that entropy is maximized for a uniform distribution and minimized for one where the mass is concentrated in a single point. Therefore, a higher entropy score corresponds to a more uniform, and thus more desirable, distribution of the fuzzy attribute over time. Final scores are normalized using the entropy of the uniform distribution over $\mathcal{T}$ days which equals $\log_2(\mathcal{T})$.\\
+
+The complete pipelines for these fuzzy are summarized in the diagrams from figure \ref{fig:risk-size_closeness_envimpact}.
+
+
+
+\clearpage                 % flush earlier floats first
+\newgeometry{top=1cm,bottom=1cm,left=2cm,right=2cm}
+\begin{figure}[!p]
+    \begin{adjustwidth}{-1.2cm}{-1.8cm}
+    \includegraphics[width=1.07\linewidth]{ch3/figures/Fuzzy_att_concurrency.png}
+    \end{adjustwidth}
+    \caption{Distribution of daily masses of membership for an example solution over the planning horizon.}
+    \label{fig:fuzzy_att_concurrency}
+\end{figure}
+% -----------------------------------------------------------------
+% Stacked TikZ figures
+% -----------------------------------------------------------------
+\begin{figure}[!p]
+    \centering                          % keep everything centred
+    % Temporarily widen the text block by 1.6 cm on both sides
+    \begin{adjustwidth}{-1.6cm}{-1.6cm}
+  
+      % First row ───────────────────────────────────────────────
+      \adjustbox{max width=0.9\linewidth, center}{%
+        \input{ch3/figures/tikz/DiagramRiskSize.tex}%
+      }
+  
+      % A little breathing room between rows (optional)
+      \vspace{1.5ex}
+  
+      % Second row ──────────────────────────────────────────────
+      \adjustbox{max width=0.9\linewidth, center}{%
+        \input{ch3/figures/tikz/DiagramCloseness.tex}%
+      }
+  
+      % More breathing room (optional)
+      \vspace{1.5ex}
+  
+      % Third row ───────────────────────────────────────────────
+      \adjustbox{max width=0.9\linewidth, center}{%
+        \input{ch3/figures/tikz/DiagramEnvImp.tex}%
+      }
+  
+    \end{adjustwidth}
+  
+    \caption{Overview of fuzzy attribute pipelines: risk/size (top), closeness (middle) and environmental
+             impact (bottom) diagrams.}
+    \label{fig:risk-size_closeness_envimpact}
+  \end{figure}
+
+\thispagestyle{empty}
+  \restoregeometry          % margin settings back to normal
+\clearpage   

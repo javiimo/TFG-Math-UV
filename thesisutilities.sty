@@ -3,11 +3,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ProvidesPackage{thesisutilities}[2025/01/21 Custom Abstract Environments]
 \RequirePackage{changepage}
+\RequirePackage{adjustbox}
 \RequirePackage{rotating}
 \RequirePackage{natbib}
 \RequirePackage{etoolbox}
 \RequirePackage{multirow}
-\RequirePackage{xcolor}
+\RequirePackage[svgnames,table]{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{array}
 \RequirePackage{makecell}
@@ -19,8 +20,6 @@
 \RequirePackage{amssymb}
 \RequirePackage{tcolorbox}
 \RequirePackage{enumerate}
-\usepackage[svgnames]{xcolor}
-\usepackage[table]{xcolor}
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage{tikz-cd}
 \RequirePackage{tikz}
@@ -242,3 +241,30 @@
 \definecolor{Winter}{HTML}{BBDEFB}
 \definecolor{Summer}{HTML}{FFE0B2}
 \definecolor{Inter}{HTML}{C8E6C9}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Tikz Diagrams ch3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% colours
+\definecolor{closec}{RGB}{ 55,126,184}   % blue
+\definecolor{midclosec}{RGB}{ 77,175, 74} % green
+\definecolor{midc}{RGB}{255,255, 51}     % yellow
+\definecolor{midfarc}{RGB}{255,127,  0}  % orange
+\definecolor{farc}{RGB}{228, 26, 28}     % red
+% 
+% colours
+\definecolor{s0}{RGB}{ 55,126,184}   % small / low  (blue)
+\definecolor{s1}{RGB}{ 77,175, 74}   % mid-small / mid-low (green)
+\definecolor{s2}{RGB}{255,255, 51}   % medium / mid  (yellow)
+\definecolor{s3}{RGB}{255,127,  0}   % mid-large / mid-high (orange)
+\definecolor{s4}{RGB}{228, 26, 28}   % large / high (red)----------------------------------------------------------
+% styles
+\tikzset{
+  matrixbox/.style   ={draw,thick,rounded corners=2pt,inner sep=2pt,fill=white},
+  fuzzymatrix/.style ={matrixbox,minimum width=1.35cm,minimum height=1.35cm,fill=#1!25},
+  scalarbox/.style   ={draw,thick,rounded corners=2pt,minimum width=2.25cm,minimum height=1.35cm,fill=gray!15},
+  process/.style     ={font=\scriptsize\itshape,text width=2.7cm,align=center},
+  arrow/.style       ={-{Stealth[length=5pt]},thick},
+}
