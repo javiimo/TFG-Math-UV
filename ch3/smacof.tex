@@ -25,7 +25,7 @@ In practice, this condition will rarely hold for all time periods $t$. However, 
     By definition, an intervention has a correlation of 1 with itself.
 \end{remark}
 
-Notice that not all correlation values provide information about the closeness between interventions. Only positively correlated interventions can be considered "close" to some extent. However, we cannot determine how far apart negatively correlated interventions should be. Therefore, these negative correlations will be set to \texttt{NaN} and treated as missing values.\\
+Notice that not all correlation values provide information about the closeness between interventions. Only positively correlated interventions can be considered ''close" to some extent. However, we cannot determine how far apart negatively correlated interventions should be. Therefore, these negative correlations will be set to \texttt{NaN} and treated as missing values.\\
 
 There is not enough information to assign a specific distance value between 2 close points, but following assumption 1: the higher the correlation between two interventions, the stronger the indication that they are close to each other. Therefore, the algorithm proposed to recover a map from a distance matrix is: non-metric weighted Multi-Dimensional Scaling (MDS):
 

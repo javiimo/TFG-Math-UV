@@ -1,12 +1,32 @@
 Fuzzy sets were introduced by Zadeh in 1965, following the idea of generalizing sets that was presented in section \ref{sec:sorites}:
 
-\say{More often than not, the classes of objects encountered in the real physical world do not have precisely defined criteria of membership. [...]Clearly, the "class of all real numbers which are much greater than 1," or "the class of beautiful women," or "the class of tall men," do not constitute classes or sets in the usual mathematical sense of these terms. [...]Yet, the fact remains that such imprecisely defined "classes" play an important role in human thinking, particularly in the domains of pattern recognition, communication of information, and abstraction.}\cite{Zadeh1965}\\
+\say{More often than not, the classes of objects encountered in the real physical world do not have precisely defined criteria of membership. [...]Clearly, the ''class of all real numbers which are much greater than 1," or ''the class of beautiful women," or ''the class of tall men," do not constitute classes or sets in the usual mathematical sense of these terms. [...]Yet, the fact remains that such imprecisely defined ''classes" play an important role in human thinking, particularly in the domains of pattern recognition, communication of information, and abstraction.}\cite{Zadeh1965}\\
 
 The idea he proposed for representing those classes is using a continuum of grades of membership. While classical (also called crisp or boolean) sets use a boolean membership function $\chi_A:X\rightarrow\{0,1\}$ that assigns either 0 or 1 to each element, fuzzy sets generalize this by using a membership function $\mu_A:X\rightarrow[0,1]$ that can assign any value between 0 and 1. 
 
 \begin{remark}
-    The membership degree represents how compatible an object is with a set. This creates a \signal{total ordering (or partial since 2 objects with the same membership are not equal but cannot be ordered?)} of objects based on their degree of compatibility with the set.
+    The membership degrees represent how compatible an object is with a set. Since membership degrees are real numbers in $[0,1]$, they are totally ordered. However, this does not imply a total ordering of objects, since two different objects may have the same membership degree. The set of objects can be totally ordered by considering equivalence classes of objects with the same membership degree.
 \end{remark}
+
+Let us take a closer look at Zadeh's example of the set of ''tall men" to answer a fundamental question: where do these membership values come from?
+
+Most people would agree that a person with a height of 1.50m is not tall, so we can anchor the function with $\mu_{tall}(1.50) = 0$. Conversely, a person 2.00m tall is generally considered tall, so $\mu_{tall}(2.00) = 1$. But how should we define the values in between? The choice is not unique, and this non-uniqueness is not a flaw, but a feature.
+
+However, not all choices are valid. For a membership function to be a reasonable model of ''tallness", it must be consistent with our understanding of the concept. For example, it would be illogical to define a 1.70m person as ''more tall" than a 1.80m person. This means the function must be non-decreasing. Furthermore, a classical boolean definition fails to capture the gradual nature of ''tallness", even if it is not \emph{wrong}, it lacks the expressive power for more a nuanced definition. Figure \ref{fig:tall_definitions} illustrates these points.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{ch1/figures/Fuzzy_tall.png}
+    \caption{Illustrations of different membership functions for the fuzzy set ''tall". The left plot shows incorrect definitions: a crisp set is too rigid to capture the gradual nature of the concept, and a non-monotonic function is logically inconsistent since it implies a shorter person could be considered ''more tall" than a taller one. The right plot shows several valid, monotonic functions that can represent ''tall". Each reflects a different modeling choice, but all are anchored to the clear cases: membership is 0 for heights below 1.5m and 1 for heights above 2.0m.}
+    \label{fig:tall_definitions}
+\end{figure}
+
+As shown in Figure \ref{fig:tall_correct}, there are infinitely many valid ways to define the fuzzy set ''tall". This flexibility might seem like a problem of subjectivity or a lack of rigor, but it is better understood as a \textbf{matter of definition}. In classical set theory, we don't ask whether the set of ''prime numbers" is more correct than the set of ''even numbers"; they are simply different sets defined for different purposes. 
+
+Similarly, choosing a membership function \emph{is} the act of defining the fuzzy set. The goal is not to discover a single, universal truth for ''tallness," but to \textbf{design a fuzzy set that is useful for a specific problem}. This allows us to encode context-dependent or domain-specific expert knowledge into a precise mathematical model. The various methods for systematically creating these membership functions, a process known as \textit{fuzzification}, will be discussed in Section \ref{sec:fuzzification}.
+
+For the remainder of this chapter, we will assume that appropriate fuzzy sets are given, and we will focus on the mathematical properties and operations that can be derived from them.
+
 
 Therefore, fuzzy sets can be seen as an extension of crisp sets, since every crisp set can be modeled as a fuzzy set but not the other way around. The formal definition is as follows:
 
