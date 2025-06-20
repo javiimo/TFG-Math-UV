@@ -1,7 +1,7 @@
   In the previous sections we have been working with a single domain denoted by $X$. Intuitively, it might be useful to think about the domain as the different values of a property (independently of the object that has that property). For example, we could say that for the property \textit{lenght} the domain is $\R^+\coleq
   \{x\in\R \mid x \geq 0\}$ and a person might have a \textit{height} defined in that domain (modeled as a fuzzy set), although not all length values will be compatible with a person's height since it is safe to assume impossible to be 10 meters tall, but we do not know where to place a sharp boundary, so the feasible region of heights is best represented by a fuzzy set. If we were to look at the arm length, then we would have another set of feasible lenghts. Treating each set independently, doesn't allow to distinguish between the people of the same height with different arm lenght or viceversa. Therefore it is needed to a way to differentiate each unique combination of attributes. Notice that in this example, height and arm length have the same domain but for example hair color would have a different domain.\\
 
-  Mathematically, this is done with relations which are subsets of the cartesian product of the domains, so that each element is a unique possible combination of attributes, an ordered n-tuple. For simplicity, let us consider just the cartesian product of 2 sets since the general case can be obtained inductively (see remark below). Again, the ''fuzzy" part will be referred to how we generalize the membership values to the continuum.
+  Mathematically, this is done with relations which are subsets of the cartesian product of the domains, so that each element is a unique possible combination of attributes, an ordered n-tuple. For simplicity, let us consider just the cartesian product of 2 sets since the general case can be obtained inductively (see remark below). Again, the ``fuzzy" part will be referred to how we generalize the membership values to the continuum.
 
 
   \begin{definition}[Fuzzy Relation]
@@ -141,7 +141,7 @@ Based on these properties, two important types of fuzzy relations are:
 \begin{definition}[Fuzzy equivalence relation]
   A fuzzy relation $S \in \fuzzy{X \times X}$ is A fuzzy equivalence relation (also called similarity relation) if it is reflexive, symmetric, and transitive (typically sup-min transitive).
 \end{definition}
-It generalizes the concept of a classical equivalence relation to the fuzzy context, indicating the degree to which elements are considered ''similar" or ''equivalent."
+It generalizes the concept of a classical equivalence relation to the fuzzy context, indicating the degree to which elements are considered ``similar" or ``equivalent."
 
 \begin{definition}[Fuzzy Compatibility Relation]
   A fuzzy relation $C \in \fuzzy{X \times X}$ is a \textbf{fuzzy compatibility relation} (also sometimes called a tolerance or proximity relation) if it is reflexive and symmetric.
@@ -183,7 +183,7 @@ In this diagram, the arrows represent fuzzy relations, with \(R\) mapping elemen
 \begin{minipage}{0.3\textwidth}
   \begin{center}
     \begin{tikzcd}
-      X \arrow[r, ''R", leftrightarrow] & Y \arrow[r, ''G", leftrightarrow] & Z \arrow[bend right=30, from=1-1, ''R \circ G"', leftrightarrow]
+      X \arrow[r, ``R", leftrightarrow] & Y \arrow[r, ``G", leftrightarrow] & Z \arrow[bend right=30, from=1-1, ``R \circ G"', leftrightarrow]
       \end{tikzcd}
   \end{center}
 

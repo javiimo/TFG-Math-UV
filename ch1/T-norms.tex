@@ -276,12 +276,12 @@ T(x,y) =
 \]
 is called the \emph{ordinal sum} of the summands $(a_\alpha, e_\alpha, T_\alpha)$, $\alpha \in A$.
 \end{definition}
-Intuitively (see figure \ref{fig:ordinal_sum_tnorm}), an ordinal sum constructs a t-norm by combining scaled copies of other t-norms on the unit square $[0,1]^2$. For each interval $]a_\alpha, e_\alpha[$ along the main diagonal, a t-norm $T_\alpha$ operates within the square region $[a_\alpha, e_\alpha]^2$. Inside these ''active" regions, inputs are first scaled down from $[a_\alpha, e_\alpha]$ to $[0,1]$ via linear transformations, then $T_\alpha$ is applied, and finally the result is scaled back to $[a_\alpha, e_\alpha]$. Outside these regions, the t-norm defaults to the minimum $T_M$, which ensures continuity (if the $T_\alpha$ are continuous) and makes the interval endpoints $a_\alpha, e_\alpha$ into idempotent elements of the resulting t-norm. This continuity at the boundaries of the active region is possible because any t-norm $T$ coincides with $T_M$ along the border of any square region centered in the diagonal $(x,x)$.\\
+Intuitively (see figure \ref{fig:ordinal_sum_tnorm}), an ordinal sum constructs a t-norm by combining scaled copies of other t-norms on the unit square $[0,1]^2$. For each interval $]a_\alpha, e_\alpha[$ along the main diagonal, a t-norm $T_\alpha$ operates within the square region $[a_\alpha, e_\alpha]^2$. Inside these ``active" regions, inputs are first scaled down from $[a_\alpha, e_\alpha]$ to $[0,1]$ via linear transformations, then $T_\alpha$ is applied, and finally the result is scaled back to $[a_\alpha, e_\alpha]$. Outside these regions, the t-norm defaults to the minimum $T_M$, which ensures continuity (if the $T_\alpha$ are continuous) and makes the interval endpoints $a_\alpha, e_\alpha$ into idempotent elements of the resulting t-norm. This continuity at the boundaries of the active region is possible because any t-norm $T$ coincides with $T_M$ along the border of any square region centered in the diagonal $(x,x)$.\\
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.9\textwidth]{ch1/figures/ordinal_sums.png}
-    \caption{Visualization of an ordinal sum of t-norms. Each colored square (black on the surface, red on the xy plane) along the diagonal corresponds to an ''active" region where a rescaled t-norm (Product or Łukasiewicz) operates. Outside these regions, the minimum t-norm $T_M$ is used. It is inspired by \cite[Fig.~3.16]{Klement2000}}
+    \caption{Visualization of an ordinal sum of t-norms. Each colored square (black on the surface, red on the xy plane) along the diagonal corresponds to an ``active" region where a rescaled t-norm (Product or Łukasiewicz) operates. Outside these regions, the minimum t-norm $T_M$ is used. It is inspired by \cite[Fig.~3.16]{Klement2000}}
     \label{fig:ordinal_sum_tnorm}
 \end{figure}
 

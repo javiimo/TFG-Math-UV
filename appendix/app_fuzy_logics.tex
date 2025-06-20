@@ -18,7 +18,7 @@ logical calculi admitting exact investigation}\cite[p.1]{Hajek1998}. A formal lo
 
 \begin{itemize}
     \item Propositional logic (PL, also called Sentential logic)\cite[Ch.~6]{ConciseLogicBook}: it deals with statements (propositions) and combinations of them through connectives ($ \lor, \land, \neg, \rightarrow, \leftrightarrow$).
-    \item First Order Logic (also called Predicate logic)\cite[Ch.~8]{ConciseLogicBook}: extends propositional logic by introducing predicates, terms (names and variables over individual domains), and quantifiers ($\forall$, $\exists$) to make general statements about these individuals. As stated in \cite[p.~67]{MathLogicBook}, when the ''working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
+    \item First Order Logic (also called Predicate logic)\cite[Ch.~8]{ConciseLogicBook}: extends propositional logic by introducing predicates, terms (names and variables over individual domains), and quantifiers ($\forall$, $\exists$) to make general statements about these individuals. As stated in \cite[p.~67]{MathLogicBook}, when the ``working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
     \item Other families of formal logics often build upon, extend, or modify the principles of propositional or predicate logic. Some examples include: modal logics, temporal logics, intuitionistic logic and many-valued logics.
 \end{itemize}
 
@@ -119,13 +119,13 @@ Algebraic logic investigates the connections between logical systems and algebra
 
 \paragraph{From the Syntactic Side} For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra}. The process begins by grouping formulas into equivalence classes. Two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$. This notion of equivalence must be compatible with the logical connectives, meaning $\leftrightarrow$ behaves as a congruence relation \cite[p.~1-2]{BlokPigozzi1989}. The logical connectives (e.g., $\wedge, \lor, \rightarrow$) then naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).
 
-The specific type of algebraic structure that results (e.g., a Boolean algebra for classical propositional logic, or a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}) is entirely determined by the axioms and inference rules of the logic itself. In this algebra, a formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ''top" element (often denoted $1$ or $\top$), representing provable truth. The Lindenbaum-Tarski algebra is, in a specific sense, the ''most general" algebraic model for the logic, as it satisfies precisely those algebraic laws corresponding to the logic's theorems and no others.
+The specific type of algebraic structure that results (e.g., a Boolean algebra for classical propositional logic, or a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}) is entirely determined by the axioms and inference rules of the logic itself. In this algebra, a formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ``top" element (often denoted $1$ or $\top$), representing provable truth. The Lindenbaum-Tarski algebra is, in a specific sense, the ``most general" algebraic model for the logic, as it satisfies precisely those algebraic laws corresponding to the logic's theorems and no others.
 
 \paragraph{From the Semantic Side} We can define the meaning or interpretation of a logic by choosing a class of algebraic structures, $\mathcal{K}$, to serve as its models.\footnote{A class $\mathcal{K}$ is typically a collection of algebraic structures that share the same signature (sets of operations with same ary) and satisfy common defining properties. Often, $\mathcal{K}$ forms a \textit{variety} (defined by equations) or a \textit{quasivariety} (defined by quasi-equations) \cite[Def.~2.2]{BlokPigozzi1989}.}
 
 The elements of an algebra $A \in \mathcal{K}$ are the truth values. For classical propositional logic, this is typically the two-element Boolean algebra $\mathbf{2} = (\{0,1\}, \land, \lor, \neg, 0, 1)$. For many fuzzy logics, the truth values come from the real unit interval $[0,1]$, equipped with suitable operations like t-norms and their residua \cite[Ch.~2]{Hajek1998}.
 
-A \textit{valuation} (or interpretation) $v$ is a homomorphism from the algebra of formulas into an algebra $A \in \mathcal{K}$. This means $v$ maps propositional variables to elements of $A$ and preserves operations corresponding to connectives. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} if $v(\phi)$ evaluates to a designated ''true" value (typically $1$) for all valuations $v$ into every algebra $A \in \mathcal{K}$. For fuzzy logics, these are often called $1$-tautologies \cite[Ch.~2]{Hajek1998}.
+A \textit{valuation} (or interpretation) $v$ is a homomorphism from the algebra of formulas into an algebra $A \in \mathcal{K}$. This means $v$ maps propositional variables to elements of $A$ and preserves operations corresponding to connectives. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} if $v(\phi)$ evaluates to a designated ``true" value (typically $1$) for all valuations $v$ into every algebra $A \in \mathcal{K}$. For fuzzy logics, these are often called $1$-tautologies \cite[Ch.~2]{Hajek1998}.
 
 \paragraph{Bridging Syntax and Semantics} The crucial link between both approaches is established through soundness and completeness theorems. A logic is \textbf{sound} with respect to a class of algebras $\mathcal{K}$ if every provable formula is a $\mathcal{K}$-tautology. It is \textbf{complete} if every $\mathcal{K}$-tautology is a theorem.
 
@@ -135,7 +135,7 @@ For example, Hájek's Basic Logic (BL) \cite[Ch.~2]{Hajek1998} is complete with 
 
 For semantic purposes (defining truth, checking validity), it's often simpler to work with concrete algebras of truth values rather than directly with the (often infinite and complex) Lindenbaum-Tarski algebra of equivalence classes. Soundness and completeness theorems allow us to do so by showing that provability (tied to the Lindenbaum-Tarski algebra) corresponds to validity in these (often simpler) algebraic models.\\
 
-\signal{It is essentially what you get if you ''quotient" the $L_T$ algebra by its relationship with truth.}\\
+\signal{It is essentially what you get if you ``quotient" the $L_T$ algebra by its relationship with truth.}\\
 
 \signal{I think that $\mathcal{K}$ contains $L_T$ when we have soundness and completeness.}
 
@@ -168,7 +168,7 @@ This algebraic perspective is particularly fruitful for fuzzy logics, where the 
 
 \subsection{Substructural Logics and Residuated Lattices}
 
-Many logics, including classical and intuitionistic logic, satisfy certain ''structural rules" in their Gentzen-style formulations, such as:
+Many logics, including classical and intuitionistic logic, satisfy certain ``structural rules" in their Gentzen-style formulations, such as:
 \begin{itemize}
     \item \textbf{Weakening:} Allows adding arbitrary formulas to antecedents or succedents.
     \item \textbf{Contraction:} Allows replacing multiple occurrences of a formula with a single one.
@@ -197,7 +197,7 @@ The foundational logics—MTL, BL, $\L$, G, and $\Pi$—form a hierarchy: MTL is
             \item G: Minimum, conservative (weakest link/idempotent).
             \item $\Pi$: Product, multiplicative.
         \end{itemize}
-    \item \textbf{Deduction theorem}: G has a stronger deduction theorem than the others; in $\L$, $\Pi$, BL, and MTL, only a weaker, ''n-fold" deduction theorem holds.
+    \item \textbf{Deduction theorem}: G has a stronger deduction theorem than the others; in $\L$, $\Pi$, BL, and MTL, only a weaker, ``n-fold" deduction theorem holds.
     \item \textbf{Completeness}: BL, $\L$, G, and $\Pi$ are complete with respect to their standard [0,1] semantics as based on continuous t-norms. MTL is complete w.r.t.\ linearly ordered MTL-algebras and, non-trivially, for the left-continuous t-norms~\cite{Jenei2001MTLCompl}. G has full (not only 1-tautology) completeness for arbitrary theories~\cite[Thm. 4.2.17]{Hajek1998}; completeness of BL and $\L$ is for 1-tautologies, and extensions vary.
     \item \textbf{Relationship to classical logic}: Pairwise combinations of $\L$, G, and $\Pi$ generate classical logic~\cite[Thm. 4.3.9]{Hajek1998}.
 \end{itemize}
@@ -314,7 +314,7 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % \end{itemize}
 
-% As stated in \cite[p.~67]{MathLogicBook}, when the ''working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
+% As stated in \cite[p.~67]{MathLogicBook}, when the ``working mathematician" finds a proof, it is almost invariably meant to be one that can be formalized in First Order Logic.
 
 
 % \paragraph{Syntax} defines the language: its symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that don't make sense and wouldn't be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".} (WFFs), such as $(P \rightarrow Q)$. Using these syntactic rules, specifically axioms and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39,64]{ResiduatedLattices2007}}), we can derive new WFFs in a purely formal, symbolic manner, without any regard for their meaning. This process leads to the notion of provability: a formula $\phi$ is provable from a set of axioms called theory $\Gamma$ ($\Gamma \vdash \phi$) if there's a finite sequence of WFFs (a proof) where each step is an axiom, an assumption, or follows from previous steps by an inference rule \cite[Sec.~1.2, Defs.~1.2.6, 1.2.8]{Hajek1998}. If $\phi$ is provable from no assumptions ($\vdash \phi$), it's a theorem of the logic. \signal{Cuidado, que creo que las rules of inference a lo mejor no son parte de la syntax, sino que vienen después de definir syntax y semantics como una proof theory.}
@@ -354,9 +354,9 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 % %     $L_T$ is a Lindenbaum...\signal{ACABAARRR}
 % % \end{notation}
 
-% From the syntactic side, we can construct an ''algebra of formulas" or, more precisely, a Lindenbaum-Tarski algebra. Here, formulas are grouped into equivalence classes based on provable equivalence (e.g., $[\phi] = \{\psi \mid \vdash (\phi \leftrightarrow \psi)\}$). The logical connectives then induce operations on these equivalence classes (e.g., $[\phi] \wedge [\psi] = [\phi \wedge \psi]$). The kind of algebraic structure is entirely determined by the axioms and inference rules of the logic and theory $T$. This process, applied to classical propositional logic, yields a Boolean algebra.\\
+% From the syntactic side, we can construct an ``algebra of formulas" or, more precisely, a Lindenbaum-Tarski algebra. Here, formulas are grouped into equivalence classes based on provable equivalence (e.g., $[\phi] = \{\psi \mid \vdash (\phi \leftrightarrow \psi)\}$). The logical connectives then induce operations on these equivalence classes (e.g., $[\phi] \wedge [\psi] = [\phi \wedge \psi]$). The kind of algebraic structure is entirely determined by the axioms and inference rules of the logic and theory $T$. This process, applied to classical propositional logic, yields a Boolean algebra.\\
 
-% From the semantic side, we can use a class of algebraic structures to define the semantics of a logic. The elements of a chosen algebra (e.g., $\{0,1\}$ for classical logic, or the interval $[0,1]$ for many fuzzy logics) serve as the truth values, and the algebra's operations define the truth functions for the logical connectives. A formula is then considered valid in this ''algebraic semantics" if it evaluates to a designated truth value (like '1') under all valuations into the relevant algebras. When a logic is sound and complete with respect to such an algebraic semantics, it signifies that the Lindenbaum-Tarski algebra (derived from syntax) is essentially the ''freest" or most general algebraic model for that logic, and its structure faithfully reflects the semantic properties defined by the chosen class of algebras. This establishes that the study of logical properties can be translated into the study of properties of their corresponding algebraic counterparts, a cornerstone of algebraic logic.\\
+% From the semantic side, we can use a class of algebraic structures to define the semantics of a logic. The elements of a chosen algebra (e.g., $\{0,1\}$ for classical logic, or the interval $[0,1]$ for many fuzzy logics) serve as the truth values, and the algebra's operations define the truth functions for the logical connectives. A formula is then considered valid in this ``algebraic semantics" if it evaluates to a designated truth value (like '1') under all valuations into the relevant algebras. When a logic is sound and complete with respect to such an algebraic semantics, it signifies that the Lindenbaum-Tarski algebra (derived from syntax) is essentially the ``freest" or most general algebraic model for that logic, and its structure faithfully reflects the semantic properties defined by the chosen class of algebras. This establishes that the study of logical properties can be translated into the study of properties of their corresponding algebraic counterparts, a cornerstone of algebraic logic.\\
 
 % The algebraic study of fuzzy logics has identified several important classes of ordered algebraic structures, many of which are based on the real unit interval $[0,1]$:
 % \begin{itemize}
@@ -442,7 +442,7 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 
 
-% \signal{Choosing a different algebra (or class of algebras) for the semantics means you are choosing a different set of ''permissible worlds" or ''interpretive frameworks" (models) in which to evaluate the truth of your logical formulas. POR ESO DEPENDE DEL ALGEBRA QUE ELIJAS, SI SE CUMPLE LA COMPLETITUD O NO!!}
+% \signal{Choosing a different algebra (or class of algebras) for the semantics means you are choosing a different set of ``permissible worlds" or ``interpretive frameworks" (models) in which to evaluate the truth of your logical formulas. POR ESO DEPENDE DEL ALGEBRA QUE ELIJAS, SI SE CUMPLE LA COMPLETITUD O NO!!}
 
 
 
@@ -459,7 +459,7 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 % *   **Operations on Classes:** The logical connectives of the logic naturally induce operations on these equivalence classes. For example, if $\wedge$ is a conjunction connective, we can define an operation $\mathbf{\wedge}$ on equivalence classes as $[\phi] \mathbf{\wedge} [\psi] = [\phi \wedge \psi]$. Similarly for other connectives like implication $\rightarrow$ inducing $\mathbf{\rightarrow}$.
 % *   **The Resulting Structure:** The set of these equivalence classes, equipped with these induced operations, forms an algebra. The specific type of algebraic structure (e.g., a Boolean algebra, a Heyting algebra, an MV-algebra) is entirely determined by the axioms and inference rules of the original logic. For example, the Lindenbaum-Tarski algebra for classical propositional logic is a Boolean algebra.
 
-% Crucially, the Lindenbaum-Tarski algebra is, in a sense, the ''most general" or ''freest" algebraic model for the logic. A formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ corresponds to a designated ''true" element (often the top element, '1') in this algebra.
+% Crucially, the Lindenbaum-Tarski algebra is, in a sense, the ``most general" or ``freest" algebraic model for the logic. A formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ corresponds to a designated ``true" element (often the top element, '1') in this algebra.
 
 % \paragraph{2. From Algebras to Semantics: Algebraic Semantics}
 
@@ -467,7 +467,7 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % *   **Truth Values as Algebraic Elements:** The elements of a chosen algebra (or a class of similar algebras) are taken as the set of truth values. For classical logic, this is the two-element Boolean algebra $\{0, 1\}$. For many fuzzy logics, this is often the real unit interval $[0,1]$ equipped with certain operations.
 % *   **Connectives as Algebraic Operations:** The operations of the algebra are used to interpret the logical connectives. For example, a binary operation $\otimes$ in the algebra might interpret a conjunction connective, and an operation $\Rightarrow$ might interpret an implication.
-% *   **Validity in Algebraic Semantics:** A formula is considered a tautology (or valid) with respect to this algebraic semantics if it evaluates to the designated ''true" element (e.g., 1) for all possible assignments of truth values (from the algebra) to its propositional variables, in *every* algebra within the chosen class.
+% *   **Validity in Algebraic Semantics:** A formula is considered a tautology (or valid) with respect to this algebraic semantics if it evaluates to the designated ``true" element (e.g., 1) for all possible assignments of truth values (from the algebra) to its propositional variables, in *every* algebra within the chosen class.
 
 % \paragraph{3. The Bridge: Soundness, Completeness, and Characterization}
 
@@ -499,12 +499,12 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % Given a formal logic (defined by its language, axioms, and rules of inference), we can construct an algebraic structure directly from its formulas. This is known as the **Lindenbaum-Tarski algebra**.
 % \begin{itemize}
-%     \item \textbf{Elements:} The ''elements" of this algebra are not individual formulas, but rather *equivalence classes* of formulas. Two formulas, $\phi$ and $\psi$, are considered equivalent if they are provably interchangeable within the logic, meaning $\vdash (\phi \leftrightarrow \psi)$ (i.e., $\phi$ and $\psi$ provably imply each other). We denote the equivalence class of $\phi$ as $[\phi]$.
+%     \item \textbf{Elements:} The ``elements" of this algebra are not individual formulas, but rather *equivalence classes* of formulas. Two formulas, $\phi$ and $\psi$, are considered equivalent if they are provably interchangeable within the logic, meaning $\vdash (\phi \leftrightarrow \psi)$ (i.e., $\phi$ and $\psi$ provably imply each other). We denote the equivalence class of $\phi$ as $[\phi]$.
 %     \item \textbf{Operations:} The logical connectives (like $\wedge, \lor, \rightarrow, \neg$) induce operations on these equivalence classes. For example, the operation corresponding to conjunction $\wedge$ would be defined as $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$. Similar definitions apply to other connectives.
 % \end{itemize}
 % The resulting algebraic structure (e.g., the set of equivalence classes equipped with operations like $\bar{\wedge}, \bar{\lor}, \bar{\rightarrow}$) is the Lindenbaum-Tarski algebra for that logic. The specific type of algebraic structure it forms (e.g., a Boolean algebra, a Heyting algebra, an MV-algebra) is entirely determined by the axioms and inference rules of the logic itself. For example, if the logic is classical propositional logic, the Lindenbaum-Tarski algebra is a Boolean algebra.
 
-% Crucially, a formula $\phi$ is provable in the logic (i.e., it's a theorem, $\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ''top" element (often denoted $1$ or $\top$) in the Lindenbaum-Tarski algebra, representing universal truth within that syntactic system. This algebra is, in a sense, the ''most general" or ''freest" algebraic model that precisely captures the provability of the logic, as it satisfies exactly the laws derivable from the logic's axioms and no more.
+% Crucially, a formula $\phi$ is provable in the logic (i.e., it's a theorem, $\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ``top" element (often denoted $1$ or $\top$) in the Lindenbaum-Tarski algebra, representing universal truth within that syntactic system. This algebra is, in a sense, the ``most general" or ``freest" algebraic model that precisely captures the provability of the logic, as it satisfies exactly the laws derivable from the logic's axioms and no more.
 
 % \paragraph{2. Semantic Algebras: Algebras of Truth Values}
 
@@ -512,9 +512,9 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 % \begin{itemize}
 %     \item \textbf{Truth Values:} The elements of a chosen algebra serve as the truth values. For classical logic, this is typically the two-element Boolean algebra $\{0, 1\}$. For fuzzy logics, this is often the real unit interval $[0,1]$ equipped with certain operations.
 %     \item \textbf{Truth Functions:} The operations of this chosen algebra define the truth functions for the logical connectives. For example, in classical logic, the operation corresponding to $\wedge$ in the algebra $\{0,1\}$ is the minimum function.
-%     \item \textbf{Valuations and Validity:} A valuation (or interpretation) is a function that assigns a truth value from the chosen algebra to each propositional variable. This assignment is then extended to all complex formulas using the algebra's operations as truth functions. A formula $\phi$ is considered a **tautology** (or semantically valid) with respect to this chosen algebraic semantics if it evaluates to a designated ''true" value (typically $1$ or the top element of the algebra) under *all possible valuations* into that algebra (or into *every* algebra in a chosen class of algebras).
+%     \item \textbf{Valuations and Validity:} A valuation (or interpretation) is a function that assigns a truth value from the chosen algebra to each propositional variable. This assignment is then extended to all complex formulas using the algebra's operations as truth functions. A formula $\phi$ is considered a **tautology** (or semantically valid) with respect to this chosen algebraic semantics if it evaluates to a designated ``true" value (typically $1$ or the top element of the algebra) under *all possible valuations* into that algebra (or into *every* algebra in a chosen class of algebras).
 % \end{itemize}
-% This approach essentially defines what ''truth" means for the logic by specifying the allowed truth values and how connectives behave with respect to them.
+% This approach essentially defines what ``truth" means for the logic by specifying the allowed truth values and how connectives behave with respect to them.
 
 % \paragraph{3. Bridging Syntax and Semantics: Soundness, Completeness, and Algebraic Models}
 
@@ -528,15 +528,15 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 % The choice of the class of semantic algebras $\mathcal{K}$ is crucial.
 % \begin{itemize}
 %     \item For example, Basic Logic (BL) is defined by a set of axioms. Its Lindenbaum-Tarski algebra, $L_{BL}$, is inherently a BL-algebra. BL is proven to be complete with respect to the class of *all linearly ordered BL-algebras*.
-%     \item If we were to choose a *more specific* single algebra for semantics, say the Łukasiewicz t-norm and its residuum on $[0,1]$ (which forms an MV-algebra, a special kind of BL-algebra), BL would *not* be complete with respect to this single algebra. This is because the Łukasiewicz algebra satisfies properties (like $\neg\neg x = x$) that are not provable in BL alone. Thus, some formulas (like $\neg\neg\phi \leftrightarrow \phi$) would be tautologies in this specific Łukasiewicz algebra but not provable in BL. The Lindenbaum-Tarski algebra $L_{BL}$ does not necessarily satisfy these additional properties; it is ''more general" in that sense, satisfying only what BL proves.
-%     \item This illustrates that the Lindenbaum-Tarski algebra captures the logic's ''essence." For completeness to hold, the chosen semantic class of algebras must be rich enough to reflect this essence but not so specific that it validates unprovable statements.
+%     \item If we were to choose a *more specific* single algebra for semantics, say the Łukasiewicz t-norm and its residuum on $[0,1]$ (which forms an MV-algebra, a special kind of BL-algebra), BL would *not* be complete with respect to this single algebra. This is because the Łukasiewicz algebra satisfies properties (like $\neg\neg x = x$) that are not provable in BL alone. Thus, some formulas (like $\neg\neg\phi \leftrightarrow \phi$) would be tautologies in this specific Łukasiewicz algebra but not provable in BL. The Lindenbaum-Tarski algebra $L_{BL}$ does not necessarily satisfy these additional properties; it is ``more general" in that sense, satisfying only what BL proves.
+%     \item This illustrates that the Lindenbaum-Tarski algebra captures the logic's ``essence." For completeness to hold, the chosen semantic class of algebras must be rich enough to reflect this essence but not so specific that it validates unprovable statements.
 % \end{itemize}
 % This interplay allows us to study logical properties by analyzing the properties of their corresponding algebraic counterparts, and vice-versa.
 
 
 % Yes, that's exactly right!
 
-% **Choosing a different algebra (or class of algebras) for the semantics means you are choosing a different set of ''permissible worlds" or ''interpretive frameworks" (models) in which to evaluate the truth of your logical formulas.**
+% **Choosing a different algebra (or class of algebras) for the semantics means you are choosing a different set of ``permissible worlds" or ``interpretive frameworks" (models) in which to evaluate the truth of your logical formulas.**
 
 % Let's break this down:
 
@@ -549,10 +549,10 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % 2.  **The Role of Semantic Algebras:**
 %     When you define the semantics for this logic, you specify:
-%     *   **What constitutes a ''model" or an ''interpretation."**
+%     *   **What constitutes a ``model" or an ``interpretation."**
 %     *   **How formulas are assigned truth values within these models.**
 
-%     A key part of defining ''what constitutes a model" is specifying the algebraic structure of the truth values. The ''algebra for the semantics" is the structure (or class of structures) that your truth values and the operations on them must conform to.
+%     A key part of defining ``what constitutes a model" is specifying the algebraic structure of the truth values. The ``algebra for the semantics" is the structure (or class of structures) that your truth values and the operations on them must conform to.
 
 %     *   **Example 1: Classical Propositional Logic (CPL)**
 %         *   **Syntax:** Standard axioms for CPL, Modus Ponens.
@@ -580,8 +580,8 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % 3.  **How the Choice of Semantic Algebra(s) Affects Completeness:**
 
-%     *   **A Broader Class of Semantic Algebras:** If you choose a very general class of algebras for your semantics (e.g., all BL-algebras for Basic Logic), it's ''easier" to achieve completeness. This is because if a formula is *not* provable, its equivalence class in the (correspondingly general) Lindenbaum-Tarski algebra provides a counterexample. Since this Lindenbaum-Tarski algebra belongs to the broad class, you've found a semantic counterexample.
-%     *   **A More Restrictive Class of Semantic Algebras:** If you choose a very specific algebra (like the standard Łukasiewicz algebra on [0,1]) or a narrow class of algebras for your semantics, it becomes ''harder" to achieve completeness for a *general* logic.
+%     *   **A Broader Class of Semantic Algebras:** If you choose a very general class of algebras for your semantics (e.g., all BL-algebras for Basic Logic), it's ``easier" to achieve completeness. This is because if a formula is *not* provable, its equivalence class in the (correspondingly general) Lindenbaum-Tarski algebra provides a counterexample. Since this Lindenbaum-Tarski algebra belongs to the broad class, you've found a semantic counterexample.
+%     *   **A More Restrictive Class of Semantic Algebras:** If you choose a very specific algebra (like the standard Łukasiewicz algebra on [0,1]) or a narrow class of algebras for your semantics, it becomes ``harder" to achieve completeness for a *general* logic.
 %         *   Your specific semantic algebra(s) might satisfy additional properties (laws) that are not derivable from the logic's basic axioms alone.
 %         *   Therefore, these specific algebras might validate certain formulas that are *not* provable in the (more general) logic.
 %         *   If this happens, the logic is *incomplete* with respect to that *specific, restrictive class* of semantic algebras.
@@ -589,15 +589,15 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % **In essence:**
 
-% *   The **Lindenbaum-Tarski algebra** is the algebraic structure *dictated by the logic's syntax*. It's the ''most honest" algebraic reflection of what the logic can prove.
-% *   The **choice of semantic algebras** is your decision about what constitutes the ''intended range of interpretations" or the ''universe of truth."
+% *   The **Lindenbaum-Tarski algebra** is the algebraic structure *dictated by the logic's syntax*. It's the ``most honest" algebraic reflection of what the logic can prove.
+% *   The **choice of semantic algebras** is your decision about what constitutes the ``intended range of interpretations" or the ``universe of truth."
 % *   **Completeness** is the property that these two perspectives align: what is provable is exactly what is true in all your chosen semantic models.
 % *   If you **choose a different set of semantic algebras, you are choosing a different set of models.** This new set of models might:
 %     *   Validate more formulas than your logic can prove (if the new set is more restrictive/has more properties).
 %     *   Validate fewer formulas (if the new set is broader, though this is less common when starting from an established logic).
 %     *   This directly impacts whether your original logic is complete with respect to this *new* choice of semantic models.
 
-% You are making the models conform to a particular algebraic structure when you ''choose" a semantic algebra. If that chosen structure has more laws than what the logic's syntax can derive, then the logic will be incomplete with respect to models restricted to that specific algebraic form. The Lindenbaum-Tarski algebra, being derived only from syntax, won't necessarily have those extra laws.
+% You are making the models conform to a particular algebraic structure when you ``choose" a semantic algebra. If that chosen structure has more laws than what the logic's syntax can derive, then the logic will be incomplete with respect to models restricted to that specific algebraic form. The Lindenbaum-Tarski algebra, being derived only from syntax, won't necessarily have those extra laws.
 
 
 %! ESTE ES EL BUENO
@@ -613,21 +613,21 @@ Each logic is therefore tailored for different reasoning needs. MTL, as the most
 
 % Given a formal logic's syntax, we can construct a canonical algebraic structure directly from its formulas. This is the \textbf{Lindenbaum-Tarski algebra} for the logic. \signal{No cita el teorema de Lindenbaum-tarski}
 
-% \signal{(El siguiente itemize lo puedo simplificar continuando el párrafo con algo como esto) we can construct an ''algebra of formulas" or, more precisely, a Lindenbaum-Tarski algebra. Here, formulas are grouped into equivalence classes based on provable equivalence (e.g., $[\phi] = \{\psi \mid \vdash (\phi \leftrightarrow \psi)\}$). The logical connectives then induce operations on these equivalence classes (e.g., $[\phi] \wedge [\psi] = [\phi \wedge \psi]$).}
+% \signal{(El siguiente itemize lo puedo simplificar continuando el párrafo con algo como esto) we can construct an ``algebra of formulas" or, more precisely, a Lindenbaum-Tarski algebra. Here, formulas are grouped into equivalence classes based on provable equivalence (e.g., $[\phi] = \{\psi \mid \vdash (\phi \leftrightarrow \psi)\}$). The logical connectives then induce operations on these equivalence classes (e.g., $[\phi] \wedge [\psi] = [\phi \wedge \psi]$).}
 % \begin{itemize}
 %     \item \textbf{Elements:} The elements are not individual formulas but equivalence classes of formulas. Two formulas, $\phi$ and $\psi$, are considered equivalent (their class denoted $[\phi]$), if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$ (meaning $\phi \vdash \psi$ and $\psi \vdash \phi$). This definition of equivalence is crucial, as $\leftrightarrow$ must behave like a congruence for the connectives \cite[p.~1-2]{BlokPigozzi1989}.
 %     \item \textbf{Operations:} The logical connectives (e.g., $\wedge, \lor, \rightarrow$) induce operations on these equivalence classes. For example, the algebraic operation $\bar{\wedge}$ corresponding to logical conjunction $\wedge$ is defined as $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$. Similar definitions apply to other connectives, provided they respect the equivalence relation.
 % \end{itemize}
 % The resulting structure, consisting of these equivalence classes and their induced operations, is the Lindenbaum-Tarski algebra. The specific type of algebraic structure it forms (e.g., a Boolean algebra for classical logic, a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}, or a BL-algebra for Basic Logic) is entirely determined by the axioms and inference rules of the logic itself.
-% A formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ''top" element (often denoted $1$ or $\top$, representing provable truth) in its Lindenbaum-Tarski algebra. This algebra is, in a specific sense, the ''most general" or ''freest" algebraic model for the logic, as it satisfies precisely the algebraic laws that correspond to the theorems of the logic and no others.
+% A formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ``top" element (often denoted $1$ or $\top$, representing provable truth) in its Lindenbaum-Tarski algebra. This algebra is, in a specific sense, the ``most general" or ``freest" algebraic model for the logic, as it satisfies precisely the algebraic laws that correspond to the theorems of the logic and no others.
 
 % \subsection{Algebras for Semantics: Truth Values and Algebraic Models}
 
-% Independently of the syntactic construction, we can define the semantics of a logic by choosing a class of algebraic structures\footnote{A collection or family of algebraic structures that all share the same signature (the same set of operation symbols with the same arities) and typically satisfy a common set of axioms or defining properties.}, $\mathcal{K}$, to provide interpretations. The algebras in $\mathcal{K}$ are often called \textbf{algebraic models} \signal{(no queda claro qué es eso de matrix semantics y quizás no sea necesario meterse ahí) or, in some contexts, form the basis of \textbf{matrix semantics} \cite[Sec.~1.2]{BlokPigozzi1989}, where a matrix is an algebra paired with a set of designated ''true" values.}
+% Independently of the syntactic construction, we can define the semantics of a logic by choosing a class of algebraic structures\footnote{A collection or family of algebraic structures that all share the same signature (the same set of operation symbols with the same arities) and typically satisfy a common set of axioms or defining properties.}, $\mathcal{K}$, to provide interpretations. The algebras in $\mathcal{K}$ are often called \textbf{algebraic models} \signal{(no queda claro qué es eso de matrix semantics y quizás no sea necesario meterse ahí) or, in some contexts, form the basis of \textbf{matrix semantics} \cite[Sec.~1.2]{BlokPigozzi1989}, where a matrix is an algebra paired with a set of designated ``true" values.}
 % \begin{itemize}
 %     \item \textbf{Truth Values:} The elements of an algebra $A \in \mathcal{K}$ serve as the truth values. For classical logic, this is usually the two-element Boolean algebra $\mathbf{2} = (\{0,1\}, \land, \lor, \neg, 0, 1)$. For many fuzzy logics, the truth values are taken from the real unit interval $[0,1]$ equipped with suitable operations (e.g., t-norms and their residua \cite[Ch.~2]{Hajek1998}).
 %     \item \textbf{Truth Functions:} The operations of an algebra $A \in \mathcal{K}$ define the truth functions for the logical connectives. For example, if $\&$ is a connective in the logic, its interpretation $\&^A$ is an operation on $A$.
-%     \item \textbf{Valuations and Validity:} \signal{Merece la pena mencionar 1-tautolgy en específico como la notación del libro de Hajek? Qué ocurre con la partial truth?}A valuation (or interpretation) is a \signal{(Qué clase de homomorfismo?)homomorphism} $v$ from the algebra of formulas into an algebra $A \in \mathcal{K}$. A formula $\phi$ is an \textbf{A-tautology} if $v(\phi)$ evaluates to a designated ''true" value (typically $1$, the top element of $A$) for all valuations $v$ into $A$. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} (or semantically valid with respect to $\mathcal{K}$) if it is an $A$-tautology for all $A \in \mathcal{K}$.
+%     \item \textbf{Valuations and Validity:} \signal{Merece la pena mencionar 1-tautolgy en específico como la notación del libro de Hajek? Qué ocurre con la partial truth?}A valuation (or interpretation) is a \signal{(Qué clase de homomorfismo?)homomorphism} $v$ from the algebra of formulas into an algebra $A \in \mathcal{K}$. A formula $\phi$ is an \textbf{A-tautology} if $v(\phi)$ evaluates to a designated ``true" value (typically $1$, the top element of $A$) for all valuations $v$ into $A$. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} (or semantically valid with respect to $\mathcal{K}$) if it is an $A$-tautology for all $A \in \mathcal{K}$.
 % \end{itemize}
 % This semantic approach defines truth by specifying permissible algebraic interpretations. The class $\mathcal{K}$ is often a variety (an equational class) or a quasivariety of algebras \cite[Def.~2.2]{BlokPigozzi1989}.
 

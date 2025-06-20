@@ -16,9 +16,9 @@ Notice that usually these abstractions are not unique in the sense that there ar
     By \emph{set of things}, we mean that \(T\) may be any collection of elements, from a simple set (finite or infinite) to more complex structures such as sets of sets or power sets. Likewise, the \emph{set of relations} (\(R\)) is understood broadly, it encapsulates interactions, constraints, and dependencies between these elements; providing a structural foundation. Hence, even though \((T, R)\) appears simple, its components can be very varied and rich.
 \end{remark}
 
-This definition is too general to have any practical utility. However, it gives us a flexible ''skeleton" to build upon and tackle what we refer to with \textit{uncertainty in a system}. \\
+This definition is too general to have any practical utility. However, it gives us a flexible ``skeleton" to build upon and tackle what we refer to with \textit{uncertainty in a system}. \\
 
-Finding a proper definition for uncertainty is a very subtle and challenging task due to the ample scope of the concept, but following the ideas from \cite{UncertaintySciences} and \cite{RumsfeldMatrix} we will start by classifying knowledge into 4 categories using Rumsfeld's Matrix\footnote{While \cite{RumsfeldMatrix} classifies this matrix as representing only epistemic uncertainty, we take a broader view since aleatoric uncertainty, with its quantifiable regularities through probability distributions, can be considered a ''known unknown".}:
+Finding a proper definition for uncertainty is a very subtle and challenging task due to the ample scope of the concept, but following the ideas from \cite{UncertaintySciences} and \cite{RumsfeldMatrix} we will start by classifying knowledge into 4 categories using Rumsfeld's Matrix\footnote{While \cite{RumsfeldMatrix} classifies this matrix as representing only epistemic uncertainty, we take a broader view since aleatoric uncertainty, with its quantifiable regularities through probability distributions, can be considered a ``known unknown".}:
 
 \begin{table}[h!]
     \centering
@@ -57,7 +57,7 @@ This matrix illustrates the relationship between knowledge and ignorance\footnot
     };
     
     % Second group: Ignorance
-    % Increase vertical gap below ''knowledge" to avoid overlap
+    % Increase vertical gap below ``knowledge" to avoid overlap
     \node (ignorance) [below=0.5cm of knowledge] {%
       \begin{minipage}{0.8\textwidth}
         \begin{itemize}[leftmargin=1cm]
@@ -129,7 +129,7 @@ Given these limitations of the binary classification, we will adopt a more nuanc
 
     \item \textbf{Vagueness:} Arises from imprecise, unclear, or fuzzy boundaries in concepts, meaning that elements can partially belong to a category. 
     \begin{itemize}
-        \item \textit{Example:} Categorizing a temperature as ''hot"; the boundary between hot and not-hot is not clearly defined; it is not crisp.
+        \item \textit{Example:} Categorizing a temperature as ``hot"; the boundary between hot and not-hot is not clearly defined; it is not crisp.
         \item \textit{Frameworks:} Modeled using fuzzy set theory, assigning partial membership values between 0 and 1 to indicate degrees of compatibility between elements and sets.
     \end{itemize}
 
@@ -163,4 +163,4 @@ A final consideration worth discussing is \textbf{the distinction between subjec
 This distinction plays an important role in frameworks like Bayesian statistics (through the specification of prior distributions) and is particularly relevant in fuzzy set theory where membership values often reflect a decision maker's subjective assessment. However, while the source of uncertainty may differ (subjective judgment versus objective measurement), we will treat them as formally equivalent in their mathematical representation. The only practical distinction may arise when decision makers assign importance weights, potentially weighting objective and subjective sources differently according to their preferences.\\
 
 The boundary between what may be considered objective versus subjective in fuzzy sets is often unclear. Consider this illustrative example that highlights this ambiguity:
-Suppose we want to determine the membership degree of a person who is 180cm tall to the set of ''tall people". One approach would be to assign a value based on personal perception, a subjective assessment influenced by our own height, the heights of people we know, and even potentially varying over time as our perception changes. Alternatively, we could use the population height percentile as the membership degree, which seems more objective. However, this choice still involves subjective decisions: for instance, why use the percentile directly rather than its square root?\\
+Suppose we want to determine the membership degree of a person who is 180cm tall to the set of ``tall people". One approach would be to assign a value based on personal perception, a subjective assessment influenced by our own height, the heights of people we know, and even potentially varying over time as our perception changes. Alternatively, we could use the population height percentile as the membership degree, which seems more objective. However, this choice still involves subjective decisions: for instance, why use the percentile directly rather than its square root?\\
