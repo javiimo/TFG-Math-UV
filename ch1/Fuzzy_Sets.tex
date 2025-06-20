@@ -1,6 +1,6 @@
 Fuzzy sets were introduced by Zadeh in 1965, following the idea of generalizing sets that was presented in section \ref{sec:sorites}:
 
-\say{More often than not, the classes of objects encountered in the real physical world do not have precisely defined criteria of membership. [...]Clearly, the ``class of all real numbers which are much greater than 1," or ``the class of beautiful women," or ``the class of tall men," do not constitute classes or sets in the usual mathematical sense of these terms. [...]Yet, the fact remains that such imprecisely defined ``classes" play an important role in human thinking, particularly in the domains of pattern recognition, communication of information, and abstraction.}\cite{Zadeh1965}\\
+\say{More often than not, the classes of objects encountered in the real physical world do not have precisely defined criteria of membership. [...]Clearly, the \emph{class of all real numbers which are much greater than 1,} or \emph{the class of beautiful women,} or \emph{the class of tall men,} do not constitute classes or sets in the usual mathematical sense of these terms. [...]Yet, the fact remains that such imprecisely defined \emph{classes} play an important role in human thinking, particularly in the domains of pattern recognition, communication of information, and abstraction.}\cite{Zadeh1965}\\
 
 The idea he proposed for representing those classes is using a continuum of grades of membership. While classical (also called crisp or boolean) sets use a boolean membership function $\chi_A:X\rightarrow\{0,1\}$ that assigns either 0 or 1 to each element, fuzzy sets generalize this by using a membership function $\mu_A:X\rightarrow[0,1]$ that can assign any value between 0 and 1. 
 
@@ -12,7 +12,7 @@ Let us take a closer look at Zadeh's example of the set of ``tall men" to answer
 
 Most people would agree that a person with a height of 1.50m is not tall, so we can anchor the function with $\mu_{tall}(1.50) = 0$. Conversely, a person 2.00m tall is generally considered tall, so $\mu_{tall}(2.00) = 1$. But how should we define the values in between? The choice is not unique, and this non-uniqueness is not a flaw, but a feature.\\
 
-However, not all choices are valid. For a membership function to be a reasonable model of ``tallness", it must be consistent with our understanding of the concept. For example, it would be illogical to define a 1.70m person as ``more tall" than a 1.80m person. This means the function must be non-decreasing. Furthermore, a classical boolean definition fails to capture the gradual nature of ``tallness", even if it is not \emph{wrong}, it lacks the expressive power for more a nuanced definition. Figure \ref{fig:tall_definitions} illustrates these points.
+However, not all choices are valid. For a membership function to be a reasonable model of the ``tall person" concept, it must be consistent with our understanding of it. For example, it would be illogical to define a 1.70m person as taller than a 1.80m person. This means $\mu_{tall}(h)$ must be non-decreasing. Furthermore, a classical boolean definition fails to capture the gradual nature of ``tallness", even if it is not wrong, it lacks the expressive power for more a nuanced definition. Figure \ref{fig:tall_definitions} illustrates these points.
 
 \begin{figure}[!ht]
     \centering
@@ -21,14 +21,11 @@ However, not all choices are valid. For a membership function to be a reasonable
     \label{fig:tall_definitions}
 \end{figure}
 
-As shown in Figure \ref{fig:tall_definitions}, there are infinitely many valid ways to define the fuzzy set ``tall". This flexibility might seem like a problem of subjectivity or a lack of rigor, but it is better understood as a \textbf{matter of definition}. In classical set theory, we don't ask whether the set of ``prime numbers" is more correct than the set of ``even numbers"; they are simply different sets defined for different purposes. 
+As shown in Figure \ref{fig:tall_definitions}, there are (infinitely) many valid ways to define the fuzzy set ``tall". This flexibility might seem like a problem of subjectivity or a lack of rigor, but it is better understood as a matter of definition. In classical set theory, the question is not whether the set of ``natural numbers including zero" is more correct than the set of ``natural numbers starting from one". They are simply different sets defined for different purposes. Similarly, choosing a membership function is the act of defining the fuzzy set. The goal is not to discover a single, universal truth for ``tall people", but to design a fuzzy set that is useful for a specific problem. \\
 
-Similarly, choosing a membership function \emph{is} the act of defining the fuzzy set. The goal is not to discover a single, universal truth for ``tallness," but to \textbf{design a fuzzy set that is useful for a specific problem}. This allows us to encode context-dependent or domain-specific expert knowledge into a precise mathematical model. The various methods for systematically creating these membership functions, a process known as \textit{fuzzification}, will be discussed in Section \ref{sec:fuzzification}.
+This allows us to encode context-dependent or domain-specific expert knowledge into a precise mathematical model. The various methods for systematically creating these membership functions, a process known as \textit{fuzzification}, will be discussed in Section \ref{sec:fuzzification}.\\
 
-For the remainder of this chapter, we will assume that appropriate fuzzy sets are given, and we will focus on the mathematical properties and operations that can be derived from them.
-
-
-Therefore, fuzzy sets can be seen as an extension of crisp sets, since every crisp set can be modeled as a fuzzy set but not the other way around. The formal definition is as follows:
+For the remainder of this chapter, fuzzy sets will be considered as given, with focus placed on their mathematical properties and operations. Since fuzzy sets extend the concept of crisp sets, every crisp set can be modeled as a fuzzy set while the reverse is not true. The formal definition is presented as follows:
 
 \begin{definition}[Fuzzy Set]
     Let $X\neq\emptyset$ a set. Then we define a \textbf{fuzzy set A in X}, i.e., $A \in \fuzzy{X}$ as:
