@@ -1,23 +1,135 @@
-\signal{Aquí explicaré varias formas de dar esos valores.}
+Fuzzy sets, as discussed in chapter \ref{ch:intro}, provide a way to encode data. In the case of MCDM  problems, we are particularly interested in modeling the vagueness of fuzzy attributes. And as stated in section \ref{sec:fuzzy_sets} with the set of \emph{tall people}, there is not a unique way to define the membership value of an object to a fuzzy set.\\
 
-Fuzzy sets, as discussed in chapter \ref{ch:intro}, provide a way to encode data. In the case of MCDM  problems, we are particularly interested in modeling the vagueness of fuzzy attributes. In the previous chapter, the starting point always assumed a fuzzy set was given (defined by its membership function), and from there properties and operations were defined. However, there isn't a unique way to determine the membership value of an object to a fuzzy set:
+Information from three key sources is often considered to define membership functions, and we may exemplify them through the same case of people's height mentioned above: First, concept-driven constraints arise from the inherent nature of what is being modeled (higher heights do not correspond to ''less tall"). Second, domain knowledge or data provides empirical foundations, such as population height statistics, height requirements for particular activities (like basketball), or expert knowledge (the judgement of a basketball coach). Third, the preferences of the decision maker shape the final form, reflecting aspects such as their risk tolerance and the desired level of discrimination between alternatives.\\
 
-Recovering the example of height from section \ref{sec:relations}, let us consider the set of tall people with membership function $\mu(x)$. It has already been discussed that this concept lacks sharp boundaries. But how can we assign membership values (degrees of compatibility between the concept tall and any given height value) to different heights?
+% \signal{Define here fuzzification and present what is coming after this.}
 
-A first simpler step, seems to assign those memberships to heights that 
 
-In general it depends on the definition and the kind of information the fuzzy set encodes but in most of the applications, there will be choices to be made that won't come from a universal objective truth everyone agrees with (whose existance is a topic of philosophy, not addressed in this work) but rather from a more practical perspective often involving subjectivity. Instead of seeing this as a flaw and a lack of rigor, it can be considered a major advantage for mathematical models that need to take into account the opinion of stakeholders. It is only problematic when its  \\
 
-There isn't a standard 
+% \subsection{Elicitation from Domain Experts}
+% \paragraph{Direct elicitation}sfaf
 
-\paragraph{}
 
-\paragraph{Linguistic Variables}
-1. Base Variable and Linguistic Values:
-A linguistic variable (e.g., Age) is typically associated with a numerical base variable (e.g., the chronological age from 0 to 100).
-The words or sentences that the linguistic variable can take (e.g., young, old, very young) are its linguistic values.
-A linguistic value like young is interpreted as a label for a fuzzy restriction on the values of the base variable. This fuzzy restriction defines the meaning of the linguistic value.
-2. Compatibility Function (The Meaning):
-The meaning of a linguistic value is defined by a compatibility function. This function associates each value of the base variable with a number in the interval [0, 1].
-This number represents the compatibility of the numerical value with the linguistic label. For example, the compatibility of the numerical age 28 with the linguistic value young might be 0.7, while the compatibility of age 35 might be 0.2 (p. 4, Fig. 1).
-The paper explicitly states that compatibility is distinct from probability. It is a subjective measure of how well a numerical value fits a linguistic concept.
+
+% Another approach that might be more interpretable is:
+% \paragraph{Indirect elicitation:}
+
+% Include here linguistic variables:
+
+% 1. Base Variable and Linguistic Values:
+% A linguistic variable (e.g., Age) is typically associated with a numerical base variable (e.g., the chronological age from 0 to 100).
+% The words or sentences that the linguistic variable can take (e.g., young, old, very young) are its linguistic values.
+% A linguistic value like young is interpreted as a label for a fuzzy restriction on the values of the base variable. This fuzzy restriction defines the meaning of the linguistic value.
+% 2. Compatibility Function (The Meaning):
+% The meaning of a linguistic value is defined by a compatibility function. This function associates each value of the base variable with a number in the interval [0, 1].
+% This number represents the compatibility of the numerical value with the linguistic label. For example, the compatibility of the numerical age 28 with the linguistic value young might be 0.7, while the compatibility of age 35 might be 0.2 (p. 4, Fig. 1).
+% The paper explicitly states that compatibility is distinct from probability. It is a subjective measure of how well a numerical value fits a linguistic concept.
+
+
+
+% \subsection{Learning from data}
+
+
+% Present this as an optimization subproblem.
+
+% Mention that here you can use labeled data for supervised learning (fitting a function that depends on some parameters via an objective you want to minimize). Even in the case of non labeled data, there exist also unsupervised approaches, for example fuzzy clustering.
+
+% I think ANFIS also would fit into this category.
+
+% As another optimization problem where given a functional form that depends on some parameters you aim to find the function that best
+
+
+
+% \subsection{Deriving it from other fuzzy sets}
+% Do not mention tarski stuff, omit that.
+
+% Mention fuzzy relational equations
+
+% Mention the use of operators such as AND, OR,... So that from the set of cheap cars and the set of comfortable cars, we may get the set of cheap and comfortable cars.
+
+
+
+The process of defining these membership functions is known as fuzzification. Since it is a crucial first step in any fuzzy logic application, the following subsections explore membership function construction methods, which are broadly categorized according to the source of information: elicitation from domain experts, learning from empirical data, or derivation from other pre-existing fuzzy sets.
+
+\subsection{Elicitation from Domain Experts}
+An approach to construct membership functions when empirical data is scarce, or the concept being modeled is highly subjective, is to elicit information from domain experts. This process, which can be performed through direct or indirect methods, leverages human knowledge and intuition to quantify vague concepts.
+
+\paragraph{Direct Elicitation}
+The most straightforward method is direct elicitation, where an expert is asked to directly assign a numerical membership grade to a series of elements in the universe of discourse. For example, to define the fuzzy set for \emph{high temperature} in a room, experts could be polled to provide a value between 0 and 1 for several different temperatures. The results, often averaged, form a set of points that define the membership function. A key consideration in this approach is the scale used for elicitation, which can then be mapped into the $[0,1]$ interval. A common approach is using $7\pm2$ categories when making absolute judgments along a single dimension. This idea originated in a psychology paper \cite{miller1956magical}, suggests that simpler scales may be more appropriate than finer ones for elicitation tasks.
+
+\paragraph{Indirect and Compositional Elicitation}
+A more interpretable and often more robust approach is indirect elicitation, which avoids requiring experts to provide precise numerical values for each element. This is commonly achieved through the use of linguistic variables, which provide a formal structure for handling verbal concepts.
+
+\begin{definition}[Linguistic Variable \cite{Zadeh1975}]
+A \textbf{linguistic variable} is a variable (e.g., \emph{age}) whose values are words or sentences rather than numbers. It is characterized by a set of linguistic values, or \textbf{terms} (e.g., \emph{young}), defined over an underlying numerical \textbf{base variable}. The meaning of each term is captured by a fuzzy set, whose membership function (compatibility function), specifies the degree to which any value on the base variable is compatible with the linguistic label.
+\end{definition}
+
+Instead of defining this compatibility function point-by-point, an expert can specify it by choosing a standard, parameterized shape that is easy to interpret. For instance, a triangular fuzzy number is intuitive for representing a concept centered "around" a certain point, while a trapezoidal shape can represent a concept that is fully valid over an interval. Furthermore, new linguistic values can be derived compositionally from existing ones using \emph{linguistic modifiers}, or hedges. These are operations that alter a membership function, such as concentrators like \emph{very}, which makes a fuzzy set more specific, and dilators like \emph{somewhat}, which makes it less specific. \signal{Often modeled as an exponent}
+
+\begin{example}\signal{Maybe it is better to model hot and then show very hot.}
+    To define the linguistic value \emph{comfortable temperature}, an expert might specify a trapezoidal membership function by providing four points: the temperatures at which comfort begins to be felt (e.g., 19°C), becomes fully established (e.g., 21°C), starts to decline (e.g., 23°C), and is completely lost (e.g., 25°C). This is often more intuitive for an expert than assigning a specific membership value to every possible temperature.
+\end{example}
+
+% \subsection{Elicitation from Domain Experts}
+% \signal{use \ paragraph to separate between direct elicitation and indirect elicitation using functional forms and develop a bit more each. Include the miller 7 pm 2 rule and an example for it.
+% Also properly define linguistic variable as I have in the comments}
+% When empirical data is scarce or the concept being modeled is highly subjective, the knowledge of domain experts becomes the primary source for constructing membership functions. This can be done through direct or indirect methods.
+
+% Direct elicitation is the most straightforward approach, where an expert or a group of experts is asked to directly assign a membership value, typically in the interval $[0, 1]$, to a series of elements in the universe of discourse. For instance, to define a fuzzy set for \emph{high temperature} in a room, experts could be polled on the degree of membership for various temperatures. The average of their responses for each temperature point can then be used to form the membership function.
+
+% A more interpretable and often more robust approach is indirect elicitation, which does not require experts to provide precise numerical values. One common indirect method involves the use of \emph{linguistic variables} \cite{Zadeh1975}. A linguistic variable, such as \emph{Age}, is characterized by a set of linguistic values, such as \emph{young}, \emph{middle-aged}, and \emph{old}. The meaning of each linguistic value is defined by a membership function, also called a compatibility function, over a numerical base variable, like chronological age. Rather than defining the function point-by-point, experts can define it by specifying a few parameters of a standard canonical shape, such as a triangular or trapezoidal function.
+% \signal{Mention that these shapes are more interpretable. Triangular can be thought like around this, trapezoidal... Mention the use of modifiers and so on.}
+
+% % 1. Base Variable and Linguistic Values:
+% % A linguistic variable (e.g., Age) is typically associated with a numerical base variable (e.g., the chronological age from 0 to 100).
+% % The words or sentences that the linguistic variable can take (e.g., young, old, very young) are its linguistic values.
+% % A linguistic value like young is interpreted as a label for a fuzzy restriction on the values of the base variable. This fuzzy restriction defines the meaning of the linguistic value.
+% % 2. Compatibility Function (The Meaning):
+% % The meaning of a linguistic value is defined by a compatibility function. This function associates each value of the base variable with a number in the interval [0, 1].
+% % This number represents the compatibility of the numerical value with the linguistic label. For example, the compatibility of the numerical age 28 with the linguistic value young might be 0.7, while the compatibility of age 35 might be 0.2 (p. 4, Fig. 1).
+% % The paper explicitly states that compatibility is distinct from probability. It is a subjective measure of how well a numerical value fits a linguistic concept.
+
+% \begin{example}
+%     To define the linguistic value \emph{comfortable temperature}, an expert might specify a trapezoidal membership function by providing four points: the temperatures at which comfort begins to be felt (e.g., 19°C), becomes fully established (e.g., 21°C), starts to decline (e.g., 23°C), and is completely lost (e.g., 25°C). This is often more intuitive for an expert than assigning a specific membership value to every possible temperature.
+% \end{example}
+
+\subsection{Learning from Data}
+When historical or experimental data is available, membership functions can be constructed automatically through learning algorithms. This approach frames the task as an optimization problem, where the goal is to find the parameters of a membership function that best fit the available data.\\
+
+In a supervised learning context, we have a dataset of input-output pairs $(u_i, y_i)$, where $u_i$ is an element of the universe and $y_i$ is its known membership grade. We can then use function approximation techniques, such as artificial neural networks or Adaptive Neuro-Fuzzy Inference Systems (ANFIS), to learn a membership function $A(u; \theta)$ that minimizes a loss function, for example, the mean squared error between the function's output and the true grades $y_i$.\\
+
+In many real-world scenarios, however, we do not have such explicit membership grades. For these unsupervised cases, clustering algorithms, particularly fuzzy clustering, can be employed. Fuzzy clustering partitions a dataset into several groups, where each data point can belong to multiple clusters with varying degrees of membership. These membership degrees can then be interpreted as the values of the membership function for the fuzzy set represented by each cluster. The most widely used algorithm for this is the Fuzzy C-Means (FCM) algorithm \cite{bezdek1981pattern}.\\
+
+\signal{Mention that this algorithm is explained further because it will be used in the next chapter.}
+
+\paragraph{Fuzzy C-Means (FCM) algorithm} Given a dataset $X = \{x_1, x_2, \ldots, x_n\}$ of $n$ data points in an $r$-dimensional space, FCM aims to find a partition of $X$ into $c$ fuzzy clusters by minimizing the objective function:
+\[
+J_m(U, V) = \sum_{i=1}^{c} \sum_{k=1}^{n} (u_{ik})^m \|x_k - v_i\|^2
+\]
+where $U$ is the partition matrix with elements $u_{ik}$ representing the membership of data point $x_k$ in cluster $i$, $V = \{v_1, \ldots, v_c\}$ is the set of cluster centers, and $m > 1$ is a fuzzification parameter that controls the degree of cluster overlap. The minimization of $J_m$ is performed iteratively through the following steps:
+\begin{enumerate}
+    \item Initialize the partition matrix $U^{(0)}$ randomly, subject to $\sum_{i=1}^{c} u_{ik} = 1$ for each $k$.
+    \item At iteration $t$, calculate the cluster centers $V^{(t)}$:
+    \[
+    v_i^{(t)} = \frac{\sum_{k=1}^{n} (u_{ik}^{(t-1)})^m x_k}{\sum_{k=1}^{n} (u_{ik}^{(t-1)})^m}
+    \]
+    \item Update the partition matrix $U^{(t)}$:
+    \[
+    u_{ik}^{(t)} = \left( \sum_{j=1}^{c} \left( \frac{\|x_k - v_i^{(t)}\|}{\|x_k - v_j^{(t)}\|} \right)^{\frac{2}{m-1}} \right)^{-1}
+    \]
+    \item Repeat steps 2 and 3 until the change in the partition matrix, $\|U^{(t)} - U^{(t-1)}\|$, is smaller than a predefined threshold.
+\end{enumerate}
+Once the algorithm converges, the resulting column $i$ of the matrix $U$ can be taken as the membership function for the fuzzy set represented by cluster $i$.
+
+\begin{example}
+    A marketing firm could use FCM to segment customers based on their purchasing habits (e.g., purchase frequency and average transaction value). The algorithm might identify three clusters, like \emph{Low-Value}, \emph{Medium-Value}, and \emph{High-Value} customers. The membership value $u_{ik}$ would represent the degree to which customer $k$ belongs to the \emph{High-Value} fuzzy set, providing a more nuanced classification than a crisp assignment.
+\end{example}
+
+\subsection{Deriving from Other Fuzzy Sets}
+New fuzzy sets can also be constructed from existing ones. The most common method is the use of fuzzy set operations (intersection, union and complement), which are particularly useful for creating complex fuzzy concepts from simpler, elementary ones. For instance, if we have already defined membership functions for the fuzzy sets \emph{cheap cars} and \emph{comfortable cars}, we can derive the membership function for \emph{cheap and comfortable cars} by applying a fuzzy AND operator (a t-norm) to the membership values of the original sets.\\
+
+Another, more complex, method involves the use of fuzzy relational equations \cite[Sec.~3.5]{HistoryFL2017}. This approach is typically formulated as an inverse problem. A fuzzy relational equation describes a relationship between two or more fuzzy variables, often in the form $R = P \circ Q$, where $P$ and $Q$ are fuzzy relations and $\circ$ is a composition operator. If two of the three components are known, the third can be determined by solving the equation.
+
+\begin{example}
+    In medical diagnosis, let $S$ be a fuzzy relation between patients and symptoms, and $D$ be a fuzzy relation between patients and diseases. These two may be linked through a fuzzy relation $K$ representing medical knowledge, such that $D = S \circ K$. If we have observed data for patients' symptoms $S$ and their final diagnoses $D$, we could solve this equation to infer the underlying medical knowledge relation $K$ that connects symptoms to diseases.
+\end{example}
