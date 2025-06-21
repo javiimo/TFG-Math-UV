@@ -34,18 +34,45 @@
 
 % Interdependencia de los criterios!
 
-% Lo de que la importancia es relativa, puedo tener unos criterios sí y otros no y tal y que eso me cambie el grado de importancia.}
+% % Lo de que la importancia es relativa, puedo tener unos criterios sí y otros no y tal y que eso me cambie el grado de importancia.}
 
-\signal{Aquí pensaba definir agregación en general como una función. Luego presento los OWAs y sus variaciones. Hasta aquí sí que lo tengo claro.
+% \signal{Aquí pensaba definir agregación en general como una función. Luego presento los OWAs y sus variaciones. Hasta aquí sí que lo tengo claro.
 
-Pero para seguir, quería simplemente poner los métodos que vaya a usar en la aplicación práctica del tema 3. No sé si un fuzzy TOPSIS o ELECTRE o alguno de esos que tengo en el diagrama de arriba. O si por el contrario puedo continuar con generalizaciones de los OWA pero eso ya sería meterme otra vez con fuzzy measures y acabaría en la integral de Choquet, de Sugeno o de Shilkret o alguna de esas. También otro método sería meterme en lo de reglas de inferencia, ya que he empezado con lo de Pavelka y el razonamiento aproximado, podría ser interesante igual.}
+% Pero para seguir, quería simplemente poner los métodos que vaya a usar en la aplicación práctica del tema 3. No sé si un fuzzy TOPSIS o ELECTRE o alguno de esos que tengo en el diagrama de arriba. O si por el contrario puedo continuar con generalizaciones de los OWA pero eso ya sería meterme otra vez con fuzzy measures y acabaría en la integral de Choquet, de Sugeno o de Shilkret o alguna de esas. También otro método sería meterme en lo de reglas de inferencia, ya que he empezado con lo de Pavelka y el razonamiento aproximado, podría ser interesante igual.}
 
-\section{Fuzzy Aggregation}
+% \section{Fuzzy Aggregation}
 \label{subsec:fuzzy_aggregation}
 
-In the context of multi-criteria decision making, after evaluating each alternative against every criterion, the next logical step is to combine these individual assessments into a single, comprehensive value for each alternative. This process is known as aggregation. An aggregation function takes a collection of numerical inputs, representing the performance scores of an alternative, and maps them to a single output value. This overall score should ideally be a meaningful representation of the inputs, allowing for a final ranking of the alternatives. The most common aggregation function is the weighted average (WA), where each criterion's score is multiplied by a predefined weight representing its importance, and the results are summed.
+% In the context of multi-criteria decision making, after evaluating each alternative against every criterion, the next logical step is to combine these individual assessments into a single, comprehensive value for each alternative. This process is known as aggregation and would belong to the \emph{Value Measurement Methods} strategy presented in section \ref{sec:crisp_methods}. 
 
-However, the weighted average has a fundamental limitation, its weights are fixed to specific criteria. This approach does not allow for modeling the decision maker's attitude, such as optimism or pessimism, towards the performance scores themselves. To address this, the Ordered Weighted Averaging (OWA) operator, introduced by Yager, provides a more flexible framework. The core innovation of the OWA operator is that it disassociates the weights from the criteria and instead associates them with the ordered positions of the values. That is, weights are assigned based on a value's rank (e.g., to the highest value, the second highest, and so on) rather than to the criterion it came from.
+% % \signal{Include here the definition of aggregation function in a \begin{definition}}
+
+% An aggregation function takes a collection of numerical inputs, representing the performance scores of an alternative, and maps them to a single output value. This overall score should ideally be a meaningful representation of the inputs, allowing for a final ranking of the alternatives. \signal{Weighted Arithmetic Mean (WAM)
+% Median, Minimum, and Maximum
+% Geometric and Harmonic means
+% Ordered Weighted Averaging (OWA) functions
+% Fuzzy integrals\footnote{like the Choquet and Sugeno integrals and say very briefly how these relate to the concept fuzzy measure concept discussed in \ref{sec:fuzzy_measures}.}}\\
+
+
+
+
+
+
+In the context of multi-criteria decision making, after evaluating each alternative against every criterion, the next logical step is to combine these individual assessments into a single, comprehensive value for each alternative. This process is known as aggregation\footnote{In some books, especially in control systems' literature, it might be found under the name of \textit{defuzzification}, since it involves converting the fuzzy information into a single value for making a decision.} and would belong to the \emph{Value Measurement Methods} strategy presented in section \ref{sec:crisp_methods}. The formalism and concepts discussed in this section are primarily based on the books \cite{beliakov2023discrete} and \cite{xu2015uncertain}.
+
+\begin{definition}[Aggregation Function] \label{def:aggregation_function}
+An aggregation function is a function $f: [0, 1]^n \to [0, 1]$ that satisfies the following two properties for any input vectors $\mathbf{x}, \mathbf{y} \in [0, 1]^n$:
+\begin{romanenum}
+    \item \textbf{Boundary Conditions:} The function preserves the boundaries of the interval:
+    \[f(0, 0, \dots, 0) = 0\text{ and }f(1, 1, \dots, 1) = 1\]
+    \item \textbf{Monotonicity:} The function is jointly non-decreasing in all its arguments:
+    \[\text{If }\mathbf{x} \le \mathbf{y}\text{ (meaning }x_i \le y_i \forall i=1, \dots, n\text{), then }f(\mathbf{x}) \le f(\mathbf{y})\]
+\end{romanenum}
+\end{definition}
+
+An aggregation function takes a collection of numerical inputs, representing the performance scores of an alternative, and maps them to a single output value. This overall score should ideally be a meaningful representation of the inputs, allowing for a final ranking of the alternatives. It should be noted that the choice of non-decreasing monotonicity rather than non-increasing is purely conventional. This convention aligns with the intuitive principle that higher membership values indicate more desirable properties of alternatives. Although the inverse ordering could be considered for ranking alternatives downwards, the \textit{higher is better} paradigm is generally more natural and thus preferred. Common examples of aggregation functions include: weighted (arithmetic, geometric or harmonic) means, median, minimum, maximum, ordered weighted average (OWA) or fuzzy integrals\footnote{Integrals defined using non-additive fuzzy measures, such as the Choquet and Sugeno integrals.}.\\
+
+A simpler approach like the weighted average has a fundamental limitation due to its weights being fixed to specific criteria. This does not allow for modeling the decision maker's attitude, such as optimism or pessimism, towards the performance scores themselves \signal{Give a clear and concise example for why this is the case. And also mention that another limitation is that the dm needs to choose exactly the weights for specific criteria}. To address this, the Ordered Weighted Averaging (OWA) operator, introduced by Yager in \cite{YagerOWA}, provides a more flexible framework. The core innovation of the OWA operator is that it disassociates the weights from the criteria and instead associates them with the ordered positions of the values. That is, weights are assigned based on a value's rank (e.g., to the highest value, the second highest, and so on) rather than to the criterion it came from.\\
 
 \begin{definition}[Ordered Weighted Averaging (OWA) Operator]
 Let $(a_1, a_2, \dots, a_n)$ be a collection of values to be aggregated. The OWA operator is a mapping $\text{OWA}: \mathbb{R}^n \to \mathbb{R}$ defined by a weighting vector $W = (w_1, w_2, \dots, w_n)$ such that $w_i \in [0, 1]$ and $\sum_{i=1}^{n} w_i = 1$. The aggregated value is given by:
@@ -55,8 +82,61 @@ Let $(a_1, a_2, \dots, a_n)$ be a collection of values to be aggregated. The OWA
 where $b_j$ is the $j$-th largest value in the collection $(a_1, a_2, \dots, a_n)$.
 \end{definition}
 
-The key to the OWA operator's flexibility lies in the determination of the weighting vector $W$. By changing the distribution of the weights, one can model a wide spectrum of aggregation behaviors. For instance, an optimistic decision maker, who focuses on the best outcomes, would assign higher weights to the first components of the vector $W$, thereby giving more importance to the highest-ranked values ($b_1, b_2, \dots$). Conversely, a pessimistic decision maker would assign higher weights to the last components, emphasizing the worst-performing criteria. A standard arithmetic mean is recovered by setting all weights equal, $w_j = 1/n$. This ability to model the decision maker's attitude is a significant advantage over the simple weighted average.
+The key to the OWA operator's flexibility lies in the determination of the weighting vector $W$. By changing the distribution of the weights, one can model a wide spectrum of aggregation behaviors. For instance, an optimistic decision maker, who focuses on the best outcomes, would assign higher weights to the first components of the vector $W$, thereby giving more importance to the highest-ranked values ($b_1, b_2, \dots$). Conversely, a pessimistic decision maker would assign higher weights to the last components, emphasizing the worst-performing criteria. A standard arithmetic mean is recovered by setting all weights equal, $w_j = 1/n$. This ability to model the decision maker's attitude is a significant advantage over the simple weighted average. A fundamental quantity in this regard is the \textit{orness}\footnote{Its dual, \textit{andness}, can also be defined as $1-\text{\textit{orness}}$, but it does not provide any additional information.}, which quantifies the degree of optimism of the operator. It is calculated as \[\text{orness}(W) = \sum_{j=1}^{n} w_j \frac{n-j}{n-1}\] 
+An orness of 1 corresponds to pure optimism (like the maximum operator, where $w_1=1$), an orness of 0 corresponds to pure pessimism (like the minimum operator, where $w_n=1$), and an orness of 0.5 reflects a neutral attitude (like the arithmetic mean).
 
-The process of defining the weights can be guided by several methods. A fundamental concept in this regard is the measure of \textit{orness}, which quantifies the degree of optimism of the operator. It is calculated as $\text{orness}(W) = \sum_{j=1}^{n} w_j \frac{n-j}{n-1}$. An orness of 1 corresponds to pure optimism (like the MAX operator, where $w_1=1$), an orness of 0 corresponds to pure pessimism (like the MIN operator, where $w_n=1$), and an orness of 0.5 reflects a neutral attitude (like the mean). More intuitively, weights can be derived from linguistic quantifiers, such as "most", "at least half", or "about three". These quantifiers can be mathematically modeled to generate a corresponding weighting vector $W$, allowing the decision maker to specify their aggregation strategy in a natural and understandable way.
+\begin{remark}
+    It should be noted that OWA operators and their direct variants rely on an additive measure of importance, as the weights must sum to one and the aggregated importance of any subset of criteria equals the sum of its individual weights. This framework assumes that the criteria are preferentially independent. It does not capture more complex interactions between criteria, such as synergy or redundancy (where the combined effect of two criteria is greater or lower than their sum). Modeling such relationships requires non-additive fuzzy measures and more complex aggregation tools, like the Choquet or Sugeno integrals, which are not studied in this work.\\
+\end{remark}
 
-The OWA operator has inspired numerous extensions and variations, such as the Ordered Weighted Geometric (OWG) operator for contexts where a multiplicative aggregation is more suitable, and hybrid operators like the Induced OWA (IOWA) and the Combined Weighted Averaging (CWA), which seek to reintroduce the importance of the criteria themselves alongside the attitudinal weighting. It is important to note, however, that OWA and its direct variants are based on an additive measure of importance, since the weights must sum to one. This framework assumes that the criteria are preferentially independent. It does not capture more complex interactions between criteria, such as synergy, where the combined effect of two criteria is greater than their sum, or redundancy. Modeling such relationships requires non-additive fuzzy measures and more complex aggregation tools, like the Choquet or Sugeno integrals, which are beyond the scope of this discussion.
+
+The OWA operator has inspired numerous extensions and variations, such as the Ordered Weighted Geometric (OWG) operator for contexts where a multiplicative aggregation is more suitable, and hybrid operators like the Induced OWA (IOWA) and the Combined Weighted Averaging (CWA), which seek to reintroduce the importance of the criteria themselves alongside the attitudinal weighting. 
+
+
+
+\subsection{Assigning weights}
+
+% The process of defining the weights can be guided by several methods. More intuitively, weights can be derived from linguistic quantifiers, such as "most", "at least half", or "about three". These quantifiers can be mathematically modeled to generate a corresponding weighting vector $W$, allowing the decision maker to specify their aggregation strategy in a natural and understandable way.\\
+
+
+The process of defining the weights for the OWA operator is a critical step that directly models the decision-maker's aggregation strategy. This is not a trivial task, as the weights are not assigned to specific criteria but to the ordered performance scores, capturing the decision-maker's attitude towards risk and trade-offs. Several methods have been developed to guide this process, ranging from intuitive linguistic approaches to formal optimization techniques. The most common approaches can be categorized by the type of information they elicit from the decision maker.
+
+\paragraph{Using Linguistic Quantifiers}
+Perhaps the most intuitive method for defining weights is through the use of linguistic quantifiers. This approach allows the decision maker to specify their aggregation strategy in a natural way, using words like "most", "at least half", or "about three". This is formalized through the concept of a fuzzy linguistic quantifier.
+
+\begin{definition} [Linguistic Quantifier]
+A linguistic quantifier is a fuzzy set on the interval $[0, 1]$ that represents a proportion. A relative quantifier, such as *most* or *about half*, provides a fuzzy characterization of a number of elements.
+\end{definition}
+
+To derive the OWA weights from a relative linguistic quantifier $Q$, we can evaluate the quantifier's membership function at regular intervals. For an aggregation of $n$ values, the weights $w_j$ can be calculated as:
+
+\begin{equation}
+    w_j = Q\left(\frac{j}{n}\right) - Q\left(\frac{j-1}{n}\right) \quad \text{for } j=1, \dots, n
+\end{equation}
+
+where $Q(r)$ is the membership degree of the proportion $r$ to the fuzzy set representing the quantifier. This method directly translates the semantics of the quantifier into a set of weights. For instance, if a decision-maker states they want "at least half" of the criteria to be met, the quantifier can be modeled as $Q(r) = 1$ for $r \geq 0.5$ and $Q(r)=0$ for $r < 0.5$. This would assign weights only to the better-performing half of the scores.
+
+\paragraph{Defining an Orness Level}
+In some cases, a decision-maker may not be able to articulate a specific quantifier but can express a general degree of optimism. The orness measure, as defined in section 1.3, directly captures this attitude. This method involves the decision-maker specifying a desired orness level, $\alpha \in [0,1]$, and then finding a weight vector $W$ that satisfies this preference.
+
+However, the equation $\text{orness}(W) = \alpha$ is under-determined, meaning multiple weight vectors can yield the same orness level. To resolve this ambiguity, an optimization problem is typically formulated to find the weights that, for a given orness, are maximally non-specific. This is often achieved by maximizing the Shannon entropy of the weights, which leads to the most dispersed (least biased) weight distribution that satisfies the decision-maker's attitudinal preference. The problem is thus:
+\begin{align*}
+    \text{maximize} \quad & H(W) = -\sum_{j=1}^{n} w_j \ln(w_j) \\
+    \text{subject to} \quad & \text{orness}(W) = \alpha \\
+    & \sum_{j=1}^{n} w_j = 1, \quad w_j \ge 0
+\end{align*}
+
+\paragraph{Maximizing an Objective Function}
+When criteria weights are unknown, they can be derived objectively from the data in the decision matrix itself. The underlying principle is that a criterion's importance is related to the information it provides for distinguishing between alternatives.
+
+One approach is to **maximize the variance** of the performance scores. The intuition is that a criterion with high variance across alternatives is more useful for discrimination than a criterion where all alternatives perform similarly. If all alternatives have the same score for a given criterion, that criterion provides no information for ranking and should have a weight of zero. The total deviation for a criterion $j$ is given by the sum of its deviations from all other alternatives. The overall objective is to find the weight vector $w$ that maximizes the total weighted deviation across all criteria. This leads to the following formula for the weights, as derived in [92]:
+\begin{equation}
+    w_j = \frac{\sum_{i=1}^{n}\sum_{k=1}^{n} |r_{ij} - r_{kj}|}{\sum_{l=1}^{m}\sum_{i=1}^{n}\sum_{k=1}^{n} |r_{il} - r_{kl}|}
+\end{equation}
+where $r_{ij}$ is the normalized performance score of alternative $i$ on criterion $j$.
+
+Another approach is based on **maximizing the information entropy**. Entropy is a measure of uncertainty. In this context, the weight for a criterion can be determined based on the uncertainty associated with its performance values. The process first involves normalizing the decision matrix so that the values in each column sum to one. Then, the entropy $E_j$ of each criterion $j$ is calculated. A smaller value of $E_j$ implies less uncertainty and thus more concentrated, decisive information. Therefore, the weight $w_j$ is inversely related to the entropy and is given by:
+\begin{equation}
+    w_j = \frac{1 - E_j}{\sum_{k=1}^{m}(1-E_k)}
+\end{equation}
+This assigns greater weight to criteria that provide more definite information for differentiating among the alternatives.

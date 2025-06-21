@@ -55,52 +55,39 @@ The process of defining these membership functions is known as fuzzification. Si
 An approach to construct membership functions when empirical data is scarce, or the concept being modeled is highly subjective, is to elicit information from domain experts. This process, which can be performed through direct or indirect methods, leverages human knowledge and intuition to quantify vague concepts.
 
 \paragraph{Direct Elicitation}
-The most straightforward method is direct elicitation, where an expert is asked to directly assign a numerical membership grade to a series of elements in the universe of discourse. For example, to define the fuzzy set for \emph{high temperature} in a room, experts could be polled to provide a value between 0 and 1 for several different temperatures. The results, often averaged, form a set of points that define the membership function. A key consideration in this approach is the scale used for elicitation, which can then be mapped into the $[0,1]$ interval. A common approach is using $7\pm2$ categories when making absolute judgments along a single dimension. This idea originated in a psychology paper \cite{miller1956magical}, suggests that simpler scales may be more appropriate than finer ones for elicitation tasks.
+The most straightforward method is direct elicitation, where an expert is asked to directly assign a numerical membership grade to a series of elements in the universe of discourse. For example, to define the fuzzy set for \emph{high temperature} in a room, the expert could be polled to provide a value between 0 and 1 for several different temperatures. These results form a set of points that define the membership function. For continuous fuzzy sets or cases with too many surveyed points, this approach becomes unfeasible. A key consideration is the scale used for elicitation, which can then be mapped into the $[0,1]$ interval. A common strategy is to use $7\pm2$ categories when making absolute judgements along a single dimension. This idea originated in a psychology paper \cite{miller1956magical}, suggests that simpler scales may be more appropriate than finer ones for elicitation tasks.
 
 \paragraph{Indirect and Compositional Elicitation}
-A more interpretable and often more robust approach is indirect elicitation, which avoids requiring experts to provide precise numerical values for each element. This is commonly achieved through the use of linguistic variables, which provide a formal structure for handling verbal concepts.
+A more interpretable and often more robust approach is indirect elicitation, which avoids requiring experts to provide precise values for each element and instead employs parametrized functional forms. This is commonly achieved through the use of linguistic variables, which provide a formal structure for handling verbal concepts.
 
 \begin{definition}[Linguistic Variable \cite{Zadeh1975}]
-A \textbf{linguistic variable} is a variable (e.g., \emph{age}) whose values are words or sentences rather than numbers. It is characterized by a set of linguistic values, or \textbf{terms} (e.g., \emph{young}), defined over an underlying numerical \textbf{base variable}. The meaning of each term is captured by a fuzzy set, whose membership function (compatibility function), specifies the degree to which any value on the base variable is compatible with the linguistic label.
+A \textbf{linguistic variable} is a variable (e.g., \emph{age}) whose values are words or sentences rather than numbers. It is characterized by a set of linguistic values, or \textbf{terms} (e.g., \emph{young}), defined over an underlying numerical \textbf{base variable} (e.g. a numerical variable \texttt{x} whose values are the integers from 0 to 100). The meaning of each term is captured by a fuzzy set, whose membership function (compatibility function), specifies the degree to which any value on the base variable is compatible with the linguistic label.
 \end{definition}
 
-Instead of defining this compatibility function point-by-point, an expert can specify it by choosing a standard, parameterized shape that is easy to interpret. For instance, a triangular fuzzy number is intuitive for representing a concept centered "around" a certain point, while a trapezoidal shape can represent a concept that is fully valid over an interval. Furthermore, new linguistic values can be derived compositionally from existing ones using \emph{linguistic modifiers}, or hedges. These are operations that alter a membership function, such as concentrators like \emph{very}, which makes a fuzzy set more specific, and dilators like \emph{somewhat}, which makes it less specific. \signal{Often modeled as an exponent}
+Instead of defining this compatibility function point-by-point, an expert can specify it by choosing a standard, parameterized shape that is easy to interpret. For instance, a triangular fuzzy number is intuitive for representing a concept centered ``around" a certain point, while a trapezoidal shape can represent a concept that is fully valid over an interval. 
 
-\begin{example}\signal{Maybe it is better to model hot and then show very hot.}
-    To define the linguistic value \emph{comfortable temperature}, an expert might specify a trapezoidal membership function by providing four points: the temperatures at which comfort begins to be felt (e.g., 19°C), becomes fully established (e.g., 21°C), starts to decline (e.g., 23°C), and is completely lost (e.g., 25°C). This is often more intuitive for an expert than assigning a specific membership value to every possible temperature.
+Furthermore, new linguistic values can be derived compositionally from existing ones using \emph{linguistic modifiers}, or hedges. These are operations that alter a membership function, such as concentrators like \emph{very}, which makes a fuzzy set more specific, and dilators like \emph{somewhat}, which makes it less specific. These effects are often achieved by applying an exponent to the original membership function: for a concentrator like \emph{very}, the membership values are squared ($\mu_{\text{very } A}(x) = (\mu_A(x))^2$), while for a dilator like \emph{somewhat}, the square root is taken ($\mu_{\text{somewhat } A}(x) = \sqrt{\mu_A(x)}$).
+
+\begin{example}
+    Consider the linguistic variable \emph{Price}. An expert might define the term \emph{cheap} as being fully true for prices below \$30 and completely false above \$70. Similarly, the term \emph{expensive} could be defined as false below \$50 and fully true above \$90.
+    
+    This formulation creates an overlap region (between \$50 and \$70) where an item can be considered, to some degree, \emph{both} cheap and expensive, capturing the inherent ambiguity of mid-range pricing. From these base terms, modifiers like \emph{very} and \emph{somewhat} are used to derive more nuanced linguistic values, as illustrated in Figure \ref{fig:linguistic_variable_overlap}.
 \end{example}
 
-% \subsection{Elicitation from Domain Experts}
-% \signal{use \ paragraph to separate between direct elicitation and indirect elicitation using functional forms and develop a bit more each. Include the miller 7 pm 2 rule and an example for it.
-% Also properly define linguistic variable as I have in the comments}
-% When empirical data is scarce or the concept being modeled is highly subjective, the knowledge of domain experts becomes the primary source for constructing membership functions. This can be done through direct or indirect methods.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ch2/figures/fuzzy_var_car_example.png}
+    \caption{An illustration of the linguistic variable 'Price' with overlapping terms. The overlap between 'cheap' and 'expensive' represents the ambiguity of mid-range prices. Modifiers create more specific or general terms.}
+    \label{fig:linguistic_variable_overlap}
+\end{figure}
 
-% Direct elicitation is the most straightforward approach, where an expert or a group of experts is asked to directly assign a membership value, typically in the interval $[0, 1]$, to a series of elements in the universe of discourse. For instance, to define a fuzzy set for \emph{high temperature} in a room, experts could be polled on the degree of membership for various temperatures. The average of their responses for each temperature point can then be used to form the membership function.
-
-% A more interpretable and often more robust approach is indirect elicitation, which does not require experts to provide precise numerical values. One common indirect method involves the use of \emph{linguistic variables} \cite{Zadeh1975}. A linguistic variable, such as \emph{Age}, is characterized by a set of linguistic values, such as \emph{young}, \emph{middle-aged}, and \emph{old}. The meaning of each linguistic value is defined by a membership function, also called a compatibility function, over a numerical base variable, like chronological age. Rather than defining the function point-by-point, experts can define it by specifying a few parameters of a standard canonical shape, such as a triangular or trapezoidal function.
-% \signal{Mention that these shapes are more interpretable. Triangular can be thought like around this, trapezoidal... Mention the use of modifiers and so on.}
-
-% % 1. Base Variable and Linguistic Values:
-% % A linguistic variable (e.g., Age) is typically associated with a numerical base variable (e.g., the chronological age from 0 to 100).
-% % The words or sentences that the linguistic variable can take (e.g., young, old, very young) are its linguistic values.
-% % A linguistic value like young is interpreted as a label for a fuzzy restriction on the values of the base variable. This fuzzy restriction defines the meaning of the linguistic value.
-% % 2. Compatibility Function (The Meaning):
-% % The meaning of a linguistic value is defined by a compatibility function. This function associates each value of the base variable with a number in the interval [0, 1].
-% % This number represents the compatibility of the numerical value with the linguistic label. For example, the compatibility of the numerical age 28 with the linguistic value young might be 0.7, while the compatibility of age 35 might be 0.2 (p. 4, Fig. 1).
-% % The paper explicitly states that compatibility is distinct from probability. It is a subjective measure of how well a numerical value fits a linguistic concept.
-
-% \begin{example}
-%     To define the linguistic value \emph{comfortable temperature}, an expert might specify a trapezoidal membership function by providing four points: the temperatures at which comfort begins to be felt (e.g., 19°C), becomes fully established (e.g., 21°C), starts to decline (e.g., 23°C), and is completely lost (e.g., 25°C). This is often more intuitive for an expert than assigning a specific membership value to every possible temperature.
-% \end{example}
 
 \subsection{Learning from Data}
-When historical or experimental data is available, membership functions can be constructed automatically through learning algorithms. This approach frames the task as an optimization problem, where the goal is to find the parameters of a membership function that best fit the available data.\\
+When relevant data is available, membership functions can be constructed through learning algorithms. This approach frames the task as an optimization problem, where the goal is to find the membership function that best fit the available data.\\
 
-In a supervised learning context, we have a dataset of input-output pairs $(u_i, y_i)$, where $u_i$ is an element of the universe and $y_i$ is its known membership grade. We can then use function approximation techniques, such as artificial neural networks or Adaptive Neuro-Fuzzy Inference Systems (ANFIS), to learn a membership function $A(u; \theta)$ that minimizes a loss function, for example, the mean squared error between the function's output and the true grades $y_i$.\\
+In a supervised learning context, we have a dataset of input-output pairs. For example, consider a company with data regarding products (e.g. their characteristics) and customer satisfaction surveys. Each product would be an element of the universe and its membership grade is derived from the satisfaction surveys. We can then use function approximation techniques (e.g. Machine Learning models like artificial neural networks), to learn a membership function from the data and use them to generalize to new products with similar characteristics without needing to survey them.\\
 
-In many real-world scenarios, however, we do not have such explicit membership grades. For these unsupervised cases, clustering algorithms, particularly fuzzy clustering, can be employed. Fuzzy clustering partitions a dataset into several groups, where each data point can belong to multiple clusters with varying degrees of membership. These membership degrees can then be interpreted as the values of the membership function for the fuzzy set represented by each cluster. The most widely used algorithm for this is the Fuzzy C-Means (FCM) algorithm \cite{bezdek1981pattern}.\\
-
-\signal{Mention that this algorithm is explained further because it will be used in the next chapter.}
+In many real-world scenarios, however, we do not have such input-output pairs. For these unsupervised learning contexts, several approaches could be employed, such as fuzzy clustering (which is implemented in the next chapter). This algorithm partitions a dataset into several groups, allowing each data point to belong to multiple clusters with varying degrees of membership. These membership degrees can then be interpreted as the values of the membership function for the fuzzy set represented by each cluster. The Fuzzy C-Means (FCM) algorithm \cite{bezdek1984fcm} stands as the most widely used method in this category.
 
 \paragraph{Fuzzy C-Means (FCM) algorithm} Given a dataset $X = \{x_1, x_2, \ldots, x_n\}$ of $n$ data points in an $r$-dimensional space, FCM aims to find a partition of $X$ into $c$ fuzzy clusters by minimizing the objective function:
 \[
@@ -119,7 +106,18 @@ where $U$ is the partition matrix with elements $u_{ik}$ representing the member
     \]
     \item Repeat steps 2 and 3 until the change in the partition matrix, $\|U^{(t)} - U^{(t-1)}\|$, is smaller than a predefined threshold.
 \end{enumerate}
-Once the algorithm converges, the resulting column $i$ of the matrix $U$ can be taken as the membership function for the fuzzy set represented by cluster $i$.
+Once the algorithm converges, the resulting column $i$ of the matrix $U$ can be taken as the membership function for the fuzzy set represented by cluster $i$.\\
+
+Memberships decay with the exponent ${-2/(m-1)}$, which provides key insights into the algorithm's operation. When $m$ approaches 1, the exponent approaches negative infinity, causing the nearest center to dominate and resulting in nearly crisp labels. Conversely, as $m$ approaches infinity, the exponent approaches 0, causing distances to lose influence and all memberships to converge to $1/c$. This behavior is clearly illustrated in figure \ref{fig:fuzzy_cmeans}, which shows how different values of $m$ affect the clustering results.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{adjustwidth}{-1.7cm}{-1cm}
+    \includegraphics[width=1.15\textwidth]{ch2/figures/fuzzy_cmeans.png}
+\end{adjustwidth}
+    \caption{3 plots of fuzzy cmeans for 3 clusters with different m values (1, 1.5 and 2). Each color correspond to a cluster whose center is marked with the white cross. Memberships are denoted using gradients of color, where fainter tones denote lower membership values.}
+    \label{fig:fuzzy_cmeans}
+\end{figure}
 
 \begin{example}
     A marketing firm could use FCM to segment customers based on their purchasing habits (e.g., purchase frequency and average transaction value). The algorithm might identify three clusters, like \emph{Low-Value}, \emph{Medium-Value}, and \emph{High-Value} customers. The membership value $u_{ik}$ would represent the degree to which customer $k$ belongs to the \emph{High-Value} fuzzy set, providing a more nuanced classification than a crisp assignment.
