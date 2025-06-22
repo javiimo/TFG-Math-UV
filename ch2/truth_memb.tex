@@ -2,52 +2,7 @@ Fuzzy sets, as discussed in chapter \ref{ch:intro}, provide a way to encode data
 
 Information from three key sources is often considered to define membership functions, and we may exemplify them through the same case of people's height mentioned above: First, concept-driven constraints arise from the inherent nature of what is being modeled (higher heights do not correspond to ''less tall"). Second, domain knowledge or data provides empirical foundations, such as population height statistics, height requirements for particular activities (like basketball), or expert knowledge (the judgement of a basketball coach). Third, the preferences of the decision maker shape the final form, reflecting aspects such as their risk tolerance and the desired level of discrimination between alternatives.\\
 
-% \signal{Define here fuzzification and present what is coming after this.}
-
-
-
-% \subsection{Elicitation from Domain Experts}
-% \paragraph{Direct elicitation}sfaf
-
-
-
-% Another approach that might be more interpretable is:
-% \paragraph{Indirect elicitation:}
-
-% Include here linguistic variables:
-
-% 1. Base Variable and Linguistic Values:
-% A linguistic variable (e.g., Age) is typically associated with a numerical base variable (e.g., the chronological age from 0 to 100).
-% The words or sentences that the linguistic variable can take (e.g., young, old, very young) are its linguistic values.
-% A linguistic value like young is interpreted as a label for a fuzzy restriction on the values of the base variable. This fuzzy restriction defines the meaning of the linguistic value.
-% 2. Compatibility Function (The Meaning):
-% The meaning of a linguistic value is defined by a compatibility function. This function associates each value of the base variable with a number in the interval [0, 1].
-% This number represents the compatibility of the numerical value with the linguistic label. For example, the compatibility of the numerical age 28 with the linguistic value young might be 0.7, while the compatibility of age 35 might be 0.2 (p. 4, Fig. 1).
-% The paper explicitly states that compatibility is distinct from probability. It is a subjective measure of how well a numerical value fits a linguistic concept.
-
-
-
-% \subsection{Learning from data}
-
-
-% Present this as an optimization subproblem.
-
-% Mention that here you can use labeled data for supervised learning (fitting a function that depends on some parameters via an objective you want to minimize). Even in the case of non labeled data, there exist also unsupervised approaches, for example fuzzy clustering.
-
-% I think ANFIS also would fit into this category.
-
-% As another optimization problem where given a functional form that depends on some parameters you aim to find the function that best
-
-
-
-% \subsection{Deriving it from other fuzzy sets}
-% Do not mention tarski stuff, omit that.
-
-% Mention fuzzy relational equations
-
-% Mention the use of operators such as AND, OR,... So that from the set of cheap cars and the set of comfortable cars, we may get the set of cheap and comfortable cars.
-
-
+The inherent variability in constructing membership functions naturally leads to a fundamental question: how critical is the exact shape of a fuzzy set to the final outcome? Fortunately, for many of the logical operations used in decision-making models, the system's output is not overly sensitive to minor perturbations in the input membership functions. This robustness implies that while the general form of the function is important, the precise membership values are often less critical than they might appear \cite{ExactFuzzySetShape}.\\
 
 The process of defining these membership functions is known as fuzzification. Since it is a crucial first step in any fuzzy logic application, the following subsections explore membership function construction methods, which are broadly categorized according to the source of information: elicitation from domain experts, learning from empirical data, or derivation from other pre-existing fuzzy sets.
 

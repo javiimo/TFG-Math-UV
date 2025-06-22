@@ -96,16 +96,11 @@ In the context of uncertainty quantification, we focus primarily on the \textbf{
     \say{The term uncertainty can be viewed as \textbf{a component of ignorance}.[...] Uncertainty and information as a pair, and ignorance and knowledge as another pair,[...], as the former component of each pair describes a deficiency in the respective latter component, while the latter component of a pair can be viewed as the respective capacity available to reduce the respective former component.}\cite{UncertaintySciences}
 \end{definition}
 
-It is useful to classify different types of uncertainty to better understand what our mathematical models represent. However, it is vital to keep in mind that these types are not independent of each other. Rather than strict boundaries where every known unknown fits, it is better to think of them as dimensions of uncertainty. The most broadly used classification of uncertainty is this binary one:\\
+It is useful to classify different types of uncertainty to better understand what our mathematical models represent. However, it is vital to keep in mind that these types are not independent of each other. Rather than strict boundaries where every known unknown fits, it is better to think of them as dimensions of uncertainty. The most broadly used classification of uncertainty is this binary one:
 
 \begin{itemize}
     \item \textbf{Aleatoric:} inherent randomness or natural variability, which is \textbf{irreducible}. This is the most familiar one to the general public since it is the one that appears in the famous example of throwing a fair dice, and it is a case of success of probability theory.
-    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. 
-    %Some examples include: 
-    % \begin{itemize} 
-    %     \item Estimating voter preferences from a poll of 10 people involves high epistemic uncertainty; polling 10,000 voters significantly reduces this uncertainty, providing a clearer representation of true preferences. 
-    %     \item Imagine a sensor that detects if a temperature is above a threshold. Even if we have 2 objects at different temperature above that level, we would need to group them together. This situation presents uncertainty due to the limited granularity of our knowledge, known as \textbf{coarseness} (which is a type of epistemic uncertainty).
-    % \end{itemize} 
+    \item \textbf{Epistemic Uncertainty}: arises from incomplete knowledge, measurement limitations, imperfect models, or lack of data. This uncertainty \textbf{may be reducible} if additional information or resources become available. Consider flipping a coin: while the aleatoric uncertainty of any single flip remains irreducible (we cannot predict the exact outcome), the epistemic uncertainty about the coin's probability of landing heads reduces as we perform more flips. With 10 flips we have a rough estimate; with 10,000 flips we gain a much clearer picture of the true probability distribution.
 \end{itemize}
 
 Nevertheless, this binary classification has several important limitations:
@@ -124,7 +119,7 @@ Given these limitations of the binary classification, we will adopt a more nuanc
     \item \textbf{Nonspecificity:} Uncertainty resulting from insufficient specificity or detail, information is insufficient to precisely specify which outcome or event applies. 
     \begin{itemize}
         \item \textit{Example:} Knowing only that the solution to an equation lies within a set \(\{1, 2, 3\}\), but without further precision.
-        \item \textit{Frameworks:} Modeled primarily by crisp set theory and possibility theory, where uncertainty arises from ambiguous specification of possibilities. For example, this is what is modeled when assigning a domain for a random experiment.
+        \item \textit{Frameworks:} Modeled primarily by classical (or crisp) set theory and possibility theory, where uncertainty arises from ambiguous specification of possibilities. For example, this is what is modeled when assigning a domain for a random experiment.
     \end{itemize}
 
     \item \textbf{Vagueness:} Arises from imprecise, unclear, or fuzzy boundaries in concepts, meaning that elements can partially belong to a category. 
