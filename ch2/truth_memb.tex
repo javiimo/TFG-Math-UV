@@ -66,12 +66,13 @@ A \textbf{linguistic variable} is a variable (e.g., \emph{age}) whose values are
 
 Instead of defining this compatibility function point-by-point, an expert can specify it by choosing a standard, parameterized shape that is easy to interpret. For instance, a triangular fuzzy number is intuitive for representing a concept centered ``around" a certain point, while a trapezoidal shape can represent a concept that is fully valid over an interval. 
 
-Furthermore, new linguistic values can be derived compositionally from existing ones using \emph{linguistic modifiers}, or hedges. These are operations that alter a membership function, such as concentrators like \emph{very}, which makes a fuzzy set more specific, and dilators like \emph{somewhat}, which makes it less specific. These effects are often achieved by applying an exponent to the original membership function: for a concentrator like \emph{very}, the membership values are squared ($\mu_{\text{very } A}(x) = (\mu_A(x))^2$), while for a dilator like \emph{somewhat}, the square root is taken ($\mu_{\text{somewhat } A}(x) = \sqrt{\mu_A(x)}$).
+Furthermore, new linguistic values can be derived compositionally from existing ones using \emph{linguistic modifiers}, or hedges. These are operations that alter a membership function, such as concentrators like \emph{very}, which makes a fuzzy set more specific, and dilators like \emph{somewhat}, which makes it less specific. These effects are often achieved by applying an exponent to the original membership function: f
+or a concentrator like \emph{very}, the membership values are raised to an exponent greater than 1 (e.g. $\mu_{\text{very } A}(x) = (\mu_A(x))^2$), while for a dilator like \emph{somewhat}, an exponent between 0 and 1 is used (e.g. $\mu_{\text{somewhat } A}(x) = \sqrt{\mu_A(x)}$).
 
 \begin{example}
-    Consider the linguistic variable \emph{Price}. An expert might define the term \emph{cheap} as being fully true for prices below \$30 and completely false above \$70. Similarly, the term \emph{expensive} could be defined as false below \$50 and fully true above \$90.
+    Consider the linguistic variable \emph{Price}. An expert might define the term \emph{cheap} as being fully true for prices below 30\euro$\,$ and completely false above 70\euro. Similarly, the term \emph{expensive} could be defined as false below 50\euro$\,$ and fully true above 90\euro. 
     
-    This formulation creates an overlap region (between \$50 and \$70) where an item can be considered, to some degree, \emph{both} cheap and expensive, capturing the inherent ambiguity of mid-range pricing. From these base terms, modifiers like \emph{very} and \emph{somewhat} are used to derive more nuanced linguistic values, as illustrated in Figure \ref{fig:linguistic_variable_overlap}.
+    This formulation creates an overlap region (between 50\euro$\,$ and 70\euro) where an item can be considered, to some degree, \emph{both} cheap and expensive, capturing the inherent ambiguity of mid-range pricing. From these base terms, modifiers like \emph{very} and \emph{somewhat} are used to derive more nuanced linguistic values, as illustrated in Figure \ref{fig:linguistic_variable_overlap}.
 \end{example}
 
 \begin{figure}[!ht]
