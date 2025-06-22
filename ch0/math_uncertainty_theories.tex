@@ -169,14 +169,14 @@ attempts to capture. For this reason, \textbf{precise information should be mode
 
 Regarding operators and measures (most based on the previous set models), there exist many different frameworks, with varying levels of development and adoption. In Figure \ref{fig:uncertainty_taxonomy}, Cuzzolin \cite{uncertaintymeasuresbigpicture} maps out the major uncertainty theories and notes that \say{The \say{quality} of the various proposals differs radically}. As an example, he points out that Liu's Uncertainty Theory lacks rigorous mathematical foundations and convincing justification. \\
 
-Another interesting observation stated in the paper is that generality isn't the only factor that matters, as the most general frameworks haven't experienced the growth and adoption one might expect. This is likely because overly general frameworks can become intractable and unnecessarily complex without providing clear practical benefits:
+Another interesting observation stated in the paper is that generality is not the only factor that matters, as the most general frameworks have not experienced the growth and adoption one might expect. This is likely because overly general frameworks can become intractable and unnecessarily complex without providing clear practical benefits:
 
 \hspace{1cm}\say{Imprecise probability is remarkable for its generality, as special cases of coherent lower previsions include probabilities, de Finetti previsions, Choquet capacities, possibility and belief measures, random sets but also probability boxes, (lower and upper envelopes of) credal sets, and robust Bayesian models. Nevertheless, IP has so far failed to achieve the expected impact in both mathematical statistics and application fields. This may lead to the reflection that generality, after all, is not the real thing.}\cite{uncertaintymeasuresbigpicture}\\
 
 The majority of these frameworks emerged to address key limitations of probability theory. Some of these limitations include:
 \begin{romanenum}
       \item \textbf{Second-Order Uncertainty:} Probability theory handles risk well but fails to capture uncertainties about the probability model itself.
-      \item \textbf{Ignorance Representation:} There is no probability distribution that assigns equal probability to every single event (not even the uniform distribution). There the state of absolute ignorance is not possible.
+      \item \textbf{Ignorance Representation:} There is no probability distribution that assigns equal probability to every single event (not even the uniform distribution). As a result, a state of complete ignorance cannot be properly represented within this framework.
       \item \textbf{Imprecision in Data:} The additive nature of probability struggles with fuzzy, ambiguous, or set-valued data.
       %\item \textbf{Scarce Data Limitations:} It relies on large datasets, making it less effective when data is incomplete or limited.
       \item \textbf{Additivity Constraint:} The strict additivity axiom prevents modeling non-additive phenomena common in real-world uncertainty.
@@ -190,7 +190,7 @@ The majority of these frameworks emerged to address key limitations of probabili
 
 
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \includegraphics[width=\textwidth]{ch0/figures/Uncertainties Diagram.png}
     \caption{A classification of uncertainty theories showing their relationships and hierarchies. The theories are grouped based on their rationale and class of objects they attempt to mathematically model. Arrows indicate generalization relationships, pointing from more specific to more general frameworks. Extracted from \cite{uncertaintymeasuresbigpicture}.}
     \label{fig:uncertainty_taxonomy}

@@ -28,9 +28,9 @@ Finding a proper definition for uncertainty is a very subtle and challenging tas
         \multicolumn{2}{c}{} & \multicolumn{1}{c}{Known} & \multicolumn{1}{c}{Unknown} \\
         \cline{3-4}
         \multirow{2}{*}{\rotatebox{90}{\parbox{2cm}{\centering \large \textbf{Real State of} \\ \textbf{Knowledge}}}} 
-        & Known & Things we know we know & Things we know we don't know \\
+        & Known & Things we know we know & Things we know we do not know \\
         \cline{3-4}
-        & Unknown & Things we do not know we know & Things we do not know we don't know \\
+        & Unknown & Things we do not know we know & Things we do not know we do not know \\
         \cline{3-4}
     \end{tabular}
     \vspace{1cm}
@@ -130,7 +130,7 @@ Given these limitations of the binary classification, we will adopt a more nuanc
 
     \item \textbf{Coarseness (Granularity):} Uncertainty due to limited resolution in the available data or knowledge, making it difficult to distinguish precisely between similar elements.
     \begin{itemize}
-        \item \textit{Example:} A doctor has patient records with temperatures and cough symptoms, but can only match new patients' temperatures with cough symptoms at a coarse level (e.g. 37.3°C and 37.4°C are treated as identical since the records don't include every possible temperature value), limiting the precision of symptom prediction.
+        \item \textit{Example:} A doctor has patient records with temperatures and cough symptoms, but can only match new patients' temperatures with cough symptoms at a coarse level (e.g. 37.3°C and 37.4°C are treated as identical since the records do not include every possible temperature value), limiting the precision of symptom prediction.
         \item \textit{Frameworks:} Modeled using rough set theory, i.e. equivalence classes to define lower and upper approximations of a set to manage indistinguishability caused by granularity.
     \end{itemize}
 

@@ -57,7 +57,7 @@ For both attributes, we use fuzzy c-means to assign each intervention $i$ a vect
 
 
 \paragraph{Closeness Concurrency and Environmental Impact Concurrency.}
-These attributes assess spatial concentration using the linguistic variable \textit{Distance}, whose fuzzy term boundaries are defined as follows (in kilometers): for interventions, the boundaries are 5, 15, 50, 100, and 200 km, while for parks they are 1, 10, 20, 60, and 150 km. These values correspond to (a,b,c,d,e) in figure \ref{fig:fuzzy_distance}.
+These attributes assess spatial concentration using the linguistic variable \textit{Distance}, whose fuzzy term boundaries are defined as follows (in kilometers): for interventions, the boundaries are 5, 15, 50, 100, and 200 km, while for parks they are 1, 10, 20, 60, and 150 km. These values correspond to (a,b,c,d,e) in Figure \ref{fig:fuzzy_distance}.
 
 \textbf{Closeness Concurrency} quantifies the degree to which spatially proximate interventions are scheduled simultaneously. After applying the \textit{Distance} linguistic variable to the distance matrix derived in section \ref{sec:dist_mat}, five membership matrices are obtained for each pair of interventions $(i, j)$, corresponding to the fuzzy terms close, mid-close, mid, mid-far, and far (denoted as $\mu_{\text{close}}(i, j),\dots ,\mu_{\text{far}}(i, j)$). The daily mass for a term is the sum of membership degrees over all unique pairs of concurrently active interventions:
 \[

@@ -64,7 +64,7 @@ where $U$ is the partition matrix with elements $u_{ik}$ representing the member
 \end{enumerate}
 Once the algorithm converges, the resulting column $i$ of the matrix $U$ can be taken as the membership function for the fuzzy set represented by cluster $i$.\\
 
-Memberships decay with the exponent ${-2/(m-1)}$, which provides key insights into the algorithm's operation. When $m$ approaches 1, the exponent approaches negative infinity, causing the nearest center to dominate and resulting in nearly crisp labels. Conversely, as $m$ approaches infinity, the exponent approaches 0, causing distances to lose influence and all memberships to converge to $1/c$. This behavior is clearly illustrated in figure \ref{fig:fuzzy_cmeans}, which shows how different values of $m$ affect the clustering results.
+Memberships decay with the exponent ${-2/(m-1)}$, which provides key insights into the algorithm's operation. When $m$ approaches 1, the exponent approaches negative infinity, causing the nearest center to dominate and resulting in nearly crisp labels. Conversely, as $m$ approaches infinity, the exponent approaches 0, causing distances to lose influence and all memberships to converge to $1/c$. This behavior is clearly illustrated in Figure \ref{fig:fuzzy_cmeans}, which shows how different values of $m$ affect the clustering results.
 
 \begin{figure}[!ht]
     \centering
