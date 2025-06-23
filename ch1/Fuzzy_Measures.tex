@@ -164,36 +164,6 @@ The term $\Pi(A^c)$ precisely captures this ``plausibility of doubt". It is the 
 
 \subsection{Probability-Possibility Transformations}
 
-\signal{The relationship $N(A) \le P(A) \le \Pi(A)$ \signal{Mencionar los principios de los que salle esta desigualdad} suggests an ordering and provides a basis for transformations. Transformations between these measures are often wanted for practical reasons:
-\begin{itemize}
-    \item We might have probabilistic information but need a possibilistic model for certain types of reasoning (e.g., reasoning about feasibility under uncertainty).
-    \item We might have possibilistic information (e.g., from expert elicitation of what's feasible) but need a probability distribution for decision-making processes that require expected utility calculations.
-\end{itemize}
-The core assumption underlying many transformations is that possibility acts as an upper bound for probability: $P(A) \le \Pi(A)$ for all $A \subseteq \Omega$. This implies that what is probable must first be possible. An event cannot be likely if it's not even deemed possible to some corresponding degree. The set of all probability measures $P$ consistent with a given possibility measure $\Pi$ is called a credal set.
-
-\subsubsection{Transformations from Probability to Possibility (P$\to\Pi$)}
-The goal here is to summarize or bound a precise probability distribution $p$ (defined on elementary events) with a possibility distribution $\pi$ (which induces $\Pi$) such that $p(x) \le \pi(x)$ for all $x \in \Omega$, and often, to preserve the ranking of probabilities.
-One common method, attributed to Dubois and Prade \cite{Dubois1997}, is the least-specific dominating possibility distribution.
-Given a probability distribution $p=(p_1, \dots, p_n)$ over a finite universe $\Omega = \{\omega_1, \dots, \omega_n\}$, with elements ordered such that $p_1 \ge p_2 \ge \dots \ge p_n$ (where $p_k$ is the probability of $\omega_k$). The possibility degree for $\omega_k$ is defined based on cumulative probabilities:
-\[ \pi(\omega_k) = \sum_{i=k}^{n} p_i \]
-This is typically normalized so that $\max_k \pi(\omega_k) = \pi(\omega_1) = 1$.
-Intuition: The most probable element is fully possible. The possibility of less probable elements reflects the cumulative probability of them and all elements less probable than them. This ensures the order-preserving property and consistency with $P(A) \le \Pi(A)$. Such transformations inherently involve a loss of information, as the additivity of probability is replaced by the weaker maxitivity of possibility.
-
-\subsubsection{Transformations from Possibility to Probability ($\Pi\to$P)}
-The goal is to select a single probability distribution $p$ from the credal set $\mathcal{P}(\Pi)$ defined by a possibility distribution $\pi$. This often involves an ``information filling-in" step, guided by principles like maximum entropy or insufficient reason.
-A well-known example is the pignistic transform (context of belief functions, of which possibility measures are a special case). Given distinct possibility levels (in general, a consonant belief) $1 = \alpha_0 > \alpha_1 > \dots > \alpha_m = 0$, we define $\alpha$-cuts $E_j = \{\omega : \pi(\omega) \ge \alpha_j\}$. The probability mass $(\alpha_{j-1} - \alpha_j)$ that ``drops" between two successive possibility levels is distributed uniformly among the elements in the narrower (more possible) set $E_{j-1}$:
-\[ p(\omega) = \sum_{j=1}^{m} \frac{\alpha_{j-1} - \alpha_j}{|E_{j-1}|} \mathbf{1}_{\{\omega \in E_{j-1}\}} \]
-Elements that are equally highly possible share the available probability mass assigned to that level of possibility. This transform selects the probability distribution that is maximally non-committal (maximizes entropy) within the constraints imposed by the possibility measure. These transformations add assumptions to select one specific probability distribution from many consistent ones.
-
-\signal{Tengo que añadir las limitaciones de este tipo de transformaciones y referenciarlo todo esto a sus papers.}}
-% \subsubsection{Limitations and Assumptions of Transformations}
-% It is crucial to understand that transformations are not universally applicable without careful consideration of their underlying assumptions:
-% \begin{enumerate}
-%     \item \textbf{The $P(A) \le \Pi(A)$ Postulate:} This is a fundamental modeling choice, not an inherent law. It is justified if the possibility measure truly represents available information about the upper bounds of potential probabilities (e.g., $\Pi$ derived from imprecise observations constraining $P$). It can be problematic if $P$ and $\Pi$ are derived from entirely independent sources or model fundamentally different aspects of a problem.
-%     \item \textbf{Information Loss/Gain:} Transforming $P \to \Pi$ loses the precision of additivity. Transforming $\Pi \to P$ involves making assumptions (like maximum entropy or insufficient reason) to pick one $P$ out of a set of possibilities. The choice of transformation method itself is an assumption.
-%     \item \textbf{Semantic Alignment:} Transformations are most meaningful when probability and possibility are indeed modeling different facets of the \textit{same underlying uncertainty}. If they model completely unrelated concepts, applying formal transformations can be a category mistake, as the numbers, despite being in $[0, 1]$, have entirely different semantics.
-% \end{enumerate}
-
 
 
 The relationship $N(A) \le P(A) \le \Pi(A)$, provides the foundational link between probability and possibility. It establishes that a possibility measure $\Pi$ does not correspond to a single probability measure, but rather defines a family of consistent probability measures (also called a credal set $\mathcal{P}(\Pi)$) for which it serves as an upper bound.
