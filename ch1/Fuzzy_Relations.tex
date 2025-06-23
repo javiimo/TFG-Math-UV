@@ -201,6 +201,7 @@ We can define a the composition of a fuzzy set with a fuzzy relation in a comple
 \end{definition}
 
 \subsection{Extension Principle}
+\label{sec:ext_pple}
 
 Following a similar idea as in the definition of the composition of fuzzy sets, we can derive a way to generalize crisp functions to fuzzy sets.\\
 
@@ -231,7 +232,7 @@ This is called the (Zadeh's) extension principle and is the basis for building a
 It is important to highlight as well that this definition is a straight forward generalization of set-valued functions where $f(A)= \{f(x)\mid x\in A\}$. In terms of boolean membership function:
 $$\chi _{f(A)}(y)=\sup_{x\in f^{-1}(y)}\chi_A(x)$$
 
-The definition above can be generalized to vector functions using the definition of fuzzy cartesian product, which requires us to take the intersection:
+The definition above can be generalized to vector functions using the definition of fuzzy cartesian product, which requires us to take the intersection (using a t-norm):
 
 \begin{definition}[Sup-T extension principle]
   Let $f: X_1 \times \cdots \times X_n \longrightarrow Y$ be a crisp function and $A_1 \in \fuzzy{X_1}, \ldots, A_n \in \fuzzy{X_n}$ be fuzzy sets. Then we can define $f(A_1,\ldots,A_n)\in \fuzzy{Y}$ as:
@@ -251,4 +252,4 @@ $$\chi _{f(A_1,\ldots,A_n)}(y)=\sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}T(\chi_{A_1}(
 
 Where we have used that every t-norm operates the same on boolean memberships.\\
 
-\signal{Hay otros principios de extensión como el de Ramik con extensiones canónicas y order preserving operators, etc. No sé hasta qué punto eso podrá serme útil. Igual lo menciono en una frase y ya.}
+Alternative extension principles have been proposed in the literature for two main reasons: seeking higher computational efficiency and avoiding uncertainty ``inflation''. The latter is due to the principle treating independently each of the variables, which leads to criticized edge cases such as the one shown in example \ref{ex:unc_inflation}. Nevertheless, none of them are explored in this work.

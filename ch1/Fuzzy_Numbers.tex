@@ -1,12 +1,12 @@
-%See Nguyen paper page 7-8 of the pdf and 375-376 of the book.
-According to Nguyen \cite{NGUYEN1978}:
+In the context of Multi-Criteria Decision Making (MCDM), fuzzy sets defined over the real numbers serve as a powerful tool for modeling quantitative attributes under uncertainty. For example, ``approximately 100'' could be represented using a fuzzy set centered at 100 with membership 1 and decaying to zero as the numbers get bigger or smaller than 100. While their role in MCDM is central to this work, fuzzy numbers are also fundamental to many other applications, including MISO (Multiple-Input Single-Output) systems, fuzzy linear programming, and ANFIS (Adaptive Neuro-Fuzzy Inference Systems), though a detailed exploration of these topics is beyond our current scope. This section establishes the formal definition of fuzzy numbers, explores some common types and examines how arithmetic operations can be performed on these numbers through application of the extension principle.\\
+
+Fuzzy numbers according to Nguyen \cite{NGUYEN1978} can be understood as fuzzy intervals:
  
 \say{Interval analysis deals with closed bounded intervals (complex convex sets of $\R$) as an extension of numbers. Fuzzy numbers can be regarded as 
 an extension of closed bounded intervals, [...]} 
 \\
 
-\signal{Aquí me falta introducir esto como que otra forma de entender los fuzzy numbers es que son un caso especial de fuzzy intervals. Y también motivar para qué me sirven los fuzzy numbers en MCDM: modelizar atributos, MISO, fuzzy linear programming, ANFIS y esas cosas.}
-
+The following definitions provide the key ideas and properties for characterizing fuzzy numbers. These include normality, alpha cuts and convexity.
 
 \begin{definition}[Normal Fuzzy Set]
     A fuzzy set $A\in \fuzzy{X}$ is called normal if there exists $x\in X$ such that $A(x)=1$. Otherwise it is called subnormal.
@@ -45,6 +45,11 @@ an extension of closed bounded intervals, [...]}
     
 \end{definition}
 
+It is important to highlight that the general definition of fuzzy numbers relaxes the continuity property and only requires upper semi-continuity\cite{ApprLRFuzzNum}. This constrained version corresponds to the particular case of LR-Fuzzy Number, which admits the canonical form from Proposition \ref{prop:canonical_LR} and offers a pragmatic balance between expressive power and computational feasibility. It should be noted that this computational convenience comes at the cost of generality. The constrained shapes of LR-fuzzy numbers may not be suitable for modeling all types of uncertainty, particularly those involving discontinuities or more complex functional forms. Nevertheless in this text, Fuzzy Numbers and LR-Fuzzy Numbers will be used interchangeably.
+
+
+
+
 \begin{proposition}[$\alpha$-cuts are closed intervals]
     Let $A\in \fuzzy{\R}$ be a fuzzy number. Then for every $\alpha \in [0,1]$, the $\alpha$-cut $[A]^\alpha$ is a closed interval in $\R$.
 \end{proposition}
@@ -75,7 +80,7 @@ $$\textnormal{(iv}_{\textnormal{bis}}\textnormal{) } \lim{t}{\infty}A(t) = 0 \qu
 
 The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment without proof) establishes that the membership function of any fuzzy number can be partitioned into three contiguous intervals: one where it monotonically increases, one where it equals 1, and one where it monotonically decreases. This characterization shows that every fuzzy number can be represented as an LR-fuzzy number (see example \ref{ex:fuzzy_num} for the definition).
 
-\begin{proposition}[Membership function of fuzzy numbers]
+\begin{proposition}[Membership function of fuzzy numbers]\label{prop:canonical_LR}
     Let $A\in \fuzzy{\R}$ be a fuzzy number, then it satisfies:
     \begin{romanenum}
         \item $\mu_A(t)=0$ outside an interval (denoted by $[a,d]$)\vspace{-0.5em}
@@ -97,9 +102,8 @@ The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment withou
 \end{proof}
 
 
-% Write me a python function to represent the following fuzzy numbers in theree plots in the same figure. I want the letters to be the same as the ones in the definition and I want them all to be in the positive quadrant. Also write the 1 of the membership in the y axis saying that axis is the membership function of A \mu_A. The area of the fuzzy number must be gray and plot also thin lines for the reference values.
 \begin{example}\label{ex:fuzzy_num}
-    Here are some examples of fuzzy numbers:
+    Here are some examples of fuzzy numbers, which are also plotted in Figure \ref{fig:fuzzy_numbers}. Both, triangular and trapezoidal are special cases of LR-fuzzy numbers.:
     \begin{itemize}
         \item \textbf{Triangular Fuzzy Number:} Defined by a triplet $A\equiv(a, \alpha, \beta)$ where $a$ is the peak and $\alpha$ and $\beta$ the right and left widths respectively. The membership function $\mu_A(x)$ is given by:
         \[
@@ -207,7 +211,7 @@ Nguyen's theorems (\cite[Thm. 1.3.1, 1.3.2]{FULLER2}) provide fundamental result
 % \end{proof}
 
 \begin{remark}
-Since $A$ is a fuzzy number, its $\alpha$-cuts $[A]^\alpha$ are closed and bounded intervals (compact and connected sets in $\mathbb{R}$). A continuous function $f: \mathbb{R} \to \mathbb{R}$ maps compact sets to compact sets and connected sets (intervals) to connected sets (intervals). Therefore, $f([A]^\alpha)$ is also a closed and bounded interval. This property ensures that $f(A)$ (whose $\alpha$-cuts are these $f([A]^\alpha)$) is indeed a fuzzy number, as its $\alpha$-cuts remain convex (i.e., are intervals) and satisfy other necessary properties. \signal{Y qué pasa con la propiedad de convexity?}
+Since $A$ is a fuzzy number, its $\alpha$-cuts $[A]^\alpha$ are closed and bounded intervals (compact and connected sets in $\mathbb{R}$). A continuous function $f: \mathbb{R} \to \mathbb{R}$ maps compact sets to compact sets and connected sets (intervals) to connected sets (intervals). Therefore, $f([A]^\alpha)$ is also a closed and bounded interval. This property ensures that $f(A)$ (whose $\alpha$-cuts are these $f([A]^\alpha)$) is indeed a fuzzy number, as its $\alpha$-cuts remain convex (i.e., are intervals) and satisfy other necessary properties.
 \end{remark}
 
 \begin{theorem}[Second Nguyen Theorem]
@@ -237,7 +241,7 @@ The generalized theorem states the condition for the equality:
 \end{equation}
 
 
-It's important to see that if $T(x,y) = \min(x,y)$, then $T(\xi, \eta) \ge \alpha$ implies $\xi \ge \alpha$ and $\eta \ge \alpha$. In this case, the union $\bigcup_{\min(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta)$ simplifies. Since $f([A]^\xi, [B]^\eta) \subseteq f([A]^\alpha, [B]^\alpha)$ for $\xi, \eta \ge \alpha$ (due to the nesting property of $\alpha$-cuts and assuming $f$ behaves well \signal{explicar eso de que se porte bien qué es} with set inclusion, e.g., for interval operations), the largest set in the union is $f([A]^\alpha, [B]^\alpha)$. Thus, Equation \eqref{eq:nguyen_generalized} reduces to:
+It's important to see that if $T(x,y) = \min(x,y)$, then $T(\xi, \eta) \ge \alpha$ implies $\xi \ge \alpha$ and $\eta \ge \alpha$. In this case, the union $\bigcup_{\min(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta)$ simplifies. Since $f([A]^\xi, [B]^\eta) \subseteq f([A]^\alpha, [B]^\alpha)$ for $\xi, \eta \ge \alpha$ (due to the nesting property of $\alpha$-cuts), the largest set in the union is $f([A]^\alpha, [B]^\alpha)$. Thus, Equation \eqref{eq:nguyen_generalized} reduces to:
 \[
 [f(A, B)]^\alpha = f([A]^\alpha, [B]^\alpha)
 \]
@@ -249,7 +253,7 @@ Fullér and Keresztfalvi provide the following key results \cite[Thms. 1.9.1, 1.
 \end{theorem}
 
 \begin{theorem}
-    If $f: X \times Y \to Z$ is continuous, the t-norm $T$ is upper semicontinuous (u.s.c.), and $A, B$ are fuzzy subsets with u.s.c., compactly-supported membership functions (denoted $A \in \mathcal{F}(X, \mathcal{K}), B \in \mathcal{F}(Y, \mathcal{K})$), then the equality \eqref{eq:nguyen_generalized} holds.
+    If $f: X \times Y \to Z$ is continuous, the t-norm $T$ is upper semicontinuous, and $A, B$ are fuzzy subsets with u.s.c., compactly-supported membership functions (denoted $A \in \mathcal{F}(X, \mathcal{K}), B \in \mathcal{F}(Y, \mathcal{K})$), then the equality \eqref{eq:nguyen_generalized} holds.
     (Here $X, Y, Z$ are locally compact topological spaces).
 \end{theorem}
 % \begin{proof}
@@ -270,7 +274,7 @@ Fullér and Keresztfalvi provide the following key results \cite[Thms. 1.9.1, 1.
 \subsection{Fuzzy Arithmetic}
 \label{sec:fuzzy_arithmetic}
 
-Building upon the extension principle, arithmetic operations for fuzzy numbers can be defined. These are very useful for defining and solving fuzzy linear programming problems where crisp constraint may be relaxed with fuzzy ones or for aggregating different criteria represented by fuzzy numbers. Their most common implementation is using the minimum t-norm and triangular numbers.
+Building upon the extension principle, arithmetic operations for fuzzy numbers can be defined. These are very useful for aggregating different criteria represented by fuzzy numbers or for defining and solving fuzzy linear programming problems where crisp constraints may be relaxed with fuzzy ones. Their most common implementation is using the minimum t-norm and triangular numbers.
 
 \paragraph{Sup-Min Based Arithmetic for LR-Fuzzy Numbers}
 Let $\tilde{A} = (a_1, a_2, \alpha_L, \alpha_R)_{LR}$ and $\tilde{B} = (b_1, b_2, \beta_L, \beta_R)_{LR}$ be two fuzzy numbers of LR-type. Using the sup-min extension principle, the following operational rules can be derived \cite[p.16]{FULLER2}.
@@ -319,13 +323,12 @@ These simplified forms are widely used in practical applications \cite[p.17]{FUL
 \end{remark}
 
 
-
 The product of two fuzzy numbers $\tilde{A}$ and $\tilde{B}$ using the sup-min extension principle is defined as:
 \begin{equation}
 \mu_{\tilde{A} \otimes \tilde{B}}(z) = \sup_{x \cdot y = z} \min(\mu_{\tilde{A}}(x), \mu_{\tilde{B}}(y))
 \end{equation}
-Unlike addition and subtraction, the product of two LR-fuzzy numbers is not, in general, an LR-fuzzy number itself, and simple formulas for its parameters are usually not available.
-However, computations can often be simplified by working with $\alpha$-cuts and usign the Nguyen's theorem \cite[Thm. 1.3.2]{FULLER2}:
+Unlike addition and subtraction, the product of two LR-fuzzy numbers is not, in general, a LR-fuzzy number itself, and simple formulas for its parameters are usually not available.
+However, computations can often be simplified by working with $\alpha$-cuts and using the second Nguyen's theorem from the previous subsection:
 
 \begin{theorem}
 \label{thm:alpha_cut_product}
@@ -345,18 +348,42 @@ If one or both fuzzy numbers can take negative values, the interval multiplicati
 \begin{equation}
 [\tilde{A}]^\alpha \cdot [\tilde{B}]^\alpha = [\min(P), \max(P)]
 \end{equation}
-where $P = \{a_1(\alpha)b_1(\alpha), a_1(\alpha)b_2(\alpha), a_2(\alpha)b_1(\alpha), a_2(\alpha)b_2(\alpha)\}$.
+where $P = \{a_1(\alpha)b_1(\alpha), a_1(\alpha)b_2(\alpha), a_2(\alpha)b_1(\alpha), a_2(\alpha)b_2(\alpha)\}$.\\
+
+Another remarkable aspect is that while the formulas for addition and subtraction of LR-fuzzy numbers are exact and preserve the LR-form (Propositions \ref{prop:lr_add_sub} and \ref{prop:lr_scalar_mult}), as indicated above, the results for multiplication and other non-linear operations are generally not LR-fuzzy numbers. This complicates computations significantly. However, for many practical applications, approximated formulas and quasi-triangular fuzzy numbers (i.e., of the form $M=(m, \alpha, \beta)_{LR}$, where $m$ is the peak) are often used. This is achieved by neglecting the second-order term in the expansion of the product, which is a reasonable assumption when the spreads ($\alpha, \beta, \gamma, \delta$) are small relative to the means ($m, n$) or when operating in the vicinity of the core (where membership values are close to 1). As an example, the case of the multiplication is included:
+
+\begin{proposition}[Approximated Multiplication]
+The product of two positive LR-fuzzy numbers $M=(m, \alpha, \beta)_{LR}$ and $N=(n, \gamma, \delta)_{LR}$ can be approximated by:
+\begin{equation}
+M \otimes N \approx (mn, m\gamma + n\alpha, m\delta + n\beta)_{LR}
+\end{equation}
+\end{proposition}
 
 
+Different approximation formulas are available for cases where one or both fuzzy numbers are negative. Furthermore, for situations where spreads are not small compared to the means, a more complex approximation that includes a corrective second-order term can be employed. Similar approaches for other operations such as division are detailed in \cite{ApprLRFuzzNum}.\\
 
-\paragraph{T-norm Based Addition of Fuzzy Numbers}
-When employing the sup-T extension principle with an Archimedean t-norm $T$ (having an additive generator $f$), the sum of fuzzy numbers takes a specific form.
-Let $\tilde{A}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be $n$ fuzzy numbers of LR-type with common spreads $\alpha, \beta$.
-Let $f$ be the additive generator of $T$, and $L,R$ be the shape functions. The following theorem \cite[Thm. 1.7.1]{FULLER2}:
+Before introducing the arithmetic induced by the sup-T extension principle, the following example is presented to illustrate one of the key issues with Zadeh's extension principle that was briefly mentioned at the end of section \ref{sec:ext_pple}: its implicit assumption of independence between variables. This assumption leads to the following unintuitive behavior:
+
+\begin{example}[Uncertainty ``inflation'' when substracting identical fuzzy numbers]\label{ex:unc_inflation} 
+
+
+    Let $X$ be a triangular fuzzy number $\tilde X=(1,2,3)$. When computing $Z=X-X$ using the sup-T principle, the algorithm considers two "independent" copies $X^{(1)}$ and $X^{(2)}$ and calculates:
+    
+    $$
+    \mu_Z(z)=\sup_{x_1-x_2=z}\;T\!\bigl(\mu_{X}(x_1),\mu_{X}(x_2)\bigr).
+    $$
+    
+    The result is not the crisp value 0 as one might expect, but rather a fuzzy number with support $[-2,2]$ and peak at 0. The width has ``doubled'' because the dependency $x_1=x_2$ was ``forgotten''. Notice that here both $X$ are the same fuzzy number and not two different and independent fuzzy numbers with the same shape, as in that case, the resulting uncertainty would be the desired behavior.
+    \end{example}
+
+\paragraph{Sup-T Based Addition of Fuzzy Numbers}
+When employing the sup-T extension principle, there are no simple universal expressions for the general case. For the remaining of the section, some particular cases where formulas are available, are discussed.\\
+
+If we assume an Archimedean t-norm $T$ (having an additive generator $f$), the sum of fuzzy numbers (sharing both spread and well-behaved shape functions) takes a specific form \cite[Thm. 1.7.1]{FULLER2}:
 
 \begin{theorem}
 \label{thm:tnorm_addition_lr}
-Let $T$ be an Archimedean t-norm with additive generator $f$. Let $\tilde{a}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be fuzzy numbers of LR-type. If $L$ and $R$ are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then the membership function of the T-sum $\tilde{A}_n = \tilde{a}_1 \oplus_T \dots \oplus_T \tilde{a}_n$ is given by:
+Let $T$ be an Archimedean t-norm with additive generator $f$. Let $\tilde{a}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be $n$ fuzzy numbers of LR-type with common spreads $\alpha, \beta$. If $L$ and $R$ (shape functions) are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then the membership function of the T-sum $\tilde{A}_n = \tilde{a}_1 \oplus_T \dots \oplus_T \tilde{a}_n$ is given by:
 \begin{equation}
 \mu_{\tilde{A}_n}(z) =
 \begin{cases}
@@ -375,11 +402,7 @@ The product of two fuzzy numbers $\tilde{A}$ and $\tilde{B}$ using the sup-T ext
 \begin{equation}
 \mu_{\tilde{A} \otimes_T \tilde{B}}(z) = \sup_{x \cdot y = z} T(\mu_{\tilde{A}}(x), \mu_{\tilde{B}}(y))
 \end{equation}
-Similar to the sup-min product, closed-form expressions for the resulting membership function are not always straightforward for general LR-fuzzy numbers. However, the functional relationship described next provides significant insight for specific cases involving identical positive LR-fuzzy numbers.
-
-
-\paragraph{Functional Relationship Between T-norm Based Addition and Multiplication}
-A remarkable functional relationship exists between t-norm based addition and t-norm based multiplication for positive LR-fuzzy numbers of the same type. The following theorem \cite[Thm. 1.8.1]{FULLER2}:
+Similar to the sup-min product, closed-form expressions for the resulting membership function are not always straightforward for general LR-fuzzy numbers. However, a remarkable functional relationship exists between sup-T addition and sup-T multiplication for positive LR-fuzzy numbers of the same type. The following theorem \cite[Thm. 1.8.1]{FULLER2}:
 
 \begin{theorem}
 \label{thm:functional_relationship_add_mult}
@@ -394,4 +417,9 @@ where $\oplus_T$ denotes t-norm based addition and $\otimes_T$ denotes t-norm ba
 This theorem establishes that the membership function of the sum of $n$ identical fuzzy numbers, when evaluated at $nz$, is equal to the membership function of the product of these $n$ fuzzy numbers evaluated at $z^n$. Both are determined by scaling the transformed membership function of the original fuzzy number $\tilde{M}$ using its generator $f$. This relationship is particularly useful in analyzing the behavior of aggregated fuzzy quantities. An immediate consequence is that if $e^*_n(\tilde{M}) = (\tilde{M} \oplus_T \dots \oplus_T \tilde{M})/n$ (where division by $n$ is scalar multiplication by $1/n$), then $\lim_{n\to\infty} e^*_n(\tilde{M})$ converges to the core $[a,b]$ of $\tilde{M}$ \cite{FULLER2}{p.33}.
 \end{remark}
 
-%Most methods used for solving such problems are based on ranking functions, alfa-cuts, using duality results or penalty functions. In these methods, authors deal with crisp formulations of the fuzzy problems. Recently, some heuristic algorithms have also been proposed. In these methods, some authors solve the fuzzy problem directly, while others solve the crisp problems approximately.
+
+
+
+
+
+
