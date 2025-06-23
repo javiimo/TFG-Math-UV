@@ -44,36 +44,36 @@ The study of fuzzy measures emerged as a generalization of classical measure the
 Let $\Omega$ be a universal set. A fuzzy measure (or capacity) $\nu$ is a set function
 \[ \nu: 2^\Omega \to [0, 1] \]
 that assigns a value to each subset of $\Omega$ (often called an event or criterion) such that:
-\begin{enumerate}
-    \item \textbf{Boundary Conditions:}
-    \begin{itemize}
-        \item $\nu(\emptyset) = 0$ (the measure of the empty set is zero).
-        \item $\nu(\Omega) = 1$ (the measure of the universal set is one).
-    \end{itemize}
+\begin{romanenum}
+    \item \textbf{Boundary Conditions:} The measure of the empty set is $0$ ($\nu(\emptyset) = 0$) and the measure of the universal set is $1$ ($\nu(\Omega) = 1$).
+
     \item \textbf{Monotonicity:} For any $A, B \subseteq \Omega$, if $A \subseteq B$, then $\nu(A) \le \nu(B)$.
-\end{enumerate}
+\end{romanenum}
 \end{definition}
 
-The crucial departure from classical probability (in its general form) is the absence of a strict additivity requirement for disjoint sets. This allows fuzzy measures to model situations where, for example, the combined importance of two criteria $A$ and $B$ might be greater than the sum of their individual importances (synergy) or less (redundancy). The value $\nu(A)$ quantifies the weight, importance, degree of belief, or capacity associated with the subset $A$.
+The value $\nu(A)$ may quantify the weight, importance, degree of belief, or capacity associated with the subset $A$. A relevant aspect of any fuzzy measure $\nu$ defined over a finite universal set $\Omega$, is that it is fundamentally defined by the values assigned to all the subsets (i.e.\ $2^{|\Omega|}$ values in total, minus the two fixed boundary values). This implies that the greater generality of fuzzy measures comes at the cost of an exponentially growing number of parameters. By contrast, an additive measure only requires a linearly growing number of parameters $|\Omega|$. 
+This is the motivation behind k-additive or $\lambda$-fuzzy measures (not further studied in this work), which employ parametric approaches to reduce the degrees of freedom, achieving polynomial complexity in the size of the universal set.\\
 
-A fuzzy measure $\nu$ is fundamentally defined by its $2^{|N|}$ values assigned to all subsets of the universal set $N$ \cite[p. 41]{beliakov2023discrete}. They are classified based on several criteria such as based on their behavior concerning additivity and modularity, which describe interactions between set contributions.
-Regarding additivity, which considers disjoint sets $A,B \subseteq N$ (i.e., $A \cap B = \emptyset$):
-\begin{itemize}
-    \item a measure is additive if $\nu(A \cup B) = \nu(A) + \nu(B)$ \cite[Def. 2.4, Eq. 2.1]{beliakov2023discrete};
-    \item it is subadditive if $\nu(A \cup B) \leq \nu(A) + \nu(B)$ \cite[Def. 2.10, Eq. 2.8]{beliakov2023discrete};
-    \item and superadditive if $\nu(A \cup B) \geq \nu(A) + \nu(B)$ \cite[Def. 2.10, Eq. 2.9]{beliakov2023discrete}.
-\end{itemize}
-Modularity describes how the measure of unions and intersections relates to the sum of individual measures for any sets $A,B \subseteq N$:
-\begin{itemize}
-    \item a measure is submodular if $\nu(A \cup B) + \nu(A \cap B) \leq \nu(A) + \nu(B)$ \cite[Def. 2.8, Eq. 2.3]{beliakov2023discrete};
-    \item it is supermodular if $\nu(A \cup B) + \nu(A \cap B) \geq \nu(A) + \nu(B)$ \cite[Def. 2.8, Eq. 2.4]{beliakov2023discrete};
-    \item and modular if equality holds: $\nu(A \cup B) + \nu(A \cap B) = \nu(A) + \nu(B)$ \cite[Eq. 2.5]{beliakov2023discrete}. Notably, a measure is modular if and only if it is additive \cite[Note 2.6]{beliakov2023discrete}.
-\end{itemize}
-Symmetry is another criterion, where the measure $\nu(A)$ depends only on the set cardinality $|A|$, i.e., if $|A|=|B|$ then $\nu(A)=\nu(B)$ \cite[Def. 2.6]{beliakov2023discrete}. Finally, decomposability defines how the measure of a union of disjoint sets $A, B \subseteq N$ (with $A \cap B = \emptyset$) is derived from the measures of its components, generally as $\nu(A \cup B) = f(\nu(A), \nu(B))$ for some function $f$ \cite[Def. 2.20, Eq. 2.18]{beliakov2023discrete}. Key examples of decomposable measures include:
-\begin{itemize}
-    \item $\lambda$-fuzzy measures, where for disjoint $A,B$, the union is given by $\nu(A \cup B) = \nu(A) + \nu(B) + \lambda\nu(A)\nu(B)$ \cite[Def. 2.18, Eq. 2.14]{beliakov2023discrete};
-    \item possibility measures, which satisfy $Pos(A \cup B) = \max\{Pos(A), Pos(B)\}$ (a property that, for possibility measures, holds even for non-disjoint sets $A,B$ \cite[Def. 2.14]{beliakov2023discrete}).
-\end{itemize}
+
+Fuzzy measures can be categorized according to various properties. For the purposes of this work, the discussion is focused on the additivity properties, and their formal definitions are presented as follows:
+
+
+\begin{definition}[Additivity]
+Given disjoint sets $A,B \subseteq N$ (i.e., $A \cap B = \emptyset$), a fuzzy measure $\nu$ is:
+\begin{romanenum}
+    \item \textbf{Subadditive} if $\nu(A \cup B) \leq \nu(A) + \nu(B)$ \cite[Def. 2.10, Eq. 2.8]{beliakov2023discrete}
+    \item \textbf{Additive} if $\nu(A \cup B) = \nu(A) + \nu(B)$ \cite[Def. 2.4, Eq. 2.1]{beliakov2023discrete}
+    \item \textbf{Superadditive} if $\nu(A \cup B) \geq \nu(A) + \nu(B)$ \cite[Def. 2.10, Eq. 2.9]{beliakov2023discrete}
+\end{romanenum}
+\end{definition}
+
+\begin{example}[Additivity of probability and possibility measures]
+    Probability measures are additive for disjoint sets $A,B$, satisfying $P(A \cup B) = P(A) + P(B)$. On the other hand,possibility measures, are maxitive, satisfying $Pos(A \cup B) = \max\{Pos(A), Pos(B)\}$ for any sets $A,B$ (a property that, for possibility measures, holds even for non-disjoint sets). The maxitivity of possibility measures directly implies they are subadditive, since $\max\{Pos(A), Pos(B)\} \leq Pos(A) + Pos(B)$ and measures are non-negative.
+\end{example}
+
+
+The crucial departure from the additivity requiremen allows fuzzy measures to model situations where, for example, the combined importance of two criteria $A$ and $B$ might be greater than the sum of their individual importances (synergy) or less (redundancy). 
+
 
 
 \subsection{Probability and Possibility Measures}
@@ -84,36 +84,87 @@ A probability measure $P$ is a fuzzy measure that additionally satisfies the axi
 For any two disjoint sets $A, B \subseteq \Omega$ (i.e., $A \cap B = \emptyset$):
 \[ P(A \cup B) = P(A) + P(B) \]
 \end{definition}
-A probability measure quantifies the likelihood or frequency of an event occurring, or the degree of belief that a proposition is true. The sum of probabilities for a complete set of mutually exclusive elementary events is 1.
+A probability measure quantifies the likelihood or long-term frequency of an event occurring. 
+
 
 \begin{definition}[Possibility Measure]
-A possibility measure $\Pi$, pioneered by Zadeh \cite{Zadeh1978}, is a fuzzy measure characterized by the axiom of maxitivity (or sup-additivity):
+A possibility measure $\Pi$, pioneered by Zadeh \cite{Zadeh1978}, is a fuzzy measure characterized by the axiom of maxitivity:
 For any two sets $A, B \subseteq \Omega$:
 \[ \Pi(A \cup B) = \max(\Pi(A), \Pi(B)) \]
 \end{definition}
-A possibility measure quantifies the degree to which an event is considered possible, plausible, or compatible with available knowledge. It is often derived from a possibility distribution $\pi: \Omega \to [0, 1]$, where $\pi(x)$ is the possibility that a variable takes the value $x$. Then, for any $A \subseteq \Omega$, $\Pi(A) = \sup_{x \in A} \pi(x)$. Normalization typically requires $\sup_{x \in \Omega} \pi(x) = 1$, which implies $\Pi(\Omega) = 1$.
+A possibility measure quantifies the degree to which an event is considered feasible (meaning possible, plausible, or compatible with available knowledge). \\
 
-\signal{Me falta meter lo del ejemplo del dado feo que creo que aclara bastante la diferencia.}
+Both measures are typically derived from an underlying distribution. A probability measure is built from a probability mass function $p$ via summation, $P(A) = \sum_{x \in A} p(x)$, and is normalized such that $\sum_{x \in \Omega} p(x) = 1$. A possibility measure is built from a possibility distribution $\pi$ via the supremum, $\Pi(A) = \sup_{x \in A} \pi(x)$, and is normalized such that $\sup_{x \in \Omega} \pi(x) = 1$.\\
 
-% \subsection{Conceptual Differences: An Example}
-% Consider a standard six-sided die.
-% \begin{itemize}
-%     \item \textbf{Probability:} If the die is fair, the probability of rolling any specific number $x \in \{1, ..., 6\}$ is $P(\{x\}) = 1/6$.
-%     The probability of rolling an even number is $P(\text{even}) = P(\{2\}) + P(\{4\}) + P(\{6\}) = 1/6 + 1/6 + 1/6 = 3/6 = 1/2$.
-%     Similarly, $P(\text{odd}) = 1/2$. Note that $P(\text{even}) + P(\text{odd}) = 1$.
-%     Also, $P(\text{even} \cup \text{odd}) = P(\Omega) = 1$.
 
-%     \item \textbf{Possibility:} If our knowledge only states that ``it is possible to roll any number from 1 to 6," we might assign a possibility distribution $\pi(x) = 1$ for all $x \in \{1, ..., 6\}$.
-%     Then, the possibility of rolling an even number is $\Pi(\text{even}) = \max(\pi(2), \pi(4), \pi(6)) = \max(1,1,1) = 1$.
-%     Similarly, $\Pi(\text{odd}) = \max(\pi(1), \pi(3), \pi(5)) = 1$.
-%     Here, $\Pi(\text{even}) = 1$ means ``it is fully possible to roll an even number." It does not mean it is certain.
-%     Crucially, it is not required that $\Pi(A) + \Pi(\overline{A}) = 1$. In this example, $\Pi(\text{even}) = 1$ and $\Pi(\overline{\text{even}}) = \Pi(\text{odd}) = 1$. This reflects a state of incomplete information: it's fully possible to be even, and fully possible to be odd.
-%     Also, $\Pi(\text{even} \cup \text{odd}) = \max(\Pi(\text{even}), \Pi(\text{odd})) = \max(1,1) = 1$.
-% \end{itemize}
-Associated with every possibility measure is a dual necessity measure $N$, defined as $N(A) = 1 - \Pi(\overline{A})$. $N(A)$ quantifies the degree to which event $A$ is certainly true or necessarily implied. For our dice example, $N(\text{even}) = 1 - \Pi(\text{odd}) = 1 - 1 = 0$. It is not necessary to roll an even number.
+When Zadeh introduced possibility theory, he understood the possibility of an event as an upper bound on its probability. This is formalized by the \textbf{consistency principle}, which states that the probability of an event cannot exceed its possibility, i.e. $p(\omega) \leq \pi(\omega) \forall \omega \in \Omega$. This extends the idea of ``an unfeasible event must be impossible'', to a weak connection between probabilities and possibilities. In situations where the true probability $p$ is unknown, this principle is useful for defining a set of all probability distributions that are compatible with our current knowledge. 
+
+An illustrative example is presented to facilitate the understanding of both probability and possibility measures, as well as the distinction between possibilities and memberships:
+
+
+\begin{example}[Probabilities, Possibilities, and Memberships: \textit{An Ugly Die}]
+    
+    Imagine a six-sided die where each face, $\omega \in \Omega = \{1, 2, \dots, 6\}$, has a different painting on it. We want to model this situation using three distinct numerical scales:
+    
+    \begin{enumerate}
+        \item \textbf{Probability $p(\omega)$}: This represents the objective, long-run frequency of an outcome. In general, we do not know the probability distribution of a random experiment, but let us assume for the example that the die is \textit{actually} fair, so the probability of any face appearing is uniform.
+        
+        \item \textbf{Feasibility Possibility $\pi_F(\omega)$}: This captures our \textit{prior belief} about the die's behavior. Before rolling it, we handle the die and get the impression that face 1 feels slightly heavier. On a standard die, the opposite face is 6, so we believe it is more feasible (i.e., more likely based on our current knowledge) for face 6 to land up. We also think faces 1 and 6 are more plausible outcomes than the others, which all seem equally possible. This expresses our subjective epistemic uncertainty.
+        
+        \item \textbf{Beauty Membership $\mu_B(\omega)$}: This represents our subjective \textit{preference} or aesthetic judgment. It quantifies the degree to which each face's painting belongs to our own concept of a ``beautiful face".
+    \end{enumerate}
+    
+    These three distinct concepts are summarized in the table below:
+    
+    \begin{center}
+    \begin{tabular}{c|c|c|c}
+        \textbf{Face ($\omega$)} & \textbf{Probability $p(\omega)$} & \textbf{Feasibility $\pi_F(\omega)$} & \textbf{Beauty $\mu_B(\omega)$} \\
+        \hline
+        1 & $1/6 \approx 0.167$ & 0.7 (Plausible) & 0.0 (Awful) \\
+        2 & $1/6 \approx 0.167$ & 0.5 (Possible) & 0.0 (Awful) \\
+        3 & $1/6 \approx 0.167$ & 0.5 (Possible) & 0.0 (Awful) \\
+        4 & $1/6 \approx 0.167$ & 0.5 (Possible) & 0.0 (Awful) \\
+        5 & $1/6 \approx 0.167$ & 0.5 (Possible) & 0.1 (A bit nice) \\
+        6 & $1/6 \approx 0.167$ & 1.0 (Most feasible) & 1.0 (Beautiful) \\
+    \end{tabular}
+    \end{center}
+    
+    Then, \textit{what is the probability of getting a beautiful face?}
+    
+    To answer this, we must first define the event ``getting a beautiful face" as a crisp set over the set of outcomes, where our probability measure is defined. This crisp set depends on the \textbf{beauty membership} $\mu_B$. A natural way is to construct $B$ containing all faces that have a non-zero degree of beauty (any other desired threshold could be used):
+    \[ B = \{\omega \in \Omega \mid \mu_B(\omega) > 0\} = \{5, 6\} \]
+    The probability of this event is then calculated, as with any other event, by summing the probability masses of its elements:
+    \[ P(B) = p(5) + p(6) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3} \]
+    The only role of the membership function $\mu_B$ was to \textit{define the crisp event} $B$. The possibility distribution $\pi_F$ was entirely irrelevant for this specific calculation.
+    
+    \textit{Why use a possibility distribution at all?}
+
+    As mentioned, a primary utility of a feasibility model like $\pi_F$ is to constrain the set of plausible probability distributions when the true probability is unknown, via the consistency principle $p(\omega) \leq \pi_F(\omega)$. However, this approach carries a significant risk: if the possibility distribution imposes bounds that are too restrictive (e.g., if we had mistakenly set $\pi_F(2)=0.1$), the resulting set of compatible probabilities could be completely unrealistic, or even exclude the true probability distribution altogether. For this reason, a conservative approach is generally preferred when modeling with possibilities. It is safer to define wider, less specific bounds to ensure that reality is not inadvertently ruled out by an overly confident or incorrect assumption.
+\end{example}
+
+A relevant question that arises from this example is: What is the difference between using a possibility or a subjective probability (e.g. Bayesian framework)? Two main distinctions can be identified: The possibility measure offers more expressiveness than a probability measure because it allows the representation of concepts such as absolute ignorance (where every subset has equal measure), which cannot be represented with an additive measure\cite{Dubois1997}. Additionally, a possibility measure do not specify the likelihood of any event (even though it can be used to derive a probability distribution, see the next subsection), making the direct update via Bayes rule illogical. Therefore, possibility distributions do not replace subjective probabilities, but rather provide a less restricted representation of our current knowledge from where a subjective probability could be derived.\\
+
+\begin{remark}
+    Not all the possibility distributions must be derived using only the subjective intuition of a decision maker as in the example. Data and more structured ``objective"\footnote{The objectivity of this approach is debatable since the selection of data and how it is processed can involve subjective choices despite being justifiable.} approaches could be used, or a mix of both. 
+    For instance, the feasibility of a car making a sharp turn is based on physical limits: while completing the turn is fully possible ($\pi=1$) at 16~km/h, it becomes only partially possible at 64~km/h as the required centripetal force approaches the maximum friction of the tires, and physically impossible ($\pi=0$) at 97~km/h.
+\end{remark}
+
+Complementary to the possibility measure is its dual measure, called necessity measure, which quantifies the degree to which an event is not just feasible, but certain.
+
+\begin{definition}[Necessity Measure]
+A necessity measure $N$ is the dual of a possibility measure $\Pi$, and is defined for any set $A \subseteq \Omega$ by:
+\[ N(A) = 1 - \Pi(A^c) \]
+where $A^c$ is the complement of $A$.
+\end{definition}
+
+The intuition behind this formula can be understood by thinking about what it means for an event to be certain based on our knowledge. An event $A$ is absolutely certain only if its complement, $A^c$ (the event "not A"), is absolutely impossible (unfeasible). If there is any feasibility to "not A", our certainty in "A" must be diminished.
+
+The term $\Pi(A^c)$ precisely captures this ``plausibility of doubt". It is the highest degree of support our knowledge gives to any outcome outside of $A$. In the context of the consistency principle from Zadeh, necessity is interpreted as a lower bound for the probability distribution:
+\[N(A) \le P(A) \le \Pi(A)\]
 
 \subsection{Probability-Possibility Transformations}
-Despite their distinct conceptual foundations, probability and possibility measures are not entirely disconnected. The relationship $N(A) \le P(A) \le \Pi(A)$ \signal{Mencionar los principios de los que salle esta desigualdad} suggests an ordering and provides a basis for transformations. Transformations between these measures are often wanted for practical reasons:
+
+The relationship $N(A) \le P(A) \le \Pi(A)$ \signal{Mencionar los principios de los que salle esta desigualdad} suggests an ordering and provides a basis for transformations. Transformations between these measures are often wanted for practical reasons:
 \begin{itemize}
     \item We might have probabilistic information but need a possibilistic model for certain types of reasoning (e.g., reasoning about feasibility under uncertainty).
     \item We might have possibilistic information (e.g., from expert elicitation of what's feasible) but need a probability distribution for decision-making processes that require expected utility calculations.
