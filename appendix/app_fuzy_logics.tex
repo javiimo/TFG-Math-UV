@@ -30,39 +30,47 @@ Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logica
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[node distance=1cm and 2.5cm]
-        
-        \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic}; 
-    
-        \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
-            \textbf{Propositional Logic Syntax}
-            \begin{itemize}
-                \setlength\itemsep{0em}
-                \item Propositional Variables ($P, Q$)
-                \item Truth Constants (e.g., $\bar{0}, \bar{1}$)
-                \item Logical Connectives ($\Rightarrow$, $\land$, $\lor$, $\neg$)
-                \item Formation Rules for WFFs
-            \end{itemize}
-        };
-    
-        \node[block_ext, right=of prop_syntax] (pred_syntax) {
-            \textbf{FOL Syntax (Extends Propositional)}
+        % title
+        \node[title] (title_syntax) {Syntax: Propositional \textrightarrow{} Predicate Logic};
 
-            \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements plus:}}
+        % propositional syntax block
+        \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
+            \textbf{Fuzzy Propositional Syntax}
             \begin{itemize}
                 \setlength\itemsep{0em}
-                \item Object Symbols: Variables ($x$), Constants ($c$)
-                \item Structure Symbols: Predicates ($P(\cdot)$), Functions ($f(\cdot)$)
-                \item Quantifiers ($\oldforall, \exists$)
-                \item Terms (functions on objects)
-                \item Atomic Formulas (predicates on terms)
-                \item Extended Formation Rules for WFFs
+                \item Propositional variables ($p, q, \dots$)
+                \item Truth constants ($0,1$)
+                \item Connectives:
+                  $\otimes$ (t\textendash{}norm conj.),
+                  $\rightarrow$ (residuum),
+                  $\neg$ (negation)
+                \item Formation rules for WFFs
             \end{itemize}
         };
+
+        % predicate syntax block
+        \node[block_ext, right=of prop_syntax] (pred_syntax) {
+            \textbf{Fuzzy Predicate Syntax (extends propositional)}
+
+            \textcolor{pastelred!70!black}{\textit{Adds object structure:}}
+            \begin{itemize}
+                \setlength\itemsep{0em}
+                \item Object variables ($x,y,\dots$), constants ($c$)
+                \item Function symbols ($f, g, \dots$)
+                \item Predicate symbols ($P, R, \dots$)
+                \item Quantifiers ($\forall$, $\exists$)
+                \item Terms and atomic formulas ($P(t_1,\dots,t_n)$)
+                \item Extended formation rules for WFFs
+            \end{itemize}
+        };
+
         \path [line] (prop_syntax.east) -- (pred_syntax.west) node [midway, above, font=\footnotesize] {Extends with};
     \end{tikzpicture}}
-    \caption{Syntax elements for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
-    \label{fig:syntax_diagram}
-    \end{figure}
+    \caption{Syntax elements for fuzzy propositional logic and their extension to fuzzy predicate logic.}
+    \label{fig:fuzzy_syntax_diagram}
+\end{figure}
+
+
 
 \paragraph{Semantics} assigns meaning to these WFFs, primarily by defining how truth is determined. For classical propositional logic, this involves assigning truth values (True or False) to atomic propositions and the meaning of the logical connectives, often illustrated using truth tables \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}. Each distinct assignment of truth values to atomic propositions constitutes a model \cite[Sec.~3.1]{Agler2013SymbolicLogic}. A WFF is semantically valid (e.g., a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if it is true in all possible models. For predicate logic, semantics include as well interpretations over a domain of discourse, assigning objects to names and sets of objects (or n-tuples) to predicates \cite[Ch.~6.4]{Agler2013SymbolicLogic}.
 
@@ -70,41 +78,55 @@ Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logica
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[node distance=1cm and 2.5cm]
-        \node[title] (title_sem) {Semantics: Propositional to Predicate Logic};
-        \node[block, below=0.5cm of title_sem, xshift=-1cm] (prop_sem) {
-            \textbf{Propositional Logic Semantics}
-            \begin{itemize}
-                \setlength\itemsep{0em}
-                \item Truth Value Algebra $\mathbf{L}$ (e.g., $[0,1]$ with t-norm, residuum)
-                \item Evaluation $e$: assigns truth values to propositional variables
-                \item Truth functions for connectives
-            \end{itemize}
-        };
-        \node[block_ext, right=of prop_sem] (pred_sem) {
-            \textbf{FOL Semantics (Extends Propositional)}
+        % title
+        \node[title] (title_sem) {Semantics: Propositional \textrightarrow{} Predicate Logic};
 
-            \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra plus:}}
+        % propositional semantics block
+        \node[block, below=0.5cm of title_sem, xshift=-1cm] (prop_sem) {
+            \textbf{Fuzzy Propositional Semantics}
             \begin{itemize}
                 \setlength\itemsep{0em}
-                \item Domain of Discourse $U$
-                \item Interpretation (Model) $\mathcal{M}$ maps:
-                    \begin{itemize}
-                    \setlength\itemsep{0em}
-                        \item Constants $\rightarrow$ elements in $U$
-                        \item Function symbols $\rightarrow$ functions on $U$
-                        \item Predicate symbols $\rightarrow$ fuzzy relations on $U$ ($r_P: U^n \to \mathbf{L}$)
-                    \end{itemize}
-                \item Variable Assignment $v: \text{ObjVars} \to U$
-                \item Truth for atomic formulas via fuzzy relations
-                \item Truth for connectives (as propositional)
-                \item Truth for quantifiers (inf/sup over domain)
+                \item Truth‑value algebra $\mathbf{L}=\langle[0,1],\min,\max,T,\rightarrow_T,0,1\rangle$
+                \item Evaluation $e$: variables $\to$ $[0,1]$
+                \item Truth functions for $\otimes,\rightarrow,\neg$ given by $T,\rightarrow_T,1{-}x$
             \end{itemize}
         };
+
+        % predicate semantics block
+        \node[block_ext, right=of prop_sem] (pred_sem) {
+            \textbf{Fuzzy Predicate Semantics (extends propositional)}
+
+            \textcolor{pastelred!70!black}{\textit{Adds structure interpretation:}}
+            \begin{itemize}
+                \setlength\itemsep{0em}
+                \item Domain of discourse $U$
+                \item Interpretation $\mathcal{M}$ maps
+                  \begin{itemize}
+                      \setlength\itemsep{0em}
+                      \item Constants $\to U$
+                      \item $n$‑ary functions $\to U^{n} \to U$
+                      \item $n$‑ary predicates $\to U^{n} \to [0,1]$
+                  \end{itemize}
+                \item Variable assignment $v: \text{ObjVars} \to U$
+                \item Truth of atomic $P(t_1,\dots,t_n)$ via $\mathcal{M}(P)(v(t_1),\dots)$
+                \item Connectives as in propositional case
+                \item Quantifiers: 
+                
+                $\displaystyle \|
+                    \forall x\,\varphi\|_{v}^{\mathcal{M}} 
+                      = \inf_{u\in U}\|\varphi\|_{v[x\mapsto u]}^{\mathcal{M}}$
+
+
+                  $\displaystyle \|\exists x\,\varphi\|_{v}^{\mathcal{M}} 
+                      = \sup_{u\in U}\|\varphi\|_{v[x\mapsto u]}^{\mathcal{M}}$
+            \end{itemize}
+        };
+
         \path [line] (prop_sem.east) -- (pred_sem.west) node [midway, above, font=\footnotesize] {Extends with};
     \end{tikzpicture}}
-    \caption{Diagram summarizing the extension of semantics from fuzzy propositional logic to fuzzy predicate logic. Based on the ideas from \cite[Ch.~2,5]{Hajek1998}.}
-    \label{fig:semantics_diagram}
-    \end{figure} 
+    \caption{Semantic ingredients for fuzzy propositional logic and their extension to fuzzy predicate logic.}
+    \label{fig:fuzzy_semantics_diagram}
+\end{figure}
 
 \paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), i.e. using only the axioms without specific assumptions, it is called a theorem of the logic.\\
 
