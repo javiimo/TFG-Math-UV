@@ -149,7 +149,7 @@ A relevant question that arises from this example is: What is the difference bet
     For instance, the feasibility of a car making a sharp turn is based on physical limits: while completing the turn is fully possible ($\pi=1$) at 16~km/h, it becomes only partially possible at 64~km/h as the required centripetal force approaches the maximum friction of the tires, and physically impossible ($\pi=0$) at 97~km/h.
 \end{remark}
 
-Complementary to the possibility measure is its dual measure, called necessity measure, which quantifies the degree to which an event is not just feasible, but certain.
+Complementary to the possibility measure is its dual measure, called necessity measure, which quantifies the degree to which an event is not just feasible, but certain. The notion of necessity was not discussed in Zadeh's original paper but was subsequently introduced in the literature.
 
 \begin{definition}[Necessity Measure]
 A necessity measure $N$ is the dual of a possibility measure $\Pi$, and is defined for any set $A \subseteq \Omega$ by:
@@ -157,14 +157,14 @@ A necessity measure $N$ is the dual of a possibility measure $\Pi$, and is defin
 where $A^c$ is the complement of $A$.
 \end{definition}
 
-The intuition behind this formula can be understood by thinking about what it means for an event to be certain based on our knowledge. An event $A$ is absolutely certain only if its complement, $A^c$ (the event "not A"), is absolutely impossible (unfeasible). If there is any feasibility to "not A", our certainty in "A" must be diminished.
+The intuition behind this formula can be understood by thinking about what it means for an event to be certain based on our knowledge. An event $A$ is absolutely certain only if its complement, $A^c$ (the event ``not A"), is absolutely impossible (unfeasible). If there is any feasibility to ``not A", our certainty in ``A" must be diminished.
 
 The term $\Pi(A^c)$ precisely captures this ``plausibility of doubt". It is the highest degree of support our knowledge gives to any outcome outside of $A$. In the context of the consistency principle from Zadeh, necessity is interpreted as a lower bound for the probability distribution:
 \[N(A) \le P(A) \le \Pi(A)\]
 
 \subsection{Probability-Possibility Transformations}
 
-The relationship $N(A) \le P(A) \le \Pi(A)$ \signal{Mencionar los principios de los que salle esta desigualdad} suggests an ordering and provides a basis for transformations. Transformations between these measures are often wanted for practical reasons:
+\signal{The relationship $N(A) \le P(A) \le \Pi(A)$ \signal{Mencionar los principios de los que salle esta desigualdad} suggests an ordering and provides a basis for transformations. Transformations between these measures are often wanted for practical reasons:
 \begin{itemize}
     \item We might have probabilistic information but need a possibilistic model for certain types of reasoning (e.g., reasoning about feasibility under uncertainty).
     \item We might have possibilistic information (e.g., from expert elicitation of what's feasible) but need a probability distribution for decision-making processes that require expected utility calculations.
@@ -185,7 +185,7 @@ A well-known example is the pignistic transform (context of belief functions, of
 \[ p(\omega) = \sum_{j=1}^{m} \frac{\alpha_{j-1} - \alpha_j}{|E_{j-1}|} \mathbf{1}_{\{\omega \in E_{j-1}\}} \]
 Elements that are equally highly possible share the available probability mass assigned to that level of possibility. This transform selects the probability distribution that is maximally non-committal (maximizes entropy) within the constraints imposed by the possibility measure. These transformations add assumptions to select one specific probability distribution from many consistent ones.
 
-\signal{Tengo que añadir las limitaciones de este tipo de transformaciones y referenciarlo todo esto a sus papers.}
+\signal{Tengo que añadir las limitaciones de este tipo de transformaciones y referenciarlo todo esto a sus papers.}}
 % \subsubsection{Limitations and Assumptions of Transformations}
 % It is crucial to understand that transformations are not universally applicable without careful consideration of their underlying assumptions:
 % \begin{enumerate}
@@ -193,3 +193,26 @@ Elements that are equally highly possible share the available probability mass a
 %     \item \textbf{Information Loss/Gain:} Transforming $P \to \Pi$ loses the precision of additivity. Transforming $\Pi \to P$ involves making assumptions (like maximum entropy or insufficient reason) to pick one $P$ out of a set of possibilities. The choice of transformation method itself is an assumption.
 %     \item \textbf{Semantic Alignment:} Transformations are most meaningful when probability and possibility are indeed modeling different facets of the \textit{same underlying uncertainty}. If they model completely unrelated concepts, applying formal transformations can be a category mistake, as the numbers, despite being in $[0, 1]$, have entirely different semantics.
 % \end{enumerate}
+
+
+
+The relationship $N(A) \le P(A) \le \Pi(A)$, provides the foundational link between probability and possibility. It establishes that a possibility measure $\Pi$ does not correspond to a single probability measure, but rather defines a family of consistent probability measures (also called a credal set $\mathcal{P}(\Pi)$) for which it serves as an upper bound.
+
+Transformations between these formalisms are motivated by the need to bridge different forms of information. As explained by Dubois and Prade \cite{Dubois1997}, these transformations are not arbitrary but are guided by information principles. When moving from a precise probability to a less specific\footnote{Possibility distributions have greater expressive power while carrying less specific information. They are less restrictive than the probability distributions they bound, which makes them both more flexible in representation but less definitive in their implications.} possibility, the goal is to lose minimal information by constructing the tightest possible bounds. Conversely, when moving from a possibilistic model to a single probability measure, the goal is to add minimal new information by making the weakest, most non-committal assumption necessary.\\
+The transformation formulas presented in this subsection are valid for the discrete case, the continuous case can also be found in \cite{Dubois1997}.
+
+\subsubsection{From Probability to Possibility (P$\to\Pi$): The Principle of Maximum Specificity}
+When converting a known probability distribution $p$ to a possibility distribution $\pi$, the objective is to find the most specific (or tightest) possibility distribution that remains consistent with $p$. This ensures that the resulting possibilistic model is as informative as possible.
+
+A standard method that achieves this is based on preserving the preference ordering of the probabilities. Given a probability distribution $p$ over a finite universe $\Omega = \{\omega_1, \dots, \omega_n\}$, with elements ordered such that their probabilities are non-increasing ($p_1 \ge p_2 \ge \dots \ge p_n$), the transformation is defined as:
+\[ \pi(\omega_k) = \sum_{i=k}^{n} p_i \]
+The possibility of an outcome $\omega_k$ is the total probability mass of all outcomes that are equally or less probable than $\omega_k$. This construction guarantees consistency ($P(A) \le \Pi(A)$) and creates the tightest possible possibilistic envelope around the probability distribution \cite{Dubois1997}. This transformation is an act of summarization, trading the precision of an additive measure for a qualitative, less demanding representation of uncertainty.
+
+\subsubsection{From Possibility to Probability ($\Pi\to$P): The Principle of Insufficient Reason}
+Conversely, transforming a possibility distribution $\pi$ into a single probability distribution $p$ requires selecting one representative from the credal set $\mathcal{P}(\Pi)$. This involves an ``information filling-in" step, guided by the principle of insufficient reason or ``least commitment". The aim is to derive a probability measure that reflects the uncertainty encoded in $\pi$ without adding extraneous assumptions.
+
+A well-known transformation, consistent with this principle, distributes the probability mass associated with each possibility level uniformly among the elements that attain it. Given distinct possibility levels $1 = \alpha_0 > \alpha_1 > \dots > \alpha_m > 0$, the probability mass $(\alpha_{j-1} - \alpha_j)$, which represents the ``drop" in confidence between levels, is shared equally among all elements in the $\alpha_{j-1}$ level-cut ($E_{j-1} = \{\omega : \pi(\omega) \ge \alpha_{j-1}\}$). The resulting probability for an element $\omega$ is the sum of all the shares it receives:
+\[ p(\omega) = \sum_{j=1}^{m} \frac{\alpha_{j-1} - \alpha_j}{|E_{j-1}|} \cdot \mathbf{1}_{E_{j-1}}(\omega) \]
+This method, also known as a pignistic transform in belief function theory, yields the center of gravity of the credal set $\mathcal{P}(\Pi)$ \cite{Dubois1997}. It produces a single, usable probability distribution by making the maximally non-committal assumption of uniformity wherever the possibility distribution allows for ambiguity.
+
+It is important to note that the principles of maximum specificity and insufficient reason are not the only guides for such transformations. Other approaches exist, driven by different objectives. For instance, some methods aim to preserve information-theoretic quantities like entropy (as in the work of Klir \cite{Klir1990}) or to optimize a specific consistency index (as in Civanlar and Trussell \cite{Civanlar1986}). The choice of transformation ultimately depends on the intended application: whether the goal is a faithful logical approximation, a pragmatic basis for decision-making, or the preservation of specific mathematical properties across different uncertainty formalisms.
