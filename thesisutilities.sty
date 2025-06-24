@@ -78,34 +78,35 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Abstract
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Default options
-\definecolor{defaultabstractrulecolor}{rgb}{0,0,0} % Define a default color
-\newcommand{\abstractrulecolor}{defaultabstractrulecolor}
-\newcommand{\abstracttitlesize}{\large}
+% -------------------------------------------
+%  Minimal, elegant poliabstract  (book class)
+% -------------------------------------------
+\RequirePackage{xcolor}
 
-% Allow overriding options
-\DeclareOption{rulecolor}{\def\abstractrulecolor{#1}}
-\DeclareOption{titlesize}{\def\abstracttitlesize{\csname #1\endcsname}}
-\ProcessOptions\relax
+% --- accent & text colours ------------------
+\definecolor{granate}{HTML}{7A1530}  % deep burgundy
+\definecolor{textgrey}{HTML}{222222} % soft charcoal
 
-% Define custom abstract environment
-\newenvironment{abstract}{%
-    \vspace*{2em}
-    \begin{center}
-        {\abstracttitlesize\bfseries\abstractname}
-    \end{center}
-    \vspace{1em}
-    \noindent\textcolor{\abstractrulecolor}{\rule{\textwidth}{0.5pt}}
-    \par
-    \noindent
+% --- poliabstract ---------------------------
+% \begin{poliabstract}[<Title>]
+%   ... abstract text ...
+% \end{poliabstract}
+%
+% <Title> is optional; defaults to “Abstract”
+% -------------------------------------------
+\NewDocumentEnvironment{poliabstract}{O{Abstract}}{%
+  \begingroup
+    %\centering
+    {\centering\bfseries\large\color{granate} #1\par}% title
+    \vskip0.6em
+    \noindent\color{granate}\rule{\textwidth}{0.5pt}%
+    \vskip0.9em
+    \normalfont\color{textgrey}% body text colour
 }{%
-    \par\vspace{1em}
-    \noindent\textcolor{\abstractrulecolor}{\rule{\textwidth}{0.5pt}}
+  \par\endgroup
 }
-\newcommand{\abstractname}{Abstract}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Theorem-like envs

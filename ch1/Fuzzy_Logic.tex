@@ -20,12 +20,12 @@ If continuity of the t-norm is imposed (rather than just left-continuity), the d
 
 As stated in section \ref{sec:class_tnorms}, all continuous t-norms can be decomposed (as an ordinal sum) from \luka, Gödel and Product t-norms. These yield the three major systems of fuzzy logic, obtained by extending BL with axioms reflecting these t-norms:
 \begin{itemize}
-    \item \textbf{Łukasiewicz Logic ($\L$)} is characterized by the standard negation ($1-x$) and an axiom equivalent to $\lnot\lnot\phi \rightarrow \phi$. Its algebraic structures are MV-algebras~\cite[Ch. 3]{Hajek1998}.
+    \item \textbf{Łukasiewicz Logic (\L)} is characterized by the standard negation ($1-x$) and an axiom equivalent to $\lnot\lnot\phi \rightarrow \phi$. Its algebraic structures are MV-algebras~\cite[Ch. 3]{Hajek1998}.
     \item \textbf{Gödel Logic (G)} is based on the minimum t-norm and is characterized by the idempotence of its conjunction: $\phi \rightarrow (\phi \& \phi)$; its semantics are given by G-algebras, a subclass of linearly ordered Heyting algebras~\cite[Sec. 4.2]{Hajek1998}.
     \item \textbf{Product Logic ($\Pi$)} is based on the product t-norm and incorporates additional properties characteristic of multiplication. Its standard negation is the Gödel-style negation: $\lnot x$ is $1$ if $x=0$, $0$ if $x>0$; algebraically, its models are product algebras~\cite[Sec. 4.1]{Hajek1998}.
 \end{itemize}
 
-Fuzzy \textbf{disjunction (OR)} and \textbf{negation (NOT)} in these logics are typically generalized from classical set union and complement. Negation is defined in MTL, BL, and their extensions as $\lnot \phi := \phi \rightarrow 0$. Its specific properties depend on the logic (involutive in $\L$, not so in G and $\Pi$). Disjunction is definable, e.g., in MTL, by $\phi \vee \psi := \big((\phi \rightarrow \psi) \rightarrow \psi\big) \wedge \big((\psi \rightarrow \phi) \rightarrow \phi\big)$~\cite[Def. 1]{GodoMonoidal}~\cite[Def. 2.2.1]{Hajek1998}. This definition coincides, in many systems of fuzzy logic, with a t-conorm (or s-norm), the dual of a t-norm, which generalizes the logical OR and the set-theoretic union.
+Fuzzy \textbf{disjunction (OR)} and \textbf{negation (NOT)} in these logics are typically generalized from classical set union and complement. Negation is defined in MTL, BL, and their extensions as $\lnot \phi := \phi \rightarrow 0$. Its specific properties depend on the logic (involutive in \L, not so in G and $\Pi$). Disjunction is definable, e.g., in MTL, by $\phi \vee \psi := \big((\phi \rightarrow \psi) \rightarrow \psi\big) \wedge \big((\psi \rightarrow \phi) \rightarrow \phi\big)$~\cite[Def. 1]{GodoMonoidal}~\cite[Def. 2.2.1]{Hajek1998}. This definition coincides, in many systems of fuzzy logic, with a t-conorm (or s-norm), the dual of a t-norm, which generalizes the logical OR and the set-theoretic union.
 
 \subsection{Fuzzy Implications}
 
