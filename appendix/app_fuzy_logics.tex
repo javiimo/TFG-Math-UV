@@ -14,7 +14,7 @@ The early 20th century brought both ambitious hopes and fundamental limitations.
 \label{app:form_log}
 
 As Hájek states: \say{Logic studies the notion(s) of consequence. [...] The task of formal logic is to represent all this by means of well-defined
-logical calculi admitting exact investigation}\cite[p.1]{Hajek1998}. A formal logic provides a precise framework for reasoning. Examples of formal logics are:
+logical calculi admitting exact investigation}\cite[p.1]{Hajek1998}. A formal logic provides a precise framework for reasoning and is composed by a language (syntax), a meaning (semantics) and a proof system. Examples of formal logics are:
 
 \begin{itemize}
     \item Propositional logic (PL, also called Sentential logic)\cite[Ch.~6]{ConciseLogicBook}: it deals with statements (propositions) and combinations of them through connectives ($ \lor, \land, \neg, \rightarrow, \leftrightarrow$).
@@ -22,9 +22,8 @@ logical calculi admitting exact investigation}\cite[p.1]{Hajek1998}. A formal lo
     \item Other families of formal logics often build upon, extend, or modify the principles of propositional or predicate logic. Some examples include: modal logics, temporal logics, intuitionistic logic and many-valued logics.
 \end{itemize}
 
-Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logical calculus has two notions of consequence: syntactical (based on a notion of proof) and semantical (based on a notion of truth); then the natural questions of soundness (does provability imply truth?) and completeness (does truth imply provability?) pose themselves.} A formal logic is typically characterized by its syntax, semantics, and a proof system.
 
-\paragraph{Syntax} defines the formal language: its vocabulary of basic symbols (like propositional variables $P, Q$ and connectives $\neg, \rightarrow$) and formation rules for constructing well-formed formulas (WFFs)\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that do not make sense and would not be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".\cite[Sec.~2.3.3]{Agler2013SymbolicLogic}} (e.g., $(P \rightarrow Q)$ in PL \cite[Sec.~2.3.3]{Agler2013SymbolicLogic}).
+\paragraph{Syntax} defines the formal language: its vocabulary of basic symbols (used to define operations, predicates and constants) and formation rules for constructing well-formed formulas (WFFs)\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that do not make sense and would not be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".\cite[Sec.~2.3.3]{Agler2013SymbolicLogic}} (e.g., $(P \rightarrow Q)$ in PL \cite[Sec.~2.3.3]{Agler2013SymbolicLogic}). Figure~\ref{fig:fuzzy_syntax_diagram} summarises the jump from propositional to predicate syntax in the fuzzy setting, where $\otimes$ and $\to$ are a $t$-norm and its residuum.
 
 \begin{figure}[!ht]
     \centering
@@ -72,7 +71,7 @@ Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logica
 
 
 
-\paragraph{Semantics} assigns meaning to these WFFs, primarily by defining how truth is determined. For classical propositional logic, this involves assigning truth values (True or False) to atomic propositions and the meaning of the logical connectives, often illustrated using truth tables \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}. Each distinct assignment of truth values to atomic propositions constitutes a model \cite[Sec.~3.1]{Agler2013SymbolicLogic}. A WFF is semantically valid (e.g., a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if it is true in all possible models. For predicate logic, semantics include as well interpretations over a domain of discourse, assigning objects to names and sets of objects (or n-tuples) to predicates \cite[Ch.~6.4]{Agler2013SymbolicLogic}.
+\paragraph{Semantics} Truth is evaluated in \emph{models}. For classical PL the two-element Boolean algebra $\mathbf 2={0,1}$ and truth tables suffice. Fuzzy PL typically uses the unit interval $[0,1]$ equipped with a left-continuous $t$-norm $T$ and its residuum $\to_T$. Figure~\ref{fig:fuzzy_semantics_diagram} shows how the same truth-value algebra is reused when moving to fuzzy predicate logic, where a model additionally interprets symbols over a domain $U$ and quantifiers ($\oldforall, \exists$) by infima and suprema.
 
 \begin{figure}[!ht]
     \centering
@@ -86,7 +85,7 @@ Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logica
             \textbf{Fuzzy Propositional Semantics}
             \begin{itemize}
                 \setlength\itemsep{0em}
-                \item Truth‑value algebra $\mathbf{L}=\langle[0,1],\min,\max,T,\rightarrow_T,0,1\rangle$
+                \item Truth-value algebra $\mathbf{L}=\langle[0,1],\min,\max,T,\rightarrow_T,0,1\rangle$
                 \item Evaluation $e$: variables $\to$ $[0,1]$
                 \item Truth functions for $\otimes,\rightarrow,\neg$ given by $T,\rightarrow_T,1{-}x$
             \end{itemize}
@@ -104,8 +103,8 @@ Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logica
                   \begin{itemize}
                       \setlength\itemsep{0em}
                       \item Constants $\to U$
-                      \item $n$‑ary functions $\to U^{n} \to U$
-                      \item $n$‑ary predicates $\to U^{n} \to [0,1]$
+                      \item $n$-ary functions $\to U^{n} \to U$
+                      \item $n$-ary predicates $\to U^{n} \to [0,1]$
                   \end{itemize}
                 \item Variable assignment $v: \text{ObjVars} \to U$
                 \item Truth of atomic $P(t_1,\dots,t_n)$ via $\mathcal{M}(P)(v(t_1),\dots)$
@@ -128,50 +127,77 @@ Continuing with the cites from Hájek \cite[p.1]{Hajek1998}: \say{Often a logica
     \label{fig:fuzzy_semantics_diagram}
 \end{figure}
 
-\paragraph{Proof System (or Deductive System)} provides a way to derive WFFs from other WFFs. It consists of axioms (if any) and rules of inference (like Modus Ponens\footnote{Some formal logics such as Hilbert Systems, rely on having a sufficiently expressive set of axioms and Modus Ponens as their only rule of inference then other rules can be deduced\cite[Sec.~1.2, Def.~1.2.6]{Hajek1998}. Hilbert Systems can be used to define Classical Propositional Logics satisfying completeness. In general, more rules may be defined as well, such as the substitution rule in Gentzen Calculus for intuitionistic logic. \cite[p.~39]{ResiduatedLattices2007}}) \cite[Sec.~5.1, 5.3]{Agler2013SymbolicLogic}. A proof is a finite sequence of WFFs where each WFF is an axiom, a premise (an assumption for the specific argument), or follows from preceding WFFs in the sequence by a rule of inference \cite[Sec.~5.1]{Agler2013SymbolicLogic}. A formula $\phi$ is provable from a set of premises $\Gamma$ (written $\Gamma \vdash \phi$) if such a proof exists. If $\phi$ is provable from no premises ($\vdash \phi$), i.e. using only the axioms without specific assumptions, it is called a theorem of the logic.\\
+\paragraph{Proof System (or Deductive System)} A calculus supplies axioms and inference rules (e.g. Modus Ponens).  A \emph{proof} is a finite sequence each of whose lines is either an axiom or obtained from previous lines by a rule.  We write $\Gamma\vdash\varphi$ if $\varphi$ has a proof from premises $\Gamma$.  A theorem is a formula provable from the empty set.
 
-The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic: soundness ensures that only valid formulas are provable ($\vdash \phi \implies \models \phi$), while completeness ensures that all valid formulas are provable ($\models \phi \implies \vdash \phi$) \cite[Lemmas~1.2.7, 1.2.9]{Hajek1998}. When a logic is both sound and complete, provability and validity become equivalent concepts. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
-
-
-
-
-\section{Algebraic Logic}
-\label{app:alg_log}
-Algebraic logic investigates the connections between logical systems and algebraic structures, a field advanced by Tarski's work on propositional formulas \cite[p.~1]{BlokPigozzi1989}. \signal{The key insight is that provable statements and logical equivalences within a deductive system correspond to properties of operations in algebraic structures.} For example, classical propositional logic maps directly to Boolean algebras. This relationship can be understood through both the syntax (proof theory) and semantics (model theory) of a logic.
-
-\paragraph{From the Syntactic Side} For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra}. The process begins by grouping formulas into equivalence classes. Two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$. This notion of equivalence must be compatible with the logical connectives, meaning $\leftrightarrow$ behaves as a congruence relation \cite[p.~1-2]{BlokPigozzi1989}. The logical connectives (e.g., $\wedge, \lor, \rightarrow$) then naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).
-
-The specific type of algebraic structure that results (e.g., a Boolean algebra for classical propositional logic, or a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}) is entirely determined by the axioms and inference rules of the logic itself. In this algebra, a formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ``top" element (often denoted $1$ or $\top$), representing provable truth. The Lindenbaum-Tarski algebra is, in a specific sense, the ``most general" algebraic model for the logic, as it satisfies precisely those algebraic laws corresponding to the logic's theorems and no others.
-
-\paragraph{From the Semantic Side} We can define the meaning or interpretation of a logic by choosing a class of algebraic structures, $\mathcal{K}$, to serve as its models.\footnote{A class $\mathcal{K}$ is typically a collection of algebraic structures that share the same signature (sets of operations with same ary) and satisfy common defining properties. Often, $\mathcal{K}$ forms a \textit{variety} (defined by equations) or a \textit{quasivariety} (defined by quasi-equations) \cite[Def.~2.2]{BlokPigozzi1989}.}
-
-The elements of an algebra $A \in \mathcal{K}$ are the truth values. For classical propositional logic, this is typically the two-element Boolean algebra $\mathbf{2} = (\{0,1\}, \land, \lor, \neg, 0, 1)$. For many fuzzy logics, the truth values come from the real unit interval $[0,1]$, equipped with suitable operations like t-norms and their residua \cite[Ch.~2]{Hajek1998}.
-
-A \textit{valuation} (or interpretation) $v$ is a homomorphism from the algebra of formulas into an algebra $A \in \mathcal{K}$. This means $v$ maps propositional variables to elements of $A$ and preserves operations corresponding to connectives. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} if $v(\phi)$ evaluates to a designated ``true" value (typically $1$) for all valuations $v$ into every algebra $A \in \mathcal{K}$. For fuzzy logics, these are often called $1$-tautologies \cite[Ch.~2]{Hajek1998}.
-
-\paragraph{Bridging Syntax and Semantics} The crucial link between both approaches is established through soundness and completeness theorems. A logic is \textbf{sound} with respect to a class of algebras $\mathcal{K}$ if every provable formula is a $\mathcal{K}$-tautology. It is \textbf{complete} if every $\mathcal{K}$-tautology is a theorem.
-
-When a logic is sound and complete with respect to $\mathcal{K}$, its Lindenbaum-Tarski algebra is characteristically embedded within $\mathcal{K}$. This means that logical consequence can be effectively translated into equational consequence within $\mathcal{K}$ \cite[Abstract]{BlokPigozzi1989}. Logics with particularly strong and well-defined translations between logical deduction and algebraic reasoning are termed \textbf{algebraizable} \cite[Def.~2.10]{BlokPigozzi1989}.\\
-
-For example, Hájek's Basic Logic (BL) \cite[Ch.~2]{Hajek1998} is complete with respect to the class of all linearly ordered BL-algebras \cite[Thm.~2.3.15]{Hajek1998}. However, BL is \textit{not} complete with respect to the \textit{single} standard Łukasiewicz algebra on $[0,1]$. The formula $\neg \neg \phi \leftrightarrow \phi$ (double negation elimination) is a tautology in this particular algebra but not provable in BL. Thus, the Lindenbaum-Tarski algebra of BL does not satisfy $\neg \neg x = x$, while the standard Łukasiewicz algebra does. This illustrates that the Lindenbaum-Tarski algebra of BL is more general, validating only what is provable in BL, and that completeness often requires a broader class of algebraic models.\\
-
-For semantic purposes (defining truth, checking validity), it's often simpler to work with concrete algebras of truth values rather than directly with the (often infinite and complex) Lindenbaum-Tarski algebra of equivalence classes. Soundness and completeness theorems allow us to do so by showing that provability (tied to the Lindenbaum-Tarski algebra) corresponds to validity in these (often simpler) algebraic models.\\
-
-\signal{It is essentially what you get if you ``quotient" the $L_T$ algebra by its relationship with truth.}\\
-
-\signal{I think that $\mathcal{K}$ contains $L_T$ when we have soundness and completeness.}
-
-\signal{De aquí para adelante en el apéndice tengo que repasarlo bien y resumir y demás, solo he puesto cosas de libros sin redactar del todo bien.}
-
-This algebraic perspective is particularly fruitful for fuzzy logics, where the truth values are typically ordered and often continuous\footnote{\signal{For non-continuous see perfect MV-algebras.}}. The algebraic study of fuzzy logics has identified several important classes of ordered algebraic structures, many of which are based on the real unit interval $[0,1]$ as the set of truth values:
+\paragraph{Soundness and completeness.}  The fundamental goal of a logical system is to align its syntactic derivations with semantic truth. This is represented by two properties of a formal logic:
 \begin{itemize}
-    \item \textbf{Residuated Lattices}: These form a very general algebraic foundation for a wide range of fuzzy and substructural logics. They combine a lattice structure (for conjunction $\wedge$ and disjunction $\vee$) with a monoid operation $\otimes$ (modeling a strong, typically conjunctive, connective, often a t-norm) and its residuum $\rightarrow$ (modeling implication). These operations are linked by the adjointness property: $x \otimes y \leq z \iff x \leq y \rightarrow z$, which captures a fundamental deductive relationship.
-    \item \textbf{MTL-algebras (Monoidal t-norm based Logic algebras)}: These are residuated lattices that are also prelinear (i.e., they satisfy the condition $(x \rightarrow y) \vee (y \rightarrow x) = 1$, reflecting a total order of truth values or a linear framework for comparing implications). They serve as the algebraic counterparts of Monoidal t-norm Logic (MTL), which axiomatizes the tautologies common to all logics based on left-continuous t-norms and their residua.
-    \item \textbf{BL-algebras (Basic Logic algebras)}: These are MTL-algebras that additionally satisfy the divisibility condition: $x \wedge y = x \otimes (x \rightarrow y)$. They are the algebraic semantics for Basic Logic (BL), which is the logic of all continuous t-norms and their residua.
-    \item \textbf{MV-algebras (Łukasiewicz Logic algebras)}: These are BL-algebras that are also involutive, meaning they satisfy $\neg \neg x = x$ (where the negation is defined as $\neg x = x \rightarrow 0$, with $0$ being the bottom element). They are the algebraic semantics for Łukasiewicz logic, which is based on the Łukasiewicz t-norm.
-    \item \textbf{Gödel algebras (G-algebras)}: These are BL-algebras where the monoidal operation $\otimes$ is idempotent ($x \otimes x = x$), which implies that $\otimes$ coincides with the lattice meet operation $\wedge$. They correspond to Gödel logic, based on the minimum t-norm. Gödel algebras are a subclass of Heyting algebras (the algebraic semantics for intuitionistic logic).
-    \item \textbf{Product algebras ($\Pi$-algebras)}: These are BL-algebras satisfying specific additional axioms that characterize product logic, which is based on the algebraic product t-norm.
+\item \emph{Soundness}: $\Gamma\vdash\varphi\Rightarrow\Gamma\models\varphi$ (ensures that only valid formulas are provable).
+
+\item \emph{Completeness}: $\Gamma\models\varphi\Rightarrow\Gamma\vdash\varphi$ (ensures that all valid formulas are provable).
 \end{itemize}
+When both hold, syntactic provability and semantic validity coincide. Semantic truth is achievable through syntactic manipulation.\cite[Thm.~1.2.11]{Hajek1998}
+
+
+\section{Algebraic Logic}\label{app:alg_log}
+Algebraic logic, pioneered by Tarski, studies logics through the equational properties of suitable \emph{truth‑value algebras}.  For classical PL these are Boolean algebras and for most fuzzy logics, \emph{residuated lattices}.  The bridge is built in two directions.
+
+\paragraph{Syntactic side:}   For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra} by defining $\varphi\equiv\psi$ iff $\vdash(\varphi\leftrightarrow\psi)$. This represents that two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic. Since $\equiv$ is a congruence, the quotient of the term algebra forms an algebra $\mathbf{LT}(\mathcal L)$ on equivalence classes $[\varphi]$, where the logical connectives naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).  A formula is provable exactly when its class is the top element $1$.
+
+\paragraph{Semantic side (algebraic models):}  Fix a class $\mathcal K$ of algebras sharing the language of the logic.  A valuation is then a homomorphism from the term algebra to some $A\in\mathcal K$.  A formula $\varphi$ is a \emph{$\mathcal K$-tautology} if $v(\varphi)=1$ for every such valuation.  Soundness and completeness with respect to $\mathcal K$ mean
+
+$$
+  \text{provability}\;\Leftrightarrow\;\mathcal K\text{-tautology},
+$$
+
+which places $\mathbf{LT}(\mathcal L)$ inside the variety generated by $\mathcal K$.
+
+Logics for which the bidirectional translation between proofs and algebraic equations, so that it is possible to fully represent logical inference using algebraic reasoning, are called algebraizable.\emph{algebraizable}\cite[Def.~2.10]{BlokPigozzi1989}.
+
+
+\begin{example}
+    Hájek's Basic Logic (BL) is sound and complete for the class of linearly ordered BL-algebras\cite[Thm.~2.3.15]{Hajek1998}.  It is \emph{not} complete for the single standard Łukasiewicz algebra on $[0,1]$ because the formula $\lnot\lnot x\leftrightarrow x$ holds there but is unprovable in BL, which shows that the entire variety is needed, since a particular algebra might satisfy more equations than the whole class does.
+\end{example}
+
+
+% \subsection{Residuated lattices}  
+% A left-continuous $t$-norm $T$ possesses a \emph{residuum}
+% \[
+%   a\to_T b \;=\; \sup\{c \mid T(a,c)\le b\},
+% \]
+% and the algebra
+% $\langle[0,1],\min,\max,T,\to_T,0,1\rangle$ is a \emph{commutative integral residuated lattice} (CIRL).
+
+% \paragraph{Why this works.}
+% Left-continuity of $T$ guarantees that the set
+% \(\{\,c \mid T(a,c)\le b\}\) is closed and therefore that the supremum
+% exists in \([0,1]\).  Moreover,
+% \[
+%    T(a,c)\le b \;\text{iff}\; c\le a\to_T b,
+% \]
+% so the pair $(T,\to_T)$ satisfies the defining \emph{residuation law}.
+% Because the underlying lattice order on $[0,1]$ is total, we obtain a
+% \emph{standard $T$-chain}.  In substructural and fuzzy logics this
+% residuated structure algebraically models conjunction (\(\otimes\))
+% and implication (\(\to\)), with the residuation law corresponding to
+% modus ponens.  Esteva and Godo showed that the logic \textsf{MTL} is
+% sound and complete for the whole class of such $T$-chains,
+% demonstrating that left-continuity alone suffices to recover full
+% implication-conjunction semantics \cite{GodoMonoidal}.  Hence every
+% left-continuous $t$-norm embeds naturally into the residuated-lattice
+% framework used throughout mathematical fuzzy logic.\\
+
+% Adding just two equational schemata to this base yields
+% \begin{center}
+% \begin{tabular}{@{}lll@{}}
+% \textbf{Logic} & \textbf{Extra law} & \textbf{Algebraic variety} \\ 
+% MTL & prelinearity $(x\to y)\lor(y\to x)$ & MTL-algebras \\
+% BL  & divisibility $x\land y = x\otimes(x\to y)$ & BL-algebras \\
+% $\L$ (Łukasiewicz) & involution $\lnot\lnot x=x$ & MV-algebras \\
+% $\mathbf G$ (Gödel) & idempotence $x\otimes x=x$ & Gödel algebras \\
+% $\prod$ (Product) & cancellativity & Product algebras \\
+% \end{tabular}
+% \end{center}
+% All sit inside the same residuated-lattice umbrella; completeness results differ (MTL is strongly complete for all l.c.\ $t$-norm chains\cite{JeneiMontagna2001}, BL is standard-complete for continuous $t$-norms\cite{CignoliEstevaGodo2000}, etc.).
 
 
 
@@ -188,127 +214,206 @@ This algebraic perspective is particularly fruitful for fuzzy logics, where the 
 
 
 
-\subsection{Substructural Logics and Residuated Lattices}
-
-Many logics, including classical and intuitionistic logic, satisfy certain ``structural rules" in their Gentzen-style formulations, such as:
-\begin{itemize}
-    \item \textbf{Weakening:} Allows adding arbitrary formulas to antecedents or succedents.
-    \item \textbf{Contraction:} Allows replacing multiple occurrences of a formula with a single one.
-    \item \textbf{Exchange:} Allows reordering formulas.
-\end{itemize}
-\textbf{Substructural logics} are logics where one or more of these structural rules are restricted or absent. Examples include relevance logics (lack weakening), linear logic (lacks weakening and contraction), and fuzzy logics.
-
-The algebraic study of substructural logics reveals that their algebraic counterparts are often \textbf{residuated lattices} (or related structures).
-A residuated lattice is, at its core, a lattice $(L, \land, \lor)$ equipped with a monoid operation $\cdot$ (fusion) and two binary operations $\backslash$ (left residual) and $/$ (right residual) satisfying the residuation property:
-\[ x \cdot y \le z \iff y \le x \backslash z \iff x \le z / y \]
-This is a generalization of the relationship in Heyting algebras ($x \land y \le z \iff y \le x \to z$) where fusion is meet, and the implication $\to$ is the residual. In Boolean algebras, $x \cdot y = x \land y$ and $x \to y = \neg x \lor y$. The implication $\to$ in logics often corresponds to a residual operation.
-The absence or presence of structural rules in the logic corresponds to specific algebraic properties of the residuated lattices (e.g., commutativity of $\cdot$ for exchange, integrality for weakening, idempotence of $\cdot$ for contraction).
 
 
 
-\subsection{Characteristics and Intuitions of Foundational Fuzzy Logics}
-
-The foundational logics—MTL, BL, $\L$, G, and $\Pi$—form a hierarchy: MTL is most general, based on all left-continuous t-norms and their residua; BL restricts to continuous t-norms; and each of $\L$, G, $\Pi$ is a further axiomatic specialization of BL connected to a distinguished continuous t-norm.
-
-\begin{itemize}
-    \item \textbf{Generality}: MTL omits the divisibility property ($x*(x \Rightarrow y)=\min(x,y)$), so min-conjunction is not definable from strong conjunction and implication; BL recovers it for continuous t-norms.
-    \item \textbf{Negation}: $\L$ has involutive (double) negation, G and $\Pi$ use a Gödel-type negation, while MTL and BL only ensure weaker forms (involutive negation may be added as an axiom for special subclasses like IMTL~\cite{GodoMonoidal}).
-    \item \textbf{Nature of conjunction (t-norm)}:
-        \begin{itemize}
-            \item $\L$: Additive-like, compensatory.
-            \item G: Minimum, conservative (weakest link/idempotent).
-            \item $\Pi$: Product, multiplicative.
-        \end{itemize}
-    \item \textbf{Deduction theorem}: G has a stronger deduction theorem than the others; in $\L$, $\Pi$, BL, and MTL, only a weaker, ``n-fold" deduction theorem holds.
-    \item \textbf{Completeness}: BL, $\L$, G, and $\Pi$ are complete with respect to their standard [0,1] semantics as based on continuous t-norms. MTL is complete w.r.t.\ linearly ordered MTL-algebras and, non-trivially, for the left-continuous t-norms~\cite{Jenei2001MTLCompl}. G has full (not only 1-tautology) completeness for arbitrary theories~\cite[Thm. 4.2.17]{Hajek1998}; completeness of BL and $\L$ is for 1-tautologies, and extensions vary.
-    \item \textbf{Relationship to classical logic}: Pairwise combinations of $\L$, G, and $\Pi$ generate classical logic~\cite[Thm. 4.3.9]{Hajek1998}.
-\end{itemize}
-Each logic is therefore tailored for different reasoning needs. MTL, as the most general, accommodates any left-continuous t-norm and provides the universal backbone for fuzzy deduction systems.
-
-% \rule{\textwidth}{0.4mm}
 
 
-% A formal logic is typically characterized by its syntax, semantics, and a proof system.
 
-% \paragraph{Syntax} defines the formal language: its vocabulary of basic symbols and rules for constructing well-formed formulas (WFFs)\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that do not make sense and would not be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".\cite[Sec.~2.3.3]{Agler2013SymbolicLogic}}. Figure~\ref{fig:syntax_diagram} illustrates these components. Propositional logic (PL) syntax (left in Fig.~\ref{fig:syntax_diagram}) includes propositional variables (e.g., $P, Q$) and logical connectives (e.g., $\neg, \rightarrow$) used to form WFFs like $(P \rightarrow Q)$ \cite[Sec.~2.3.3]{Agler2013SymbolicLogic}. First-order logic (FOL) syntax (right in Fig.~\ref{fig:syntax_diagram}) extends PL by adding new vocabulary such as object variables (e.g., $x,y$), object constants (e.g., $c,d$), predicate symbols (e.g., $P(-)$), function symbols (e.g., $f(-)$), and quantifiers ($\forall, \exists$). From variables, constants, and function applications, a syntactic category called \textit{terms} is formed; these generally refer to objects. \textit{Atomic formulas} are then constructed by applying predicate symbols to terms. These, along with the propositional connectives and quantifiers, are used in the extended formation rules to build complex WFFs.
 
-% \begin{figure}[!ht]
-%     \centering
-%     \resizebox{\textwidth}{!}{%
-%     \begin{tikzpicture}[node distance=1cm and 2.5cm]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \section{Algebraic Logic}
+% \label{app:alg_log}
+% Algebraic logic investigates the connections between logical systems and algebraic structures, a field advanced by Tarski's work on propositional formulas \cite[p.~1]{BlokPigozzi1989}. \signal{The key insight is that provable statements and logical equivalences within a deductive system correspond to properties of operations in algebraic structures.} For example, classical propositional logic maps directly to Boolean algebras. This relationship can be understood through both the syntax (proof theory) and semantics (model theory) of a logic.
+
+% \paragraph{From the Syntactic Side} For propositional logics, we can construct a canonical algebraic structure called the \textbf{Lindenbaum-Tarski algebra}. The process begins by grouping formulas into equivalence classes. Two formulas, $\phi$ and $\psi$, are considered equivalent (and belong to the same class, denoted $[\phi]$) if they are provably interchangeable within the logic, i.e., $\vdash (\phi \leftrightarrow \psi)$. This notion of equivalence must be compatible with the logical connectives, meaning $\leftrightarrow$ behaves as a congruence relation \cite[p.~1-2]{BlokPigozzi1989}. The logical connectives (e.g., $\wedge, \lor, \rightarrow$) then naturally induce operations on these equivalence classes (for example, $[\phi] \bar{\wedge} [\psi] = [\phi \wedge \psi]$).
+
+% The specific type of algebraic structure that results (e.g., a Boolean algebra for classical propositional logic, or a Heyting algebra for intuitionistic logic \cite[Ch.~1]{ResiduatedLattices2007}) is entirely determined by the axioms and inference rules of the logic itself. In this algebra, a formula $\phi$ is a theorem of the logic ($\vdash \phi$) if and only if its equivalence class $[\phi]$ is the ``top" element (often denoted $1$ or $\top$), representing provable truth. The Lindenbaum-Tarski algebra is, in a specific sense, the ``most general" algebraic model for the logic, as it satisfies precisely those algebraic laws corresponding to the logic's theorems and no others.
+
+% \paragraph{From the Semantic Side} We can define the meaning or interpretation of a logic by choosing a class of algebraic structures, $\mathcal{K}$, to serve as its models.\footnote{A class $\mathcal{K}$ is typically a collection of algebraic structures that share the same signature (sets of operations with same ary) and satisfy common defining properties. Often, $\mathcal{K}$ forms a \textit{variety} (defined by equations) or a \textit{quasivariety} (defined by quasi-equations) \cite[Def.~2.2]{BlokPigozzi1989}.}
+
+% The elements of an algebra $A \in \mathcal{K}$ are the truth values. For classical propositional logic, this is typically the two-element Boolean algebra $\mathbf{2} = (\{0,1\}, \land, \lor, \neg, 0, 1)$. For many fuzzy logics, the truth values come from the real unit interval $[0,1]$, equipped with suitable operations like t-norms and their residua \cite[Ch.~2]{Hajek1998}.
+
+% A \textit{valuation} (or interpretation) $v$ is a homomorphism from the algebra of formulas into an algebra $A \in \mathcal{K}$. This means $v$ maps propositional variables to elements of $A$ and preserves operations corresponding to connectives. A formula $\phi$ is a $\mathcal{K}$\textbf{-tautology} if $v(\phi)$ evaluates to a designated ``true" value (typically $1$) for all valuations $v$ into every algebra $A \in \mathcal{K}$. For fuzzy logics, these are often called $1$-tautologies \cite[Ch.~2]{Hajek1998}.
+
+% \paragraph{Bridging Syntax and Semantics} The crucial link between both approaches is established through soundness and completeness theorems. A logic is \textbf{sound} with respect to a class of algebras $\mathcal{K}$ if every provable formula is a $\mathcal{K}$-tautology. It is \textbf{complete} if every $\mathcal{K}$-tautology is a theorem.
+
+% When a logic is sound and complete with respect to $\mathcal{K}$, its Lindenbaum-Tarski algebra is characteristically embedded within $\mathcal{K}$. This means that logical consequence can be effectively translated into equational consequence within $\mathcal{K}$ \cite[Abstract]{BlokPigozzi1989}. Logics with particularly strong and well-defined translations between logical deduction and algebraic reasoning are termed \textbf{algebraizable} \cite[Def.~2.10]{BlokPigozzi1989}.\\
+
+% For example, Hájek's Basic Logic (BL) \cite[Ch.~2]{Hajek1998} is complete with respect to the class of all linearly ordered BL-algebras \cite[Thm.~2.3.15]{Hajek1998}. However, BL is \textit{not} complete with respect to the \textit{single} standard Łukasiewicz algebra on $[0,1]$. The formula $\neg \neg \phi \leftrightarrow \phi$ (double negation elimination) is a tautology in this particular algebra but not provable in BL. Thus, the Lindenbaum-Tarski algebra of BL does not satisfy $\neg \neg x = x$, while the standard Łukasiewicz algebra does. This illustrates that the Lindenbaum-Tarski algebra of BL is more general, validating only what is provable in BL, and that completeness often requires a broader class of algebraic models.\\
+
+% For semantic purposes (defining truth, checking validity), it's often simpler to work with concrete algebras of truth values rather than directly with the (often infinite and complex) Lindenbaum-Tarski algebra of equivalence classes. Soundness and completeness theorems allow us to do so by showing that provability (tied to the Lindenbaum-Tarski algebra) corresponds to validity in these (often simpler) algebraic models.\\
+
+% \signal{It is essentially what you get if you ``quotient" the $L_T$ algebra by its relationship with truth.}\\
+
+% \signal{I think that $\mathcal{K}$ contains $L_T$ when we have soundness and completeness.}
+
+% \signal{De aquí para adelante en el apéndice tengo que repasarlo bien y resumir y demás, solo he puesto cosas de libros sin redactar del todo bien.}
+
+% This algebraic perspective is particularly fruitful for fuzzy logics, where the truth values are typically ordered and often continuous\footnote{\signal{For non-continuous see perfect MV-algebras.}}. The algebraic study of fuzzy logics has identified several important classes of ordered algebraic structures, many of which are based on the real unit interval $[0,1]$ as the set of truth values:
+% \begin{itemize}
+%     \item \textbf{Residuated Lattices}: These form a very general algebraic foundation for a wide range of fuzzy and substructural logics. They combine a lattice structure (for conjunction $\wedge$ and disjunction $\vee$) with a monoid operation $\otimes$ (modeling a strong, typically conjunctive, connective, often a t-norm) and its residuum $\rightarrow$ (modeling implication). These operations are linked by the adjointness property: $x \otimes y \leq z \iff x \leq y \rightarrow z$, which captures a fundamental deductive relationship.
+%     \item \textbf{MTL-algebras (Monoidal t-norm based Logic algebras)}: These are residuated lattices that are also prelinear (i.e., they satisfy the condition $(x \rightarrow y) \vee (y \rightarrow x) = 1$, reflecting a total order of truth values or a linear framework for comparing implications). They serve as the algebraic counterparts of Monoidal t-norm Logic (MTL), which axiomatizes the tautologies common to all logics based on left-continuous t-norms and their residua.
+%     \item \textbf{BL-algebras (Basic Logic algebras)}: These are MTL-algebras that additionally satisfy the divisibility condition: $x \wedge y = x \otimes (x \rightarrow y)$. They are the algebraic semantics for Basic Logic (BL), which is the logic of all continuous t-norms and their residua.
+%     \item \textbf{MV-algebras (Łukasiewicz Logic algebras)}: These are BL-algebras that are also involutive, meaning they satisfy $\neg \neg x = x$ (where the negation is defined as $\neg x = x \rightarrow 0$, with $0$ being the bottom element). They are the algebraic semantics for Łukasiewicz logic, which is based on the Łukasiewicz t-norm.
+%     \item \textbf{Gödel algebras (G-algebras)}: These are BL-algebras where the monoidal operation $\otimes$ is idempotent ($x \otimes x = x$), which implies that $\otimes$ coincides with the lattice meet operation $\wedge$. They correspond to Gödel logic, based on the minimum t-norm. Gödel algebras are a subclass of Heyting algebras (the algebraic semantics for intuitionistic logic).
+%     \item \textbf{Product algebras ($\Pi$-algebras)}: These are BL-algebras satisfying specific additional axioms that characterize product logic, which is based on the algebraic product t-norm.
+% \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \subsection{Substructural Logics and Residuated Lattices}
+
+% Many logics, including classical and intuitionistic logic, satisfy certain ``structural rules" in their Gentzen-style formulations, such as:
+% \begin{itemize}
+%     \item \textbf{Weakening:} Allows adding arbitrary formulas to antecedents or succedents.
+%     \item \textbf{Contraction:} Allows replacing multiple occurrences of a formula with a single one.
+%     \item \textbf{Exchange:} Allows reordering formulas.
+% \end{itemize}
+% \textbf{Substructural logics} are logics where one or more of these structural rules are restricted or absent. Examples include relevance logics (lack weakening), linear logic (lacks weakening and contraction), and fuzzy logics.
+
+% The algebraic study of substructural logics reveals that their algebraic counterparts are often \textbf{residuated lattices} (or related structures).
+% A residuated lattice is, at its core, a lattice $(L, \land, \lor)$ equipped with a monoid operation $\cdot$ (fusion) and two binary operations $\backslash$ (left residual) and $/$ (right residual) satisfying the residuation property:
+% \[ x \cdot y \le z \iff y \le x \backslash z \iff x \le z / y \]
+% This is a generalization of the relationship in Heyting algebras ($x \land y \le z \iff y \le x \to z$) where fusion is meet, and the implication $\to$ is the residual. In Boolean algebras, $x \cdot y = x \land y$ and $x \to y = \neg x \lor y$. The implication $\to$ in logics often corresponds to a residual operation.
+% The absence or presence of structural rules in the logic corresponds to specific algebraic properties of the residuated lattices (e.g., commutativity of $\cdot$ for exchange, integrality for weakening, idempotence of $\cdot$ for contraction).
+
+
+
+% \subsection{Characteristics and Intuitions of Foundational Fuzzy Logics}
+
+% The foundational logics—MTL, BL, $\L$, G, and $\Pi$—form a hierarchy: MTL is most general, based on all left-continuous t-norms and their residua; BL restricts to continuous t-norms; and each of $\L$, G, $\Pi$ is a further axiomatic specialization of BL connected to a distinguished continuous t-norm.
+
+% \begin{itemize}
+%     \item \textbf{Generality}: MTL omits the divisibility property ($x*(x \Rightarrow y)=\min(x,y)$), so min-conjunction is not definable from strong conjunction and implication; BL recovers it for continuous t-norms.
+%     \item \textbf{Negation}: $\L$ has involutive (double) negation, G and $\Pi$ use a Gödel-type negation, while MTL and BL only ensure weaker forms (involutive negation may be added as an axiom for special subclasses like IMTL~\cite{GodoMonoidal}).
+%     \item \textbf{Nature of conjunction (t-norm)}:
+%         \begin{itemize}
+%             \item $\L$: Additive-like, compensatory.
+%             \item G: Minimum, conservative (weakest link/idempotent).
+%             \item $\Pi$: Product, multiplicative.
+%         \end{itemize}
+%     \item \textbf{Deduction theorem}: G has a stronger deduction theorem than the others; in $\L$, $\Pi$, BL, and MTL, only a weaker, ``n-fold" deduction theorem holds.
+%     \item \textbf{Completeness}: BL, $\L$, G, and $\Pi$ are complete with respect to their standard [0,1] semantics as based on continuous t-norms. MTL is complete w.r.t.\ linearly ordered MTL-algebras and, non-trivially, for the left-continuous t-norms~\cite{Jenei2001MTLCompl}. G has full (not only 1-tautology) completeness for arbitrary theories~\cite[Thm. 4.2.17]{Hajek1998}; completeness of BL and $\L$ is for 1-tautologies, and extensions vary.
+%     \item \textbf{Relationship to classical logic}: Pairwise combinations of $\L$, G, and $\Pi$ generate classical logic~\cite[Thm. 4.3.9]{Hajek1998}.
+% \end{itemize}
+% Each logic is therefore tailored for different reasoning needs. MTL, as the most general, accommodates any left-continuous t-norm and provides the universal backbone for fuzzy deduction systems.
+
+% % \rule{\textwidth}{0.4mm}
+
+
+% % A formal logic is typically characterized by its syntax, semantics, and a proof system.
+
+% % \paragraph{Syntax} defines the formal language: its vocabulary of basic symbols and rules for constructing well-formed formulas (WFFs)\footnote{This can be understood as grammar. It is just to exclude formulas that are incorrect. Some examples that do not make sense and would not be considered WFF are: "$))P\Rightarrow \neg\Rightarrow $" or "$P \land \Leftarrow \lor Q$".\cite[Sec.~2.3.3]{Agler2013SymbolicLogic}}. Figure~\ref{fig:syntax_diagram} illustrates these components. Propositional logic (PL) syntax (left in Fig.~\ref{fig:syntax_diagram}) includes propositional variables (e.g., $P, Q$) and logical connectives (e.g., $\neg, \rightarrow$) used to form WFFs like $(P \rightarrow Q)$ \cite[Sec.~2.3.3]{Agler2013SymbolicLogic}. First-order logic (FOL) syntax (right in Fig.~\ref{fig:syntax_diagram}) extends PL by adding new vocabulary such as object variables (e.g., $x,y$), object constants (e.g., $c,d$), predicate symbols (e.g., $P(-)$), function symbols (e.g., $f(-)$), and quantifiers ($\forall, \exists$). From variables, constants, and function applications, a syntactic category called \textit{terms} is formed; these generally refer to objects. \textit{Atomic formulas} are then constructed by applying predicate symbols to terms. These, along with the propositional connectives and quantifiers, are used in the extended formation rules to build complex WFFs.
+
+% % \begin{figure}[!ht]
+% %     \centering
+% %     \resizebox{\textwidth}{!}{%
+% %     \begin{tikzpicture}[node distance=1cm and 2.5cm]
         
-%         \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic}; 
+% %         \node[title] (title_syntax) {Syntax: Propositional to Predicate Logic}; 
     
-%         \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
-%             \textbf{Propositional Logic Syntax}
-%             \begin{itemize}
-%                 \setlength\itemsep{0em}
-%                 \item Propositional Variables ($P, Q$)
-%                 \item Truth Constants (e.g., $\bar{0}, \bar{1}$)
-%                 \item Logical Connectives (\&, $\rightarrow$, $\land$, $\lor$, $\neg$)
-%                 \item Formation Rules for WFFs
-%             \end{itemize}
-%         };
+% %         \node[block, below=0.5cm of title_syntax, xshift=-1cm] (prop_syntax) {
+% %             \textbf{Propositional Logic Syntax}
+% %             \begin{itemize}
+% %                 \setlength\itemsep{0em}
+% %                 \item Propositional Variables ($P, Q$)
+% %                 \item Truth Constants (e.g., $\bar{0}, \bar{1}$)
+% %                 \item Logical Connectives (\&, $\rightarrow$, $\land$, $\lor$, $\neg$)
+% %                 \item Formation Rules for WFFs
+% %             \end{itemize}
+% %         };
     
-%         \node[block_ext, right=of prop_syntax] (pred_syntax) {
-%             \textbf{First-Order Logic Syntax (Extends Propositional)}
-%             \begin{itemize}
-%                 \setlength\itemsep{0em}
-%                 \item \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements plus:}}
-%                 \item Object Symbols: Variables ($x$), Constants ($c$)
-%                 \item Structure Symbols: Predicates ($P(\cdot)$), Functions ($f(\cdot)$)
-%                 \item Quantifiers ($\oldforall, \exists$)
-%                 \item Terms (functions on objects)
-%                 \item Atomic Formulas (predicates on terms)
-%                 \item Extended Formation Rules for WFFs
-%             \end{itemize}
-%         };
-%         \path [line] (prop_syntax.east) -- (pred_syntax.west) node [midway, above, font=\footnotesize] {Extends with};
-%     \end{tikzpicture}}
-%     \caption{Syntax elements for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
-%     \label{fig:syntax_diagram}
-%     \end{figure}
+% %         \node[block_ext, right=of prop_syntax] (pred_syntax) {
+% %             \textbf{First-Order Logic Syntax (Extends Propositional)}
+% %             \begin{itemize}
+% %                 \setlength\itemsep{0em}
+% %                 \item \textcolor{pastelred!70!black}{\textit{All Propositional Syntax Elements plus:}}
+% %                 \item Object Symbols: Variables ($x$), Constants ($c$)
+% %                 \item Structure Symbols: Predicates ($P(\cdot)$), Functions ($f(\cdot)$)
+% %                 \item Quantifiers ($\oldforall, \exists$)
+% %                 \item Terms (functions on objects)
+% %                 \item Atomic Formulas (predicates on terms)
+% %                 \item Extended Formation Rules for WFFs
+% %             \end{itemize}
+% %         };
+% %         \path [line] (prop_syntax.east) -- (pred_syntax.west) node [midway, above, font=\footnotesize] {Extends with};
+% %     \end{tikzpicture}}
+% %     \caption{Syntax elements for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
+% %     \label{fig:syntax_diagram}
+% %     \end{figure}
 
-% \paragraph{Semantics} assigns meaning to WFFs, primarily by defining how their truth is determined. Key semantic components are outlined in Figure~\ref{fig:semantics_diagram}. For propositional logic (left in Fig.~\ref{fig:semantics_diagram}), this involves a truth-value algebra (e.g., classical \{True, False\}, or a continuous range like $[0,1]$ for many-valued logics), an evaluation function $e$ assigning truth values from this algebra to propositional variables, and truth functions defining how connectives operate on these values (often given by truth tables in classical PL \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}). A specific assignment of truth values to atomic propositions constitutes a model (or valuation \cite[Sec.~3.1]{Agler2013SymbolicLogic}). A WFF is semantically valid (a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if true in all models. As Figure~\ref{fig:semantics_diagram} (right) shows, first-order logic semantics extends this framework. It introduces a domain of discourse $U$ and an interpretation $\mathcal{M}$ that maps constants to elements in $U$, function symbols to functions on $U$, and predicate symbols to relations on $U$ \cite[Ch.~6.4]{Agler2013SymbolicLogic}. A variable assignment $v$ maps object variables to elements in $U$. The truth of quantified formulas is typically defined using infima/suprema over the domain elements.
+% % \paragraph{Semantics} assigns meaning to WFFs, primarily by defining how their truth is determined. Key semantic components are outlined in Figure~\ref{fig:semantics_diagram}. For propositional logic (left in Fig.~\ref{fig:semantics_diagram}), this involves a truth-value algebra (e.g., classical \{True, False\}, or a continuous range like $[0,1]$ for many-valued logics), an evaluation function $e$ assigning truth values from this algebra to propositional variables, and truth functions defining how connectives operate on these values (often given by truth tables in classical PL \cite[Sec.~3.1-3.2]{Agler2013SymbolicLogic}). A specific assignment of truth values to atomic propositions constitutes a model (or valuation \cite[Sec.~3.1]{Agler2013SymbolicLogic}). A WFF is semantically valid (a tautology in PL \cite[Sec.~3.3.1]{Agler2013SymbolicLogic}) if true in all models. As Figure~\ref{fig:semantics_diagram} (right) shows, first-order logic semantics extends this framework. It introduces a domain of discourse $U$ and an interpretation $\mathcal{M}$ that maps constants to elements in $U$, function symbols to functions on $U$, and predicate symbols to relations on $U$ \cite[Ch.~6.4]{Agler2013SymbolicLogic}. A variable assignment $v$ maps object variables to elements in $U$. The truth of quantified formulas is typically defined using infima/suprema over the domain elements.
 
 
-% \begin{figure}[h!]
-%     \centering
-%     \resizebox{\textwidth}{!}{%
-%     \begin{tikzpicture}[node distance=1cm and 2.5cm]
-%         \node[title] (title_sem) {Semantics: Propositional to Predicate Logic};
-%         \node[block, below=0.5cm of title_sem, xshift=-1cm] (prop_sem) {
-%             \textbf{Propositional Logic Semantics}
-%             \begin{itemize}
-%                 \setlength\itemsep{0em}
-%                 \item Truth Value Algebra (e.g., $[0,1]$ with t-norm, residuum)
-%                 \item Evaluation $e$: assigns truth values to propositional variables
-%                 \item Truth functions for connectives
-%                 \item Tautology: True for all evaluations
-%             \end{itemize}
-%         };
-%         \node[block_ext, right=of prop_sem] (pred_sem) {
-%             \textbf{First-Order Logic Semantics (Extends Propositional)}
-%             \begin{itemize}
-%                 \setlength\itemsep{0em}
-%                 \item \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra}}
-%                 \item \textbf{Plus:}
-%                 \item Domain of Discourse $U$
-%                 \item Interpretation $(\cdot)^\mathcal{M}$:
-%                     \begin{itemize}
-%                     \setlength\itemsep{0em}
-%                         \item Constants $\rightarrow$ elements in $U$
-%                         \item Function symbols $\rightarrow$ crisp functions on $U$
-%                         \item Predicate symbols $\rightarrow$ fuzzy relations on $U$
-%                     \end{itemize}
-%                 \item Variable assignment $v$: object variables $\rightarrow$ elements in $U$
-%                 \item Truth for atomic formulas via fuzzy relations
-%                 \item Truth for connectives (as propositional)
-%                 \item Truth for quantifiers (inf/sup over domain)
-%                 \item Tautology: True in all structures $\mathcal{M}$ for all $v$
-%             \end{itemize}
-%         };
-%         \path [line] (prop_sem.east) -- (pred_sem.west) node [midway, above, font=\footnotesize] {Extends with};
+% % \begin{figure}[h!]
+% %     \centering
+% %     \resizebox{\textwidth}{!}{%
+% %     \begin{tikzpicture}[node distance=1cm and 2.5cm]
+% %         \node[title] (title_sem) {Semantics: Propositional to Predicate Logic};
+% %         \node[block, below=0.5cm of title_sem, xshift=-1cm] (prop_sem) {
+% %             \textbf{Propositional Logic Semantics}
+% %             \begin{itemize}
+% %                 \setlength\itemsep{0em}
+% %                 \item Truth Value Algebra (e.g., $[0,1]$ with t-norm, residuum)
+% %                 \item Evaluation $e$: assigns truth values to propositional variables
+% %                 \item Truth functions for connectives
+% %                 \item Tautology: True for all evaluations
+% %             \end{itemize}
+% %         };
+% %         \node[block_ext, right=of prop_sem] (pred_sem) {
+% %             \textbf{First-Order Logic Semantics (Extends Propositional)}
+% %             \begin{itemize}
+% %                 \setlength\itemsep{0em}
+% %                 \item \textcolor{pastelred!70!black}{\textit{Same Truth Value Algebra}}
+% %                 \item \textbf{Plus:}
+% %                 \item Domain of Discourse $U$
+% %                 \item Interpretation $(\cdot)^\mathcal{M}$:
+% %                     \begin{itemize}
+% %                     \setlength\itemsep{0em}
+% %                         \item Constants $\rightarrow$ elements in $U$
+% %                         \item Function symbols $\rightarrow$ crisp functions on $U$
+% %                         \item Predicate symbols $\rightarrow$ fuzzy relations on $U$
+% %                     \end{itemize}
+% %                 \item Variable assignment $v$: object variables $\rightarrow$ elements in $U$
+% %                 \item Truth for atomic formulas via fuzzy relations
+% %                 \item Truth for connectives (as propositional)
+% %                 \item Truth for quantifiers (inf/sup over domain)
+% %                 \item Tautology: True in all structures $\mathcal{M}$ for all $v$
+% %             \end{itemize}
+% %         };
+% %         \path [line] (prop_sem.east) -- (pred_sem.west) node [midway, above, font=\footnotesize] {Extends with};
 %     \end{tikzpicture}}
 %     \caption{Semantic components for propositional logic and their extension in first-order logic. Based on \cite[Ch.~2,5]{Hajek1998}.}
 %     \label{fig:semantics_diagram}
