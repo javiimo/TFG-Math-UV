@@ -72,7 +72,7 @@ Given disjoint sets $A,B \subseteq N$ (i.e., $A \cap B = \emptyset$), a fuzzy me
 \end{example}
 
 
-The crucial departure from the additivity requiremen allows fuzzy measures to model situations where, for example, the combined importance of two criteria $A$ and $B$ might be greater than the sum of their individual importances (synergy) or less (redundancy). 
+The crucial departure from the additivity requirement allows fuzzy measures to model situations where, for example, the combined importance of two criteria $A$ and $B$ might be greater than the sum of their individual importances (synergy) or less (redundancy). 
 
 
 
@@ -97,7 +97,7 @@ A possibility measure quantifies the degree to which an event is considered feas
 Both measures are typically derived from an underlying distribution. A probability measure is built from a probability mass function $p$ via summation, $P(A) = \sum_{x \in A} p(x)$, and is normalized such that $\sum_{x \in \Omega} p(x) = 1$. A possibility measure is built from a possibility distribution $\pi$ via the supremum, $\Pi(A) = \sup_{x \in A} \pi(x)$, and is normalized such that $\sup_{x \in \Omega} \pi(x) = 1$.\\
 
 
-When Zadeh introduced possibility theory, he understood the possibility of an event as an upper bound on its probability. This is formalized by the \textbf{consistency principle}, which states that the probability of an event cannot exceed its possibility, i.e. $p(\omega) \leq \pi(\omega) \forall \omega \in \Omega$. This extends the idea of ``an unfeasible event must be impossible'', to a weak connection between probabilities and possibilities. In situations where the true probability $p$ is unknown, this principle is useful for defining a set of all probability distributions that are compatible with our current knowledge. 
+When Zadeh introduced possibility theory, he understood the possibility of an event as an upper bound on its probability. This is formalized by the \textbf{consistency principle}, which states that the probability of an event cannot exceed its possibility, i.e. $p(\omega) \leq \pi(\omega) \forall \omega \in \Omega$. This extends the idea of ``an infeasible event must be impossible'', to a weak connection between probabilities and possibilities. In situations where the true probability $p$ is unknown, this principle is useful for defining a set of all probability distributions that are compatible with our current knowledge. 
 
 An illustrative example is presented to facilitate the understanding of both probability and possibility measures, as well as the distinction between possibilities and memberships:
 
@@ -157,7 +157,7 @@ A necessity measure $N$ is the dual of a possibility measure $\Pi$, and is defin
 where $A^c$ is the complement of $A$.
 \end{definition}
 
-The intuition behind this formula can be understood by thinking about what it means for an event to be certain based on our knowledge. An event $A$ is absolutely certain only if its complement, $A^c$ (the event ``not A"), is absolutely impossible (unfeasible). If there is any feasibility to ``not A", our certainty in ``A" must be diminished.
+The intuition behind this formula can be understood by thinking about what it means for an event to be certain based on our knowledge. An event $A$ is absolutely certain only if its complement, $A^c$ (the event ``not A"), is absolutely impossible (infeasible). If there is any feasibility to ``not A", our certainty in ``A" must be diminished.
 
 The term $\Pi(A^c)$ precisely captures this ``plausibility of doubt". It is the highest degree of support our knowledge gives to any outcome outside of $A$. In the context of the consistency principle from Zadeh, necessity is interpreted as a lower bound for the probability distribution:
 \[N(A) \le P(A) \le \Pi(A)\]

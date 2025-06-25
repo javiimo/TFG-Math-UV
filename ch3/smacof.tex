@@ -1,11 +1,11 @@
-\subsection{Retriving the physical location of the interventions}
+\subsection{Retrieving the physical location of the interventions}
 \label{sec:dist_mat}
 Some information that the challenge providers have access to, such as the physical location of each intervention, is not public. This will be later on used to compute the environmental impact and the concurrency of close interventions. In order to determine a plausible physical location of the interventions, a two step approach is proposed: first the relative positioning between interventions must be determined, then these positions should be aligned with the map of France. Making some assumptions will allow us to extract this meaningful information from the available data while maintaining the integrity of the original problem structure.\\
 
 We will start with the assumption that there is a component of the risk that comes from the location of an intervention. This is intuitive since interventions in densely populated areas or near critical infrastructure likely carry higher risks than those in remote locations. However, it is important to notice that location is not the only factor, the risk also depends on other variables like the type of maintenance work. \\ 
 
 \begin{assumption}
-  Two interventions \(i\) and \(j\) are close if their overall mean risks (averaged accross all possible start times and scenarios)
+  Two interventions \(i\) and \(j\) are close if their overall mean risks (averaged across all possible start times and scenarios)
   \[
   \overline{r}_t^{(i)} = \frac{1}{\left|\mathcal{T}_i\right|}\sum_{\mathcal{T}_i}\mu_t^{(i,\tau)}, 
   \qquad \text{where }\mu_t^{(i,\tau)} \coleq \frac{1}{|S|}\sum_{s\in S} \mathrm{risk}_{s,t}^{(i,\tau)}, \quad
@@ -74,7 +74,7 @@ where $\hat{\Delta}$ denotes the matrix $\bigl[\hat{\delta}_{ij}\bigr]$.
 The goal is to minimize this STRESS with respect to both $X$ and the (monotonic) mapping $f$. Missing values are simply not taken into account in the sum (which is equivalent to setting their weight to 0).
 
 \paragraph{Solution via SMACOF}\label{sec:smacof-solution}
-\emph{Scaling by MAjorizing a COmplicated Function} is an iterative algorithm that provides a stable, monotone-convergent framework for MDS. Unlike Kruskal's classic method, which uses gradient-based updates to move the configuration $X$, SMACOF replaces the gradient step with a \emph{majorization step} that guarantees non-increasing STRESS accross iterations. This is typically more numerically stable and better at handling large amounts of missing data.
+\emph{Scaling by MAjorizing a COmplicated Function} is an iterative algorithm that provides a stable, monotone-convergent framework for MDS. Unlike Kruskal's classic method, which uses gradient-based updates to move the configuration $X$, SMACOF replaces the gradient step with a \emph{majorization step} that guarantees non-increasing STRESS across iterations. This is typically more numerically stable and better at handling large amounts of missing data.
 
 The algorithm alternates between two main steps:
 

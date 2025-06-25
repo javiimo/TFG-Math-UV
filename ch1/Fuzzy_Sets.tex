@@ -12,14 +12,14 @@ Let us take a closer look at Zadeh's example of the set of ``tall men" to answer
 
 Most people would agree that a person with a height of 1.50m is not tall, so we can anchor the function with $\mu_{tall}(1.50) = 0$. Conversely, a person 2.00m tall is generally considered tall, so $\mu_{tall}(2.00) = 1$. But how should we define the values in between? The choice is not unique, and this non-uniqueness is not a flaw, but a feature.\\
 
-However, not all choices are valid. For a membership function to be a reasonable model of the ``tall person" concept, it must be consistent with our understanding of it. For example, it would be illogical to define a 1.70m person as taller than a 1.80m person. This means $\mu_{tall}(h)$ must be non-decreasing. Furthermore, a classical boolean definition fails to capture the gradual nature of ``tallness", even if it is not wrong, it lacks the expressive power for more a nuanced definition. Figure \ref{fig:tall_definitions} illustrates these points.
+However, not all choices are valid. For a membership function to be a reasonable model of the ``tall person" concept, it must be consistent with our understanding of it. For example, it would be illogical to define a 1.70m person as taller than a 1.80m person. This means $\mu_{tall}(h)$ must be non-decreasing. Furthermore, a classical boolean definition fails to capture the gradual nature of ``tallness", even if it is not wrong, it lacks the expressive power for a more nuanced definition. Figure \ref{fig:tall_definitions} illustrates these points.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{ch1/figures/Fuzzy_tall.png}
-    \caption{Illustrations of different membership functions for the fuzzy set \emph{tall}. The left plot shows incorrect definitions using non-monotonic function which are logically inconsistent since it implies a shorter person could be considered ``more tall" than a taller one. The right plot shows several valid, non-decreasing functions that can represent \emph{tall}. Each reflects a different modeling choice, but all are anchored to the same clear cases: membership is 0 for heights below 1.5m and 1 for heights above 2.0m.}
+    \caption{Illustrations of different membership functions for the fuzzy set \emph{tall}. The left plot shows incorrect definitions using non-monotonic functions which are logically inconsistent since it implies a shorter person could be considered ``more tall" than a taller one. The right plot shows several valid, non-decreasing functions that can represent \emph{tall}. Each reflects a different modeling choice, but all are anchored to the same clear cases: membership is 0 for heights below 1.5m and 1 for heights above 2.0m.}
     \label{fig:tall_definitions}
-\end{figure}
+\end{figure} 
 
 As shown in Figure \ref{fig:tall_definitions}, there are (infinitely) many valid ways to define the fuzzy set \emph{tall}. This flexibility might seem like a problem of subjectivity or a lack of rigor, but it is better understood as a matter of definition. In classical set theory, the question is not whether the set of ``natural numbers including zero" is more correct than the set of ``natural numbers starting from one". They are simply different sets defined for different purposes. Similarly, choosing a membership function is the act of defining the fuzzy set. The goal is not to discover a single, universal truth for ``tall people", but to design a fuzzy set that is useful for a specific problem. \\
 
@@ -28,7 +28,7 @@ This allows us to encode context-dependent or domain-specific expert knowledge i
 For the remainder of this chapter, fuzzy sets will be considered as given, with focus placed on their mathematical properties and operations. Since fuzzy sets extend the concept of crisp sets, every crisp set can be modeled as a fuzzy set while the reverse is not true. The formal definition is presented as follows:
 
 \begin{definition}[Fuzzy Set]
-    Let $X\neq\emptyset$ a set. Then we define a \textbf{fuzzy set A in X}, i.e., $A \in \fuzzy{X}$ as:
+    Let $X\neq\emptyset$ be a set. Then we define a \textbf{fuzzy set A in X}, i.e., $A \in \fuzzy{X}$ as:
     \[A=\{(x,\mu_A(x))\mid x\in X\}\]
     Where $\mu_A:X\longrightarrow [0,1]$ is the \textbf{membership function} and $X$ is the \textbf{domain} of the fuzzy set.
 \end{definition}

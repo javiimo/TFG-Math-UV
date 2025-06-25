@@ -65,7 +65,7 @@ These attributes assess spatial concentration using the linguistic variable \tex
 \]
 \textbf{Environmental Impact Concurrency} measures the simultaneous execution of interventions near environmentally sensitive areas (national parks). In this case, the distance matrix is from an intervention $i$ to a park $p$. 
 For each intervention $i$, after applying the linguistic variable Distance to its distance to each park p, the values are aggregated into a single fuzzy membership value using a t-conorm (S-norm) operation, 
-such as the product t-conorm\footnote{The product t-norm is often used in control systems because it is strictly increasing in each argument, unlike the maximum or Lukasiewicz ones. That is also the reason it was chosen here, every single increase in membership to any park will be reflected in the aggregation.}:
+such as the product t-conorm\footnote{The product t-norm is often used in control systems because it is strictly increasing in each argument, unlike the maximum or \luka~ones. That is also the reason it was chosen here, every single increase in membership to any park will be reflected in the aggregation.}:
 \[\mu_{\text{env\_close}}(i) =  1 - \prod_{p \in \text{Parks}} (1-\mu_{\text{close}}(i, p))\]
 The daily mass is then the sum of these aggregated values for the active interventions: \[\text{Mass}_{\text{env\_close}}(t) = \sum_{i \in \mathcal{I}(t)} \mu_{\text{env\_close}}(i)\] Figure~\ref{fig:fuzzy_att_concurrency} illustrates the resulting daily mass distributions for all four attribute categories.
 

@@ -92,7 +92,7 @@ An intuitive way to understand a quantifier function for a fixed number of desir
 
         \item \textbf{``The majority'':} Focuses on not having too low-performing criteria, the majority is good enough (pessimistic or risk-averse decision-maker). This is modeled with a convex quantifier like $Q(r) = r^2$. For $n=5$, this generates the vector $W=(0.04, 0.12, 0.20, 0.28, 0.36)$. The weights increase for lower-ranked criteria, placing more importance on the lower-valued inputs and reflecting a pessimistic attitude.
         
-        \item \textbf{The Window-Type Quantifier:} This models instructions like "ignore the best and worst scores and average the middle ones." For $n=5$, using a window quantifier that averages the middle 50\% of scores:
+        \item \textbf{The Window-Type Quantifier:} This models instructions like ``ignore the best and worst scores and average the middle ones." For $n=5$, using a window quantifier that averages the middle 50\% of scores:
         \[ Q(r) = \begin{cases} 0 & \text{if } r \le 0.25 \\ 2r - 0.5 & \text{if } 0.25 < r \le 0.75 \\ 1 & \text{if } r > 0.75 \end{cases} \]
         This generates weights where the middle-ranked scores have non-zero weights while the extreme scores are ignored.
     \end{itemize}
@@ -107,7 +107,7 @@ An intuitive way to understand a quantifier function for a fixed number of desir
 \end{figure}
     
 
-The definition above describes what is formally known as a regular non-decreasing quantifier. Fuller presents in \cite[ch.~2]{FULLER2} a complete taxonomy of quantifiers that includes as well: non-increasing quantifiers, which are completely equivalent to the non-decreasing ones and do not provide any advantages, and unimodal ones. The latter is non-monotonic and models concepts like "about two" or "around half." These concepts cannot be represented by a standard OWA operator using the quantifier method because they require negative weights to penalize having a number of non-zero criteria different from the required. 
+The definition above describes what is formally known as a regular non-decreasing quantifier. Fullér presents in \cite[ch.~2]{FULLER2} a complete taxonomy of quantifiers that includes as well: non-increasing quantifiers, which are completely equivalent to the non-decreasing ones and do not provide any advantages, and unimodal ones. The latter is non-monotonic and models concepts like "about two" or "around half." These concepts cannot be represented by a standard OWA operator using the quantifier method because they require negative weights to penalize having a number of non-zero criteria different from the required. 
 
 
 \paragraph{Defining an Orness Level}
@@ -135,7 +135,7 @@ However, the equation $\text{orness}(W) = \alpha$ is under-determined. Multiple 
         &                   & & \sum_{j=1}^{n} w_j = 1, \quad w_j \ge 0
     \end{aligned}
     \end{equation}
-    This constrained optimization problem has a unique optimal weighting vector $W$ for a given $n$ and $\alpha$. The proof for existance and uniqueness of an optimal solution to this problem can be found in \cite[Sec.~2.3]{FULLER2}.
+    This constrained optimization problem has a unique optimal weighting vector $W$ for a given $n$ and $\alpha$. The proof for existence and uniqueness of an optimal solution to this problem can be found in \cite[Sec.~2.3]{FULLER2}.
 \end{enumerate}
 
 \paragraph{Maximizing Inter-criteria Variance}

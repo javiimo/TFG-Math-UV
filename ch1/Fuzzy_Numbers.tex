@@ -105,7 +105,7 @@ The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment withou
 \begin{example}\label{ex:fuzzy_num}
     Here are some examples of fuzzy numbers, which are also plotted in Figure \ref{fig:fuzzy_numbers}. Both, triangular and trapezoidal are special cases of LR-fuzzy numbers.:
     \begin{itemize}
-        \item \textbf{Triangular Fuzzy Number:} Defined by a triplet $A\equiv(a, \alpha, \beta)$ where $a$ is the peak and $\alpha$ and $\beta$ the right and left widths respectively. The membership function $\mu_A(x)$ is given by:
+        \item \textbf{Triangular Fuzzy Number:} Defined by a triplet $A\equiv(a, \alpha, \beta)$ where $a$ is the peak and $\alpha$ and $\beta$ the left and right widths respectively. The membership function $\mu_A(x)$ is given by:
         \[
         \mu_A(x) = 
         \begin{cases} 
@@ -115,7 +115,7 @@ The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment withou
         \end{cases}
         \]
         
-        \item \textbf{Trapezoidal Fuzzy Number:} Defined by a quadruplet $A\equiv(a, b, \alpha, \beta)$ where $[a,b]$ is the tolerance interval and $\alpha$ and $\beta$ the right and left widths respectively. The membership function $\mu_A(x)$ is given by:
+        \item \textbf{Trapezoidal Fuzzy Number:} Defined by a quadruplet $A\equiv(a, b, \alpha, \beta)$ where $[a,b]$ is the tolerance interval and $\alpha$ and $\beta$ the left and right widths respectively. The membership function $\mu_A(x)$ is given by:
         \[
         \mu_A(x) = 
         \begin{cases} 
@@ -241,7 +241,7 @@ The generalized theorem states the condition for the equality:
 \end{equation}
 
 
-It's important to see that if $T(x,y) = \min(x,y)$, then $T(\xi, \eta) \ge \alpha$ implies $\xi \ge \alpha$ and $\eta \ge \alpha$. In this case, the union $\bigcup_{\min(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta)$ simplifies. Since $f([A]^\xi, [B]^\eta) \subseteq f([A]^\alpha, [B]^\alpha)$ for $\xi, \eta \ge \alpha$ (due to the nesting property of $\alpha$-cuts), the largest set in the union is $f([A]^\alpha, [B]^\alpha)$. Thus, Equation \eqref{eq:nguyen_generalized} reduces to:
+It is important to see that if $T(x,y) = \min(x,y)$, then $T(\xi, \eta) \ge \alpha$ implies $\xi \ge \alpha$ and $\eta \ge \alpha$. In this case, the union $\bigcup_{\min(\xi, \eta) \ge \alpha} f([A]^\xi, [B]^\eta)$ simplifies. Since $f([A]^\xi, [B]^\eta) \subseteq f([A]^\alpha, [B]^\alpha)$ for $\xi, \eta \ge \alpha$ (due to the nesting property of $\alpha$-cuts), the largest set in the union is $f([A]^\alpha, [B]^\alpha)$. Thus, Equation \eqref{eq:nguyen_generalized} reduces to:
 \[
 [f(A, B)]^\alpha = f([A]^\alpha, [B]^\alpha)
 \]
@@ -364,7 +364,7 @@ Different approximation formulas are available for cases where one or both fuzzy
 
 Before introducing the arithmetic induced by the sup-T extension principle, the following example is presented to illustrate one of the key issues with Zadeh's extension principle that was briefly mentioned at the end of section \ref{sec:ext_pple}: its implicit assumption of independence between variables. This assumption leads to the following unintuitive behavior:
 
-\begin{example}[Uncertainty ``inflation'' when substracting identical fuzzy numbers]\label{ex:unc_inflation} 
+\begin{example}[Uncertainty ``inflation'' when subtracting identical fuzzy numbers]\label{ex:unc_inflation} 
 
 
     Let $X$ be a triangular fuzzy number $\tilde X=(1,2,3)$. When computing $Z=X-X$ using the sup-T principle, the algorithm considers two "independent" copies $X^{(1)}$ and $X^{(2)}$ and calculates:

@@ -2,7 +2,7 @@
 %     In this section, we use the variable \( x \) to represent time and \( y \) to represent distance.
 %   \end{notation}
 
-The notions of union and intersection in fuzzy sets were first introduced by Zadeh \cite{Zadeh1965} using the operations $\max\{A(x),B(x)\}$ and $\min\{A(x),B(x)\}$ respectively. These can be intuitively interpreted as follows: the union is the \textit{smallest} fuzzy set (having lowest membership values) that contains both sets, while the intersection is the \textit{biggest} fuzzy set (having highest membership values) that is contained by both sets.\\
+The notions of union and intersection in fuzzy sets were first introduced by Zadeh \cite{Zadeh1965} using the operations $\max\{A(x),B(x)\}$ and $\min\{A(x),B(x)\}$ respectively. These can be intuitively interpreted as follows: the union is the \textit{smallest} fuzzy set (having lowest membership values) that contains both sets, while the intersection is the \textit{largest} fuzzy set (having highest membership values) that is contained by both sets.\\
 
 However, these operations can be generalized by two broader classes of operators: triangular norms (for intersection) and triangular conorms (for union).
 
@@ -87,7 +87,7 @@ Notice that this definition of complement is consistent with the classical defin
 
 One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
 
-However, there are t-norms and t-conorms such as the ones named after \luka that do satisfy both laws\footnote{Indeed, all continuous t-norms in agreement with non-contradiction are isomorphic to \luka \cite[p.~7]{LukasiewiczNonContrad}.}. Another example is the drastic t-norm which also satisfies the law of non-contradiction, but not the law of excluded middle. See example \ref{ex:basic_tnorms} for their formal expressions. All of this, has implications for the derived logic (see section \ref{sec:fuzzy_logic}).\\
+However, there are t-norms and t-conorms such as the ones named after \luka~that do satisfy both laws\footnote{Indeed, all continuous t-norms in agreement with non-contradiction are isomorphic to \luka~\cite[p.~7]{LukasiewiczNonContrad}.}. Another example is the drastic t-norm which also satisfies the law of non-contradiction, but not the law of excluded middle. See example \ref{ex:basic_tnorms} for their formal expressions. All of this, has implications for the derived logic (see section \ref{sec:fuzzy_logic}).\\
 
 Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of t-norm and t-conorm, these laws are not automatically satisfied. However, there are specific pairs that do fulfill them. To illustrate the relationship between t-norms and t-conorms that satisfy De Morgan's Laws, we can use our probabilistic metric space analogy. Reconsidering the probabilistic metrics $F,G$ introduced earlier and substituting $F = 1 - G$ into equation \ref{eq:Ftriangle_inequality}, we obtain:
 
@@ -115,7 +115,7 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 
 \end{proof}
 
-Any triplet of union, intersection and complement operations that satisfy the De Morgan laws, is called a De Morgan triplet\cite[p.~52]{HistoryFL2017}. The proposition above is a sufficient and necessary condition for building a triplet with any given t-norm (or t-conorm) and the standard negation.\\
+Any triplet of union, intersection and complement operations that satisfy the De Morgan's laws, is called a De Morgan triplet\cite[p.~52]{HistoryFL2017}. The proposition above is a sufficient and necessary condition for building a triplet with any given t-norm (or t-conorm) and the standard negation.\\
 
 The following algebraic properties will be needed when defining fuzzy logics and to classify continuous t-norms \cite[Def.~2.1 \& 2.13]{Klement2000}:
 
@@ -202,20 +202,20 @@ Let $T$ be a continuous Archimedean t-norm. Then the following are equivalent:
 
 
 \subsection{Classification of T-norms}\label{sec:class_tnorms}
-The first and most straight forward way to classify them is by defining the following partial order on the set of all t-norms. 
+The first and most straightforward way to classify them is by defining the following partial order on the set of all t-norms. 
 \begin{definition}[Weaker/Stronger t-norm {\cite[Def.~1.4]{Klement2000}}]\label{def:weaker}
   Given two t-norms $T_1$ and $T_2$, $T_1$ is said to be \emph{weaker} than $T_2$ (denoted $T_1 \leq T_2$) if $T_1(x,y) \leq T_2(x,y) \forall x,y \in [0,1]$.
   Equivalently, $T_2$ is said to be \emph{stronger} than $T_1$.
 \end{definition}
 
 \begin{remark}
-  It's a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ and $T_M$ are the drastic and the minimum t-norms respectively (\cite[Rem.~1.5]{Klement2000}).
+  It is a fundamental result that for any t-norm $T$, we have $T_D \leq T \leq T_M$, where $T_D$ and $T_M$ are the drastic and the minimum t-norms respectively (\cite[Rem.~1.5]{Klement2000}).
 \end{remark}
 
 The interpretation is that a weaker t-norm can be seen as a stricter and more pessimistic intersection (conjunction in the fuzzy logic derived), returning lower membership values than a stronger one. Notice that it is not a total order: there are pairs of t-norms where none of them is weaker than the other. Some examples, such as the product $T_P$ and Yager $T_2^Y$ (see \ref{ex:families_tnorms} for the definition of the Yager family) t-norms, are shown in \cite[Fig.~6.1]{Klement2000}.\\
 
 
-Another way to classify t-norms is based on their continuity properties. Continuous t-norms can be divided into two main classes (Fig.~\ref{fig:tnorm_classification}): Archimedean and non-Archimedean t-norms. The Archimedean t-norms can be further subdivided into strict and nilpotent t-norms (using the theorem \ref{thm:alg_arch_cont})\footnote{This classification is also characterized by the behavior of their generator functions at 0. For a more detailed discussion and definitions related to generators, see Appendix \ref{app:generators_tnorms}}:
+Another way to classify t-norms is based on their continuity properties. Continuous t-norms can be divided into two main classes (Fig.~\ref{fig:tnorm_classification}): Archimedean and non-Archimedean t-norms. The Archimedean t-norms can be further subdivided into strict and nilpotent t-norms (using the Theorem \ref{thm:alg_arch_cont})\footnote{This classification is also characterized by the behavior of their generator functions at 0. For a more detailed discussion and definitions related to generators, see Appendix \ref{app:generators_tnorms}}:
 
 \begin{itemize}
     \item $T$ is \textbf{strict} if it does not have any nilpotent elements except $0$. This means $T(x,y)>0$ whenever $x,y > 0$. (\cite[Cor.~3.30(i)]{Klement2000}).
