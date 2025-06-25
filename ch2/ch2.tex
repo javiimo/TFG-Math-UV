@@ -14,7 +14,13 @@ Imagine a team working on \textnormal{sustainable building design} wants to find
 \end{itemize}
 The key challenge is balancing natural lighting and energy efficiency. More natural light means we need larger windows, but this reduces the building's thermal insulation. On the other hand, smaller windows help save energy but do not let in as much daylight.\\
 
-Formally, this is a Multiobjective Optimization Problem where we maximize two functions simultaneously: natural lighting and energy efficiency. Such problems generally do not have a unique optimal solution where both objectives reach their maximum values, but rather a set of solutions called the \textit{Pareto frontier}: a subset of feasible solutions where improving one objective necessarily requires worsening another\footnote{This condition is called Pareto Optimality.}.\\
+Formally, this is a Multiobjective Optimization Problem where we maximize two functions simultaneously: natural lighting and energy efficiency. Such problems generally do not have a unique optimal solution where both objectives reach their maximum values, but rather a set of solutions called the \textit{Pareto frontier}. 
+
+
+\begin{definition}[Pareto frontier]
+The Pareto frontier is a set of feasible solutions in a multi-objective problem for which it is impossible to improve one objective's performance without worsening the performance of at least one other objective.
+\end{definition}
+
 
 Once the Pareto frontier has been identified\footnote{In general, Multiobjective Optimization problems are not tractable analytically, often involve many dimensions, and cannot be easily solved like the example plotted in Figure \ref{fig:pareto_frontier}. Common solution approaches include metaheuristic algorithms such as Goal Programming and Evolutionary Algorithms, which yield near-optimal solutions.}
 (see Figure \ref{fig:pareto_frontier}), it cannot be directly presented as a solution to the customer since it represents an infinite set of building designs. Therefore, the team selects 5 representative options to present to the customer. \\
