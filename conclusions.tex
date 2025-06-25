@@ -11,9 +11,9 @@ The framework's efficacy was rigorously tested on a complex, real-world maintena
 
 \section*{Future Work}
 
-While the implemented framework proved effective, its value-measurement approach represents just one paradigm within the rich field of MCDM. Future investigations could explore alternative methodologies, such as distance-based algorithms like Fuzzy TOPSIS or preference-based outranking methods like Fuzzy ELECTRE. A comparative analysis of these different schools of thought would not only test the robustness of the obtained rankings but also provide deeper insights into the nature of the optimal solutions. Furthermore, the foundational concepts of fuzzy logic and rule-based systems extend well beyond decision-making. Their application in designing Multiple-Input Single-Output (MISO) fuzzy controllers represents a significant avenue for research, where the logic could be used to model and manage complex, non-linear system dynamics.\\
+While the implemented framework proved effective, its value measurement approach represents just one paradigm within the rich field of MCDM. Future investigations could explore alternative methodologies, such as distance-based algorithms like Fuzzy TOPSIS or preference-based outranking methods like Fuzzy ELECTRE. A comparative analysis of these algorithms would not only test the robustness of the obtained rankings but also provide deeper insights into the nature of the solutions. Furthermore, the integration of concepts from fuzzy logic and rule-based systems, such as Multiple-Input Single-Output (MISO) systems, represent another significant avenue for research for interpreatable decision making. \\
 
-The modeling process itself could also be enhanced. The current project relied on a model-based and expert-driven approach to fuzzification. A promising extension would be to incorporate data-driven techniques, such as Adaptive Neuro-Fuzzy Inference Systems (ANFIS). These hybrid systems merge the learning capabilities of neural networks with the interpretability of fuzzy logic, enabling membership functions and inference rules to be automatically learned from data, thereby creating more adaptive and potentially more accurate models. Beyond this, the project could explore hybrid models that integrate fuzzy logic with other uncertainty frameworks. For instance, combining fuzzy sets with Rough Set theory, which excels at handling indiscernibility and incomplete information, could lead to the development of more powerful formalisms like Fuzzy Rough Sets and Rough Fuzzy Sets.\\
+The modeling process itself could also be enhanced. The current project relied on a model-based and expert-driven approach to fuzzification. A promising extension would be to incorporate data-driven techniques, such as Adaptive Neuro-Fuzzy Inference Systems (ANFIS). These hybrid systems merge the learning capabilities of neural networks with the interpretability of fuzzy logic, enabling membership functions and inference rules to be automatically learned from data, thereby creating more adaptive and potentially more accurate models. Beyond this, the project could explore hybrid models that integrate fuzzy logic with other uncertainty frameworks. For instance, combining fuzzy sets with Rough Set theory, which excels at handling indiscernibility and incomplete information, leads to the development of more expressive formalisms like Fuzzy Rough Sets and Rough Fuzzy Sets.\\
 
 Finally, specific improvements could be made to the case study presented in this work. It was noted that some of the high-level attributes, while robust, could benefit from greater discriminative power. Future work could leverage more granular, non-public data to design more targeted criteria. For example, attributes could be developed to explicitly penalize interventions during historically critical periods, quantify the specific economic impact of delaying certain power lines, or measure the temporal clustering of particular intervention types. Such enhancements would provide a more decisive basis for comparison and lead to an even more refined decision-making process.
 
@@ -21,12 +21,49 @@ Finally, specific improvements could be made to the case study presented in this
 \section*{Data and Code Availability}
 \addcontentsline{toc}{section}{Data and Code Availability}
 
-In order to ensure the reproducibility of this research, all source code and data developed and used throughout this project have been made publicly available.\\
 
-The primary GitHub repository contains the complete Python implementation of the fuzzy multi-criteria decision-making model applied in the case study. This includes the scripts for generating the alternative schedules, the module for inferring plausible intervention locations via non-metric Multi-Dimensional Scaling, the code for computing all crisp and fuzzy attributes, and the final aggregation script that implements the two-level ranking model. The repository also houses the raw solution files, the geospatial data for national parks, and the final decision matrix in CSV format. This can be accessed at:
+In order to ensure the reproducibility of this work, all source code and data developed and used throughout this project have been made publicly available. The primary repository contains the complete Python implementation of the fuzzy multi-criteria decision-making model applied in the case study. This can be accessed at:
+\begin{center}
+    \texttt{https://github.com/javiimo/Fuzzy-MCDM}
+\end{center}
 
-\texttt{https://github.com/javiimo/Fuzzy-MCDM}\\
+The repository is structured to reflect the computational pipeline of this research, from raw data processing to final analysis. The key components and their corresponding scripts are detailed below:
+
+\begin{enumerate}
+    \item \textbf{Alternative Generation:} The 29 alternative maintenance schedules analyzed in this work were generated by executing the solvers from the top-performing teams of the ROADEF/EURO 2020 Challenge. As these solvers were compiled for a Linux environment (Debian 10), they were run on a Windows machine using the Windows Subsystem for Linux (WSL). The script \texttt{Decision Matrix/Alternatives/Solvers/execute.py} automates this process by generating a shell script (\texttt{run\_all.sh}) that handles the complex environment setup. This includes managing the Gurobi solver license, which required dynamic key activation to resolve a changing \texttt{hostid} issue inherent to WSL.
+
+    \item \textbf{Data Parsing and Structuring:} The raw problem data, provided in a large and complex \texttt{X\_12.json} file, was parsed into a structured object-oriented model to facilitate analysis. The script \texttt{my\_data\_structs.py} defines a series of Python data classes (\texttt{Solution}, \texttt{Intervention}, \texttt{MaintenanceSchedulingInstance}, etc.) that represent the problem's entities and their relationships in an intuitive and accessible manner.
+
+    \item \textbf{Plausible Location Inference via Weighted MDS:} Since the physical locations of interventions were not public, their relative positions were inferred based on the assumption that spatially close interventions exhibit similar risk profiles over time. A weighted non-metric Multi-Dimensional Scaling (MDS) was required to give more importance to stronger correlations. As the \texttt{scikit-learn} implementation of MDS does not support a weight matrix, the robust \texttt{smacof} package from the R language was used via the \texttt{rpy2} library in Python. The script \texttt{point\_gen.py} implements this entire pipeline, from calculating the risk-correlation matrix to invoking the R \texttt{smacof} function and generating a 2D point cloud of intervention locations.
+
+    \item \textbf{Spatial Context and Fuzzification:} The abstract 2D point cloud from the MDS analysis was then mapped to the geography of France in \texttt{map.py}. This script scales and projects the points, enabling the calculation of metric distances between interventions and to real-world entities like national parks. Subsequently, \texttt{fuzzy\_var.py} defines the building blocks for fuzzification, including triangular and trapezoidal membership functions and the linguistic variable for `distance`. These tools are used in \texttt{map.py} to convert the crisp distance measurements into fuzzy membership matrices representing concepts like "close" or "far".
+
+    \item \textbf{Attribute Computation and Decision Matrix Assembly:} The \texttt{Solution} class contains methods to compute all the crisp and fuzzy attributes for a given schedule. This includes concurrency, seasonality, and the entropy-based scores for the temporal uniformity of size, risk, closeness, and environmental impact. The script \texttt{DM\_Matrix.py} orchestrates this entire process, iterating through all 29 solution files, computing every attribute, and assembling the final decision matrix, which is saved as \texttt{decision\_matrix\_expanded.csv}.
+
+    \item \textbf{Aggregation and Ranking:} The final analysis and ranking were performed using a two-level aggregation model. The script \texttt{epsilon\_decision.py} implements the chosen model, which uses an epsilon-lexicographic method for non-compensatory aggregation within conceptual blocks and an Ordered Weighted Averaging (OWA) operator for the final, attitude-driven aggregation. An alternative model using Lexicographic Ordinal OWA (LOOWA) was also implemented in \texttt{loowa\_decision.py} for comparative purposes, but not included in the results of chapter \ref{ch4}. These scripts also contain the functions used to generate the analysis plots presented in this work.
+\end{enumerate}
+
+The implementation relies on several external Python libraries for data manipulation, scientific computing, and visualization. The key dependencies include: \texttt{pandas}, \texttt{numpy}, \texttt{matplotlib}, \texttt{geopandas}, \texttt{scikit-fuzzy}, \texttt{scikit-learn}, \texttt{rpy2} for interfacing with R, and the \texttt{smacof} package within the R environment.
+
+\subsubsection*{External Data and Repositories}
+
+The data used in this project was sourced from public repositories and the official challenge website. The solvers were provided by the respective competition teams.
+\begin{itemize}
+    \item \textbf{ROADEF/EURO 2020 Challenge Instances:} The \texttt{X\_12.json} instance file and others can be downloaded from the official challenge page: \\ \texttt{https://roadef.org/challenge/2020/en/instances.php}
+    \item \textbf{Team Solvers} (from \cite{top1, ConsueloRoadef, top5})\textbf{:}
+        \begin{itemize}
+            \item \textbf{Team 1:} \texttt{https://github.com/mbmv7/rc}
+            \item \textbf{Team 3:} \texttt{https://github.com/FranciscoParrenoTorres/Roadef2020}
+            \item \textbf{Team 5:} \texttt{https://rwth-aachen.sciebo.de/s/BoMYqRmy7GbwlIm}
+        \end{itemize}
+    \item \textbf{French National Parks Data:} The geospatial data for French regional natural parks was obtained from \texttt{data.gouv.fr}: 
+    \begin{adjustwidth}{-1.5cm}{0cm}
+    \texttt{https://www.data.gouv.fr/fr/datasets/parcs-naturels-regionaux-pnr-france-metropolitaine}
+    \end{adjustwidth}
+
+\end{itemize}
 
 Additionally, the full LaTeX source code used to compile this document, including the generation of its plots and tables, can be found in a separate repository for this thesis at:
-
-\texttt{https://github.com/javiimo/TFG-Math-UV}
+\begin{center}
+    \texttt{https://github.com/javiimo/TFG-Math-UV}
+\end{center}
