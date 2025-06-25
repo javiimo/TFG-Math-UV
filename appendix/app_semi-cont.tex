@@ -2,7 +2,7 @@
 
 \section{Continuity of T-norms}
 \label{app:cont_tnorms}
-T-norms are real-valued functions of two variables defined over the compact domain $[0,1]^2$ with values in $[0,1]$, and they satisfy the monotonicity property (that is, $T(x,y) \le T(x',y')$ if $x \le x'$ and $y \le y'$). These properties greatly simplify the study of their continuity. This appendix presents key results from analysis concerning the continuity and semi-continuity of t-norms\footnote{These results also apply to t-conorms, as they do not depend on one or zero identity properties.}.
+T-norms are real-valued functions of two variables defined over the compact domain $[0,1]^2$ with values in $[0,1]$, and they satisfy the monotonicity property (that is, $T(x,y) \le T(x',y')$ if $x \le x'$ and $y \le y'$). These properties greatly simplify the study of their continuity. This appendix presents key results from analysis concerning the continuity and semi-continuity of T-norms\footnote{These results also apply to t-conorms, as they do not depend on one or zero identity properties.}.
 
 \begin{notation}{Equivalence of Norms on $\R^n$}
     On a finite-dimensional vector space (like $\mathbb{R}^n$), all norms are equivalent. This is, given any two norms $\|\cdot\|_a$ and $\|\cdot\|_b$ on $\mathbb{R}^n$ satisfy
@@ -14,43 +14,43 @@ T-norms are real-valued functions of two variables defined over the compact doma
 \end{notation}
 
 \begin{definition}[Continuity]
-A t-norm $T$ is \emph{continuous at a point} $(x_0, y_0) \in [0,1]^2$ if:
+A T-norm $T$ is \emph{continuous at a point} $(x_0, y_0) \in [0,1]^2$ if:
 \[
 \forall \epsilon > 0, \exists \delta > 0 : \forall (x,y) \in [0,1]^2, \|(x,y) - (x_0,y_0)\| < \delta \implies |T(x,y) - T(x_0,y_0)| < \epsilon
 \]
 \end{definition}
 
-Intuitively, this means that the value $T(x,y)$ can be made arbitrarily close to $T(x_0,y_0)$ by choosing $(x,y)$ sufficiently close to $(x_0,y_0)$. A t-norm $T$ is \emph{continuous} if it is continuous at every point in its domain $[0,1]^2$.
+Intuitively, this means that the value $T(x,y)$ can be made arbitrarily close to $T(x_0,y_0)$ by choosing $(x,y)$ sufficiently close to $(x_0,y_0)$. A T-norm $T$ is \emph{continuous} if it is continuous at every point in its domain $[0,1]^2$.
 
 \begin{definition}[Uniform Continuity]
-A t-norm $T$ is \emph{uniformly continuous} if:
+A T-norm $T$ is \emph{uniformly continuous} if:
 \[
 \forall \epsilon > 0, \exists \delta > 0 : \forall (x,y),(x',y') \in [0,1]^2, \|(x,y) - (x',y')\| < \delta \implies |T(x,y) - T(x',y')| < \epsilon
 \]
 \end{definition}
 The key difference from pointwise continuity is that $\delta$ depends only on $\epsilon$, not on the specific location in the domain.
 \begin{remark}
-    Since the domain $[0,1]^2$ of a t-norm is a compact set, a t-norm $T$ is continuous if and only if it is uniformly continuous \cite[p.~30]{Klement2000}.
+    Since the domain $[0,1]^2$ of a T-norm is a compact set, a T-norm $T$ is continuous if and only if it is uniformly continuous \cite[p.~30]{Klement2000}.
 \end{remark}
 
-Due to monotonicity, a t-norm's continuity over its 2D domain can be verified by checking continuity along its one-dimensional sections:
+Due to monotonicity, a T-norm's continuity over its 2D domain can be verified by checking continuity along its one-dimensional sections:
 \begin{proposition}[Continuity via Components for Monotone Functions {\cite[Prop.~1.19]{Klement2000}}]
-A t-norm $T$ (or any non-decreasing function on $[0,1]^2$) is continuous if and only if it is continuous in each variable separately. That is, for all fixed $x_0, y_0 \in [0,1]$, the functions $T(x_0, \cdot)$ and $T(\cdot, y_0)$ are continuous.
+A T-norm $T$ (or any non-decreasing function on $[0,1]^2$) is continuous if and only if it is continuous in each variable separately. That is, for all fixed $x_0, y_0 \in [0,1]$, the functions $T(x_0, \cdot)$ and $T(\cdot, y_0)$ are continuous.
 \end{proposition}
 
 \begin{remark}
-Because of the commutativity, for a t-norm
+Because of the commutativity, for a T-norm
 its continuity is equivalent to its continuity in the first component.\cite[p.~16]{Klement2000}
 \end{remark}
 
 \section{Semi-continuity of T-norms}
 \label{app:semicont-tnorms}
 
-Many theoretical contexts such as fuzzy logic require only less restrictive properties than continuity, such as left-continuity or upper semi-continuity. The following sections present these definitions and derive their relationships using the properties of t-norms.
+Many theoretical contexts such as fuzzy logic require only less restrictive properties than continuity, such as left-continuity or upper semi-continuity. The following sections present these definitions and derive their relationships using the properties of T-norms.
 
 
 \begin{definition}[Semi-continuity for T-norms {\cite[Def.~1.20]{Klement2000}}]
-    A t-norm $T$ is:
+    A T-norm $T$ is:
     \begin{itemize}
         \item \emph{Lower semi-continuous (LSC) at $(x_0,y_0)$} if:
         \[
@@ -61,7 +61,7 @@ Many theoretical contexts such as fuzzy logic require only less restrictive prop
         \forall \epsilon > 0, \exists \delta > 0 :\, T(x,y) < T(x_0,y_0) + \epsilon \quad \forall (x,y) \in \left([x_0, x_0 + \delta[ \times [y_0, y_0 + \delta[\right) \cap [0,1]^2
         \]
     \end{itemize}
-    A t-norm is LSC (USC) if it is LSC (USC) at every point in $[0,1]^2$.
+    A T-norm is LSC (USC) if it is LSC (USC) at every point in $[0,1]^2$.
     \end{definition}
     \begin{notation}{Topological semi-continuity}
         The definition above is only valid in metric spaces such as $\R^2$. The topological definitions are: $$T(x_0, y_0) \le \liminf_{(x,y) \to (x_0,y_0)} T(x,y) \text{ for LSC}$$   $$\text{and } T(x_0, y_0) \ge \limsup_{(x,y) \to (x_0,y_0)} T(x,y)\text{ for USC}$$
@@ -73,7 +73,7 @@ Many theoretical contexts such as fuzzy logic require only less restrictive prop
     jump.
 
 \begin{definition}[One-Sided Continuity]
-A t-norm $T$ is:
+A T-norm $T$ is:
 \begin{itemize}
     \item \emph{Left-continuous in its first component at $(x_0,y_0)$} if:
     \[
@@ -89,7 +89,7 @@ $T$ is \emph{left-continuous} (or \emph{right-continuous}) if it is left-continu
 \end{definition}
 
 \begin{remark}
-    Let $T$ be a t-norm:
+    Let $T$ be a T-norm:
       \begin{align*}
         T \text{ continuous } &\Leftrightarrow T \text{ lower semi-continuous and upper semi-continuous} \\
         T \text{ continuous } &\Leftrightarrow T \text{ left-continuous and right-continuous}
@@ -97,30 +97,30 @@ $T$ is \emph{left-continuous} (or \emph{right-continuous}) if it is left-continu
 \end{remark}
 
 
-For general functions, semi-continuity and one-sided continuity are unrelated concepts, as semi-continuity is related to the function's range while one-sided continuity deals with domain limits. However, for monotone functions like t-norms, these properties are equivalent. This is particularly useful because one-sided continuity is often easier to establish or analyze from the construction of a t-norm.\\
+For general functions, semi-continuity and one-sided continuity are unrelated concepts, as semi-continuity is related to the function's range while one-sided continuity deals with domain limits. However, for monotone functions like T-norms, these properties are equivalent. This is particularly useful because one-sided continuity is often easier to establish or analyze from the construction of a T-norm.\\
 \begin{proposition}[{\cite[Prop.~1.22]{Klement2000}}]
-For a t-norm $T$:
+For a T-norm $T$:
 \begin{itemize}
     \item $T$ is lower semi-continuous if and only if $T$ is left-continuous.
     \item $T$ is upper semi-continuous if and only if $T$ is right-continuous.
 \end{itemize}
 \end{proposition}
 
-For Archimedean t-norms (those for which $T(x,x) < x$ for all $x \in ]0,1[$), an even stronger relationship between one-sided continuity and full continuity exists. This class of t-norms is fundamental in many applications.
+For Archimedean T-norms (those for which $T(x,x) < x$ for all $x \in ]0,1[$), an even stronger relationship between one-sided continuity and full continuity exists. This class of T-norms is fundamental in many applications.
 \begin{proposition}[{\cite[Prop.~2.16]{Klement2000}}]
-  For an Archimedean t-norm $T$, the following are equivalent:
+  For an Archimedean T-norm $T$, the following are equivalent:
   \begin{enumerate}
       \item[(i)] $T$ is left-continuous.
       \item[(ii)] $T$ is continuous.
   \end{enumerate}
 \end{proposition}
-This result significantly simplifies the verification of continuity for Archimedean t-norms. If such a t-norm is known to be left-continuous (e.g., due to properties of its additive or multiplicative generator, which are often easier to analyze for one-sided continuity), it is automatically fully continuous. This is a non-trivial property that does not hold for general monotone functions.
+This result significantly simplifies the verification of continuity for Archimedean T-norms. If such a T-norm is known to be left-continuous (e.g., due to properties of its additive or multiplicative generator, which are often easier to analyze for one-sided continuity), it is automatically fully continuous. This is a non-trivial property that does not hold for general monotone functions.
 
 \subsection{Non-continuous T-norms}
 
-While continuous t-norms are well-classified (section \ref{sec:class_tnorms}), not all t-norms are continuous, they can exhibit quite irregular continuity behavior:\\
+While continuous T-norms are well-classified (section \ref{sec:class_tnorms}), not all T-norms are continuous, they can exhibit quite irregular continuity behavior:\\
 
-The \textbf{drastic product $T_D$} is a key example of a non-continuous t-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable. However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).\\
+The \textbf{drastic product $T_D$} is a key example of a non-continuous T-norm. It is Archimedean. It is upper semicontinuous, implying right-continuity in each variable. However, it is not left-continuous (e.g., at $(1,y)$ for $y<1$).\\
 
 The \textbf{nilpotent minimum $T^{nM}$} is lower semicontinuous (left-continuous in each variable) but it is not right-continuous at points on the line $x+y=1$ when approached from $x+y>1$ \cite[Rem.~1.21(i)]{Klement2000}. It is defined as:
   \[
@@ -132,71 +132,71 @@ The \textbf{nilpotent minimum $T^{nM}$} is lower semicontinuous (left-continuous
   \]
 
 
-The \textbf{Krause t-norm $T^K$} (\cite[App.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is neither left- nor right-continuous, but has a continuous diagonal section.
+The \textbf{Krause T-norm $T^K$} (\cite[App.~B.1]{Klement2000}) is a more complex example. It is constructed using the Cantor set and Farey series. It is neither left- nor right-continuous, but has a continuous diagonal section.
 
 % \signal{
 % \begin{remark}[Importance of Left-Continuity]
-% For non-continuous t-norms, the property of \emph{left-continuity} (in each variable) is often a desirable, or even required, condition in certain applications, particularly in fuzzy logic. For instance, in residuum-based logics, if a t-norm $T$ is left-continuous, its corresponding residuated implication $I(x,y) = \sup\{z \in [0,1] \mid T(x,z) \le y\}$ exhibits well-behaved properties. Specifically, a commutative, integral lattice-ordered monoid based on $T$ is residuated if and only if $T$ is left-continuous (\cite[Prop.~2.47, p.~63]{Klement2000}). This ensures that the implication adequately captures deductive reasoning. While the intuitive notion that ``a microscopic decrease of the truth degree of a conjunct should not macroscopically decrease the truth degree of the conjunction" points towards continuity, left-continuity is a weaker but often sufficient condition for preserving logical coherence in such frameworks.
+% For non-continuous T-norms, the property of \emph{left-continuity} (in each variable) is often a desirable, or even required, condition in certain applications, particularly in fuzzy logic. For instance, in residuum-based logics, if a T-norm $T$ is left-continuous, its corresponding residuated implication $I(x,y) = \sup\{z \in [0,1] \mid T(x,z) \le y\}$ exhibits well-behaved properties. Specifically, a commutative, integral lattice-ordered monoid based on $T$ is residuated if and only if $T$ is left-continuous (\cite[Prop.~2.47, p.~63]{Klement2000}). This ensures that the implication adequately captures deductive reasoning. While the intuitive notion that ``a microscopic decrease of the truth degree of a conjunct should not macroscopically decrease the truth degree of the conjunction" points towards continuity, left-continuity is a weaker but often sufficient condition for preserving logical coherence in such frameworks.
 % \end{remark}}
 
 \section{Generators and continuous Archimedean T-norms}
 \label{app:generators_tnorms}
-Continuous archimedean t-norms can be elegantly characterized and constructed through the concept of generators. 
+Continuous archimedean T-norms can be elegantly characterized and constructed through the concept of generators. 
 These representations emerged from studying functional equations, particularly the associativity equation
- $T(x, T(y,z)) = T(T(x,y),z)$. The study of this equation began with N. H. Abel's work in the 19th century. J. Aczél later advanced the theory through his research on functional equations. Important insights also came from P. S. Mostert, A. L. Shields, and C. H. Ling's work on topological semigroups \cite[Sec.~5.1]{Klement2000}. Though the theory behind functional equations and topological semigroups is beyond the scope of this work, these fields were essential in developing the theory of t-norm generators.\\
+ $T(x, T(y,z)) = T(T(x,y),z)$. The study of this equation began with N. H. Abel's work in the 19th century. J. Aczél later advanced the theory through his research on functional equations. Important insights also came from P. S. Mostert, A. L. Shields, and C. H. Ling's work on topological semigroups \cite[Sec.~5.1]{Klement2000}. Though the theory behind functional equations and topological semigroups is beyond the scope of this work, these fields were essential in developing the theory of T-norm generators.\\
 
-The core idea of a generator is to transform the t-norm operation on $[0,1]$ into a simpler arithmetic operation on a different domain, via a strictly monotonic function. For continuous Archimedean t-norms, the additive generator provides such a framework.
+The core idea of a generator is to transform the T-norm operation on $[0,1]$ into a simpler arithmetic operation on a different domain, via a strictly monotonic function. For continuous Archimedean T-norms, the additive generator provides such a framework.
 
-An \textbf{additive generator} \cite[Def.~3.25]{Klement2000} of a t-norm $T$ is a strictly decreasing function $t: [0,1] \to [0, \infty]$ such that:
+An \textbf{additive generator} \cite[Def.~3.25]{Klement2000} of a T-norm $T$ is a strictly decreasing function $t: [0,1] \to [0, \infty]$ such that:
 \begin{enumerate}
     \item $t(1) = 0$.
     \item $t$ is right-continuous at $0$.
 \end{enumerate}
-The t-norm $T$ is then constructed from its additive generator $t$ using the formula:
+The T-norm $T$ is then constructed from its additive generator $t$ using the formula:
 \begin{equation} \label{eq:additive_generator_t_norm}
     T(x,y) = t^{(-1)}( \min(t(0), t(x) + t(y)) )
 \end{equation}
 where $t^{(-1)}: [0, t(0)] \to [0,1]$ is the pseudo-inverse of $t$, defined as $t^{(-1)}(u) = \sup \{z \in [0,1] \mid t(z) \ge u \}$. The sum operation in equation \ref{eq:additive_generator_t_norm} is the reason why these generators are called \emph{additive}.
 
 \begin{notation}{Multiplicative Generators}
-    Parallel to additive generators, continuous Archimedean t-norms can also be represented using multiplicative generators \cite[Def.~3.36]{Klement2000}. The key differences are:
+    Parallel to additive generators, continuous Archimedean T-norms can also be represented using multiplicative generators \cite[Def.~3.36]{Klement2000}. The key differences are:
     \begin{itemize}
         \item A multiplicative generator $\theta$ is strictly \emph{increasing} (rather than decreasing)
         \item $\theta(1)=1$ (rather than $t(1)=0$)
         \item The formula analogous to Equation \ref{eq:additive_generator_t_norm} uses maximum and multiplication instead of minimum and addition:
         \[T(x,y) = \theta^{(-1)}(\max(\theta(0), \theta(x) \cdot \theta(y)))\]
-        \item For strict t-norms, $\theta(0)=0$ (rather than $t(0)=\infty$)
-        \item For nilpotent t-norms, $\theta(0) \in ]0,1[$ (rather than $t(0)$ finite)
+        \item For strict T-norms, $\theta(0)=0$ (rather than $t(0)=\infty$)
+        \item For nilpotent T-norms, $\theta(0) \in ]0,1[$ (rather than $t(0)$ finite)
     \end{itemize}
     The relationship between both types of generators is given by: \[\theta(x) = e^{-t(x)}\text{ and }t(x) = -\log(\theta(x))\]
     \end{notation}
 
     \begin{theorem}[Representation of Continuous Archimedean T-norms {\cite[Thm.~5.1]{Klement2000}}]
-        A t-norm $T$ is a continuous Archimedean t-norm if and only if it possesses a continuous additive generator $t: [0,1] \to [0,\infty]$. This generator is unique up to a positive multiplicative constant.
+        A T-norm $T$ is a continuous Archimedean T-norm if and only if it possesses a continuous additive generator $t: [0,1] \to [0,\infty]$. This generator is unique up to a positive multiplicative constant.
       \end{theorem}
     
-    This theorem is crucial because it guarantees that the entire class of continuous Archimedean t-norms can be characterized and constructed using these generator functions. Consequently, through the equivalence, they can also be represented by multiplicative generators \cite[Cor.~5.4]{Klement2000}.
+    This theorem is crucial because it guarantees that the entire class of continuous Archimedean T-norms can be characterized and constructed using these generator functions. Consequently, through the equivalence, they can also be represented by multiplicative generators \cite[Cor.~5.4]{Klement2000}.
 
-The value $t(0)$ is particularly significant as it determines the nature of the continuous Archimedean t-norm \cite[Cor.~3.30]{Klement2000}:
+The value $t(0)$ is particularly significant as it determines the nature of the continuous Archimedean T-norm \cite[Cor.~3.30]{Klement2000}:
 \begin{itemize}
-    \item If $t(0) = \infty$, then $\min(t(0), t(x) + t(y)) = t(x) + t(y)$, and the resulting t-norm $T$ is \textbf{strict} (e.g., for $t(x) = -\log(x)$, $T(x,y) = xy$, the product t-norm).
-    \item If $t(0)$ is finite (i.e., $t(0) < \infty$), the resulting t-norm $T$ is \textbf{nilpotent} (e.g., for $t(x) = 1-x$, $T(x,y) = \max(0, x+y-1)$, the Łukasiewicz t-norm).
+    \item If $t(0) = \infty$, then $\min(t(0), t(x) + t(y)) = t(x) + t(y)$, and the resulting T-norm $T$ is \textbf{strict} (e.g., for $t(x) = -\log(x)$, $T(x,y) = xy$, the product T-norm).
+    \item If $t(0)$ is finite (i.e., $t(0) < \infty$), the resulting T-norm $T$ is \textbf{nilpotent} (e.g., for $t(x) = 1-x$, $T(x,y) = \max(0, x+y-1)$, the Łukasiewicz T-norm).
 \end{itemize}
-This representation via additive generators not only simplifies the study of continuous Archimedean t-norms but also provides a mechanism for constructing them, which is the idea behind the families of t-norms. The general approach involves:
+This representation via additive generators not only simplifies the study of continuous Archimedean T-norms but also provides a mechanism for constructing them, which is the idea behind the families of T-norms. The general approach involves:
 \begin{enumerate}
     \item Starting with a known generator function. For example:
     \begin{itemize}
-        \item $t_L(x) = 1-x$, the additive generator for the Łukasiewicz t-norm ($T_L$).
-        \item $t_P(x) = -\log x$, the additive generator for the Product t-norm ($T_P$).
+        \item $t_L(x) = 1-x$, the additive generator for the Łukasiewicz T-norm ($T_L$).
+        \item $t_P(x) = -\log x$, the additive generator for the Product T-norm ($T_P$).
     \end{itemize}
     \item Introducing one or more parameters (often denoted by $\lambda, p, \dots$) into the structure of this generator function to create a parameterized generator $t_\lambda(x)$.
-    \item Applying the construction formula (Equation~\eqref{eq:additive_generator_t_norm}) with $t_\lambda(x)$ to obtain a parametric family of t-norms $T_\lambda(x,y)$.
+    \item Applying the construction formula (Equation~\eqref{eq:additive_generator_t_norm}) with $t_\lambda(x)$ to obtain a parametric family of T-norms $T_\lambda(x,y)$.
 \end{enumerate}
-The properties of the resulting t-norm family (e.g., whether its members are strict or nilpotent, their continuity with respect to the parameter) depend on how the parameter affects $t_\lambda(0)$ and the overall shape of $t_\lambda$. Many well-known t-norm families are derived in this manner.
+The properties of the resulting T-norm family (e.g., whether its members are strict or nilpotent, their continuity with respect to the parameter) depend on how the parameter affects $t_\lambda(0)$ and the overall shape of $t_\lambda$. Many well-known T-norm families are derived in this manner.
 
 
 \begin{example}[Examples of T-norm Families]\label{ex:families_tnorms}
-    Below are some families of continuous Archimedean t-norms, along with their definitions and key generator properties. These are extracted from \cite[App.~A]{Klement2000}.
+    Below are some families of continuous Archimedean T-norms, along with their definitions and key generator properties. These are extracted from \cite[App.~A]{Klement2000}.
 
     \textbf{1. Schweizer-Sklar T-norms} ($T_\lambda^{SS}$) for $\lambda \in [-\infty, \infty]$ 
 \begin{itemize}

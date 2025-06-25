@@ -167,7 +167,7 @@ The following proposition (mentioned in \cite[p.~3]{FULLER2} as a comment withou
 %     where $[\cdot]^\alpha$ denotes the $\alpha$-cut of a fuzzy set and $a_1(\alpha), a_2(\alpha)$ the extremes of the $\alpha$-cut.
 % \end{theorem}
 
-% \signal{Sup- t-norm convolution para la generalización lo menciono?? Y eso de la convolución es útil para algo más?}
+% \signal{Sup- T-norm convolution para la generalización lo menciono?? Y eso de la convolución es útil para algo más?}
 
 % \begin{theorem}[Second Nguyen Theorem]
 %     Let $f:\, \R \times \R\longrightarrow \R$ a continuous function and $A,B$ \signal{any} fuzzy numbers. Then,
@@ -228,7 +228,7 @@ Since $A$ is a fuzzy number, its $\alpha$-cuts $[A]^\alpha$ are closed and bound
 % \end{proof}
 
 \paragraph{Generalization of Nguyen's Theorem:}
-The original Nguyen's theorem for two-place functions implicitly relies on Zadeh's sup-min extension principle. Fullér and Keresztfalvi generalized this result to cases where the extension principle uses an arbitrary t-norm \cite[Sec. 1.9]{FULLER2}.
+The original Nguyen's theorem for two-place functions implicitly relies on Zadeh's sup-min extension principle. Fullér and Keresztfalvi generalized this result to cases where the extension principle uses an arbitrary T-norm \cite[Sec. 1.9]{FULLER2}.
 
 The generalized extension principle defines the membership of $z$ in $f(A,B)$ as:
 \[
@@ -249,11 +249,11 @@ which is precisely Nguyen's original second theorem.
 
 Fullér and Keresztfalvi provide the following key results \cite[Thms. 1.9.1, 1.9.2]{FULLER2}:
 \begin{theorem}
-    Let $f: X \times Y \to Z$ be a two-place function, $A \in \mathcal{F}(X)$, $B \in \mathcal{F}(Y)$, and $T$ be a t-norm. A necessary and sufficient condition for the equality \eqref{eq:nguyen_generalized} to hold is that for each $z \in Z$, the supremum $\sup_{f(x,y)=z} T(A(x), B(y))$ is attained.
+    Let $f: X \times Y \to Z$ be a two-place function, $A \in \mathcal{F}(X)$, $B \in \mathcal{F}(Y)$, and $T$ be a T-norm. A necessary and sufficient condition for the equality \eqref{eq:nguyen_generalized} to hold is that for each $z \in Z$, the supremum $\sup_{f(x,y)=z} T(A(x), B(y))$ is attained.
 \end{theorem}
 
 \begin{theorem}
-    If $f: X \times Y \to Z$ is continuous, the t-norm $T$ is upper semicontinuous, and $A, B$ are fuzzy subsets with u.s.c., compactly-supported membership functions (denoted $A \in \mathcal{F}(X, \mathcal{K}), B \in \mathcal{F}(Y, \mathcal{K})$), then the equality \eqref{eq:nguyen_generalized} holds.
+    If $f: X \times Y \to Z$ is continuous, the T-norm $T$ is upper semicontinuous, and $A, B$ are fuzzy subsets with u.s.c., compactly-supported membership functions (denoted $A \in \mathcal{F}(X, \mathcal{K}), B \in \mathcal{F}(Y, \mathcal{K})$), then the equality \eqref{eq:nguyen_generalized} holds.
     (Here $X, Y, Z$ are locally compact topological spaces).
 \end{theorem}
 % \begin{proof}
@@ -274,7 +274,7 @@ Fullér and Keresztfalvi provide the following key results \cite[Thms. 1.9.1, 1.
 \subsection{Fuzzy Arithmetic}
 \label{sec:fuzzy_arithmetic}
 
-Building upon the extension principle, arithmetic operations for fuzzy numbers can be defined. These are very useful for aggregating different criteria represented by fuzzy numbers or for defining and solving fuzzy linear programming problems where crisp constraints may be relaxed with fuzzy ones. Their most common implementation is using the minimum t-norm and triangular numbers.
+Building upon the extension principle, arithmetic operations for fuzzy numbers can be defined. These are very useful for aggregating different criteria represented by fuzzy numbers or for defining and solving fuzzy linear programming problems where crisp constraints may be relaxed with fuzzy ones. Their most common implementation is using the minimum T-norm and triangular numbers.
 
 \paragraph{Sup-Min Based Arithmetic for LR-Fuzzy Numbers}
 Let $\tilde{A} = (a_1, a_2, \alpha_L, \alpha_R)_{LR}$ and $\tilde{B} = (b_1, b_2, \beta_L, \beta_R)_{LR}$ be two fuzzy numbers of LR-type. Using the sup-min extension principle, the following operational rules can be derived \cite[p.16]{FULLER2}.
@@ -379,11 +379,11 @@ Before introducing the arithmetic induced by the sup-T extension principle, the 
 \paragraph{Sup-T Based Addition of Fuzzy Numbers}
 When employing the sup-T extension principle, there are no simple universal expressions for the general case. For the remaining of the section, some particular cases where formulas are available, are discussed.\\
 
-If we assume an Archimedean t-norm $T$ (having an additive generator $f$), the sum of fuzzy numbers (sharing both spread and well-behaved shape functions) takes a specific form \cite[Thm. 1.7.1]{FULLER2}:
+If we assume an Archimedean T-norm $T$ (having an additive generator $f$), the sum of fuzzy numbers (sharing both spread and well-behaved shape functions) takes a specific form \cite[Thm. 1.7.1]{FULLER2}:
 
 \begin{theorem}
 \label{thm:tnorm_addition_lr}
-Let $T$ be an Archimedean t-norm with additive generator $f$. Let $\tilde{a}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be $n$ fuzzy numbers of LR-type with common spreads $\alpha, \beta$. If $L$ and $R$ (shape functions) are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then the membership function of the T-sum $\tilde{A}_n = \tilde{a}_1 \oplus_T \dots \oplus_T \tilde{a}_n$ is given by:
+Let $T$ be an Archimedean T-norm with additive generator $f$. Let $\tilde{a}_i = (a_i, b_i, \alpha, \beta)_{LR}$, $i=1, \dots, n$, be $n$ fuzzy numbers of LR-type with common spreads $\alpha, \beta$. If $L$ and $R$ (shape functions) are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then the membership function of the T-sum $\tilde{A}_n = \tilde{a}_1 \oplus_T \dots \oplus_T \tilde{a}_n$ is given by:
 \begin{equation}
 \mu_{\tilde{A}_n}(z) =
 \begin{cases}
@@ -396,9 +396,9 @@ f^{[-1]}\left( n \cdot f\left(R\left(\frac{z-B_n}{n\beta}\right)\right) \right) 
 where $A_n = \sum_{i=1}^n a_i$, $B_n = \sum_{i=1}^n b_i$, and $f^{[-1]}$ is the pseudo-inverse of $f$.
 \end{theorem}
 \begin{remark}
-This theorem provides a computationally efficient way to calculate the t-norm based sum of LR-fuzzy numbers under specific conditions. It has been generalized for varying spreads and different conditions on $f, L, R$ by several authors \cite[p.29]{FULLER2}. For example, it remains valid if $f$ is convex and $L,R$ are concave.
+This theorem provides a computationally efficient way to calculate the T-norm based sum of LR-fuzzy numbers under specific conditions. It has been generalized for varying spreads and different conditions on $f, L, R$ by several authors \cite[p.29]{FULLER2}. For example, it remains valid if $f$ is convex and $L,R$ are concave.
 \end{remark}
-The product of two fuzzy numbers $\tilde{A}$ and $\tilde{B}$ using the sup-T extension principle, where $T$ is a t-norm, is defined as \cite[p.20]{FULLER2}:
+The product of two fuzzy numbers $\tilde{A}$ and $\tilde{B}$ using the sup-T extension principle, where $T$ is a T-norm, is defined as \cite[p.20]{FULLER2}:
 \begin{equation}
 \mu_{\tilde{A} \otimes_T \tilde{B}}(z) = \sup_{x \cdot y = z} T(\mu_{\tilde{A}}(x), \mu_{\tilde{B}}(y))
 \end{equation}
@@ -406,11 +406,11 @@ Similar to the sup-min product, closed-form expressions for the resulting member
 
 \begin{theorem}
 \label{thm:functional_relationship_add_mult}
-Let $T$ be an Archimedean t-norm with an additive generator $f$. Let $\tilde{M}_i = \tilde{M} = (a,b,\alpha,\beta)_{LR}$ for $i=1,\dots,n$ be $n$ identical positive fuzzy numbers of LR-type (i.e., their support is in $\mathbb{R}^+$). If $L$ and $R$ are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then for $z \ge 0$:
+Let $T$ be an Archimedean T-norm with an additive generator $f$. Let $\tilde{M}_i = \tilde{M} = (a,b,\alpha,\beta)_{LR}$ for $i=1,\dots,n$ be $n$ identical positive fuzzy numbers of LR-type (i.e., their support is in $\mathbb{R}^+$). If $L$ and $R$ are twice differentiable, concave functions, and $f$ is a twice differentiable, strictly convex function, then for $z \ge 0$:
 \begin{equation}
 \mu_{(\tilde{M}_1 \oplus_T \dots \oplus_T \tilde{M}_n)}(nz) = \mu_{(\tilde{M}_1 \otimes_T \dots \otimes_T \tilde{M}_n)}(z^n) = f^{[-1]}(n \cdot f(\mu_{\tilde{M}}(z)))
 \end{equation}
-where $\oplus_T$ denotes t-norm based addition and $\otimes_T$ denotes t-norm based multiplication.
+where $\oplus_T$ denotes T-norm based addition and $\otimes_T$ denotes T-norm based multiplication.
 \end{theorem}
 
 \begin{remark}

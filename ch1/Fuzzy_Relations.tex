@@ -1,5 +1,5 @@
   In the previous sections we have been working with a single domain denoted by $X$. Intuitively, it might be useful to think about the domain as the different values of a property (independently of the object that has that property). For example, we could say that for the property \textit{length} the domain is $\R^+\coleq
-  \{x\in\R \mid x \geq 0\}$ and a person might have a \textit{height} defined in that domain (modeled as a fuzzy set), although not all length values will be compatible with a person's height since it is safe to assume impossible to be 10 meters tall, but we do not know where to place a sharp boundary, so the feasible region of heights is best represented by a fuzzy set. If we were to look at the arm length, then we would have another set of feasible lengths. Treating each set independently, does not allow distinguishing between the people of the same height with different arm length or vice versa. Therefore, it is needed to a way to differentiate each unique combination of attributes. Notice that in this example, height and arm length have the same domain but for example hair color would have a different domain.\\
+  \{x\in\R \mid x \geq 0\}$ and a person might have a \textit{height} defined in that domain (modeled as a fuzzy set), although not all length values will be compatible with a person's height since it is safe to assume impossible to be 10 meters tall, but we do not know where to place a sharp boundary, so the feasible region of heights is best represented by a fuzzy set. If we were to look at the arm length, then we would have another set of feasible lengths. Treating each set independently, does not allow distinguishing between the people of the same height with different arm length or vice versa. Therefore, it is needed a way to differentiate each unique combination of attributes. Notice that in this example, height and arm length have the same domain but for example hair color would have a different domain.\\
 
   Mathematically, this is done with relations which are subsets of the Cartesian product of the domains, so that each element is a unique possible combination of attributes, an ordered n-tuple. For simplicity, let us consider just the Cartesian product of 2 sets since the general case can be obtained inductively (see remark below). Again, the ``fuzzy" part will be referred to how we generalize the membership values to the continuum.
 
@@ -17,17 +17,17 @@
     \[
     (A\times B)\times C \cong A\times (B\times C).
     \]
-    and that t-norms satisfy the associativity property.
+    and that T-norms satisfy the associativity property.
   \end{remark}
 
-  Before giving the definition of the fuzzy Cartesian product, we need to first understand what the classical Cartesian product is in terms of the membership function. When we define a Cartesian product $A\times B$ as "\textit{all unique ordered pairs of elements from $A$ \textbf{and} $B$}", in terms of membership functions we are taking the intersection of membership to $A$ and membership to $B$. Therefore, generalizing that notion with a t-norm we get the following definition.
+  Before giving the definition of the fuzzy Cartesian product, we need to first understand what the classical Cartesian product is in terms of the membership function. When we define a Cartesian product $A\times B$ as "\textit{all unique ordered pairs of elements from $A$ \textbf{and} $B$}", in terms of membership functions we are taking the intersection of membership to $A$ and membership to $B$. Therefore, generalizing that notion with a T-norm we get the following definition.
 
   \begin{definition}[Fuzzy Cartesian Product]
     It is a fuzzy relation $A\times B \in \fuzzy{X\times Y}$ such that the membership function is given by:
     \[ 
     (A\times B)(x,y) = T(A(x), B(y)), \quad \forall (x,y) \in X\times Y
     \]
-    where $T$ is a t-norm.
+    where $T$ is a T-norm.
   \end{definition}
 
   To justify the definition of the membership function of a Cartesian product of two fuzzy sets, let us first recall that in classical sets, we can retrieve the orginal subsets individually by taking the projection of the Cartesian product. Given $R$ a relation on $X\times Y$ the projections are:
@@ -93,7 +93,7 @@
 
 
 \begin{proposition}[Retrieval of Fuzzy Sets from their T-norm Cartesian Product]
-  Let $A \in \fuzzy{X}$ and $B \in \fuzzy{Y}$ be fuzzy sets and $T$ a left-continuous t-norm. If the fuzzy set $B$ is normalized (i.e., $\sup\{B(y) \mid y \in Y\}  = 1$), then $\Pi_X(A \times B)(x) = A(x)$ for all $x \in X$. 
+  Let $A \in \fuzzy{X}$ and $B \in \fuzzy{Y}$ be fuzzy sets and $T$ a left-continuous T-norm. If the fuzzy set $B$ is normalized (i.e., $\sup\{B(y) \mid y \in Y\}  = 1$), then $\Pi_X(A \times B)(x) = A(x)$ for all $x \in X$. 
   In general, if $B$ is not normalized, we only get a lower bound $\Pi_X(A \times B)(x) \le A(x)$.
   \end{proposition}
   
@@ -108,11 +108,11 @@
       \end{cases}
     \end{split}
   \end{equation*}
-  Since $A(x)$ is a constant with respect to the supremum over $y$, and t-norms are non-decreasing and left-continuous\footnote{If the function were only left-continuous but not non-decreasing, then that equality would instead be the $\geq$ inequality.} in their second argument, then the second equality holds. The inequality before the cases is justified using that the minimum t-norm is the strongest t-norm.
+  Since $A(x)$ is a constant with respect to the supremum over $y$, and T-norms are non-decreasing and left-continuous\footnote{If the function were only left-continuous but not non-decreasing, then that equality would instead be the $\geq$ inequality.} in their second argument, then the second equality holds. The inequality before the cases is justified using that the minimum T-norm is the strongest T-norm.
   \end{proof}
   
   \begin{remark}
-  It is also crucial to emphasize that this retrieval is meaningful when the fuzzy relation $R$ under consideration is indeed a fuzzy Cartesian product of the form $A \times B$ using the t-norm $T$. If a given fuzzy relation $R'$ on $X \times Y$ is not $T$-decomposable (i.e., it cannot be expressed as $T(A'(x), B'(y))$ for any fuzzy sets $A'$ on $X$ and $B'$ on $Y$ with respect to the t-norm $T$), then the notion of retrieving original sets $A'$ and $B'$ from $R'$ does not make sense. While one can always compute the projections $A_P(x) = \Pi_X(R')(x)$ and $B_P(y) = \Pi_Y(R')(y)$, the relation $R'$ will not necessarily be equal to the $T$-Cartesian product of its projections, i.e., $R'(x,y) \neq T(A_P(x), B_P(y))$ in general for non-decomposable relations.
+  It is also crucial to emphasize that this retrieval is meaningful when the fuzzy relation $R$ under consideration is indeed a fuzzy Cartesian product of the form $A \times B$ using the T-norm $T$. If a given fuzzy relation $R'$ on $X \times Y$ is not $T$-decomposable (i.e., it cannot be expressed as $T(A'(x), B'(y))$ for any fuzzy sets $A'$ on $X$ and $B'$ on $Y$ with respect to the T-norm $T$), then the notion of retrieving original sets $A'$ and $B'$ from $R'$ does not make sense. While one can always compute the projections $A_P(x) = \Pi_X(R')(x)$ and $B_P(y) = \Pi_Y(R')(y)$, the relation $R'$ will not necessarily be equal to the $T$-Cartesian product of its projections, i.e., $R'(x,y) \neq T(A_P(x), B_P(y))$ in general for non-decomposable relations.
   \end{remark}
 
 
@@ -130,9 +130,9 @@ When a binary fuzzy relation $R$ is defined on the Cartesian product of a single
           Intuitively, every element is fully related to itself.
     \item $R$ is \textbf{symmetric} if $R(x,y) = R(y,x)$ for all $x,y \in X$.
           Intuitively, the degree of relationship from $x$ to $y$ is the same as from $y$ to $x$.
-    \item $R$ is \textbf{transitive} (specifically, transitive under a t-norm $T$) if for all $x,y,z \in X$ and a given t-norm $T$,
+    \item $R$ is \textbf{transitive} (specifically, transitive under a T-norm $T$) if for all $x,y,z \in X$ and a given T-norm $T$,
           \[ T(R(x,y), R(y,z)) \le R(x,z). \]
-          Using the definition of composition (see definition \ref{def:compos}) this can be expressed as $R \supseteq R \circ R$. Often the minimum t-norm is used and it is then called sup-min transitive.
+          Using the definition of composition (see definition \ref{def:compos}) this can be expressed as $R \supseteq R \circ R$. Often the minimum T-norm is used and it is then called sup-min transitive.
   \end{itemize}
 \end{definition}
 
@@ -160,14 +160,14 @@ A fuzzy compatibility relation indicates that elements are compatible or close t
 \subsection{Composition of Fuzzy Sets}
 \label{sec:compos}
 
-The concept of projection allows us to combine fuzzy relations sharing a common domain. Intuitively, composing two fuzzy relations involves intersecting their membership values (using a t-norm) and then projecting the result onto the domain where the relations do not overlap.
+The concept of projection allows us to combine fuzzy relations sharing a common domain. Intuitively, composing two fuzzy relations involves intersecting their membership values (using a T-norm) and then projecting the result onto the domain where the relations do not overlap.
 
 \begin{definition}[Composition of Two Fuzzy Relations]\label{def:compos}
     Let \( R \in \fuzzy{X \times Y} \) and \( G \in \fuzzy{Y \times Z} \) be fuzzy relations sharing the set \(Y\). Their composition \( R \circ G \) is the fuzzy relation in \(\fuzzy{X \times Z}\) defined by
     \[
     (R \circ G)(x,z) = \Pi_{X\times Z}\Bigl[\, T\bigl(R(x,y), G(y,z)\bigr) \Bigr] = \sup_{y\in Y}\, T\bigl(R(x,y), G(y,z)\bigr),
     \]
-    where \(T\) is a t-norm acting as the fuzzy intersection.
+    where \(T\) is a T-norm acting as the fuzzy intersection.
 \end{definition}
 
 % This means that given three properties $X$, $Y$ and $Z$ and two fuzzy relation R from X to Y and another fuzzy relation from Y to Z, we have a way to induce a relation $R\circ G$ between X and Z.
@@ -197,7 +197,7 @@ We can define the composition of a fuzzy set with a fuzzy relation in a complete
     \[
     (A \circ R)(y) = \Pi_{Y}\Bigl[\, T\bigl( A(x), R(x,y) \bigr) \Bigr] = \sup_{x \in X}\, T\bigl( A(x), R(x,y) \bigr),
     \]
-    where \(T\) is a t-norm.
+    where \(T\) is a T-norm.
 \end{definition}
 
 \subsection{Extension Principle}
@@ -232,7 +232,7 @@ This is called the (Zadeh's) extension principle and is the basis for building a
 It is important to highlight as well that this definition is a straightforward generalization of set-valued functions where $f(A)= \{f(x)\mid x\in A\}$. In terms of boolean membership function:
 $$\chi _{f(A)}(y)=\sup_{x\in f^{-1}(y)}\chi_A(x)$$
 
-The definition above can be generalized to vector functions using the definition of fuzzy Cartesian product, which requires us to take the intersection (using a t-norm):
+The definition above can be generalized to vector functions using the definition of fuzzy Cartesian product, which requires us to take the intersection (using a T-norm):
 
 \begin{definition}[Sup-T extension principle]
   Let $f: X_1 \times \cdots \times X_n \longrightarrow Y$ be a crisp function and $A_1 \in \fuzzy{X_1}, \ldots, A_n \in \fuzzy{X_n}$ be fuzzy sets. Then we can define $f(A_1,\ldots,A_n)\in \fuzzy{Y}$ as:
@@ -243,13 +243,13 @@ The definition above can be generalized to vector functions using the definition
     0 & \textnormal{otherwise}
   \end{cases}
   \]
-  where $f^{-1}(y)=\{(x_1,\ldots,x_n)\in X_1\times\cdots\times X_n \mid f(x_1,\ldots,x_n)=y\}$ and $T$ is a t-norm.
+  where $f^{-1}(y)=\{(x_1,\ldots,x_n)\in X_1\times\cdots\times X_n \mid f(x_1,\ldots,x_n)=y\}$ and $T$ is a T-norm.
 \end{definition}
 
 Which is again a generalization of vector set-valued functions where: $$f(A_1,\ldots,A_n)= \{f(x_1,\ldots,x_n)\mid x_i\in A_i\}$$
 In terms of boolean membership function:
 $$\chi _{f(A_1,\ldots,A_n)}(y)=\sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}T(\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)) = \sup_{(x_1,\ldots,x_n)\in f^{-1}(y)}min\{\chi_{A_1}(x_1),\ldots,\chi_{A_n}(x_n)\}$$
 
-Where we have used that every t-norm operates the same on boolean memberships.\\
+Where we have used that every T-norm operates the same on boolean memberships.\\
 
 Alternative extension principles have been proposed in the literature for two main reasons: seeking higher computational efficiency and avoiding uncertainty ``inflation''. The latter is due to the principle treating each of the variables independently, which leads to criticized edge cases such as the one shown in example \ref{ex:unc_inflation}. Nevertheless, none of them are explored in this work.
