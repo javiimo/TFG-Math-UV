@@ -1,0 +1,32 @@
+\chapter*{Conclusions and Future Work}
+\addcontentsline{toc}{chapter}{Conclusions and Future Work}
+
+\section*{Conclusions}
+
+This final degree project has successfully fulfilled its objective of developing and applying a comprehensive framework based on fuzzy logic for multi-criteria decision-making problems. The work began by establishing a solid theoretical foundation, exploring the nuances of uncertainty and motivating the use of fuzzy set theory to model vagueness, a domain where classical quantitative methods often fall short. The core concepts of fuzzy sets, t-norms, fuzzy relations, and fuzzy numbers were systematically detailed, providing the necessary tools for the subsequent practical application.\\
+
+The transition from theory to practice was demonstrated through the lens of Multi-Criteria Decision Making. A key achievement of this work is the detailed methodology for translating both qualitative expert knowledge and quantitative data into a fuzzy format, a process known as fuzzification. This was followed by an exploration of aggregation techniques, with a particular focus on the Ordered Weighted Averaging (OWA) operator, which allows for the explicit modeling of a decision-maker's attitudinal preferences, such as optimism or risk aversion.\\
+
+The framework's efficacy was rigorously tested on a complex, real-world maintenance scheduling problem from the ROADEF/EURO 2020 Challenge. A two-level aggregation model was designed and implemented, combining a non-compensatory epsilon-lexicographic approach for hierarchically ordered criteria with an OWA-based aggregation for high-level concepts. This hybrid model proved effective in providing a transparent and justifiable ranking of 29 highly competitive solutions. The project not only showcases a successful application but also provides a structured, adaptable approach for tackling complex decision scenarios characterized by imprecise information, leading to more robust and defensible outcomes.
+
+\section*{Future Work}
+
+While the implemented framework proved effective, its value-measurement approach represents just one paradigm within the rich field of MCDM. Future investigations could explore alternative methodologies, such as distance-based algorithms like Fuzzy TOPSIS or preference-based outranking methods like Fuzzy ELECTRE. A comparative analysis of these different schools of thought would not only test the robustness of the obtained rankings but also provide deeper insights into the nature of the optimal solutions. Furthermore, the foundational concepts of fuzzy logic and rule-based systems extend well beyond decision-making. Their application in designing Multiple-Input Single-Output (MISO) fuzzy controllers represents a significant avenue for research, where the logic could be used to model and manage complex, non-linear system dynamics.\\
+
+The modeling process itself could also be enhanced. The current project relied on a model-based and expert-driven approach to fuzzification. A promising extension would be to incorporate data-driven techniques, such as Adaptive Neuro-Fuzzy Inference Systems (ANFIS). These hybrid systems merge the learning capabilities of neural networks with the interpretability of fuzzy logic, enabling membership functions and inference rules to be automatically learned from data, thereby creating more adaptive and potentially more accurate models. Beyond this, the project could explore hybrid models that integrate fuzzy logic with other uncertainty frameworks. For instance, combining fuzzy sets with Rough Set theory, which excels at handling indiscernibility and incomplete information, could lead to the development of more powerful formalisms like Fuzzy Rough Sets and Rough Fuzzy Sets.\\
+
+Finally, specific improvements could be made to the case study presented in this work. It was noted that some of the high-level attributes, while robust, could benefit from greater discriminative power. Future work could leverage more granular, non-public data to design more targeted criteria. For example, attributes could be developed to explicitly penalize interventions during historically critical periods, quantify the specific economic impact of delaying certain power lines, or measure the temporal clustering of particular intervention types. Such enhancements would provide a more decisive basis for comparison and lead to an even more refined decision-making process.
+
+\newpage
+\section*{Data and Code Availability}
+\addcontentsline{toc}{section}{Data and Code Availability}
+
+In order to ensure the reproducibility of this research, all source code and data developed and used throughout this project have been made publicly available.\\
+
+The primary GitHub repository contains the complete Python implementation of the fuzzy multi-criteria decision-making model applied in the case study. This includes the scripts for generating the alternative schedules, the module for inferring plausible intervention locations via non-metric Multi-Dimensional Scaling, the code for computing all crisp and fuzzy attributes, and the final aggregation script that implements the two-level ranking model. The repository also houses the raw solution files, the geospatial data for national parks, and the final decision matrix in CSV format. This can be accessed at:
+
+\texttt{https://github.com/javiimo/Fuzzy-MCDM}\\
+
+Additionally, the full LaTeX source code used to compile this document, including the generation of its plots and tables, can be found in a separate repository for this thesis at:
+
+\texttt{https://github.com/javiimo/TFG-Math-UV}
