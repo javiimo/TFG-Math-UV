@@ -27,7 +27,7 @@ Since this originated in the context of distances, the following properties were
 \end{itemize}
 
 
-% \say{The name \textit{triangular norm} refers to the fact that in the framework of probabilistic metric spaces, T-norms and t-conorms are used to generalize triangle inequality of ordinary metric spaces.}\cite{NGAN2018}\\
+% \say{The name \textit{triangular norm} refers to the fact that in the framework of probabilistic metric spaces, T-norms and T-conorms are used to generalize triangle inequality of ordinary metric spaces.}\cite{NGAN2018}\\
 
 Therefore, the concept of intersection (conjunction) of fuzzy sets is generally represented by a triangular norm (also called a T-norm).
 
@@ -63,7 +63,7 @@ The reasoning regarding the properties is entirely analogous to the previous cas
     \item \textbf{Monotonicity:} $S(x,y) \leq S(x',y') \quad \textnormal{if }x\leq x' \textnormal{ and } y\leq y' \quad \oldforall x,y,x',y' \in [0,1]$
     \item \textbf{Zero Identity:} $S(x,0) = S(0,x) = x \quad \oldforall x \in [0,1]$
   \end{enumerate}
-  is called a triangular conorm or t-conorm. Defines the \textbf{union} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cup  B) (x) = S(A(x),B(x)) \forall x \in X$ 
+  is called a triangular conorm or T-conorm. Defines the \textbf{union} of two fuzzy sets $A$ and $B$ on $X$ by giving the membership function as $(A \cup  B) (x) = S(A(x),B(x)) \forall x \in X$ 
     
 \end{definition}
 
@@ -87,16 +87,16 @@ Notice that this definition of complement is consistent with the classical defin
 
 One consequence of this fact is that the union of a fuzzy set and its complement is not the total set in general. Analogously, the intersection will not the empty set in general. Those two properties that hold in classical sets but might not be true in fuzzy sets, are often called the \textbf{laws of excluded middle and of non-contradiction}, respectively.\\
 
-However, there are T-norms and t-conorms such as the ones named after \luka~that do satisfy both laws\footnote{Indeed, all continuous T-norms in agreement with non-contradiction are isomorphic to \luka~\cite[p.~7]{LukasiewiczNonContrad}.}. Another example is the drastic T-norm which also satisfies the law of non-contradiction, but not the law of excluded middle. See example \ref{ex:basic_tnorms} for their formal expressions. All of this, has implications for the derived logic (see section \ref{sec:fuzzy_logic}).\\
+However, there are T-norms and T-conorms such as the ones named after \luka~that do satisfy both laws\footnote{Indeed, all continuous T-norms in agreement with non-contradiction are isomorphic to \luka~\cite[p.~7]{LukasiewiczNonContrad}.}. Another example is the drastic T-norm which also satisfies the law of non-contradiction, but not the law of excluded middle. See example \ref{ex:basic_tnorms} for their formal expressions. All of this, has implications for the derived logic (see section \ref{sec:fuzzy_logic}).\\
 
-Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of T-norm and t-conorm, these laws are not automatically satisfied. However, there are specific pairs that do fulfill them. To illustrate the relationship between T-norms and t-conorms that satisfy De Morgan's Laws, we can use our probabilistic metric space analogy. Reconsidering the probabilistic metrics $F,G$ introduced earlier and substituting $F = 1 - G$ into equation \ref{eq:Ftriangle_inequality}, we obtain:
+Another important property that classical union and intersection satisfy is De Morgan's Laws. For an arbitrary pair of T-norm and T-conorm, these laws are not automatically satisfied. However, there are specific pairs that do fulfill them. To illustrate the relationship between T-norms and T-conorms that satisfy De Morgan's Laws, we can use our probabilistic metric space analogy. Reconsidering the probabilistic metrics $F,G$ introduced earlier and substituting $F = 1 - G$ into equation \ref{eq:Ftriangle_inequality}, we obtain:
 
 \[ G_{xz}(t + s) \leq 1 - T(1 - G_{xy}(t), 1 - G_{yz}(s))\]
 
-Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a relationship between T-norms and t-conorms\footnote{The relation from proposition \ref{prop:rel_tnorm_tconorm} directly mirrors the classical set union definition via intersection and negation ($A\cup B \coleq \neg (\neg A \cap \neg B)$), which can be visualized with a Venn diagram. Therefore, it is natural that this condition is equivalent to the De Morgan's Laws.}, which is formalized in the following proposition:
+Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a relationship between T-norms and T-conorms\footnote{The relation from proposition \ref{prop:rel_tnorm_tconorm} directly mirrors the classical set union definition via intersection and negation ($A\cup B \coleq \neg (\neg A \cap \neg B)$), which can be visualized with a Venn diagram. Therefore, it is natural that this condition is equivalent to the De Morgan's Laws.}, which is formalized in the following proposition:
 
-\begin{proposition}[Relationship between T-norm and t-conorm]\label{prop:rel_tnorm_tconorm}
-  Given a T-norm $T$, the t-conorm is $S(a,b)\coleq 1 - T(1-a, 1-b)$ if and only if the union and intersection defined by that pair satisfy the De Morgan's Laws.
+\begin{proposition}[Relationship between T-norm and T-conorm]\label{prop:rel_tnorm_tconorm}
+  Given a T-norm $T$, the T-conorm is $S(a,b)\coleq 1 - T(1-a, 1-b)$ if and only if the union and intersection defined by that pair satisfy the De Morgan's Laws.
 \end{proposition}
 \begin{remark}
   It is easy to see that the previous relation is equivalent to $T(a,b) = 1-S(1-a, 1-b)$ which can be obtained simply by substituting $a'=1-a$ and $b'=1-b$, i.e., working with the complementary fuzzy sets.
@@ -115,7 +115,7 @@ Comparing this with equation \ref{eq:Gtriangle_inequality}, we can derive a rela
 
 \end{proof}
 
-Any triplet of union, intersection and complement operations that satisfy the De Morgan's laws, is called a De Morgan triplet\cite[p.~52]{HistoryFL2017}. The proposition above is a sufficient and necessary condition for building a triplet with any given T-norm (or t-conorm) and the standard negation.\\
+Any triplet of union, intersection and complement operations that satisfy the De Morgan's laws, is called a De Morgan triplet\cite[p.~52]{HistoryFL2017}. The proposition above is a sufficient and necessary condition for building a triplet with any given T-norm (or T-conorm) and the standard negation.\\
 
 The following algebraic properties will be needed when defining fuzzy logics and to classify continuous T-norms \cite[Def.~2.1 \& 2.13]{Klement2000}:
 
@@ -255,7 +255,7 @@ Indeed, strict and nilpotent T-norms form two classes that are closed under cert
 \begin{definition}[Isomorphic T-norms {\cite[Prop.~2.28(iv)]{Klement2000}}]
   Two T-norms $T_1$ and $T_2$ are \emph{isomorphic} if there exists a strictly increasing bijection $\varphi: [0,1] \to [0,1]$ (an automorphism of the unit interval) such that $T_2(x,y) = \varphi^{-1}(T_1(\varphi(x), \varphi(y)))$ for all $x,y \in [0,1]$.
 \end{definition}
-This definition is completely analogous for t-conorms. The isomorphism can be understood as a rescaling of the unit interval. The original T-norm is applied to this scaled domain and then the scale is reverted to make the output comparable to the original inputs $x,y$ (otherwise, the one identity property might not hold). Isomorphic T-norms share the same algebraic structure, merely operating on rescaled inputs and outputs via $\varphi$. A fundamental result is that (up to isomorphism) there are only two distinct types of continuous Archimedean T-norms: the product type and the Łukasiewicz type.
+This definition is completely analogous for T-conorms. The isomorphism can be understood as a rescaling of the unit interval. The original T-norm is applied to this scaled domain and then the scale is reverted to make the output comparable to the original inputs $x,y$ (otherwise, the one identity property might not hold). Isomorphic T-norms share the same algebraic structure, merely operating on rescaled inputs and outputs via $\varphi$. A fundamental result is that (up to isomorphism) there are only two distinct types of continuous Archimedean T-norms: the product type and the Łukasiewicz type.
 \begin{proposition}[{Classes of continuous Archimedean T-norms \cite[Cor.~5.7]{Klement2000}}]
   {\color{white}.}
   \begin{enumerate} 

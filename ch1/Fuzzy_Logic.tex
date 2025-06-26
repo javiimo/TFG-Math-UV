@@ -25,7 +25,7 @@ As stated in section \ref{sec:class_tnorms}, all continuous T-norms can be decom
     \item \textbf{Product Logic ($\Pi$)} is based on the product T-norm and incorporates additional properties characteristic of multiplication. Its standard negation is the Gödel-style negation: $\lnot x$ is $1$ if $x=0$, $0$ if $x>0$; algebraically, its models are product algebras~\cite[Sec. 4.1]{Hajek1998}.
 \end{itemize}
 
-Fuzzy \textbf{disjunction (OR)} and \textbf{negation (NOT)} in these logics are typically generalized from classical set union and complement. Negation is defined in MTL, BL, and their extensions as $\lnot \phi := \phi \rightarrow 0$. Its specific properties depend on the logic (involutive in \L, not so in G and $\Pi$). Disjunction is definable, e.g., in MTL, by $\phi \vee \psi := \big((\phi \rightarrow \psi) \rightarrow \psi\big) \wedge \big((\psi \rightarrow \phi) \rightarrow \phi\big)$~\cite[Def. 1]{GodoMonoidal}~\cite[Def. 2.2.1]{Hajek1998}. This definition coincides, in many systems of fuzzy logic, with a t-conorm (or s-norm), the dual of a T-norm, which generalizes the logical OR and the set-theoretic union.
+Fuzzy \textbf{disjunction (OR)} and \textbf{negation (NOT)} in these logics are typically generalized from classical set union and complement. Negation is defined in MTL, BL, and their extensions as $\lnot \phi := \phi \rightarrow 0$. Its specific properties depend on the logic (involutive in \L, not so in G and $\Pi$). Disjunction is definable, e.g., in MTL, by $\phi \vee \psi := \big((\phi \rightarrow \psi) \rightarrow \psi\big) \wedge \big((\psi \rightarrow \phi) \rightarrow \phi\big)$~\cite[Def. 1]{GodoMonoidal}~\cite[Def. 2.2.1]{Hajek1998}. This definition coincides, in many systems of fuzzy logic, with a T-conorm (or s-norm), the dual of a T-norm, which generalizes the logical OR and the set-theoretic union.
 
 \subsection{Fuzzy Implications}
 
@@ -55,14 +55,14 @@ The main continuous T-norms lead to these R-implications (standard in the respec
 
 
 \paragraph{S-Implications (Standard Implications)}
-This family of implications is derived from the classical logical equivalence $P \rightarrow Q \equiv \neg P \lor Q$. A fuzzy S-implication is defined using a fuzzy negation and a t-conorm $S$ \cite[p.59]{FULLER2}:
+This family of implications is derived from the classical logical equivalence $P \rightarrow Q \equiv \neg P \lor Q$. A fuzzy S-implication is defined using a fuzzy negation and a T-conorm $S$ \cite[p.59]{FULLER2}:
 \[I_S(x,y) = S(\overline{x}, y)\]
 \begin{example}[S-Implications]
 Common examples include:
 \begin{itemize}
-    \item The \textbf{Kleene-Dienes Implication}, using standard negation $\overline{x}=1-x$ and maximum t-conorm $S(a,b)=\max(a,b)$:
+    \item The \textbf{Kleene-Dienes Implication}, using standard negation $\overline{x}=1-x$ and maximum T-conorm $S(a,b)=\max(a,b)$:
     \[I_{KD}(x,y) = \max(1-x, y)\]
-    \item If the Łukasiewicz t-conorm $S_L(a,b) = \min(1, a+b)$ is used with standard negation, the resulting S-implication is $I_L(x,y) = \min(1, 1-x+y)$, which is identical to the Łukasiewicz R-implication.
+    \item If the Łukasiewicz T-conorm $S_L(a,b) = \min(1, a+b)$ is used with standard negation, the resulting S-implication is $I_L(x,y) = \min(1, 1-x+y)$, which is identical to the Łukasiewicz R-implication.
 \end{itemize}
 \end{example}
 
